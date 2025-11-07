@@ -32,6 +32,7 @@ header {
   color: white;
   width: 100%;
   box-sizing: border-box;
+  z-index: 1500;
 }
 
 .header-left {
@@ -41,13 +42,6 @@ header {
   min-width: 200px;
   margin-right: 30px;
   flex-shrink: 0;
-}
-
-.menu-icon {
-  font-size: 24px;
-  cursor: pointer;
-  user-select: none;
-  transition: 0.1s;
 }
 
 .menu-icon:hover {

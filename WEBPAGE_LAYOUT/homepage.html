@@ -1,178 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CircuiTech</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CircuiTech</title>
 
-    <!-- CSS Links -->
-    <link rel="stylesheet" href="homepage/css-homepage/homepage-body.css">
-    <link rel="stylesheet" href="tab-bars.css">
+  <!-- CSS Links -->
+  <link rel="stylesheet" href="homepage/css-homepage/homepage-body.css" />
+  <link rel="stylesheet" href="homepage/css-homepage/sidebar.css" />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link 
-        rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
-        integrity="sha512-..." 
-        crossorigin="anonymous" 
-        referrerpolicy="no-referrer"
-    />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 </head>
 
 <body>
-    <!-- HEADER -->
-    <header>
-        <div class="header-left">
-            <div class="menu-icon">&#9776;</div>
-            <div class="logo-icon">CircuiTech</div>
+  <!-- SIDEBAR -->
+  <nav id="sidebar" class="sidebar">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Projects</a></li>
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Contacts</a></li>
+    </ul>
+  </nav>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <div id="menu-icon" class="menu-icon">&#9776;</div>
+      <div class="logo-icon">CircuiTech</div>
+    </div>
+
+    <div class="header-right">
+      <nav class="nav-links">
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Contacts</a></li>
+        </ul>
+      </nav>
+
+      <form class="search-form" action="#" method="GET" role="search">
+        <input
+          type="search"
+          placeholder="Search..."
+          aria-label="Search"
+          name="q"
+        />
+        <button type="submit" aria-label="Submit Search">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+    </div>
+  </header>
+
+  <!-- OVERLAY -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- MAIN PREVIEW SECTION -->
+  <section class="main-preview">
+    <button class="arrow left-arrow">&#8249;</button>
+
+    <div class="sliding-content">
+      <div class="slider-container">
+        <div class="slide">
+          <img
+            src="homepage/images-homepage/sahur.jpg"
+            alt="Slide 1 Description"
+          />
         </div>
-
-        <div class="header-right">
-            <nav class="nav-links">
-                <ul>
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Contacts</a></li>
-                </ul>
-            </nav>
-
-            <form class="search-form" action="#" method="GET" role="search">
-                <input type="search" placeholder="Search..." aria-label="Search" name="q">
-                <button type="submit" aria-label="Submit Search"><i class="fa fa-search"></i></button>
-            </form>
+        <div class="slide">
+          <img
+            src="homepage/images-homepage/bombardino.jpg"
+            alt="Slide 2 Description"
+          />
         </div>
-    </header>
-
-    <!-- MAIN PREVIEW SECTION -->
-    <section class="main-preview">
-        <button class="arrow left-arrow">&#8249;</button>
-
-        <div class="sliding-content">
-            <!-- Container for slides with images -->
-            <div class="slider-container">
-                <div class="slide">
-                    <img src="homepage/images-homepage/sahur.jpg" alt="Slide 1 Description">
-                </div>
-                <div class="slide">
-                    <img src="homepage/images-homepage/bombardino.jpg" alt="Slide 2 Description">
-                </div>
-                <div class="slide">
-                    <img src="homepage/images-homepage/tralelo.png" alt="Slide 3 Description">
-                </div>
-            </div>
-            <div class="slider-indicators">
-                <span class="indicator active"></span>
-                <span class="indicator"></span>
-                <span class="indicator"></span>
-            </div>
+        <div class="slide">
+          <img
+            src="homepage/images-homepage/tralelo.png"
+            alt="Slide 3 Description"
+          />
         </div>
+      </div>
+      <div class="slider-indicators">
+        <span class="indicator active"></span>
+        <span class="indicator"></span>
+        <span class="indicator"></span>
+      </div>
+    </div>
 
-        <button class="arrow right-arrow">&#8250;</button>
-    </section>
+    <button class="arrow right-arrow">&#8250;</button>
+  </section>
 
-    <!-- CONTENT SECTION -->
-    <section class="content-row">
-        <div class="educational-videos">
-            <h3>Educational Videos &gt</h3>
-            <div class="video-thumbnails">
-                <div class="video-box"></div>
-                <div class="video-box"></div>
-            </div>
-            <button class="view-more">View More</button>
-        </div>
+  <!-- CONTENT SECTION -->
+  <section class="content-row">
+    <div class="educational-videos">
+      <h3>Educational Videos &gt</h3>
+      <div class="video-thumbnails">
+        <div class="video-box"></div>
+        <div class="video-box"></div>
+      </div>
+      <button class="view-more">View More</button>
+    </div>
 
-        <div class="recent-search">
-            <h3>Recent Search</h3>
-            <button class="search-item" onclick="location.href='#meaning-section'"><i class="fa-solid fa-magnifying-glass"></i>What is PUP?</button>
-            <button class="search-item" onclick="location.href='#what-section'"><i class="fa-solid fa-magnifying-glass"></i>What is Computer Engineering About?</button>
-            <button class="search-item" onclick="location.href='#node-section'"><i class="fa-solid fa-magnifying-glass"></i> What is DSA?</button>
-            <button class="search-item" onclick="location.href='#important-section'"><i class="fa-solid fa-magnifying-glass"></i>How to contact the group?</button>
-        </div>
-    </section>
+    <div class="recent-search">
+      <h3>Recent Search</h3>
+      <button
+        class="search-item"
+        onclick="location.href='#meaning-section'"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>What is PUP?
+      </button>
+      <button
+        class="search-item"
+        onclick="location.href='#what-section'"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>What is Computer Engineering About?
+      </button>
+      <button
+        class="search-item"
+        onclick="location.href='#node-section'"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i> What is DSA?
+      </button>
+      <button
+        class="search-item"
+        onclick="location.href='#important-section'"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>How to contact the group?
+      </button>
+    </div>
+  </section>
 
-    <!-- SUB-SECTIONS -->
-    <section id="meaning-section" class="meaning-section">
-        <h2>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES</h2>
-        <p>This is the next section that appears when you click the button.</p>
-    </section>
+  <!-- SUB-SECTIONS -->
+  <section id="meaning-section" class="meaning-section">
+    <h2>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES</h2>
+    <p>This is the next section that appears when you click the button.</p>
+  </section>
 
-    <section id="what-section" class="what-section">
-        <h2>COMPUTER ENGINEERING</h2>
-        <p>This is the next section that appears when you click the button.</p>
-    </section>
+  <section id="what-section" class="what-section">
+    <h2>COMPUTER ENGINEERING</h2>
+    <p>This is the next section that appears when you click the button.</p>
+  </section>
 
-    <section id="node-section" class="node-section">
-        <h2>DATA STRUCTURES AND ALGORITHMS</h2>
-        <p>This is the next section that appears when you click the button.</p>
-    </section>
+  <section id="node-section" class="node-section">
+    <h2>DATA STRUCTURES AND ALGORITHMS</h2>
+    <p>This is the next section that appears when you click the button.</p>
+  </section>
 
-    <section id="important-section" class="important-section">
-        <h2 class="contacts">CONTACTS</h2>
-    </section>
+  <section id="important-section" class="important-section">
+    <h2 class="contacts">CONTACTS</h2>
+  </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sliderContainer = document.querySelector('.slider-container');
-            const slides = document.querySelectorAll('.slide');
-            const indicators = document.querySelectorAll('.indicator');
-            const leftArrow = document.querySelector('.left-arrow');
-            const rightArrow = document.querySelector('.right-arrow');
+  <script>
 
-            if (!sliderContainer || slides.length === 0 || indicators.length === 0 || !leftArrow || !rightArrow) {
-                console.error('Slider elements not found. Check your HTML structure.');
-                return;
-            }
-
-            let currentIndex = 0;
-            const totalSlides = slides.length;
-            const slideWidth = 100 / totalSlides; 
-
-            sliderContainer.style.animation = 'none';
-
-            function updateSlide(index) {
-                const translateX = -index * slideWidth;
-                sliderContainer.style.transform = `translateX(${translateX}%)`;
-                console.log(`Sliding to index ${index}, translateX: ${translateX}%`);
-
-                indicators.forEach((ind, i) => {
-                    ind.classList.toggle('active', i === index);
-                });
-            }
-
-            rightArrow.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % totalSlides;
-                updateSlide(currentIndex);
-            });
-
-            leftArrow.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-                updateSlide(currentIndex);
-            });
-
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateSlide(currentIndex);
-                });
-            });
-
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % totalSlides;
-                updateSlide(currentIndex);
-            }, 3000);
-
-            updateSlide(currentIndex);
+    // SIDE BAR
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuIcon = document.getElementById("menu-icon");
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        function toggleSidebar() {
+            sidebar.classList.toggle("active");
+            overlay.classList.toggle("active");
+        }
+        menuIcon.addEventListener("click", toggleSidebar);
+        overlay.addEventListener("click", toggleSidebar);
         });
-    </script>
+
+    // SLIDING PART
+    document.addEventListener('DOMContentLoaded', function () {
+      const sliderContainer = document.querySelector('.slider-container');
+      const slides = document.querySelectorAll('.slide');
+      const indicators = document.querySelectorAll('.indicator');
+      const leftArrow = document.querySelector('.left-arrow');
+      const rightArrow = document.querySelector('.right-arrow');
+
+      if (
+        !sliderContainer ||
+        slides.length === 0 ||
+        indicators.length === 0 ||
+        !leftArrow ||
+        !rightArrow
+      ) {
+        console.error('Slider elements not found. Check your HTML structure.');
+        return;
+      }
+
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+      const slideWidth = 100 / totalSlides;
+
+      sliderContainer.style.animation = 'none';
+
+      function updateSlide(index) {
+        const translateX = -index * slideWidth;
+        sliderContainer.style.transform = `translateX(${translateX}%)`;
+        indicators.forEach((ind, i) => {
+          ind.classList.toggle('active', i === index);
+        });
+      }
+
+      rightArrow.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlide(currentIndex);
+      });
+
+      leftArrow.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlide(currentIndex);
+      });
+
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          currentIndex = index;
+          updateSlide(currentIndex);
+        });
+      });
+
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlide(currentIndex);
+      }, 3000);
+
+      updateSlide(currentIndex);
+    });
+  </script>
 </body>
 </html>
