@@ -58,7 +58,7 @@
         <button class="arrow left-arrow">&#8249;</button>
 
         <div class="sliding-content">
-            <!-- New container for slides with images -->
+            <!-- Container for slides with images -->
             <div class="slider-container">
                 <div class="slide">
                     <img src="homepage/images-homepage/sahur.jpg" alt="Slide 1 Description">
@@ -100,6 +100,7 @@
         </div>
     </section>
 
+    <!-- SUB-SECTIONS -->
     <section id="meaning-section" class="meaning-section">
         <h2>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES</h2>
         <p>This is the next section that appears when you click the button.</p>
@@ -119,9 +120,7 @@
         <h2 class="contacts">CONTACTS</h2>
     </section>
 
-    <!-- Add this script just before </body> -->
     <script>
-        // Wait for the page to load fully
         document.addEventListener('DOMContentLoaded', function() {
             const sliderContainer = document.querySelector('.slider-container');
             const slides = document.querySelectorAll('.slide');
@@ -136,36 +135,30 @@
 
             let currentIndex = 0;
             const totalSlides = slides.length;
-            const slideWidth = 100 / totalSlides; // Dynamic width per slide (e.g., 33.33% for 3 slides)
+            const slideWidth = 100 / totalSlides; 
 
-            // Stop CSS animation to avoid conflicts
             sliderContainer.style.animation = 'none';
 
-            // Function to update slide position
             function updateSlide(index) {
                 const translateX = -index * slideWidth;
                 sliderContainer.style.transform = `translateX(${translateX}%)`;
                 console.log(`Sliding to index ${index}, translateX: ${translateX}%`);
 
-                // Update indicators
                 indicators.forEach((ind, i) => {
                     ind.classList.toggle('active', i === index);
                 });
             }
 
-            // Right arrow: next slide
             rightArrow.addEventListener('click', () => {
                 currentIndex = (currentIndex + 1) % totalSlides;
                 updateSlide(currentIndex);
             });
 
-            // Left arrow: previous slide
             leftArrow.addEventListener('click', () => {
                 currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
                 updateSlide(currentIndex);
             });
 
-            // Indicator clicks: jump to slide
             indicators.forEach((indicator, index) => {
                 indicator.addEventListener('click', () => {
                     currentIndex = index;
@@ -173,13 +166,11 @@
                 });
             });
 
-            // Optional: Auto-slide (remove if you only want manual control)
             setInterval(() => {
                 currentIndex = (currentIndex + 1) % totalSlides;
                 updateSlide(currentIndex);
-            }, 3000); // 3 seconds per slide
+            }, 3000);
 
-            // Initialize the first slide
             updateSlide(currentIndex);
         });
     </script>
