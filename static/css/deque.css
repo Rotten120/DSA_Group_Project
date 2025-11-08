@@ -200,3 +200,127 @@ h1 {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.1); }
 }
+
+/* OUTPUT */
+.output {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    min-height: 80px;
+    overflow-x: auto;
+    padding: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.node {
+    min-width: 120px;
+    height: 60px;
+    background: linear-gradient(135deg, #ff9999 0%, #ffb3b3 100%);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #333;
+    font-size: 16px;
+    padding: 0 20px;
+    transition: all 0.3s ease;
+}
+
+.node:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.none {
+    font-size: 3em;
+    color: white;
+    font-weight: bold;
+    min-width: 60px;
+    text-align: center;
+}
+
+.output {
+    display: flex;
+    gap: 0;
+    align-items: center;
+    min-height: 80px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+}
+
+.output::-webkit-scrollbar {
+    height: 8px;
+}
+
+.output::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.output::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.output::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.node {
+    min-width: 120px;
+    height: 60px;
+    background: linear-gradient(135deg, #ff9999 0%, #ffb3b3 100%);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #333;
+    font-size: 16px;
+    padding: 0 20px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    margin-right: 40px;
+    position: relative;
+}
+
+.node::after {
+    content: '→';
+    position: absolute;
+    right: -30px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.node:last-of-type::after {
+    display: none;
+}
+
+.node:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.none {
+    font-size: 3em;
+    color: white;
+    font-weight: bold;
+    min-width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.node:last-of-type::after {
+    display: block !important;
+}
+.node:last-of-type::before {
+    display: block !important;
+}
