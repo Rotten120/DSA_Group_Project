@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CircuiTech</title>
+
+  <!-- CSS Links -->
+  <link rel="stylesheet" href="images and css/css/header.css" />
+  <link rel="stylesheet" href="images and css/css/sidebar.css" />
+  <link rel="stylesheet" href="images and css/css/general-body.css">
+    <link rel="stylesheet" href="images and css/css/profile.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    body {
+        background-color: black;
+    }
+  </style>
+  </head>
+
+<body>
+  <!-- SIDEBAR -->
+  <nav id="sidebar" class="sidebar">
+    <ul>
+      <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="#"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
+      <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="#"><i class="fa-solid fa-address-book"></i> Contacts</a></li>
+    </ul>
+  </nav>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <div id="menu-icon" class="menu-icon">&#9776;</div>
+      <div class="logo-icon">CircuiTech</div>
+    </div>
+
+    <div class="header-right">
+      <nav class="nav-links">
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Contacts</a></li>
+        </ul>
+      </nav>
+
+      <form class="search-form" action="#" method="GET" role="search">
+        <input
+          type="search"
+          placeholder="Search..."
+          aria-label="Search"
+          name="q"
+        />
+        <button type="submit" aria-label="Submit Search">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+    </div>
+  </header>
+
+  <!-- OVERLAY -->
+  <div id="overlay" class="overlay"></div>
+<section class="main-section">
+    <div class="content-wrapper">
+        <div class="profile-row-wrapper">
+            <h1 class="profile-title">PROFILE</h1>
+
+            <div class="first-row-cards">
+            <div class="card-item" onclick="goToProfile(1)">
+                <img src="images and css/images/Card.png" alt="Profile 1" />
+            </div>
+            <div class="card-item" onclick="goToProfile(2)">
+                <img src="images and css/images/Card.png" alt="Profile 2" />
+            </div>
+            <div class="card-item" onclick="goToProfile(3)">
+                <img src="images and css/images/Card.png" alt="Profile 3" />
+            </div>
+            <div class="card-item" onclick="goToProfile(4)">
+                <img src="images and css/images/Card.png" alt="Profile 4" />
+            </div>
+            <div class="card-item" onclick="goToProfile(5)">
+                <img src="images and css/images/Card.png" alt="Profile 5" />
+            </div>
+        </div>
+    </div>
+
+    <div class="card-row bottom">
+        <div class="card-item" onclick="goToProfile(6)">
+        <img src="images and css/images/Card.png" alt="Profile 6" />
+        </div>
+        <div class="card-item" onclick="goToProfile(7)">
+        <img src="images and css/images/Card.png" alt="Profile 7" />
+        </div>
+        <div class="card-item" onclick="goToProfile(8)">
+        <img src="images and css/images/Card.png" alt="Profile 8" />
+        </div>
+        <div class="card-item" onclick="goToProfile(9)">
+        <img src="images and css/images/Card.png" alt="Profile 9" />
+        </div>
+    </div>
+    </div>
+
+</section>
+
+  <script>
+
+    // SIDE BAR
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuIcon = document.getElementById("menu-icon");
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        function toggleSidebar() {
+            sidebar.classList.toggle("active");
+            overlay.classList.toggle("active");
+        }
+        menuIcon.addEventListener("click", toggleSidebar);
+        overlay.addEventListener("click", toggleSidebar);
+        });
+
+    function goToProfile(profileId) {
+
+            const profileUrls = {
+                1: 'profile1.html',
+                2: 'profile2.html',
+                3: 'profile3.html',
+                4: 'profile4.html',
+                5: 'profile5.html',
+                6: 'profile6.html',
+                7: 'profile7.html',
+                8: 'profile8.html',
+                9: 'profile9.html'
+            };
+            
+            window.location.href = profileUrls[profileId];
+        }
+  </script>
+</body>
+</html>
