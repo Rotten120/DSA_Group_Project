@@ -151,14 +151,40 @@ body {
 }
 
 .link-slider {
-    width: 840px;
+    width: 820px;
     position: relative;
-    overflow: hidden;
+    overflow-x: scroll;  
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px;
+    scrollbar-width: thin;   
+    scrollbar-color: rgba(165,2,4,0.95) rgba(0,0,0,0.12);
 }
 
+.link-slider::-webkit-scrollbar {
+    height: 40px;
+    -webkit-appearance: none;
+}
+
+.link-slider::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.12);
+    border-radius: 6px;
+    margin: 0 4px;
+}
+
+.link-slider::-webkit-scrollbar-thumb {
+    background: rgba(165,2,4,0.95);
+    border-radius: 6px;
+    min-width: 40px;          
+}
+
+
 .slider-track {
+    min-width: calc(100% + 1px);  
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    gap: 20px;
 }
 
 .slide-link {
@@ -167,6 +193,7 @@ body {
 }
 
 .link-box {
+    flex: 0 0 auto;
     width: 190px;
     height: 280px;
     background-color: rgba(165, 2, 4, 0.8);
@@ -197,26 +224,3 @@ body {
     transition: all 0.3s ease;
 }
 
-.scroll-btn {
-    background-color: rgba(165, 2, 4, 0.8);
-    border: none;
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    transition: all 0.3s ease;
-}
-
-.scroll-btn:hover {
-    background-color: rgba(255, 0, 0, 0.9);
-    transform: scale(1.1);
-}
-
-.scroll-btn:active {
-    transform: scale(0.95);
-}
