@@ -292,15 +292,11 @@ body {
 
 
 /* SUB-SECTIONS */
-.meaning-section {
-  min-height: 1000px;
-  padding: 60px 40px;
-}
-
 h2 {
   color: white;
   font-size: 50px;
   font-family: "Didact Gothic", sans-serif;
+  justify-items: left;
 }
 
 p {
@@ -308,32 +304,101 @@ p {
   font-size: 32px;
 }
 
-
+/* MEANING */
 .meaning-section {
-  min-height: 1000px;
+  margin-top: 200px;
+  min-height: 1300px;
   padding: 60px 40px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.what-section {
-  min-height: 1000px;
+.meaning {
+  max-width: 700px;
+  width: 100%;
+  text-align: right;
+}
+
+.meaning h2 {
+  text-align: left;
+}
+
+.meaning p {
+  text-align: left;
+}
+
+/* LIFE SECTION */
+
+.life-section {
+  min-height: 100px;
+  margin-top: -400px;
   padding: 60px 40px;
+  display: flex;
+  justify-content: flex-start;
 }
 
-.node-section {
+.life {
+  max-width: 700px;
+  width: 100%;
+  text-align: left;
+}
+
+.life h2 {
+  text-align: left;
+}
+
+.life p {
+  text-align: left;
+}
+
+/* MEANING */
+.algorithm-section {
   min-height: 1000px;
+  margin-top: 100px;
   padding: 60px 40px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.important-section {
-  padding: 60px 40px 100px;
-  min-height: auto;
-  margin-bottom: 50px;
+.algorithm {
+  max-width: 700px;
+  width: 100%;
+  text-align: right;
 }
 
-.important-section {
-  padding: 40px 20px;
+.algorithm h2 {
+  text-align: left;
 }
 
+.algorithm p {
+  text-align: left;
+}
+
+/* IMPORTANT SECTION */
+.importance-section {
+  min-height: 500px;
+  margin-top: -100px;
+  margin-bottom: 70px;
+  padding: 60px 40px;
+  display: flex;
+  justify-content: flex-start;;
+}
+
+.importance {
+  max-width: 700px;
+  width: 100%;
+  text-align: left; 
+}
+
+.importance h2 {
+  text-align: left;
+}
+
+.imortance {
+  text-align: left;
+}
+
+/* CONTACTS */
 .contacts-container {
   max-width: 1200px;
   margin: 0 auto;
