@@ -16,7 +16,7 @@ body {
   background-size: cover;
   overflow-y: scroll;
   width: 100%;
-  height: 500vh;
+  min-height: 100vh; /* Changed from height: 450vh */
   position: relative;
   padding: 20px;
   min-width: 1024px;
@@ -293,8 +293,8 @@ body {
 
 /* SUB-SECTIONS */
 .meaning-section {
-  margin-top: 600px;
-  margin-bottom: 100px;
+  min-height: 1000px;
+  padding: 60px 40px;
 }
 
 h2 {
@@ -309,32 +309,28 @@ p {
 }
 
 
-.what-section {
-  margin-top: 600px;
-  margin-bottom: 100px;
+.meaning-section {
+  min-height: 1000px;
+  padding: 60px 40px;
 }
 
+.what-section {
+  min-height: 1000px;
+  padding: 60px 40px;
+}
 
 .node-section {
-  margin-top: 600px;
-  margin-bottom: 100px;
+  min-height: 1000px;
+  padding: 60px 40px;
 }
 
 .important-section {
-  margin-top: 600px;
-  margin-bottom: 100px;
-}
-
-/* CONTACT SECTION */
-.contacts {
-  margin-left: 20px;
-  font-size: 60px;
-  font-family: "Didact Gothic", sans-serif;
+  padding: 60px 40px 100px;
+  min-height: auto;
+  margin-bottom: 50px;
 }
 
 .important-section {
-  margin-top: 600px;
-  margin-bottom: 100px;
   padding: 40px 20px;
 }
 
