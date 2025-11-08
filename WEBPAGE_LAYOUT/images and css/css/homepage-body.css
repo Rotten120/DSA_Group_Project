@@ -12,7 +12,7 @@ html {
 /* BODY */
 body {
   font-family: "Montserrat", sans-serif;
-  background: url('../images-homepage/circus-overlay.png') top center no-repeat;
+  background: url('../images/circus-overlay.png') top center no-repeat;
   background-size: cover;
   overflow-y: scroll;
   width: 100%;

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CircuiTech</title>
@@ -8,6 +9,7 @@
   <!-- CSS Links -->
   <link rel="stylesheet" href="images and css/css/header.css" />
   <link rel="stylesheet" href="images and css/css/sidebar.css" />
+  <link rel="stylesheet" href="images and css/css/profile.css" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,18 +33,23 @@
 
   <style>
     body {
-        background-color: black;
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(to bottom, #1a0000 0%, #000000 100%);
+        color: white;
+        min-height: 100vh;
+        padding: 20px;
+        overflow-x: hidden;
     }
   </style>
+
 </head>
 <body>
-    <body>
   <!-- SIDEBAR -->
   <nav id="sidebar" class="sidebar">
     <ul>
-      <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
-      <li><a href="#"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
-      <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="homepage.html"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="project.html"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
+      <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
       <li><a href="#"><i class="fa-solid fa-address-book"></i> Contacts</a></li>
     </ul>
   </nav>
@@ -57,9 +64,9 @@
     <div class="header-right">
       <nav class="nav-links">
         <ul>
-          <li><a href="#" class="active">Home</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Profile</a></li>
+          <li><a href="homepage.html">Home</a></li>
+          <li><a href="project.html">Projects</a></li>
+          <li><a href="profile.html" class="active">Profile</a></li>
           <li><a href="#">Contacts</a></li>
         </ul>
       </nav>
@@ -81,21 +88,269 @@
   <!-- OVERLAY -->
   <div id="overlay" class="overlay"></div>
 
+  <!-- PROFILE CONTAINER -->
+  <div class="profile-container">
+    <!-- COVER PHOTO -->
+    <div class="cover-photo-container">
+      <img id="cover-photo" src="https://via.placeholder.com/1400x300" alt="Cover Photo" />
+    </div>
+    
+    <!-- PROFILE HEADER -->
+    <div class="profile-header">
+      <img id="profile-photo" class="profile-photo" src="https://via.placeholder.com/280" alt="Profile Photo" />
+      
+      <div class="profile-info">
+        <div class="name-role">
+        <h1 id="profile-name" class="profile-name">Jisoo Marie D. Tinubuan</h1>
+        <p id="profile-role" class="profile-role">Undergraduate Student</p>
+        </div>
+        <p id="profile-bio" class="profile-bio">
+          I am a Computer Engineering student/professional with a strong passion for technology, innovation, and problem-solving. My interests lie in hardware design, embedded systems, and software development.
+        </p>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="nav-btn" id="prev-btn">Previous</button>
+        <button class="nav-btn" id="next-btn">Next</button>
+      </div>
+    </div>
+
+    <!-- PROFILE CONTENT -->
+    <div class="profile-content">
+      <!-- LEFT COLUMN - Personal Projects -->
+      <div class="left-column">
+        <div class="section projects-section">
+          <h3 class="section-title">Personal Projects</h3>
+          <div id="projects-grid" class="projects-grid">
+            <div class="project-item">
+              <div style="width: 50px; height: 50px; background: #a50204; border-radius: 5px; margin-bottom: 5px;"></div>
+              <span class="project-name">Snake Game</span>
+            </div>
+            <div class="project-item">
+              <div style="width: 50px; height: 50px; background: #a50204; border-radius: 5px; margin-bottom: 5px;"></div>
+              <span class="project-name">Automated Bank</span>
+            </div>
+            <div class="project-item">
+              <div style="width: 50px; height: 50px; background: #a50204; border-radius: 5px; margin-bottom: 5px;"></div>
+              <span class="project-name">Lottery Game</span>
+            </div>
+            <div class="project-item">
+              <div style="width: 50px; height: 50px; background: #a50204; border-radius: 5px; margin-bottom: 5px;"></div>
+              <span class="project-name">Keyboard</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDLE COLUMN - About Me -->
+      <div class="middle-column">
+        <div class="section">
+          <h3 class="section-title">About Me</h3>
+          <div id="about-content">
+            <div class="info-row">
+              <span class="info-label">Program:</span>
+              <span class="info-value">Bachelor of Science in Computer Engineering</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">University:</span>
+              <span class="info-value">Polytechnic University of the Philippines - Manila</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Interests:</span>
+              <span class="info-value">Coding, Cooking, Singing, Dancing</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Location:</span>
+              <span class="info-value">Taguig City Metro Manila, Philippines</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Skills and Expertise:</span>
+              <span class="info-value">C, C++, Python, Java, Arduino, Raspberry Pi, Verilog</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN - Achievements -->
+      <div class="right-column">
+        <div class="section">
+          <h3 class="section-title">Achievements</h3>
+          <div id="achievements-content">
+            <div class="achievement-item">Consistent Dean's Lister</div>
+            <div class="achievement-divider"></div>
+            <div class="achievement-item">Finalist in University Hackathon 2025</div>
+            <div class="achievement-divider"></div>
+            <div class="achievement-item">Certified in Python and Embedded Systems</div>
+            <div class="achievement-divider"></div>
+            <div class="achievement-item">Built a Portfolio Website Showcasing Hardware and Software Projects</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
-
-    // SIDE BAR
+    // SIDEBAR TOGGLE
     document.addEventListener("DOMContentLoaded", () => {
-        const menuIcon = document.getElementById("menu-icon");
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("overlay");
-        function toggleSidebar() {
-            sidebar.classList.toggle("active");
-            overlay.classList.toggle("active");
-        }
-        menuIcon.addEventListener("click", toggleSidebar);
-        overlay.addEventListener("click", toggleSidebar);
-        });
+      const menuIcon = document.getElementById("menu-icon");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+
+      function toggleSidebar() {
+        sidebar.classList.toggle("active");
+        overlay.classList.toggle("active");
+      }
+
+      menuIcon.addEventListener("click", toggleSidebar);
+      overlay.addEventListener("click", toggleSidebar);
+    });
+
+    // MEMBER PROFILES DATA
+    const memberProfiles = [
+      {
+        name: "Jisoo Marie D. Tinubuan",
+        role: "Undergraduate Student",
+        photo: "images and css/images/wallpaper.jpg",   // Profile photo for Jisoo
+        cover: "images and css/images/wallpaper.jpg",  // Cover photo for Jisoo
+        bio: "I am a Computer Engineering student/professional...",
+        program: "Bachelor of Science in Computer Engineering",
+        university: "Polytechnic University of the Philippines - Manila",
+        interests: "Coding, Cooking, Singing, Dancing",
+        location: "Taguig City Metro Manila, Philippines",
+        skills: "C, C++, Python, Java, Arduino, Raspberry Pi, Verilog",
+        projects: [
+          { name: "Snake Game", image: "" },
+          { name: "Automated Bank", image: "" },
+          { name: "Lottery Game", image: "" },
+          { name: "Keyboard", image: "" }
+        ],
+        achievements: [
+          "Consistent Dean's Lister",
+          "Finalist in University Hackathon 2025",
+          "Certified in Python and Embedded Systems",
+          "Built a Portfolio Website Showcasing Hardware and Software Projects"
+        ]
+      },
+      {
+        name: "John Doe",
+        role: "Senior Developer",
+        photo: "images/profile/john.jpg",  // Profile photo for John
+        cover: "images/profile/cover-john.jpg", // Cover photo for John
+        bio: "Passionate about creating innovative solutions...",
+        program: "Bachelor of Science in Computer Science",
+        university: "University of the Philippines - Diliman",
+        interests: "Web Development, AI, Gaming, Photography",
+        location: "Quezon City, Metro Manila, Philippines",
+        skills: "JavaScript, React, Node.js, Python, TensorFlow",
+        projects: [
+          { name: "E-Commerce Platform", image: "" },
+          { name: "AI Chatbot", image: "" },
+          { name: "Portfolio Website", image: "" },
+          { name: "Mobile App", image: "" }
+        ],
+        achievements: [
+          "Won Hackathon 2024",
+          "Published Research Paper",
+          "Open Source Contributor",
+          "Full Stack Developer Certification"
+        ]
+      },
+      {
+        name: "Maria Santos",
+        role: "UI/UX Designer",
+        photo: "images/profile/maria.jpg",   // Profile photo for Maria
+        cover: "images/profile/cover-maria.jpg", // Cover photo for Maria
+        bio: "Creative designer with a passion for user-centered design...",
+        program: "Bachelor of Fine Arts in Digital Design",
+        university: "De La Salle University - Manila",
+        interests: "Design, Art, Travel, Music",
+        location: "Makati City, Metro Manila, Philippines",
+        skills: "Figma, Adobe XD, Illustrator, Photoshop, CSS",
+        projects: [
+          { name: "Mobile UI Kit", image: "" },
+          { name: "Brand Identity", image: "" },
+          { name: "Dashboard Design", image: "" },
+          { name: "Icon Set", image: "" }
+        ],
+        achievements: [
+          "Best Design Award 2024",
+          "Featured on Behance",
+          "UI/UX Certification",
+          "Freelance Designer for 50+ Clients"
+        ]
+      }
+    ];
+
+    // PROFILE NAVIGATION
+    let currentProfileIndex = 0;
+
+    function updateProfile(index) {
+      const profile = memberProfiles[index];
+      
+      // Update basic info
+      document.getElementById("profile-name").textContent = profile.name;
+      document.getElementById("profile-role").textContent = profile.role;
+      document.getElementById("profile-photo").src = profile.photo;
+      document.getElementById("cover-photo").src = profile.cover;
+      document.getElementById("profile-bio").textContent = profile.bio;
+
+      // Update about section
+      const aboutContent = document.getElementById("about-content");
+      aboutContent.innerHTML = `
+        <div class="info-row">
+          <span class="info-label">Program:</span>
+          <span class="info-value">${profile.program}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">University:</span>
+          <span class="info-value">${profile.university}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Interests:</span>
+          <span class="info-value">${profile.interests}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Location:</span>
+          <span class="info-value">${profile.location}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Skills and Expertise:</span>
+          <span class="info-value">${profile.skills}</span>
+        </div>
+      `;
+
+      // Update projects
+      const projectsGrid = document.getElementById("projects-grid");
+      projectsGrid.innerHTML = profile.projects.map(project => `
+        <div class="project-item">
+          <div style="width: 60px; height: 60px; background: #a50204; border-radius: 8px; margin-bottom: 8px;"></div>
+          <span class="project-name">${project.name}</span>
+        </div>
+      `).join('');
+
+      // Update achievements
+      const achievementsContent = document.getElementById("achievements-content");
+      achievementsContent.innerHTML = profile.achievements.map((achievement, idx) => `
+        <div class="achievement-item">${achievement}</div>
+        ${idx < profile.achievements.length - 1 ? '<div class="achievement-divider"></div>' : ''}
+      `).join('');
+    }
+
+    // Navigation buttons
+    document.getElementById("prev-btn").addEventListener("click", () => {
+      currentProfileIndex = (currentProfileIndex - 1 + memberProfiles.length) % memberProfiles.length;
+      updateProfile(currentProfileIndex);
+    });
+
+    document.getElementById("next-btn").addEventListener("click", () => {
+      currentProfileIndex = (currentProfileIndex + 1) % memberProfiles.length;
+      updateProfile(currentProfileIndex);
+    });
+
+    // Initialize with first profile
+    updateProfile(currentProfileIndex);
   </script>
+</body>
+</html>
 </body>
 </html>
