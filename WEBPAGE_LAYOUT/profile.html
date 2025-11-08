@@ -49,7 +49,7 @@
     <ul>
       <li><a href="homepage.html"><i class="fa-solid fa-house"></i> Home</a></li>
       <li><a href="project.html"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
-      <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="general-profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
       <li><a href="#"><i class="fa-solid fa-address-book"></i> Contacts</a></li>
     </ul>
   </nav>
@@ -66,7 +66,7 @@
         <ul>
           <li><a href="homepage.html">Home</a></li>
           <li><a href="project.html">Projects</a></li>
-          <li><a href="profile.html" class="active">Profile</a></li>
+          <li><a href="general-profile.html" class="active">Profile</a></li>
           <li><a href="#">Contacts</a></li>
         </ul>
       </nav>
@@ -206,137 +206,93 @@
     });
 
     // MEMBER PROFILES DATA
+    // MEMBER PROFILES DATA
     const memberProfiles = [
       {
         name: "Jisoo Marie D. Tinubuan",
         role: "Undergraduate Student",
-        photo: "images and css/images/wallpaper.jpg",   // Profile photo for Jisoo
-        cover: "images and css/images/wallpaper.jpg",  // Cover photo for Jisoo
+        photo: "images and css/images/wallpaper.jpg",
+        cover: "images and css/images/wallpaper.jpg",
         bio: "I am a Computer Engineering student/professional...",
         program: "Bachelor of Science in Computer Engineering",
         university: "Polytechnic University of the Philippines - Manila",
         interests: "Coding, Cooking, Singing, Dancing",
         location: "Taguig City Metro Manila, Philippines",
         skills: "C, C++, Python, Java, Arduino, Raspberry Pi, Verilog",
-        projects: [
-          { name: "Snake Game", image: "" },
-          { name: "Automated Bank", image: "" },
-          { name: "Lottery Game", image: "" },
-          { name: "Keyboard", image: "" }
-        ],
-        achievements: [
-          "Consistent Dean's Lister",
-          "Finalist in University Hackathon 2025",
-          "Certified in Python and Embedded Systems",
-          "Built a Portfolio Website Showcasing Hardware and Software Projects"
-        ]
+        projects: ["Snake Game","Automated Bank","Lottery Game","Keyboard"],
+        achievements: ["Consistent Dean's Lister","Finalist in University Hackathon 2025","Certified in Python and Embedded Systems","Built a Portfolio Website Showcasing Hardware and Software Projects"]
       },
       {
         name: "John Doe",
         role: "Senior Developer",
-        photo: "images/profile/john.jpg",  // Profile photo for John
-        cover: "images/profile/cover-john.jpg", // Cover photo for John
+        photo: "images/profile/john.jpg",
+        cover: "images/profile/cover-john.jpg",
         bio: "Passionate about creating innovative solutions...",
         program: "Bachelor of Science in Computer Science",
         university: "University of the Philippines - Diliman",
         interests: "Web Development, AI, Gaming, Photography",
         location: "Quezon City, Metro Manila, Philippines",
         skills: "JavaScript, React, Node.js, Python, TensorFlow",
-        projects: [
-          { name: "E-Commerce Platform", image: "" },
-          { name: "AI Chatbot", image: "" },
-          { name: "Portfolio Website", image: "" },
-          { name: "Mobile App", image: "" }
-        ],
-        achievements: [
-          "Won Hackathon 2024",
-          "Published Research Paper",
-          "Open Source Contributor",
-          "Full Stack Developer Certification"
-        ]
+        projects: ["E-Commerce Platform","AI Chatbot","Portfolio Website","Mobile App"],
+        achievements: ["Won Hackathon 2024","Published Research Paper","Open Source Contributor","Full Stack Developer Certification"]
       },
       {
         name: "Maria Santos",
         role: "UI/UX Designer",
-        photo: "images/profile/maria.jpg",   // Profile photo for Maria
-        cover: "images/profile/cover-maria.jpg", // Cover photo for Maria
+        photo: "images/profile/maria.jpg",
+        cover: "images/profile/cover-maria.jpg",
         bio: "Creative designer with a passion for user-centered design...",
         program: "Bachelor of Fine Arts in Digital Design",
         university: "De La Salle University - Manila",
         interests: "Design, Art, Travel, Music",
         location: "Makati City, Metro Manila, Philippines",
         skills: "Figma, Adobe XD, Illustrator, Photoshop, CSS",
-        projects: [
-          { name: "Mobile UI Kit", image: "" },
-          { name: "Brand Identity", image: "" },
-          { name: "Dashboard Design", image: "" },
-          { name: "Icon Set", image: "" }
-        ],
-        achievements: [
-          "Best Design Award 2024",
-          "Featured on Behance",
-          "UI/UX Certification",
-          "Freelance Designer for 50+ Clients"
-        ]
+        projects: ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
+        achievements: ["Best Design Award 2024","Featured on Behance","UI/UX Certification","Freelance Designer for 50+ Clients"]
       }
     ];
 
-    // PROFILE NAVIGATION
-    let currentProfileIndex = 0;
+    // READ PROFILE ID FROM URL
+    function getProfileIdFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'));
+      return isNaN(id) ? 1 : id; // default to first profile
+    }
 
+    let currentProfileIndex = getProfileIdFromURL() - 1;
+
+    // UPDATE PROFILE FUNCTION
     function updateProfile(index) {
       const profile = memberProfiles[index];
-      
-      // Update basic info
+
       document.getElementById("profile-name").textContent = profile.name;
       document.getElementById("profile-role").textContent = profile.role;
       document.getElementById("profile-photo").src = profile.photo;
       document.getElementById("cover-photo").src = profile.cover;
       document.getElementById("profile-bio").textContent = profile.bio;
 
-      // Update about section
-      const aboutContent = document.getElementById("about-content");
-      aboutContent.innerHTML = `
-        <div class="info-row">
-          <span class="info-label">Program:</span>
-          <span class="info-value">${profile.program}</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">University:</span>
-          <span class="info-value">${profile.university}</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">Interests:</span>
-          <span class="info-value">${profile.interests}</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">Location:</span>
-          <span class="info-value">${profile.location}</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">Skills and Expertise:</span>
-          <span class="info-value">${profile.skills}</span>
-        </div>
+      document.getElementById("about-content").innerHTML = `
+        <div class="info-row"><span class="info-label">Program:</span> <span class="info-value">${profile.program}</span></div>
+        <div class="info-row"><span class="info-label">University:</span> <span class="info-value">${profile.university}</span></div>
+        <div class="info-row"><span class="info-label">Interests:</span> <span class="info-value">${profile.interests}</span></div>
+        <div class="info-row"><span class="info-label">Location:</span> <span class="info-value">${profile.location}</span></div>
+        <div class="info-row"><span class="info-label">Skills and Expertise:</span> <span class="info-value">${profile.skills}</span></div>
       `;
 
-      // Update projects
-      const projectsGrid = document.getElementById("projects-grid");
-      projectsGrid.innerHTML = profile.projects.map(project => `
+      document.getElementById("projects-grid").innerHTML = profile.projects.map(p => `
         <div class="project-item">
           <div style="width: 60px; height: 60px; background: #a50204; border-radius: 8px; margin-bottom: 8px;"></div>
-          <span class="project-name">${project.name}</span>
+          <span class="project-name">${p}</span>
         </div>
       `).join('');
 
-      // Update achievements
-      const achievementsContent = document.getElementById("achievements-content");
-      achievementsContent.innerHTML = profile.achievements.map((achievement, idx) => `
-        <div class="achievement-item">${achievement}</div>
-        ${idx < profile.achievements.length - 1 ? '<div class="achievement-divider"></div>' : ''}
+      document.getElementById("achievements-content").innerHTML = profile.achievements.map((a,i) => `
+        <div class="achievement-item">${a}</div>
+        ${i < profile.achievements.length - 1 ? '<div class="achievement-divider"></div>' : ''}
       `).join('');
     }
 
-    // Navigation buttons
+    // NAVIGATION BUTTONS
     document.getElementById("prev-btn").addEventListener("click", () => {
       currentProfileIndex = (currentProfileIndex - 1 + memberProfiles.length) % memberProfiles.length;
       updateProfile(currentProfileIndex);
@@ -347,8 +303,9 @@
       updateProfile(currentProfileIndex);
     });
 
-    // Initialize with first profile
+    // INITIALIZE PROFILE
     updateProfile(currentProfileIndex);
+
   </script>
 </body>
 </html>

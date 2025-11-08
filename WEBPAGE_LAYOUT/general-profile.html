@@ -88,19 +88,13 @@
 
             <div class="first-row-cards">
             <div class="card-item" onclick="goToProfile(1)">
-                <img src="images and css/images/Card.png" alt="Profile 1" />
+              <img src="images and css/images/Card.png" alt="Profile 1" />
             </div>
             <div class="card-item" onclick="goToProfile(2)">
-                <img src="images and css/images/Card.png" alt="Profile 2" />
+              <img src="images and css/images/Card.png" alt="Profile 2" />
             </div>
             <div class="card-item" onclick="goToProfile(3)">
-                <img src="images and css/images/Card.png" alt="Profile 3" />
-            </div>
-            <div class="card-item" onclick="goToProfile(4)">
-                <img src="images and css/images/Card.png" alt="Profile 4" />
-            </div>
-            <div class="card-item" onclick="goToProfile(5)">
-                <img src="images and css/images/Card.png" alt="Profile 5" />
+              <img src="images and css/images/Card.png" alt="Profile 3" />
             </div>
         </div>
     </div>
@@ -139,21 +133,9 @@
         });
 
     function goToProfile(profileId) {
-
-            const profileUrls = {
-                1: 'profile1.html',
-                2: 'profile2.html',
-                3: 'profile3.html',
-                4: 'profile4.html',
-                5: 'profile5.html',
-                6: 'profile6.html',
-                7: 'profile7.html',
-                8: 'profile8.html',
-                9: 'profile9.html'
-            };
-            
-            window.location.href = profileUrls[profileId];
+          window.location.href = `profile.html?id=${profileId}`;
         }
+            
   </script>
 </body>
 </html>
