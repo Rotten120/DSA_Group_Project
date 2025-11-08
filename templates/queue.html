@@ -81,14 +81,17 @@
 
         <div class="queue-visual">
             <div class="output">
-                <span class="node">test1</span>
+                {% for node in nodes %}
+                    <span class="node">{{node}}</span>
+                {% endfor %}
                 <span class="node">X</span>
             </div>
         </div>
 
+        <form action="/queue_update" method="post">
         <div class="search-section">
             <div class="search-container">
-                <input type="text" id="mainInput" class="search-input" placeholder="Enter value or search term...">
+                <input type="text" id="mainInput" name="mainInput" class="search-input" autocomplete="off" placeholder="Enter value or search term...">
                 <button class="search-btn" title="Search">
                     <svg viewBox="0 0 24 24" fill="none">
                         <circle cx="11" cy="11" r="8"></circle>
@@ -102,17 +105,18 @@
             <div class="control-panel">
                 <div class="control-header">FRONT</div>
                 <div class="control-buttons">
-                    <button class="btn">ADD</button>
+                    <button class="btn" type="submit" name="button" value="enqueue">ADD</button>
                 </div>
             </div>
 
             <div class="control-panel">
                 <div class="control-header">REAR</div>
                 <div class="control-buttons">
-                    <button class="btn">REMOVE</button>
+                    <button class="btn" type="submit" name="button" value="dequeue">REMOVE</button>
                 </div>
             </div>
         </div>
+        </form>
     </div>
 
     <script>
