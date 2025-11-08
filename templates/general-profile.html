@@ -6,10 +6,10 @@
   <title>CircuiTech</title>
 
   <!-- CSS Links -->
-  <link rel="stylesheet" href="images and css/css/project-body.css" />
   <link rel="stylesheet" href="images and css/css/header.css" />
   <link rel="stylesheet" href="images and css/css/sidebar.css" />
-
+  <link rel="stylesheet" href="images and css/css/general-body.css">
+    <link rel="stylesheet" href="images and css/css/profile.css" />
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,7 +35,7 @@
         background-color: black;
     }
   </style>
-</head>
+  </head>
 
 <body>
   <!-- SIDEBAR -->
@@ -79,36 +79,49 @@
     </div>
   </header>
 
-  <div class="vertical-links">
-    <div class="link-slider">
-      <div class="slider-track">
-        <div class="slide-link">
-          <div class="link-box">
-            <a href="#">1</a>
-          </div>
-          <div class="link-box">
-            <a href="#">2</a>
-          </div>
-          <div class="link-box">
-            <a href="#">3</a>
-          </div>
-          <div class="link-box">
-            <a href="#">4</a>
-          </div>
-          <div class="link-box">
-            <a href="#">5</a>
-          </div>
-          <div class="link-box">
-            <a href="#">6</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-
   <!-- OVERLAY -->
   <div id="overlay" class="overlay"></div>
+<section class="main-section">
+    <div class="content-wrapper">
+        <div class="profile-row-wrapper">
+            <h1 class="profile-title">PROFILE</h1>
+
+            <div class="first-row-cards">
+            <div class="card-item" onclick="goToProfile(1)">
+                <img src="images and css/images/Card.png" alt="Profile 1" />
+            </div>
+            <div class="card-item" onclick="goToProfile(2)">
+                <img src="images and css/images/Card.png" alt="Profile 2" />
+            </div>
+            <div class="card-item" onclick="goToProfile(3)">
+                <img src="images and css/images/Card.png" alt="Profile 3" />
+            </div>
+            <div class="card-item" onclick="goToProfile(4)">
+                <img src="images and css/images/Card.png" alt="Profile 4" />
+            </div>
+            <div class="card-item" onclick="goToProfile(5)">
+                <img src="images and css/images/Card.png" alt="Profile 5" />
+            </div>
+        </div>
+    </div>
+
+    <div class="card-row bottom">
+        <div class="card-item" onclick="goToProfile(6)">
+        <img src="images and css/images/Card.png" alt="Profile 6" />
+        </div>
+        <div class="card-item" onclick="goToProfile(7)">
+        <img src="images and css/images/Card.png" alt="Profile 7" />
+        </div>
+        <div class="card-item" onclick="goToProfile(8)">
+        <img src="images and css/images/Card.png" alt="Profile 8" />
+        </div>
+        <div class="card-item" onclick="goToProfile(9)">
+        <img src="images and css/images/Card.png" alt="Profile 9" />
+        </div>
+    </div>
+    </div>
+
+</section>
 
   <script>
 
@@ -124,28 +137,23 @@
         menuIcon.addEventListener("click", toggleSidebar);
         overlay.addEventListener("click", toggleSidebar);
         });
-    
-    // Slider functionality
-    document.addEventListener('DOMContentLoaded', () => {
-        const track = document.querySelector('.slide-link');
-        const leftBtn = document.querySelector('.scroll-left');
-        const rightBtn = document.querySelector('.scroll-right');
-        let position = 0;
-        const slideWidth = 200; 
 
-        leftBtn.addEventListener('click', () => {
-            position += slideWidth;
-            if (position > 0) position = 0;
-            track.style.transform = `translateX(${position}px)`;
-        });
+    function goToProfile(profileId) {
 
-        rightBtn.addEventListener('click', () => {
-            const limit = -(track.offsetWidth - track.parentElement.offsetWidth);
-            position -= slideWidth;
-            if (position < limit) position = limit;
-            track.style.transform = `translateX(${position}px)`;
-        });
-    });
+            const profileUrls = {
+                1: 'profile1.html',
+                2: 'profile2.html',
+                3: 'profile3.html',
+                4: 'profile4.html',
+                5: 'profile5.html',
+                6: 'profile6.html',
+                7: 'profile7.html',
+                8: 'profile8.html',
+                9: 'profile9.html'
+            };
+            
+            window.location.href = profileUrls[profileId];
+        }
   </script>
 </body>
 </html>

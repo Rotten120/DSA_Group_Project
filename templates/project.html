@@ -6,6 +6,7 @@
   <title>CircuiTech</title>
 
   <!-- CSS Links -->
+  <link rel="stylesheet" href="images and css/css/project-body.css" />
   <link rel="stylesheet" href="images and css/css/header.css" />
   <link rel="stylesheet" href="images and css/css/sidebar.css" />
 
@@ -35,14 +36,14 @@
     }
   </style>
 </head>
+
 <body>
-    <body>
   <!-- SIDEBAR -->
   <nav id="sidebar" class="sidebar">
     <ul>
-      <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
-      <li><a href="#"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
-      <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="homepage.html"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="project.html"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
+      <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
       <li><a href="#"><i class="fa-solid fa-address-book"></i> Contacts</a></li>
     </ul>
   </nav>
@@ -57,9 +58,9 @@
     <div class="header-right">
       <nav class="nav-links">
         <ul>
-          <li><a href="#" class="active">Home</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Profile</a></li>
+          <li><a href="homepage.html">Home</a></li>
+          <li><a href="project.html" class="active">Projects</a></li>
+          <li><a href="profile.html">Profile</a></li>
           <li><a href="#">Contacts</a></li>
         </ul>
       </nav>
@@ -78,9 +79,36 @@
     </div>
   </header>
 
+  <div class="vertical-links">
+    <div class="link-slider">
+      <div class="slider-track">
+        <div class="slide-link">
+          <div class="link-box">
+            <a href="#">1</a>
+          </div>
+          <div class="link-box">
+            <a href="#">2</a>
+          </div>
+          <div class="link-box">
+            <a href="#">3</a>
+          </div>
+          <div class="link-box">
+            <a href="#">4</a>
+          </div>
+          <div class="link-box">
+            <a href="#">5</a>
+          </div>
+          <div class="link-box">
+            <a href="#">6</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
   <!-- OVERLAY -->
   <div id="overlay" class="overlay"></div>
-
 
   <script>
 
@@ -96,6 +124,28 @@
         menuIcon.addEventListener("click", toggleSidebar);
         overlay.addEventListener("click", toggleSidebar);
         });
+    
+    // Slider functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.querySelector('.slide-link');
+        const leftBtn = document.querySelector('.scroll-left');
+        const rightBtn = document.querySelector('.scroll-right');
+        let position = 0;
+        const slideWidth = 200; 
+
+        leftBtn.addEventListener('click', () => {
+            position += slideWidth;
+            if (position > 0) position = 0;
+            track.style.transform = `translateX(${position}px)`;
+        });
+
+        rightBtn.addEventListener('click', () => {
+            const limit = -(track.offsetWidth - track.parentElement.offsetWidth);
+            position -= slideWidth;
+            if (position < limit) position = limit;
+            track.style.transform = `translateX(${position}px)`;
+        });
+    });
   </script>
 </body>
 </html>
