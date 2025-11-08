@@ -128,43 +128,94 @@
           class="search-item"
           onclick="location.href='#meaning-section'"
         >
-          <i class="fa-solid fa-magnifying-glass"></i>What is PUP?
+          <i class="fa-solid fa-magnifying-glass"></i>What is DSA?
         </button>
         <button
           class="search-item"
-          onclick="location.href='#what-section'"
+          onclick="location.href='#life-section'"
         >
-          <i class="fa-solid fa-magnifying-glass"></i>What is Computer Engineering About?
+          <i class="fa-solid fa-magnifying-glass"></i>Real-life uses of DSA
         </button>
         <button
           class="search-item"
-          onclick="location.href='#node-section'"
+          onclick="location.href='#algorithm-section'"
         >
-          <i class="fa-solid fa-magnifying-glass"></i> What is DSA?
+          <i class="fa-solid fa-magnifying-glass"></i> How algorithms work
         </button>
         <button
           class="search-item"
-          onclick="location.href='#important-section'"
+          onclick="location.href='#importance-section'"
         >
-          <i class="fa-solid fa-magnifying-glass"></i>How to contact the group?
+          <i class="fa-solid fa-magnifying-glass"></i>Is DSA that important
         </button>
       </div>
     </section>
 
   <!-- SUB-SECTIONS -->
   <section id="meaning-section" class="meaning-section">
-    <h2>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES</h2>
-    <p>This is the next section that appears when you click the button.</p>
+    <div class="meaning">
+      <h2>WHAT IS DSA?</h2>
+      <p>
+      Data Structures and Algorithms (DSA) form the foundation of computer science and programming.
+      <br>
+      <br>
+      A data structure is a way of organizing and storing data so that it can be used efficiently — examples include arrays, linked lists, stacks, and trees.
+      <br>
+      <br>
+      An algorithm, on the other hand, is a set of step-by-step instructions designed to perform a specific task or solve a problem.
+      <br>
+      <br>
+      Together, DSA teaches us how to handle data, process information, and build programs that are both fast and reliable. Learning DSA helps programmers write better code, optimize performance, and develop logical problem-solving skills essential in software development.</p>
+    </div>
   </section>
 
-  <section id="what-section" class="what-section">
-    <h2>COMPUTER ENGINEERING</h2>
-    <p>This is the next section that appears when you click the button.</p>
+  <section id="life-section" class="life-section">
+    <div class="life">
+      <h2>REAL-LIFE USE OF DSA</h2>
+      <p>
+      DSA is everywhere — it powers almost every application and system we use daily.
+      <br>
+      <br>
+      Search engines use algorithms to find and rank information quickly. Social media platforms rely on data structures to store user data, posts, and connections.
+      <br>
+      <br>
+      Navigation apps use graph algorithms to find the shortest routes. Even online shopping sites depend on DSA for recommendation systems, inventory management, and fast search results.
+      <br>
+      <br>
+      In short, DSA is not just theory — its the backbone of efficient, real-world computing across industries like healthcare, finance, gaming, and artificial intelligence.
+      </p>
+    </div>
   </section>
 
-  <section id="node-section" class="node-section">
-    <h2>DATA STRUCTURES AND ALGORITHMS</h2>
-    <p>This is the next section that appears when you click the button.</p>
+  <section id="algorithm-section" class="algorithm-section">
+    <div class="algorithm">
+      <h2>HOW ALGORITHM WORKS</h2>
+      <p>
+      Algorithms solve problems by breaking them into smaller, logical steps that a computer can follow. Each step performs a specific operation, like comparing values, sorting data, or finding a pattern.
+      <br>
+      <br>
+      For example, a sorting algorithm organizes a list of numbers in ascending order, while a search algorithm finds a specific item in a dataset.
+      <br>
+      <br>
+      By using the right algorithm, programmers can make solutions more efficient — reducing processing time, saving memory, and improving overall performance. In essence, algorithms are the problem-solving blueprints that guide how computers think and act.
+      </p>
+    </div>
+  </section>
+
+  <section id="importance-section" class="importance-section">
+    <div class="importance">
+
+    <h2>IS DSA THAT IMPORTANT</h2>
+    <p>
+    The importance of Data Structures and Algorithms (DSA) lies in how they make programs efficient, reliable, and scalable. DSA helps developers organize data properly and choose the best way to process it, which leads to faster and more optimized solutions.
+      <br>
+      <br>
+    By understanding DSA, programmers can write code that uses less memory, executes faster, and handles larger amounts of data effectively. It also strengthens problem-solving skills, making it easier to tackle complex challenges in fields like web development, software engineering, artificial intelligence, and data science.
+      <br>
+      <br>
+    In short, DSA is the foundation of efficient programming — it turns ideas into practical, high-performance solutions.
+    </div>
+  </p>
   </section>
 
   <section id="important-section" class="important-section">
@@ -259,75 +310,6 @@
     }, 3000);
 
     updateSlide(currentIndex);
-  });
-
-  // SEARCH FUNCTIONALITY
-  document.addEventListener('DOMContentLoaded', function() {
-    const searchForm = document.querySelector('.search-form');
-    const searchInput = searchForm.querySelector('input[type="search"]');
-    
-    const searchMap = {
-      'pup': '#meaning-section',
-      'polytechnic': '#meaning-section',
-      'university': '#meaning-section',
-      'philippines': '#meaning-section',
-      
-      'computer': '#what-section',
-      'engineering': '#what-section',
-      'cpe': '#what-section',
-      
-      'dsa': '#node-section',
-      'data structures': '#node-section',
-      'algorithms': '#node-section',
-      'data': '#node-section',
-      
-      'contact': '#important-section',
-      'contacts': '#important-section',
-      'reach': '#important-section',
-      'email': '#important-section',
-      'facebook': '#important-section',
-      'linkedin': '#important-section'
-    };
-    
-    searchForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const query = searchInput.value.toLowerCase().trim();
-      
-      if (!query) {
-        alert('Please enter a search term');
-        return;
-      }
-      
-      let foundSection = null;
-      
-      for (const [keyword, section] of Object.entries(searchMap)) {
-        if (query.includes(keyword)) {
-          foundSection = section;
-          break;
-        }
-      }
-      
-      if (foundSection) {
-        const targetSection = document.querySelector(foundSection);
-        if (targetSection) {
-          targetSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
-          
-          searchInput.value = '';
-          
-          // Highlight effect
-          targetSection.style.animation = 'highlight 1s ease';
-          setTimeout(() => {
-            targetSection.style.animation = '';
-          }, 1000);
-        }
-      } else {
-        alert('No results found. Try: PUP, Computer Engineering, DSA, or Contacts');
-      }
-    });
   });
 </script>
 </body>

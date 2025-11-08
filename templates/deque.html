@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUEUE - Data Structure Visualizer</title>
+    <link rel="stylesheet" href="../static/css/header.css" />
+    <link rel="stylesheet" href="../static/css/sidebar.css" />
+    <link rel="stylesheet" href="../static/css/deque.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+    />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    />
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar" class="sidebar">
+        <ul>
+            <li><a href="homepage.html"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
+            <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+            <li><a href="#"><i class="fa-solid fa-address-book"></i> Contacts</a></li>
+        </ul>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+    <div class="header-left">
+      <div id="menu-icon" class="menu-icon">&#9776;</div>
+      <div class="logo-icon">CircuiTech</div>
+    </div>
+
+    <div class="header-right">
+      <nav class="nav-links">
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Contacts</a></li>
+        </ul>
+      </nav>
+
+      <form class="search-form" action="#" method="GET" role="search">
+        <input
+          type="search"
+          placeholder="Search..."
+          aria-label="Search"
+          name="q"
+        />
+        <button type="submit" aria-label="Submit Search">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+    </div>
+  </header>
+
+  <!-- OVERLAY -->
+  <div id="overlay" class="overlay"></div>
+
+    <div class="main-section">
+        <h1>DEQUE</h1>
+
+        <div class="queue-visual">
+            <div class="output">
+                <span class="node">test0</span>
+                <span class="node">X</span>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <div class="search-container">
+                <input type="text" id="mainInput" class="search-input" placeholder="Enter value or search term...">
+                <button class="search-btn" title="Search">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="control-panel">
+                <div class="control-header">FRONT</div>
+                <div class="control-buttons">
+                    <button class="btn">ADD</button>
+                    <button class="btn">REMOVE</button>
+                </div>
+            </div>
+
+            <div class="control-panel">
+                <div class="control-header">REAR</div>
+                <div class="control-buttons">
+                    <button class="btn">ADD</button>
+                    <button class="btn">REMOVE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SIDE BAR
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuIcon = document.getElementById("menu-icon");
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+            function toggleSidebar() {
+                sidebar.classList.toggle("active");
+                overlay.classList.toggle("active");
+            }
+            menuIcon.addEventListener("click", toggleSidebar);
+            overlay.addEventListener("click", toggleSidebar);
+            });
+
+        function goToProfile(profileId) {
+            window.location.href = `profile.html?id=${profileId}`;
+            }
+    </script>
+</body>
+</html>
