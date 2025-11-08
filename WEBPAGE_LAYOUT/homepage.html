@@ -84,19 +84,19 @@
       <div class="slider-container">
         <div class="slide">
           <img
-            src="homepage/images-homepage/sahur.jpg"
+            src="images and css/images/bombardino.jpg"
             alt="Slide 1 Description"
           />
         </div>
         <div class="slide">
           <img
-            src="homepage/images-homepage/bombardino.jpg"
+            src="images and css/images/sahur.jpg"
             alt="Slide 2 Description"
           />
         </div>
         <div class="slide">
           <img
-            src="homepage/images-homepage/tralelo.png"
+            src="images and css/images/tralelo.png"
             alt="Slide 3 Description"
           />
         </div>
@@ -113,43 +113,43 @@
 
   <!-- CONTENT SECTION -->
   <section class="content-row">
-    <div class="educational-videos">
-      <h3>Educational Videos &gt</h3>
-      <div class="video-thumbnails">
-        <div class="video-box"></div>
-        <div class="video-box"></div>
+      <div class="educational-videos">
+        <h3>Educational Videos &gt;</h3>
+        <div class="video-thumbnails">
+          <div class="video-box"></div>
+          <div class="video-box"></div>
+        </div>
+        <button class="view-more">View More</button>
       </div>
-      <button class="view-more">View More</button>
-    </div>
 
-    <div class="recent-search">
-      <h3>Recent Search</h3>
-      <button
-        class="search-item"
-        onclick="location.href='#meaning-section'"
-      >
-        <i class="fa-solid fa-magnifying-glass"></i>What is PUP?
-      </button>
-      <button
-        class="search-item"
-        onclick="location.href='#what-section'"
-      >
-        <i class="fa-solid fa-magnifying-glass"></i>What is Computer Engineering About?
-      </button>
-      <button
-        class="search-item"
-        onclick="location.href='#node-section'"
-      >
-        <i class="fa-solid fa-magnifying-glass"></i> What is DSA?
-      </button>
-      <button
-        class="search-item"
-        onclick="location.href='#important-section'"
-      >
-        <i class="fa-solid fa-magnifying-glass"></i>How to contact the group?
-      </button>
-    </div>
-  </section>
+      <div class="recent-search">
+        <h3>Recent Search</h3>
+        <button
+          class="search-item"
+          onclick="location.href='#meaning-section'"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>What is PUP?
+        </button>
+        <button
+          class="search-item"
+          onclick="location.href='#what-section'"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>What is Computer Engineering About?
+        </button>
+        <button
+          class="search-item"
+          onclick="location.href='#node-section'"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i> What is DSA?
+        </button>
+        <button
+          class="search-item"
+          onclick="location.href='#important-section'"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>How to contact the group?
+        </button>
+      </div>
+    </section>
 
   <!-- SUB-SECTIONS -->
   <section id="meaning-section" class="meaning-section">
@@ -168,81 +168,167 @@
   </section>
 
   <section id="important-section" class="important-section">
-    <h2 class="contacts">CONTACTS</h2>
+    <div class="contacts-container">
+    <h2 class="contacts-title">CONTACTS</h2>
+    <p class="contacts-subtitle">Reach out to us!</p>
+    
+    <div class="contacts-content">
+      <div class="contact-card">
+        <a href="https://facebook.com/yourpage" target="_blank" class="social-link">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+      </div>
+      
+      <div class="contact-card">
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="social-link">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </div>
+      
+      <div class="contact-card email-card">
+        <i class="fa-solid fa-envelope"></i>
+        <p>contact@circuitech.com</p>
+      </div>
+    </div>
+  </div>
   </section>
 
   <script>
+  // SIDEBAR
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuIcon = document.getElementById("menu-icon");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    
+    function toggleSidebar() {
+      sidebar.classList.toggle("active");
+      overlay.classList.toggle("active");
+    }
+    
+    menuIcon.addEventListener("click", toggleSidebar);
+    overlay.addEventListener("click", toggleSidebar);
+  });
 
-    // SIDE BAR
-    document.addEventListener("DOMContentLoaded", () => {
-        const menuIcon = document.getElementById("menu-icon");
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("overlay");
-        function toggleSidebar() {
-            sidebar.classList.toggle("active");
-            overlay.classList.toggle("active");
-        }
-        menuIcon.addEventListener("click", toggleSidebar);
-        overlay.addEventListener("click", toggleSidebar);
-        });
+  // SLIDER
+  document.addEventListener('DOMContentLoaded', function () {
+    const sliderContainer = document.querySelector('.slider-container');
+    const slides = document.querySelectorAll('.slide');
+    const indicators = document.querySelectorAll('.indicator');
+    const leftArrow = document.querySelector('.left-arrow');
+    const rightArrow = document.querySelector('.right-arrow');
 
-    // SLIDING PART
-    document.addEventListener('DOMContentLoaded', function () {
-      const sliderContainer = document.querySelector('.slider-container');
-      const slides = document.querySelectorAll('.slide');
-      const indicators = document.querySelectorAll('.indicator');
-      const leftArrow = document.querySelector('.left-arrow');
-      const rightArrow = document.querySelector('.right-arrow');
+    if (!sliderContainer || slides.length === 0 || indicators.length === 0 || !leftArrow || !rightArrow) {
+      console.error('Slider elements not found. Check your HTML structure.');
+      return;
+    }
 
-      if (
-        !sliderContainer ||
-        slides.length === 0 ||
-        indicators.length === 0 ||
-        !leftArrow ||
-        !rightArrow
-      ) {
-        console.error('Slider elements not found. Check your HTML structure.');
-        return;
-      }
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    const slideWidth = 100 / totalSlides;
 
-      let currentIndex = 0;
-      const totalSlides = slides.length;
-      const slideWidth = 100 / totalSlides;
+    sliderContainer.style.animation = 'none';
 
-      sliderContainer.style.animation = 'none';
-
-      function updateSlide(index) {
-        const translateX = -index * slideWidth;
-        sliderContainer.style.transform = `translateX(${translateX}%)`;
-        indicators.forEach((ind, i) => {
-          ind.classList.toggle('active', i === index);
-        });
-      }
-
-      rightArrow.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlide(currentIndex);
+    function updateSlide(index) {
+      const translateX = -index * slideWidth;
+      sliderContainer.style.transform = `translateX(${translateX}%)`;
+      indicators.forEach((ind, i) => {
+        ind.classList.toggle('active', i === index);
       });
+    }
 
-      leftArrow.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateSlide(currentIndex);
-      });
-
-      indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-          currentIndex = index;
-          updateSlide(currentIndex);
-        });
-      });
-
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlide(currentIndex);
-      }, 3000);
-
+    rightArrow.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % totalSlides;
       updateSlide(currentIndex);
     });
-  </script>
+
+    leftArrow.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlide(currentIndex);
+    });
+
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        currentIndex = index;
+        updateSlide(currentIndex);
+      });
+    });
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlide(currentIndex);
+    }, 3000);
+
+    updateSlide(currentIndex);
+  });
+
+  // SEARCH FUNCTIONALITY
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.querySelector('.search-form');
+    const searchInput = searchForm.querySelector('input[type="search"]');
+    
+    const searchMap = {
+      'pup': '#meaning-section',
+      'polytechnic': '#meaning-section',
+      'university': '#meaning-section',
+      'philippines': '#meaning-section',
+      
+      'computer': '#what-section',
+      'engineering': '#what-section',
+      'cpe': '#what-section',
+      
+      'dsa': '#node-section',
+      'data structures': '#node-section',
+      'algorithms': '#node-section',
+      'data': '#node-section',
+      
+      'contact': '#important-section',
+      'contacts': '#important-section',
+      'reach': '#important-section',
+      'email': '#important-section',
+      'facebook': '#important-section',
+      'linkedin': '#important-section'
+    };
+    
+    searchForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const query = searchInput.value.toLowerCase().trim();
+      
+      if (!query) {
+        alert('Please enter a search term');
+        return;
+      }
+      
+      let foundSection = null;
+      
+      for (const [keyword, section] of Object.entries(searchMap)) {
+        if (query.includes(keyword)) {
+          foundSection = section;
+          break;
+        }
+      }
+      
+      if (foundSection) {
+        const targetSection = document.querySelector(foundSection);
+        if (targetSection) {
+          targetSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          searchInput.value = '';
+          
+          // Highlight effect
+          targetSection.style.animation = 'highlight 1s ease';
+          setTimeout(() => {
+            targetSection.style.animation = '';
+          }, 1000);
+        }
+      } else {
+        alert('No results found. Try: PUP, Computer Engineering, DSA, or Contacts');
+      }
+    });
+  });
+</script>
 </body>
 </html>
