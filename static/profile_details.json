@@ -42,7 +42,7 @@
         "achievements": ["Consistent Dean Lister","Consistent with honors (Elementary-Senior High School)","Created own webpage for portfolio"]
       },
       {
-        "name": "Adrian Kurt O. Mariñas",
+        "name": "Adrian Kurt O. Mari\u00f1as",
         "role": "Undergraduate Student",
         "photo": "../static/images/profile_pics/marinas.jpg",
         "cover": "../static/images/cover_pics/marinas.png",
@@ -60,7 +60,7 @@
         "role": "Undergraduate Student",
         "photo": "../static/images/profile_pics/manaog.png",
         "cover": "../static/images/cover_pics/manaog.png",
-        "bio": "I’m a 2nd-year Computer Engineering student at Polytechnic University of the Philippines, interested in understanding how computers and electricity work together to create technology.",
+        "bio": "I'm a 2nd-year Computer Engineering student at Polytechnic University of the Philippines, interested in understanding how computers and electricity work together to create technology.",
         "program": "Bachelor of Science in Computer Engineering",
         "university": "Polytechnic University of the Philippines - Manila",
         "interests": "Programming, Hardware, Electrical Circuits",
@@ -95,7 +95,7 @@
         "location": "Taguig City, Philippines",
         "skills": "HTML, Python, CSS",
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        "achievements": ["Graduated with Honors from Olivarez College","Dean’s and President’s List (2024–2025)"]
+        "achievements": ["Graduated with Honors from Olivarez College","Dean's and President's List (2024-2025)"]
       },
       {
         "name": "Mary Chloe Anne A. Luna",
@@ -109,7 +109,7 @@
         "location": "Montalban, Rizal, Philippines",
         "skills": "Python",
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        "achievements": ["Academic Achiever"]
+        "achievements": ["Graduated with High Honors in SJLSHS", "Surviving in College"]
       },
       {
         "name": "Chris H. Mangahas",
