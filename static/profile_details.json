@@ -1,7 +1,7 @@
 [
       {
         "name": "Von Zedric B. Delos Reyes",
-        "role": "Undergraduate Student",
+        "role": "Project Manager/Backend Developer",
         "photo": "../static/images/profile_pics/delosreyes.jpg",
         "cover": "../static/images/cover_pics/delosreyes.jpg",
         "bio": "I am a 2nd year Computer Engineering Student at Polytechnic University of the Philippines. Currently invested in expanding my technical expertise in web development. Developer since 2020.",
@@ -15,7 +15,7 @@
       },
       {
         "name": "Saint Trowa N. Tangco",
-        "role": "Undergraduate Student",
+        "role": "Frontend Developer",
         "photo": "../static/images/profile_pics/tangco.jpg",
         "cover": "../static/images/cover_pics/tangco.jpg",
         "bio": "I am a 2nd year Computer Engineering Student at the Polytechnic University of the Philippines, Sta. Mesa Branch.",
@@ -29,7 +29,7 @@
       },
       {
         "name": "Shane Craven L. Palomo",
-        "role": "Undergraduate Student",
+        "role": "Chief Frontend Developer",
         "photo": "../static/images/profile_pics/palomo.webp",
         "cover": "../static/images/cover_pics/palomo.jpg",
         "bio": "As a Computer Engineering student, I am driven by a strong enthusiasm for technology and creative problem-solving. My academic and project interests revolve around hardware design, data science, and software development.",
@@ -43,7 +43,7 @@
       },
       {
         "name": "Adrian Kurt O. Mari\u00f1as",
-        "role": "Undergraduate Student",
+        "role": "UI/UX Designer",
         "photo": "../static/images/profile_pics/marinas.jpg",
         "cover": "../static/images/cover_pics/marinas.png",
         "bio": " I am a 2nd year Computer Engineering Student at the Polytechnic University of the Philippines, Sta. Mesa Branch.",
@@ -57,7 +57,7 @@
       },
       {
         "name": "Carl Joshua M. Manaog",
-        "role": "Undergraduate Student",
+        "role": "Quality Assurance",
         "photo": "../static/images/profile_pics/manaog.png",
         "cover": "../static/images/cover_pics/manaog.png",
         "bio": "I'm a 2nd-year Computer Engineering student at Polytechnic University of the Philippines, interested in understanding how computers and electricity work together to create technology.",
@@ -71,7 +71,7 @@
       },
       {
         "name": "Ycz Aubhrey V. Dy",
-        "role": "Undergraduate Student",
+        "role": "Frontend Developer",
         "photo": "../static/images/profile_pics/dy.jpeg",
         "cover": "../static/images/cover_pics/dy.jpeg",
         "bio": "I am a pretty Computer Engineering Student trying to pass Engineering.",
@@ -85,7 +85,7 @@
       },
       {
         "name": "Angel Laika L. Clarito",
-        "role": "Undergraduate Student",
+        "role": "UI/UX Designer",
         "photo": "../static/images/profile_pics/clarito.jpg",
         "cover": "../static/images/cover_pics/clarito.jpg",
         "bio": "I am a dedicated Computer Engineering undergraduate with a strong interest in both hardware and software development. Passionate about problem-solving and technology.",
@@ -99,7 +99,7 @@
       },
       {
         "name": "Mary Chloe Anne A. Luna",
-        "role": "Undergraduate Student",
+        "role": "Frontend Developer",
         "photo": "../static/images/profile_pics/luna.jpg",
         "cover": "../static/images/cover_pics/luna.jpg",
         "bio": "I'm a 2nd year Computer Engineering Student in PUP Manila.",
@@ -113,7 +113,7 @@
       },
       {
         "name": "Chris H. Mangahas",
-        "role": "Undergraduate Student",
+        "role": "Frontend Developer",
         "photo": "../static/images/profile_pics/mangahas.jpg",
         "cover": "../static/images/cover_pics/mangahas.jpg",
         "bio": "Just a guy making do with what life gives me, and doing it happily.",
