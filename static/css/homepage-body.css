@@ -352,7 +352,7 @@ p {
 
 .life-section {
   min-height: 100px;
-  margin-top: -400px;
+  margin-top: -200px;
   padding: 60px 40px;
   display: flex;
   justify-content: flex-start;
