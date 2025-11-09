@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUEUE - Data Structure Visualizer</title>
+    <title>DEQUE - Data Structure Visualizer</title>
     <link rel="stylesheet" href="../static/css/header.css" />
     <link rel="stylesheet" href="../static/css/sidebar.css" />
     <link rel="stylesheet" href="../static/css/deque.css" />
@@ -79,7 +79,7 @@
         <h1>DEQUE</h1>
 
         <div class="queue-visual">
-            <div class="output">
+            <div id="output" class="output">
                 {% for node in nodes %}
                     <span class="node">{{node}}</span>
                 {% endfor %}
@@ -131,6 +131,14 @@
         function goToProfile(profileId) {
             window.location.href = `profile.html?id=${profileId}`;
             }
+
+        const queueOutput = document.getElementById('output');
+        const observer = new ResizeObserver(() => {
+            const hasOverflow = queueOutput.scrollWidth > queueOutput.clientWidth;
+            queueOutput.style.justifyContent = hasOverflow ? 'flex-start':'center';
+        })
+        observer.observe(queueOutput);
+
     </script>
 </body>
 </html>

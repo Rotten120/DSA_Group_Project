@@ -301,6 +301,7 @@ h1 {
 }
 
 .node:last-of-type::after {
+    content: '';
     display: none;
 }
 

@@ -80,7 +80,7 @@
         <h1>QUEUE</h1>
 
         <div class="queue-visual">
-            <div class="output">
+            <div id="output" class="output">
                 {% for node in nodes %}
                     <span class="node">{{node}}</span>
                 {% endfor %}
@@ -126,6 +126,13 @@
             menuIcon.addEventListener("click", toggleSidebar);
             overlay.addEventListener("click", toggleSidebar);
         });
+
+        const queueOutput = document.getElementById('output');
+        const observer = new ResizeObserver(() => {
+            const hasOverflow = queueOutput.scrollWidth > queueOutput.clientWidth;
+            queueOutput.style.justifyContent = hasOverflow ? 'flex-start':'center';
+        })
+        observer.observe(queueOutput);
     </script>
 </body>
 </html>
