@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../static/css/header.css" />
     <link rel="stylesheet" href="../static/css/sidebar.css" />
     <link rel="stylesheet" href="../static/css/queue.css" />
+    <link rel="stylesheet" href="../static/css/contacts.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,9 +35,9 @@
     <!-- SIDEBAR -->
     <nav id="sidebar" class="sidebar">
         <ul>
-            <li><a href="homepage.html"><i class="fa-solid fa-house"></i> Home</a></li>
-            <li><a href="#"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
-            <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+            <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="/projects"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
+            <li><a href="/profiles_menu"><i class="fa-solid fa-user"></i> Profile</a></li>
             <li><a href="#"><i class="fa-solid fa-address-book"></i> Contacts</a></li>
         </ul>
     </nav>
@@ -51,9 +52,9 @@
     <div class="header-right">
       <nav class="nav-links">
         <ul>
-          <li><a href="homepage.html">Home</a></li>
-          <li><a href="#" class="active">Projects</a></li>
-          <li><a href="#">Profile</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects" class="active">Projects</a></li>
+          <li><a href="/profiles_menu">Profile</a></li>
           <li><a href="#">Contacts</a></li>
         </ul>
       </nav>
@@ -80,14 +81,17 @@
 
         <div class="queue-visual">
             <div class="output">
-                <span class="node">test1</span>
+                {% for node in nodes %}
+                    <span class="node">{{node}}</span>
+                {% endfor %}
                 <span class="node">X</span>
             </div>
         </div>
 
+        <form action="/queue_update" method="post">
         <div class="search-section">
             <div class="search-container">
-                <input type="text" id="mainInput" class="search-input" placeholder="Enter value or search term...">
+                <input type="text" id="mainInput" name="mainInput" class="search-input" autocomplete="off" placeholder="Enter value or search term...">
                 <button class="search-btn" title="Search">
                     <svg viewBox="0 0 24 24" fill="none">
                         <circle cx="11" cy="11" r="8"></circle>
@@ -101,17 +105,18 @@
             <div class="control-panel">
                 <div class="control-header">FRONT</div>
                 <div class="control-buttons">
-                    <button class="btn">ADD</button>
+                    <button class="btn" type="submit" name="button" value="dequeue">REMOVE</button>
                 </div>
             </div>
 
             <div class="control-panel">
                 <div class="control-header">REAR</div>
                 <div class="control-buttons">
-                    <button class="btn">REMOVE</button>
+                    <button class="btn" type="submit" name="button" value="enqueue">ADD</button>
                 </div>
             </div>
         </div>
+        </form>
     </div>
 
     <script>

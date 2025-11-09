@@ -1,4 +1,4 @@
-from node import Node
+from src.backend.node import Node
 
 class Queue:
     def __init__(self):
