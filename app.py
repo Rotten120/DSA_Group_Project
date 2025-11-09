@@ -22,12 +22,14 @@ def profiles_menu():
 
 @app.route('/queue_init')
 def queue_init():
+    global queue_out
     queue_out = Queue()
-    return render_template('queue.html', nodes=[])
+    return render_template('queue.html', nodes=list(queue_out))
 
 @app.route('/queue_update', methods=['GET', 'POST'])
 def queue_update():
-    inp = None 
+    inp = None
+    global queue_out
     if request.method == 'POST':
         inp = request.form.get('mainInput', '').strip()
         action = request.form['button']
@@ -41,12 +43,14 @@ def queue_update():
 
 @app.route('/deque_init')
 def deque_init():
+    global deque_out
     deque_out = DeQue()
-    return render_template('deque.html', nodes=[])
+    return render_template('deque.html', nodes=list(deque_out))
 
 @app.route('/deque_update', methods=['GET', 'POST'])
 def deque_update():
     inp = None
+    global deque_out
     if request.method == 'POST':
         inp = request.form.get('mainInput', '').strip()
         action = request.form['button']
