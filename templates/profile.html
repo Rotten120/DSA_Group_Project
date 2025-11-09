@@ -93,26 +93,24 @@
   <div class="profile-container">
     <!-- COVER PHOTO -->
     <div class="cover-photo-container">
-      <img id="cover-photo" src="https://via.placeholder.com/1400x300" alt="Cover Photo" />
+      <img id="cover-photo" src="{{cover_picture}}" alt="Cover Photo" />
     </div>
     
     <!-- PROFILE HEADER -->
     <div class="profile-header">
-      <img id="profile-photo" class="profile-photo" src="https://via.placeholder.com/280" alt="Profile Photo" />
+      <img id="profile-photo" class="profile-photo" src="{{profile_picture}}" alt="Profile Photo" />
       
       <div class="profile-info">
         <div class="name-role">
-        <h1 id="profile-name" class="profile-name">Jisoo Marie D. Tinubuan</h1>
-        <p id="profile-role" class="profile-role">Undergraduate Student</p>
+        <h1 id="profile-name" class="profile-name">{{name}}</h1>
+        <p id="profile-role" class="profile-role">{{role}}</p>
         </div>
-        <p id="profile-bio" class="profile-bio">
-          I am a Computer Engineering student/professional with a strong passion for technology, innovation, and problem-solving. My interests lie in hardware design, embedded systems, and software development.
-        </p>
+        <p id="profile-bio" class="profile-bio">{{bio}}</p>
       </div>
 
       <div class="nav-buttons">
-        <button class="nav-btn" id="prev-btn">Previous</button>
-        <button class="nav-btn" id="next-btn">Next</button>
+        <a class="nav-btn" id="prev-btn" href="{{url_for('profile', profile_id = prev_profile_id)}}">Previous</a>
+        <a class="nav-btn" id="next-btn" href="{{url_for('profile', profile_id = next_profile_id)}}">Next</a>
       </div>
     </div>
 
@@ -123,22 +121,12 @@
         <div class="section projects-section">
           <h3 class="section-title">Personal Projects</h3>
           <div id="projects-grid" class="projects-grid">
+            {% for proj in projs %}
             <div class="project-item">
               <div style="width: 50px; height: 50px; background: #a50204; border-radius: 5px; margin-bottom: 5px;"></div>
-              <span class="project-name">Snake Game</span>
+              <span class="project-name">{{proj}}</span>
             </div>
-            <div class="project-item">
-              <div style="width: 50px; height: 50px; background: #a50204; border-radius: 5px; margin-bottom: 5px;"></div>
-              <span class="project-name">Automated Bank</span>
-            </div>
-            <div class="project-item">
-              <div style="width: 50px; height: 50px; background: #a50204; border-radius: 5px; margin-bottom: 5px;"></div>
-              <span class="project-name">Lottery Game</span>
-            </div>
-            <div class="project-item">
-              <div style="width: 50px; height: 50px; background: #a50204; border-radius: 5px; margin-bottom: 5px;"></div>
-              <span class="project-name">Keyboard</span>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -150,23 +138,23 @@
           <div id="about-content">
             <div class="info-row">
               <span class="info-label">Program:</span>
-              <span class="info-value">Bachelor of Science in Computer Engineering</span>
+              <span class="info-value">{{program}}</span>
             </div>
             <div class="info-row">
               <span class="info-label">University:</span>
-              <span class="info-value">Polytechnic University of the Philippines - Manila</span>
+              <span class="info-value">{{university}}</span>
             </div>
             <div class="info-row">
               <span class="info-label">Interests:</span>
-              <span class="info-value">Coding, Cooking, Singing, Dancing</span>
+              <span class="info-value">{{interests}}</span>
             </div>
             <div class="info-row">
               <span class="info-label">Location:</span>
-              <span class="info-value">Taguig City Metro Manila, Philippines</span>
+              <span class="info-value">{{location}}</span>
             </div>
             <div class="info-row">
               <span class="info-label">Skills and Expertise:</span>
-              <span class="info-value">C, C++, Python, Java, Arduino, Raspberry Pi, Verilog</span>
+              <span class="info-value">{{skills}}</span>
             </div>
           </div>
         </div>
@@ -177,13 +165,11 @@
         <div class="section">
           <h3 class="section-title">Achievements</h3>
           <div id="achievements-content">
-            <div class="achievement-item">Consistent Dean's Lister</div>
+            {% for achievement in achievements[:-1] %}
+            <div class="achievement-item">{{achievement}}</div>
             <div class="achievement-divider"></div>
-            <div class="achievement-item">Finalist in University Hackathon 2025</div>
-            <div class="achievement-divider"></div>
-            <div class="achievement-item">Certified in Python and Embedded Systems</div>
-            <div class="achievement-divider"></div>
-            <div class="achievement-item">Built a Portfolio Website Showcasing Hardware and Software Projects</div>
+            {% endfor %}
+            <div class="achievement-item">{{achievements[-1]}}</div>
           </div>
         </div>
       </div>
@@ -205,193 +191,8 @@
       menuIcon.addEventListener("click", toggleSidebar);
       overlay.addEventListener("click", toggleSidebar);
     });
-
-    // MEMBER PROFILES DATA
-    // MEMBER PROFILES DATA
-    const memberProfiles = [
-      {
-        name: "Von Zedric B. Delos Reyes",
-        role: "Undergraduate Student",
-        photo: "../static/images/profile_pics/delosreyes.jpg",
-        cover: "../static/images/cover_pics/delosreyes.jpg",
-        bio: "I am a 2nd year Computer Engineering Student at Polytechnic University of the Philippines. Currently invested in expanding my technical expertise in web development. Developer since 2020.",
-        program: "Bachelor of Science in Computer Engineering",
-        university: "Polytechnic University of the Philippines - Manila",
-        interests: "Coding, Circuits, Math, Sleeping late, Pokemon, Manga",
-        location: "Pasig City",
-        skills: "Web Development, Game Dev, Assembly Language, Circuit Analysis",
-        projects: ["Snake Game","Automated Bank","Lottery Game","Keyboard"],
-        achievements: ["Consistent President's Lister","Graduated with Honors at PCSHS"]
-      },
-      {
-        name: "Saint Trowa N. Tangco",
-        role: "Undergraduate Student",
-        photo: "../static/images/profile_pics/tangco.jpg",
-        cover: "../static/images/cover_pics/tangco.jpg",
-        bio: "I am a 2nd year Computer Engineering Student at the Polytechnic University of the Philippines, Sta. Mesa Branch.",
-        program: "Bachelor of Science in Computer Engineering",
-        university: "Polytechnic University of the Philippines - Manila",
-        interests: "Game Development, Mangas, Visual Novels, Games",
-        location: "Talipapa, Quezon City",
-        skills: "Javascript and  HTML (Beginner), Python (Intermediate), C++(Learning)",
-        projects: ["E-Commerce Platform","AI Chatbot","Portfolio Website","Mobile App"],
-        achievements: ["Graduated with Honors in Ismael Mathay Senior Highschool"]
-      },
-      {
-        name: "Shane Craven L. Palomo",
-        role: "Undergraduate Student",
-        photo: "../static/images/profile_pics/palomo.webp",
-        cover: "../static/images/cover_pics/palomo.jpg",
-        bio: "As a Computer Engineering student, I am driven by a strong enthusiasm for technology and creative problem-solving. My academic and project interests revolve around hardware design, data science, and software development.",
-        program: "Bachelor of Science in Computer Engineering",
-        university: "Polytechnic University of the Philippines - Manila",
-        interests: "Games, Music, Books, Programming",
-        location: "San Miguel, Bulacan",
-        skills: "Python, HTML, CSS",
-        projects: ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        achievements: ["Consistent Dean Lister","Consistent with honors (Elementary-Senior High School)","Created own webpage for portfolio"]
-      },
-      {
-        name: "Adrian Kurt O. Mariñas",
-        role: "Undergraduate Student",
-        photo: "../static/images/profile_pics/marinas.jpg",
-        cover: "../static/images/cover_pics/marinas.png",
-        bio: " I am a 2nd year Computer Engineering Student at the Polytechnic University of the Philippines, Sta. Mesa Branch.",
-        program: "Bachelor of Science in Computer Engineering",
-        university: "Polytechnic University of the Philippines - Manila",
-        interests: "I am interested in learning in data science and networking. ",
-        location: "Valenzuela City, Philippines",
-        skills: "Python",
-        projects: ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        achievements: ["Consistent Dean Lister","Graduated with Honors at VPTNHS"]
-      },
-      {
-        name: "Carl Joshua M. Manaog",
-        role: "Undergraduate Student",
-        photo: "../static/images/profile_pics/manaog.png",
-        cover: "../static/images/cover_pics/manaog.png",
-        bio: "I’m a 2nd-year Computer Engineering student at Polytechnic University of the Philippines, interested in understanding how computers and electricity work together to create technology.",
-        program: "Bachelor of Science in Computer Engineering",
-        university: "Polytechnic University of the Philippines - Manila",
-        interests: "Programming, Hardware, Electrical Circuits",
-        location: "Muntinlupa City, Philippines",
-        skills: "Python, HTML, and slight CSS",
-        projects: ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        achievements: ["Graduated with honors in STEM during Senior High School","Participated in a Cybersecurity seminar on digital identity and data care"]
-      },
-      {
-        name: "Ycz Aubhrey V. Dy",
-        role: "Undergraduate Student",
-        photo: "../static/images/profile_pics/dy.jpeg",
-        cover: "../static/images/cover_pics/dy.jpeg",
-        bio: "I am a pretty Computer Engineering Student trying to pass Engineering.",
-        program: "Bachelor of Science in Computer Engineering",
-        university: "Polytechnic University of the Philippines - Manila",
-        interests: "Books, Movies, Games.",
-        location: "Sta. Mesa Manila, Philippines ",
-        skills: "C, C++, Java, Python",
-        projects: ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        achievements: ["Consistent Academic Achiever","PUP ACCESS Secretary General"]
-      },
-      {
-        name: "Angel Laika L. Clarito",
-        role: "Undergraduate Student",
-        photo: "../static/images/profile_pics/clarito.jpg",
-        cover: "../static/images/cover_pics/clarito.jpg",
-        bio: "I am a dedicated Computer Engineering undergraduate with a strong interest in both hardware and software development. Passionate about problem-solving and technology.",
-        program: "Bachelor of Science in Computer Engineering",
-        university: "Polytechnic University of the Philippines - Manila",
-        interests: "Cooking, Crafting, Coding.",
-        location: "Taguig City, Philippines",
-        skills: "HTML, Python, CSS",
-        projects: ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        achievements: ["Graduated with Honors from Olivarez College","Dean’s and President’s List (2024–2025)"]
-      },
-      {
-        name: "Mary Chloe Anne A. Luna",
-        role: "Undergraduate Student",
-        photo: "../static/images/profile_pics/luna.jpg",
-        cover: "../static/images/cover_pics/luna.jpg",
-        bio: "I'm a 2nd year Computer Engineering Student in PUP Manila.",
-        program: "Bachelor of Science in Computer Engineering",
-        university: "Polytechnic University of the Philippines - Manila",
-        interests: "Music and Movies.",
-        location: "Montalban, Rizal, Philippines",
-        skills: "Python",
-        projects: ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        achievements: ["Academic Achiever"]
-      },
-      {
-        name: "Chris H. Mangahas",
-        role: "Undergraduate Student",
-        photo: "../static/images/profile_pics/mangahas.jpg",
-        cover: "../static/images/cover_pics/mangahas.jpg",
-        bio: "Just a guy making do with what life gives me, and doing it happily.",
-        program: "Bachelor of Science in Computer Engineering",
-        university: "Polytechnic University of the Philippines - Manila",
-        interests: "Music, Games, Walking, Social Media",
-        location: "Quezon City, Philippines",
-        skills: "Python, HTML, CSS",
-        projects: ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        achievements: ["ALS Graduate"," Consistent With Honors in SHS","PIO for Filipino Club in SHS"]
-      }
-    ];
-
-    // READ PROFILE ID FROM URL
-    function getProfileIdFromURL() {
-      const params = new URLSearchParams(window.location.search);
-      const id = parseInt(params.get('id'));
-      return isNaN(id) ? 1 : id; // default to first profile
-    }
-
-    let currentProfileIndex = getProfileIdFromURL() - 1;
-
-    // UPDATE PROFILE FUNCTION
-    function updateProfile(index) {
-      const profile = memberProfiles[index];
-
-      document.getElementById("profile-name").textContent = profile.name;
-      document.getElementById("profile-role").textContent = profile.role;
-      document.getElementById("profile-photo").src = profile.photo;
-      document.getElementById("cover-photo").src = profile.cover;
-      document.getElementById("profile-bio").textContent = profile.bio;
-
-      document.getElementById("about-content").innerHTML = `
-        <div class="info-row"><span class="info-label">Program:</span> <span class="info-value">${profile.program}</span></div>
-        <div class="info-row"><span class="info-label">University:</span> <span class="info-value">${profile.university}</span></div>
-        <div class="info-row"><span class="info-label">Interests:</span> <span class="info-value">${profile.interests}</span></div>
-        <div class="info-row"><span class="info-label">Location:</span> <span class="info-value">${profile.location}</span></div>
-        <div class="info-row"><span class="info-label">Skills and Expertise:</span> <span class="info-value">${profile.skills}</span></div>
-      `;
-
-      document.getElementById("projects-grid").innerHTML = profile.projects.map(p => `
-        <div class="project-item">
-          <div style="width: 60px; height: 60px; background: #a50204; border-radius: 8px; margin-bottom: 8px;"></div>
-          <span class="project-name">${p}</span>
-        </div>
-      `).join('');
-
-      document.getElementById("achievements-content").innerHTML = profile.achievements.map((a,i) => `
-        <div class="achievement-item">${a}</div>
-        ${i < profile.achievements.length - 1 ? '<div class="achievement-divider"></div>' : ''}
-      `).join('');
-    }
-
-    // NAVIGATION BUTTONS
-    document.getElementById("prev-btn").addEventListener("click", () => {
-      currentProfileIndex = (currentProfileIndex - 1 + memberProfiles.length) % memberProfiles.length;
-      updateProfile(currentProfileIndex);
-    });
-
-    document.getElementById("next-btn").addEventListener("click", () => {
-      currentProfileIndex = (currentProfileIndex + 1) % memberProfiles.length;
-      updateProfile(currentProfileIndex);
-    });
-
-    // INITIALIZE PROFILE
-    updateProfile(currentProfileIndex);
-
   </script>
+
 </body>
 </html>
 </body>
