@@ -1,5 +1,5 @@
-from src.backend.node import Node
-from src.backend.dataqueue import Queue
+from logic.queue_deque.node import Node
+from logic.queue_deque.dataqueue import Queue
 
 class DeQue(Queue):
     def add_rear(self, data):
