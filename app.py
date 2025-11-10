@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for
-from src.backend.dataqueue import Queue
-from src.backend.datadeque import DeQue
+from logic.queue_deque.dataqueue import Queue
+from logic.queue_deque.datadeque import DeQue
 import json
 
 app = Flask(__name__)
@@ -88,6 +88,6 @@ def profile(profile_id = 0):
             )
 
 if __name__ == "__main__":
-    with open('static/profile_details.json', 'r') as file:
+    with open('data/profile_details.json', 'r') as file:
         PROFILE_DETAIL = json.load(file)
     app.run(debug=True)
