@@ -34,6 +34,9 @@
         background-color: black;
     }
   </style>
+
+  <script src="../static/js/side_bar.js"></script>
+
   </head>
 
 <body>
@@ -119,27 +122,5 @@
         </a>
     </div>
     </div>
-
-
-  <script>
-
-    // SIDE BAR
-    document.addEventListener("DOMContentLoaded", () => {
-        const menuIcon = document.getElementById("menu-icon");
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("overlay");
-        function toggleSidebar() {
-            sidebar.classList.toggle("active");
-            overlay.classList.toggle("active");
-        }
-        menuIcon.addEventListener("click", toggleSidebar);
-        overlay.addEventListener("click", toggleSidebar);
-        });
-
-    function goToProfile(profileId) {
-          window.location.href = `profile.html?id=${profileId}`;
-        }
-            
-  </script>
 </body>
 </html>
