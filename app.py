@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for
-from logic.queue_deque.dataqueue import Queue
-from logic.queue_deque.datadeque import DeQue
+from src.queue_deque.dataqueue import Queue
+from src.queue_deque.datadeque import DeQue
 import json
 
 app = Flask(__name__)
