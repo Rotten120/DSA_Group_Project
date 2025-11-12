@@ -328,20 +328,44 @@ p {
 /* MEANING */
 .meaning-section {
   margin-top: 150px;
-  min-height: 1300px;
+  margin-bottom: 200px;
+  min-height: auto;
   padding: 60px 40px;
   display: flex;
   justify-content: flex-end;
 }
 
 .meaning {
+  background: linear-gradient(135deg, #7a0000 0%, #aa1313 50%, #d32f2f 100%);
+  padding: 40px;
   max-width: 700px;
   width: 100%;
   text-align: right;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.meaning::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30%, -30%); }
 }
 
 .meaning h2 {
   text-align: left;
+  margin-bottom: 5px;
 }
 
 .meaning p {
@@ -351,21 +375,44 @@ p {
 /* LIFE SECTION */
 
 .life-section {
-  min-height: 100px;
-  margin-top: -200px;
+  min-height: auto;
+  margin-top: -100px;
   padding: 60px 40px;
   display: flex;
   justify-content: flex-start;
 }
 
 .life {
+  background: linear-gradient(135deg, #7a0000 0%, #aa1313 50%, #d32f2f 100%);
+  padding: 40px;
   max-width: 700px;
   width: 100%;
-  text-align: left;
+  text-align: right;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.life::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30%, -30%); }
 }
 
 .life h2 {
   text-align: left;
+  margin-bottom: 5px;
 }
 
 .life p {
@@ -374,7 +421,7 @@ p {
 
 /* MEANING */
 .algorithm-section {
-  min-height: 1000px;
+  min-height: auto;
   margin-top: 100px;
   padding: 60px 40px;
   display: flex;
@@ -382,13 +429,37 @@ p {
 }
 
 .algorithm {
+  background: linear-gradient(135deg, #7a0000 0%, #aa1313 50%, #d32f2f 100%);
+  padding: 40px;
   max-width: 700px;
   width: 100%;
   text-align: right;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.algorithm::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30%, -30%); }
 }
 
 .algorithm h2 {
+  font-size: 48px;
   text-align: left;
+  margin-bottom: 5px;
 }
 
 .algorithm p {
@@ -397,8 +468,8 @@ p {
 
 /* IMPORTANT SECTION */
 .importance-section {
-  min-height: 500px;
-  margin-top: -100px;
+  min-height: auto;
+  margin-top: 100px;
   margin-bottom: 70px;
   padding: 60px 40px;
   display: flex;
@@ -406,13 +477,36 @@ p {
 }
 
 .importance {
+  background: linear-gradient(135deg, #7a0000 0%, #aa1313 50%, #d32f2f 100%);
+  padding: 40px;
   max-width: 700px;
   width: 100%;
-  text-align: left; 
+  text-align: right;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.importance::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30%, -30%); }
 }
 
 .importance h2 {
   text-align: left;
+  margin-bottom: 5px;
 }
 
 .imortance {
