@@ -8,7 +8,7 @@ header {
     margin-left: 30px;
 }
 body {
-    background: url('../images/project-one.png') center center no-repeat fixed;
+    background: url('../images/background/project-one.png') center center no-repeat fixed;
     background-size: cover;
     font-family: 'Arial', sans-serif;
     display: flex;
@@ -301,7 +301,6 @@ h1 {
 }
 
 .node:last-of-type::after {
-    content: '';
     display: none;
 }
 
