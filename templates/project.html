@@ -7,88 +7,34 @@
 
   <!-- CSS Links -->
   <link rel="stylesheet" href="../static/css/project-body.css" />
-  <link rel="stylesheet" href="../static/css/header.css" />
-  <link rel="stylesheet" href="../static/css/sidebar.css" />
   <link rel="stylesheet" href="../static/css/contacts.css">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  {% include 'components/fonts.html' %}
 
   <style>
     body {
         background-color: black;
     }
   </style>
+  
+  <script src="../static/js/side_bar.js"></script>
+  <script src="../static/js/project.js"></script>
+
 </head>
 
 <body>
-  <!-- SIDEBAR -->
-  <nav id="sidebar" class="sidebar">
-    <ul>
-      <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
-      <li><a href="/projects"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
-      <li><a href="/profiles_menu"><i class="fa-solid fa-user"></i> Profile</a></li>
-      <li><a href="#"><i class="fa-solid fa-address-book"></i> Contacts</a></li>
-    </ul>
-  </nav>
-
-  <!-- HEADER -->
-  <header>
-    <div class="header-left">
-      <div id="menu-icon" class="menu-icon">&#9776;</div>
-      <div class="logo-icon">CircuiTech</div>
-    </div>
-
-    <div class="header-right">
-      <nav class="nav-links">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/projects" class="active">Projects</a></li>
-          <li><a href="/profiles_menu">Profile</a></li>
-          <li><a href="#">Contacts</a></li>
-        </ul>
-      </nav>
-
-      <form class="search-form" action="#" method="GET" role="search">
-        <input
-          type="search"
-          placeholder="Search..."
-          aria-label="Search"
-          name="q"
-        />
-        <button type="submit" aria-label="Submit Search">
-          <i class="fa fa-search"></i>
-        </button>
-      </form>
-    </div>
-  </header>
+  {% include 'components/sidebar.html' %}
+  {% include 'components/header.html' %}
 
   <div class="vertical-links">
     <div class="link-slider">
       <div class="slider-track">
         <div class="slide-link">
           <div class="link-box">
-            <a href="/queue_init">QUEUE</a>
+            <a href="/queue/init">QUEUE</a>
           </div>
           <div class="link-box">
-            <a href="/deque_init">DEQUE</a>
+            <a href="/deque/init">DEQUE</a>
           </div>
           <div class="link-box">
             <a href="#">3</a>
@@ -110,43 +56,5 @@
 
   <!-- OVERLAY -->
   <div id="overlay" class="overlay"></div>
-
-  <script>
-
-    // SIDE BAR
-    document.addEventListener("DOMContentLoaded", () => {
-        const menuIcon = document.getElementById("menu-icon");
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("overlay");
-        function toggleSidebar() {
-            sidebar.classList.toggle("active");
-            overlay.classList.toggle("active");
-        }
-        menuIcon.addEventListener("click", toggleSidebar);
-        overlay.addEventListener("click", toggleSidebar);
-        });
-    
-    // Slider functionality
-    document.addEventListener('DOMContentLoaded', () => {
-        const track = document.querySelector('.slide-link');
-        const leftBtn = document.querySelector('.scroll-left');
-        const rightBtn = document.querySelector('.scroll-right');
-        let position = 0;
-        const slideWidth = 200; 
-
-        leftBtn.addEventListener('click', () => {
-            position += slideWidth;
-            if (position > 0) position = 0;
-            track.style.transform = `translateX(${position}px)`;
-        });
-
-        rightBtn.addEventListener('click', () => {
-            const limit = -(track.offsetWidth - track.parentElement.offsetWidth);
-            position -= slideWidth;
-            if (position < limit) position = limit;
-            track.style.transform = `translateX(${position}px)`;
-        });
-    });
-  </script>
-</body>
+  </body>
 </html>
