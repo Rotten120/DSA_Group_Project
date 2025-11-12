@@ -6,77 +6,24 @@
   <title>CircuiTech</title>
 
   <!-- CSS Links -->
-  <link rel="stylesheet" href="../static/css/header.css" />
-  <link rel="stylesheet" href="../static/css/sidebar.css" />
   <link rel="stylesheet" href="../static/css/general-body.css">
   <link rel="stylesheet" href="../static/css/contacts.css">
   
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Lugrasimo&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  {% include 'components/fonts.html' %}
 
   <style>
     body {
         background-color: black;
     }
   </style>
+
+  <script src="../static/js/side_bar.js"></script>
+
   </head>
 
 <body>
-  <!-- SIDEBAR -->
-  <nav id="sidebar" class="sidebar">
-    <ul>
-      <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
-      <li><a href="/projects"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
-      <li><a href="/profiles_menu"><i class="fa-solid fa-user"></i> Profile</a></li>
-      <li><a href="#"><i class="fa-solid fa-address-book"></i> Contacts</a></li>
-    </ul>
-  </nav>
-
-  <!-- HEADER -->
-  <header>
-    <div class="header-left">
-      <div id="menu-icon" class="menu-icon">&#9776;</div>
-      <div class="logo-icon">CircuiTech</div>
-    </div>
-
-    <div class="header-right">
-      <nav class="nav-links">
-        <ul>
-          <li><a href="/" class="active">Home</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/profiles_menu">Profile</a></li>
-          <li><a href="#">Contacts</a></li>
-        </ul>
-      </nav>
-
-      <form class="search-form" action="#" method="GET" role="search">
-        <input
-          type="search"
-          placeholder="Search..."
-          aria-label="Search"
-          name="q"
-        />
-        <button type="submit" aria-label="Submit Search">
-          <i class="fa fa-search"></i>
-        </button>
-      </form>
-    </div>
-  </header>
+  {% include 'components/sidebar.html' %}
+  {% include 'components/header.html' %}
 
   <!-- OVERLAY -->
   <div id="overlay" class="overlay"></div>
@@ -86,60 +33,38 @@
             <h1 class="profile-title">PRO<br>&nbsp; FILES</h1>
 
             <div class="first-row-cards">
-            <a class="card-item" href="{{url_for('profile', profile_id=0)}}">
-              <img src="../static/images/von.png" alt="Profile 1" />
+            <a class="card-item" href="{{url_for('profile.profile', profile_id=0)}}">
+              <img src="../static/images/card_pics/von.png" alt="Profile 1" />
             </a>
-            <a class="card-item" href="{{url_for('profile', profile_id=1)}}">
-              <img src="../static/images/trowa.png" alt="Profile 2" />
+            <a class="card-item" href="{{url_for('profile.profile', profile_id=1)}}">
+              <img src="../static/images/card_pics/trowa.png" alt="Profile 2" />
             </a>
-            <a class="card-item" href="{{url_for('profile', profile_id=2)}}">
-              <img src="../static/images/shane.png" alt="Profile 3" />
+            <a class="card-item" href="{{url_for('profile.profile', profile_id=2)}}">
+              <img src="../static/images/card_pics/shane.png" alt="Profile 3" />
             </a>
-            <a class="card-item" href="{{url_for('profile', profile_id=3)}}">
-              <img src="../static/images/kurt.png" alt="Profile 4" />
+            <a class="card-item" href="{{url_for('profile.profile', profile_id=3)}}">
+              <img src="../static/images/card_pics/kurt.png" alt="Profile 4" />
             </a>
-            <a class="card-item" href="{{url_for('profile', profile_id=4)}}">
-              <img src="../static/images/carl.png" alt="Profile 5" />
+            <a class="card-item" href="{{url_for('profile.profile', profile_id=4)}}">
+              <img src="../static/images/card_pics/carl.png" alt="Profile 5" />
             </a>
         </div>
     </div>
 
     <div class="card-row bottom">
-        <a class="card-item" href="{{url_for('profile', profile_id=5)}}">
-        <img src="../static/images/ycz.png" alt="Profile 6" />
+        <a class="card-item" href="{{url_for('profile.profile', profile_id=5)}}">
+        <img src="../static/images/card_pics/ycz.png" alt="Profile 6" />
         </a>
-        <a class="card-item" href="{{url_for('profile', profile_id=6)}}">
-        <img src="../static/images/laika.png" alt="Profile 7" />
+        <a class="card-item" href="{{url_for('profile.profile', profile_id=6)}}">
+        <img src="../static/images/card_pics/laika.png" alt="Profile 7" />
         </a>
-        <a class="card-item" href="{{url_for('profile', profile_id=7)}}">
-        <img src="../static/images/chloe.png" alt="Profile 8" />
+        <a class="card-item" href="{{url_for('profile.profile', profile_id=7)}}">
+        <img src="../static/images/card_pics/chloe.png" alt="Profile 8" />
         </a>
-        <a class="card-item" href="{{url_for('profile', profile_id=8)}}">
-        <img src="../static/images/chris.png" alt="Profile 9" />
+        <a class="card-item" href="{{url_for('profile.profile', profile_id=8)}}">
+        <img src="../static/images/card_pics/chris.png" alt="Profile 9" />
         </a>
     </div>
     </div>
-
-
-  <script>
-
-    // SIDE BAR
-    document.addEventListener("DOMContentLoaded", () => {
-        const menuIcon = document.getElementById("menu-icon");
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("overlay");
-        function toggleSidebar() {
-            sidebar.classList.toggle("active");
-            overlay.classList.toggle("active");
-        }
-        menuIcon.addEventListener("click", toggleSidebar);
-        overlay.addEventListener("click", toggleSidebar);
-        });
-
-    function goToProfile(profileId) {
-          window.location.href = `profile.html?id=${profileId}`;
-        }
-            
-  </script>
 </body>
 </html>

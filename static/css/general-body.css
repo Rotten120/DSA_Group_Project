@@ -6,7 +6,7 @@
 
 body {
     background-color: black;
-    background: url('../images/profile-menu.png') center center no-repeat fixed;
+    background: url('../images/background/profile-menu.png') center center no-repeat fixed;
     background-size: cover;
     min-height: 100vh;
     overflow-x: hidden;

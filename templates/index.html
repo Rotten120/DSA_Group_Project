@@ -6,73 +6,19 @@
   <title>CircuiTech</title>
 
   <!-- CSS Links -->
-  <link rel="stylesheet" href="../static/css/header.css" />
-  <link rel="stylesheet" href="../static/css/sidebar.css" />
   <link rel="stylesheet" href="../static/css/homepage-body.css" />
   <link rel="stylesheet" href="../static/css/contacts.css">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-  />
+  {% include 'components/fonts.html' %}
 
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <script src="../static/js/side_bar.js"></script>
+  <script src="../static/js/index.js"></script>
+
 </head>
 
 <body id="home">
-  <!-- SIDEBAR -->
-  <nav id="sidebar" class="sidebar">
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="/projects">Projects</a></li>
-      <li><a href="/profiles_menu">Profile</a></li>
-      <li><a href="#important-section">Contacts</a></li>
-    </ul>
-  </nav>
-
-  <!-- HEADER -->
-  <header>
-    <div class="header-left">
-      <div id="menu-icon" class="menu-icon">&#9776;</div>
-      <div class="logo-icon">CircuiTech</div>
-    </div>
-
-    <div class="header-right">
-      <nav class="nav-links">
-        <ul>
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/profiles_menu">Profile</a></li>
-          <li><a href="#important-section">Contacts</a></li>
-        </ul>
-      </nav>
-
-      <form class="search-form" action="#" method="GET" role="search">
-        <input
-          type="search"
-          placeholder="Search..."
-          aria-label="Search"
-          name="q"
-        />
-        <button type="submit" aria-label="Submit Search">
-          <i class="fa fa-search"></i>
-        </button>
-      </form>
-    </div>
-  </header>
+  {% include 'components/sidebar.html' %}
+  {% include 'components/header.html' %}
 
   <!-- OVERLAY -->
   <div id="overlay" class="overlay"></div>
@@ -85,19 +31,19 @@
       <div class="slider-container">
         <div class="slide">
           <img
-            src="../static/images/header_background1.jpg"
+            src="../static/images/header_bg/header_background1.jpg"
             alt="Slide 1 Description"
           />
         </div>
         <div class="slide">
           <img
-            src="../static/images/header_background2.jfif"
+            src="../static/images/header_bg/header_background2.jfif"
             alt="Slide 2 Description"
           />
         </div>
         <div class="slide">
           <img
-            src="../static/images/header_background3.jpg"
+            src="../static/images/header_bg/header_background3.jpg"
             alt="Slide 3 Description"
           />
         </div>
@@ -119,12 +65,12 @@
         <div class="video-thumbnails">
           <div class="video-box">
             <a href="https://youtu.be/8hly31xKli0?si=VXbYrxjZ5GaDQL7c" target="_blank">
-              <img class="dsa-one" src="..//static/images/dsa-1.jpg" alt="DSA Tutorial 1">
+              <img class="dsa-one" src="../static/images/thumbnails/dsa-1.jpg" alt="DSA Tutorial 1">
             </a>
           </div>
           <div class="video-box">
             <a href="https://youtu.be/xwI5OBEnsZU?si=pmtybouM0H_rjGWM" target="_blank">
-              <img class="dsa-one" src="..//static/images/dsa-2.jpg" alt="DSA Tutorial 2">
+              <img class="dsa-one" src="../static/images/thumbnails/dsa-2.jpg" alt="DSA Tutorial 2">
             </a>
           </div>
         </div>
@@ -255,73 +201,5 @@
   </div>
 </section>
 
-  <script>
-  // SIDEBAR
-  document.addEventListener("DOMContentLoaded", () => {
-    const menuIcon = document.getElementById("menu-icon");
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
-    
-    function toggleSidebar() {
-      sidebar.classList.toggle("active");
-      overlay.classList.toggle("active");
-    }
-    
-    menuIcon.addEventListener("click", toggleSidebar);
-    overlay.addEventListener("click", toggleSidebar);
-  });
-
-  // SLIDER
-  document.addEventListener('DOMContentLoaded', function () {
-    const sliderContainer = document.querySelector('.slider-container');
-    const slides = document.querySelectorAll('.slide');
-    const indicators = document.querySelectorAll('.indicator');
-    const leftArrow = document.querySelector('.left-arrow');
-    const rightArrow = document.querySelector('.right-arrow');
-
-    if (!sliderContainer || slides.length === 0 || indicators.length === 0 || !leftArrow || !rightArrow) {
-      console.error('Slider elements not found. Check your HTML structure.');
-      return;
-    }
-
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    const slideWidth = 100 / totalSlides;
-
-    sliderContainer.style.animation = 'none';
-
-    function updateSlide(index) {
-      const translateX = -index * slideWidth;
-      sliderContainer.style.transform = `translateX(${translateX}%)`;
-      indicators.forEach((ind, i) => {
-        ind.classList.toggle('active', i === index);
-      });
-    }
-
-    rightArrow.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % totalSlides;
-      updateSlide(currentIndex);
-    });
-
-    leftArrow.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-      updateSlide(currentIndex);
-    });
-
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
-        currentIndex = index;
-        updateSlide(currentIndex);
-      });
-    });
-
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % totalSlides;
-      updateSlide(currentIndex);
-    }, 3000);
-
-    updateSlide(currentIndex);
-  });
-</script>
 </body>
 </html>

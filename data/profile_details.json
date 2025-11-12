@@ -99,7 +99,7 @@
       },
       {
         "name": "Mary Chloe Anne A. Luna",
-        "role": "Frontend Developer",
+        "role": "Backend Developer",
         "photo": "../static/images/profile_pics/luna.jpg",
         "cover": "../static/images/cover_pics/luna.jpg",
         "bio": "I'm a 2nd year Computer Engineering Student in PUP Manila.",
@@ -113,7 +113,7 @@
       },
       {
         "name": "Chris H. Mangahas",
-        "role": "Frontend Developer",
+        "role": "Backend Developer",
         "photo": "../static/images/profile_pics/mangahas.jpg",
         "cover": "../static/images/cover_pics/mangahas.jpg",
         "bio": "Just a guy making do with what life gives me, and doing it happily.",

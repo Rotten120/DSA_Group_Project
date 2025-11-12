@@ -4,73 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DEQUE - Data Structure Visualizer</title>
-    <link rel="stylesheet" href="../static/css/header.css" />
-    <link rel="stylesheet" href="../static/css/sidebar.css" />
     <link rel="stylesheet" href="../static/css/deque.css" />
     <link rel="stylesheet" href="../static/css/contacts.css">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-    />
-    <link
-    href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-    />
-
-    <!-- Font Awesome -->
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-    />
+    {% include 'components/fonts.html' %} 
+    <script src="../static/js/side_bar.js"></script>
 </head>
 
 <body>
-    <!-- SIDEBAR -->
-    <nav id="sidebar" class="sidebar">
-        <ul>
-            <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
-            <li><a href="/projects"><i class="fa-solid fa-diagram-project"></i> Projects</a></li>
-            <li><a href="/profiles_menu"><i class="fa-solid fa-user"></i> Profile</a></li>
-            <li><a href="#"><i class="fa-solid fa-address-book"></i> Contacts</a></li>
-        </ul>
-    </nav>
-
-    <!-- HEADER -->
-    <header>
-    <div class="header-left">
-      <div id="menu-icon" class="menu-icon">&#9776;</div>
-      <div class="logo-icon">CircuiTech</div>
-    </div>
-
-    <div class="header-right">
-      <nav class="nav-links">
-        <ul>
-          <li><a href="/" class="active">Home</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/profiles_menu">Profile</a></li>
-          <li><a href="#">Contacts</a></li>
-        </ul>
-      </nav>
-
-      <form class="search-form" action="#" method="GET" role="search">
-        <input
-          type="search"
-          placeholder="Search..."
-          aria-label="Search"
-          name="q"
-        />
-        <button type="submit" aria-label="Submit Search">
-          <i class="fa fa-search"></i>
-        </button>
-      </form>
-    </div>
-  </header>
+  {% include 'components/sidebar.html' %}
+  {% include 'components/header.html' %}
 
   <!-- OVERLAY -->
   <div id="overlay" class="overlay"></div>
@@ -87,7 +30,7 @@
             </div>
         </div>
 
-        <form action="/deque_update" method="post">
+        <form action="/deque/update" method="post">
         <div class="search-section">
             <div class="search-container">
                 <input type="text" id="mainInput" name="mainInput" class="search-input" autocomplete="off" placeholder="Enter value or search term...">
@@ -114,31 +57,6 @@
         </form>
     </div>
 
-    <script>
-        // SIDE BAR
-        document.addEventListener("DOMContentLoaded", () => {
-            const menuIcon = document.getElementById("menu-icon");
-            const sidebar = document.getElementById("sidebar");
-            const overlay = document.getElementById("overlay");
-            function toggleSidebar() {
-                sidebar.classList.toggle("active");
-                overlay.classList.toggle("active");
-            }
-            menuIcon.addEventListener("click", toggleSidebar);
-            overlay.addEventListener("click", toggleSidebar);
-            });
-
-        function goToProfile(profileId) {
-            window.location.href = `profile.html?id=${profileId}`;
-            }
-
-        const queueOutput = document.getElementById('output');
-        const observer = new ResizeObserver(() => {
-            const hasOverflow = queueOutput.scrollWidth > queueOutput.clientWidth;
-            queueOutput.style.justifyContent = hasOverflow ? 'flex-start':'center';
-        })
-        observer.observe(queueOutput);
-
-    </script>
+    <script src="../static/js/node_overflow.js"></script>
 </body>
 </html>
