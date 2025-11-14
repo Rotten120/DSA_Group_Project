@@ -6,8 +6,8 @@
   <title>CircuiTech</title>
 
   <!-- CSS Links -->
-  <link rel="stylesheet" href="../static/css/general-body.css">
-  <link rel="stylesheet" href="../static/css/contacts.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/general-body.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/contacts.css')}}">
   
   {% include 'components/fonts.html' %}
 
@@ -17,7 +17,7 @@
     }
   </style>
 
-  <script src="../static/js/side_bar.js"></script>
+  <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
 
   </head>
 
@@ -34,35 +34,35 @@
 
             <div class="first-row-cards">
             <a class="card-item" href="{{url_for('profile.profile', profile_id=0)}}">
-              <img src="../static/images/card_pics/von.png" alt="Profile 1" />
+              <img src="{{url_for('static', filename='images/card_pics/von.png')}}" alt="Profile 1" />
             </a>
             <a class="card-item" href="{{url_for('profile.profile', profile_id=1)}}">
-              <img src="../static/images/card_pics/trowa.png" alt="Profile 2" />
+              <img src="{{url_for('static', filename='images/card_pics/trowa.png')}}" alt="Profile 2" />
             </a>
             <a class="card-item" href="{{url_for('profile.profile', profile_id=2)}}">
-              <img src="../static/images/card_pics/shane.png" alt="Profile 3" />
+              <img src="{{url_for('static', filename='images/card_pics/shane.png')}}" alt="Profile 3" />
             </a>
             <a class="card-item" href="{{url_for('profile.profile', profile_id=3)}}">
-              <img src="../static/images/card_pics/kurt.png" alt="Profile 4" />
+              <img src="{{url_for('static', filename='images/card_pics/kurt.png')}}" alt="Profile 4" />
             </a>
             <a class="card-item" href="{{url_for('profile.profile', profile_id=4)}}">
-              <img src="../static/images/card_pics/carl.png" alt="Profile 5" />
+              <img src="{{url_for('static', filename='images/card_pics/carl.png')}}" alt="Profile 5" />
             </a>
         </div>
     </div>
 
     <div class="card-row bottom">
         <a class="card-item" href="{{url_for('profile.profile', profile_id=5)}}">
-        <img src="../static/images/card_pics/ycz.png" alt="Profile 6" />
+        <img src="{{url_for('static', filename='images/card_pics/ycz.png')}}" alt="Profile 6" />
         </a>
         <a class="card-item" href="{{url_for('profile.profile', profile_id=6)}}">
-        <img src="../static/images/card_pics/laika.png" alt="Profile 7" />
+        <img src="{{url_for('static', filename='images/card_pics/laika.png')}}" alt="Profile 7" />
         </a>
         <a class="card-item" href="{{url_for('profile.profile', profile_id=7)}}">
-        <img src="../static/images/card_pics/chloe.png" alt="Profile 8" />
+        <img src="{{url_for('static', filename='images/card_pics/chloe.png')}}" alt="Profile 8" />
         </a>
         <a class="card-item" href="{{url_for('profile.profile', profile_id=8)}}">
-        <img src="../static/images/card_pics/chris.png" alt="Profile 9" />
+        <img src="{{url_for('static', filename='images/card_pics/chris.png')}}" alt="Profile 9" />
         </a>
     </div>
     </div>

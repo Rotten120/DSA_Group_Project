@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DEQUE - Data Structure Visualizer</title>
-    <link rel="stylesheet" href="../static/css/deque.css" />
-    <link rel="stylesheet" href="../static/css/contacts.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/deque.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/contacts.css')}}">
 
     {% include 'components/fonts.html' %} 
-    <script src="../static/js/side_bar.js"></script>
+    <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
 </head>
 
 <body>
@@ -57,6 +57,6 @@
         </form>
     </div>
 
-    <script src="../static/js/node_overflow.js"></script>
+    <script src="{{url_for('static', filename='js/node_overflow.js')}}"></script>
 </body>
 </html>
