@@ -1,10 +1,8 @@
 from src.binary_tree.node import Node 
 
 class BinaryTree:
-    def __init__(self, root: Node):
-        if type(root) != Node:
-            raise TypeError("Root node should be of `Node` type")
-        self.root = root
+    def __init__(self, root):
+        self.root = Node(root)
 
     def insert_left(self, current_node, value):
         new_node = Node(value)
@@ -50,9 +48,14 @@ class BinaryTree:
         return traversal
 
     def search(self, root, key):
+        if root is None:
+            return None
+
+        # search succeed
         if root.value == key:
             return root
-        
+       
+        # continues the search
         left_node = self.search(root.left, key)
         right_node = self.search(root.right, key)
         
@@ -61,8 +64,8 @@ class BinaryTree:
         if right_node:
             return right_node
 
+        # in case something stupid happens
         return None
 
     def delete(self, root, key):
         pass
-
