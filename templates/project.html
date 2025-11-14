@@ -6,8 +6,8 @@
   <title>CircuiTech</title>
 
   <!-- CSS Links -->
-  <link rel="stylesheet" href="../static/css/project-body.css" />
-  <link rel="stylesheet" href="../static/css/contacts.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/project-body.css')}}" />
+  <link rel="stylesheet" href="{{url_for('static', filename='css/contacts.css')}}">
 
   {% include 'components/fonts.html' %}
 
@@ -17,8 +17,8 @@
     }
   </style>
   
-  <script src="../static/js/side_bar.js"></script>
-  <script src="../static/js/project.js"></script>
+  <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
+  <script src="{{url_for('static', filename='js/project.js')}}"></script>
 
 </head>
 
