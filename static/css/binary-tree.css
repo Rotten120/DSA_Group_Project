@@ -387,7 +387,7 @@ body {
 /* Avatar Upload - Overlays Header */
 .bt-avatar-upload {
     text-align: center;
-    margin-top: -90px;
+    margin-top: -110px;
     margin-bottom: 40px;
     position: relative;
     z-index: 2;
@@ -600,7 +600,7 @@ body {
 
 .bt-details-content {
     text-align: center;
-    padding-top: 150px;
+    padding-top: 120px;
     padding-bottom: 60px;
 }
 
@@ -631,7 +631,7 @@ body {
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    margin: -90px auto 25px;
+    margin: 70px auto 25px;
     background: linear-gradient(to bottom, #87ceeb 0%, #87ceeb 50%, #90ee90 50%, #90ee90 100%);
     border: 6px solid rgba(73, 73, 73, 0.5);
     background-size: cover;
