@@ -221,24 +221,40 @@
   flex: 1;
 }
 
-/* ACHIEVEMENTS */
+/* CONTACTS */
 .achievement-item {
-  background-color: rgba(122, 0, 0, 0.3);
-  border-radius: 12px;
-  padding: 12px;
+  background-color: rgba(133, 128, 128, 0.5);
+  border-radius: 8px;
+  padding: 12px 15px;
   margin-bottom: 10px;
-  text-align: center;
-  font-size: 11px;
-  line-height: 1.4;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  transition: 0.2s;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: normal;
+  text-align: left;
+}
+
+.achievement-item:hover {
+  background-color: rgba(133, 128, 128, 0.7);
+}
+
+.contact-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.contact-value {
+  color: #e0e0e0;
+  flex: 1;
 }
 
 .achievement-divider {
-  height: 2px;
-  background-color: #7a0000;
-  margin: 4px 0;
+  display: none;
 }
 
 /* RESPONSIVE */
