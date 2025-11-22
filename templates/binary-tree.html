@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/binary-tree.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/contacts.css')}}">
 
-    <!--Font Awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
     {% include 'components/fonts.html' %} 
     <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
 </head>
@@ -141,7 +138,12 @@
                             <button class="bt-field-add-btn" id="addNotesBtn"><i class="fa-solid fa-note-sticky"></i></button>
                             <div class="bt-field-content">
                                 <label>ADD NOTES</label>
-                                <textarea class="bt-field-input bt-field-textarea" id="btNotesInput" placeholder="Add notes here..." rows="3"></textarea>
+                                <div class="bt-notes-wrapper">
+                                    <textarea class="bt-field-input bt-field-textarea" id="btNotesInput" placeholder="Add notes here..." rows="3" maxlength="50"></textarea>
+                                    <div class="bt-char-counter">
+                                        <span id="btCharCount">0</span>/50
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

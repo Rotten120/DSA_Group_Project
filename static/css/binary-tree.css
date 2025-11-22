@@ -241,7 +241,7 @@ body {
     gap: 15px;
     padding: 12px 10px;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 5px;
     transition: background 0.2s;
 }
 
@@ -250,8 +250,9 @@ body {
 }
 
 .bt-contact-item.active {
-    background: rgba(139, 0, 0, 0.8);
-    border-radius: 25px;
+    display: block; 
+    border-bottom: 2px solid black;
+    padding-bottom: 5px;
 }
 
 .bt-contact-favorite {
@@ -528,6 +529,47 @@ body {
 .bt-field-textarea:focus {
     outline: none;
     color: #fff;
+}
+
+#btContactNotes {
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.bt-notes-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.bt-char-counter {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    font-size: 11px;
+    color: #999;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3px 8px;
+    border-radius: 12px;
+    pointer-events: none;
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bt-char-counter.bt-limit-warning {
+    color: #ff9800;
+    background: rgba(255, 152, 0, 0.1);
+}
+
+.bt-char-counter.bt-limit-reached {
+    color: #f44336;
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.bt-field-textarea {
+    padding-bottom: 32px !important;
 }
 
 /* Contact Details View */

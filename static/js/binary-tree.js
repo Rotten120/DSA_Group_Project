@@ -7,6 +7,7 @@ let currentAvatarData = null;
 let currentHeaderData = null;
 
 // ===== DOM ELEMENTS =====
+const MAX_NOTES_LENGTH = 50;
 const btSearchInput = document.getElementById('btSearchInput');
 const btContactsList = document.getElementById('btContactsList');
 const btAddBtn = document.getElementById('btAddBtn');
@@ -94,7 +95,7 @@ btSearchInput.addEventListener('input', function() {
     renderContactsList();
 });
 
-// Clear search when cancel button is clicked
+// Clear search when cancel button is clicked.
 btSearchCancelBtn.addEventListener('click', function(e) {
     e.stopPropagation();
     btSearchInput.value = '';
@@ -103,7 +104,7 @@ btSearchCancelBtn.addEventListener('click', function(e) {
     btSearchInput.focus(); 
 });
 
-// Optional: Clear search with Escape key
+// Optional: Clear search with Escape key.
 btSearchInput.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && this.value.length > 0) {
         btSearchInput.value = '';
@@ -112,6 +113,7 @@ btSearchInput.addEventListener('keydown', function(e) {
     }
 });
 
+// Displays the specified view (empty/form/details/favorites) and hides all others.
 function showView(view) {
     btEmptyContent.classList.add('bt-hidden');
     btContactForm.classList.add('bt-hidden');
@@ -129,6 +131,7 @@ function showView(view) {
     btFavoritesBtn.classList.toggle('active', currentView === 'favorites');
 }
 
+// Opens the contact creation form with cleared fields.
 function showAddForm() {
     isEditing = false;
     currentAvatarData = null;
@@ -137,6 +140,7 @@ function showAddForm() {
     showView('form');
 }
 
+// Resets all form inputs and image previews to default state.
 function clearForm() {
     btNameInput.value = '';
     btStatusInput.value = 'NEW CONTACT';
@@ -160,12 +164,14 @@ function clearForm() {
     btHeaderAddBtn.innerHTML = '<span><i class="fa-solid fa-camera"></i></span><span>Add Header Photo</span>';
 }
 
+// Returns to the appropriate view when canceling the form.
 function cancelForm() {
     if (contacts.length === 0) showView('empty');
     else if (selectedContact) showContactDetails(selectedContact);
     else showView('empty');
 }
 
+// Validates and saves a new or edited contact to the contacts array.
 function saveContact() {
     const name = btNameInput.value.trim();
     if (!name) return alert('Please enter a name');
@@ -195,6 +201,7 @@ function saveContact() {
     showContactDetails(contactData);
 }
 
+// Converts uploaded avatar image and updates preview.
 function handleAvatarUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -208,6 +215,7 @@ function handleAvatarUpload(e) {
     reader.readAsDataURL(file);
 }
 
+// Converts uploaded header image and updates preview.
 function handleHeaderUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -222,6 +230,24 @@ function handleHeaderUpload(e) {
     reader.readAsDataURL(file);
 }
 
+// Character counter for notes - add this after your DOM elements section.
+btNotesInput.addEventListener('input', function() {
+    const charCount = this.value.length;
+    const counter = document.getElementById('btCharCount');
+    const counterContainer = counter.parentElement;
+    
+    counter.textContent = charCount;
+    
+    // Character Counter.
+    counterContainer.classList.remove('bt-limit-warning', 'bt-limit-reached');
+    if (charCount >= MAX_NOTES_LENGTH) {
+        counterContainer.classList.add('bt-limit-reached');
+    } else if (charCount >= MAX_NOTES_LENGTH * 0.9) {
+        counterContainer.classList.add('bt-limit-warning');
+    }
+});
+
+// Renders the filtered and alphabetically grouped contacts list
 function renderContactsList() {
     const filtered = contacts.filter(c => c.name.toLowerCase().includes(btSearchInput.value.toLowerCase()));
 
@@ -266,6 +292,7 @@ function renderContactsList() {
     btContactsList.innerHTML = html;
 }
 
+// Displays the full details view for the selected contact.
 function showContactDetails(contact) {
     selectedContact = contact;
     btContactName.textContent = contact.name;
@@ -277,20 +304,21 @@ function showContactDetails(contact) {
     btContactFacebook.textContent = contact.facebook || 'Not provided';
     btContactNotes.textContent = contact.notes || 'No notes';
 
-    // Handle avatar
+    // Handle avatar.
     if (contact.avatar) {
         btContactAvatar.style.backgroundImage = `url(${contact.avatar})`;
         btContactAvatar.style.background = `url(${contact.avatar}) center/cover`;
     } else {
         btContactAvatar.style.background = 'linear-gradient(to bottom, #87ceeb 0%, #87ceeb 50%, #90ee90 50%, #90ee90 100%)';
     }
-
+    
     // Handle header image
     const headerBg = document.querySelector('.bt-contact-header-bg');
     if (contact.headerImage) {
         headerBg.style.backgroundImage = `url(${contact.headerImage})`;
     } else {
-        // Default gradient if no header image
+
+        // Default gradient if no header image.
         headerBg.style.backgroundImage = 'none';
         headerBg.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
     }
@@ -300,10 +328,12 @@ function showContactDetails(contact) {
     renderContactsList();
 }
 
+// Toggles the visibility of the menu dropdown.
 function toggleMenu() {
     btMenuDropdown.classList.toggle('bt-hidden');
 }
 
+// Opens the form pre-filled with selected contact's data for editing.
 function handleEdit() {
     isEditing = true;
     btMenuDropdown.classList.add('bt-hidden');
@@ -345,6 +375,7 @@ function handleEdit() {
     showView('form');
 }
 
+// Deletes the currently selected contact after confirmation,
 function handleDelete() {
     if (!selectedContact) return;
     if (confirm(`Delete ${selectedContact.name}?`)) {
@@ -356,6 +387,7 @@ function handleDelete() {
     }
 }
 
+// Toggles the favorite status of the currently selected contact.
 function toggleFavorite() {
     if (!selectedContact) return;
     selectedContact.isFavorite = !selectedContact.isFavorite;
@@ -364,6 +396,7 @@ function toggleFavorite() {
     renderFavorites();
 }
 
+// Switches between favorites view and the previous view.
 function toggleFavoritesView() {
     if (currentView === 'favorites') {
         showView(contacts.length === 0 ? 'empty' : (selectedContact ? 'details' : 'empty'));
@@ -373,6 +406,7 @@ function toggleFavoritesView() {
     }
 }
 
+// Renders the grid of favorited contacts with their avatars.
 function renderFavorites() {
     const favorites = contacts.filter(c => c.isFavorite);
     if (favorites.length === 0) {
