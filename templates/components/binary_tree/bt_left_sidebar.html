@@ -1,0 +1,43 @@
+<!-- Left Sidebar -->
+<div class="bt-sidebar">
+    <div class="bt-sidebar-header">
+        <h1>Contacts</h1>
+        <div class="bt-header-icons">
+            <button class="bt-icon-btn" id="btFavoritesBtn" title="View Favorites"><i class="fa-solid fa-star"></i></button>
+            <button class="bt-icon-btn" id="btAddBtn" title="Add Contact"><i class="fa-solid fa-plus"></i></button>
+        </div>
+    </div>
+
+    <div class="bt-search-box">
+        <span class="bt-search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input type="text" id="btSearchInput" placeholder="Search">
+        <button class="bt-search-cancel-btn bt-hidden" id="btSearchCancelBtn" type="button">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div class="bt-contacts-list" id="btContactsList">
+        {% if not contacts_list %}
+            <div class="bt-empty-state">
+                <div class="bt-empty-icon"><i class="fa-solid fa-user"></i></div>
+                <h3>No Contacts</h3>
+                <p>Contacts you've added will appear here.</p>
+                <button class="bt-create-btn" id="btCreateBtn">Create New Contact</button>
+            </div>
+
+        {% else %}
+
+            {% for letter in contacts_list %}
+                <div class="bt-letter-header">{{letter}}</div>
+                
+                {% for contact in contacts_list[letter] %}
+                    <div class="bt-contact-item">
+                        <span class="bt-contact-item-name">{{contact.value.name}}</span>
+                    </div>
+                <% endfor %>
+
+            <% endfor %>
+
+        {% endif %}
+    </div>
+</div>

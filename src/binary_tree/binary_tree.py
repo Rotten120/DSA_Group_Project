@@ -68,4 +68,70 @@ class BinaryTree:
         return None
 
     def delete(self, root, key):
+<<<<<<< Updated upstream
         pass
+=======
+        if root is None:
+            return None
+
+        if root.left is None and root.right is None:
+            if root.value == key:
+                return None
+            else:
+                return root
+
+        queue = [root]
+        target_node = None
+        parent_of_deepest = None
+        deepest_node = None
+        last_direction = None  
+
+        while queue:
+            temp = queue.pop(0)
+
+            if temp.value == key:
+                target_node = temp
+
+            if temp.left:
+                parent_of_deepest = temp
+                last_direction = "left"
+                queue.append(temp.left)
+
+            if temp.right:
+                parent_of_deepest = temp
+                last_direction = "right"
+                queue.append(temp.right)
+
+            deepest_node = temp  
+
+        if target_node is None:
+            return root
+
+        target_node.value = deepest_node.value
+
+        if parent_of_deepest:
+            if last_direction == "left":
+                parent_of_deepest.left = None
+            else:
+                parent_of_deepest.right = None
+
+        return root
+
+    def to_list(self):
+        if self.root is None:
+            return []
+
+        result = []
+        queue = [self.root]
+
+        while queue:
+            node = queue.pop(0)
+            result.append(node.value)
+
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+
+        return result  
+>>>>>>> Stashed changes
