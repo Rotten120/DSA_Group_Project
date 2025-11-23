@@ -130,4 +130,4 @@ class BinaryTree:
             if node.right:
                 queue.append(node.right)
 
-        return result  
+        return result
