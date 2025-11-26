@@ -1,9 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify
 from src.binary_tree import *
 
-def import_contacts():
-    return 0
-
 bitree_bp = Blueprint('bitree', __name__)
 bitree_out = BinaryTree()
 isleft = True
