@@ -67,8 +67,8 @@ class BinaryTree:
             return root
 
         # continues the search
-        left_node = self.search(root.left, key)
-        right_node = self.search(root.right, key)
+        left_node = self.search(root.left, key, is_root_iterable)
+        right_node = self.search(root.right, key, is_root_iterable)
         
         if left_node:
             return left_node
