@@ -19,8 +19,7 @@ def bitree_update():
 def get_contacts():
     global bitree_out
     tree_list = bitree_out.to_list()
-    to_json = jsonify([temp_node.value.to_dict() for temp_node in tree_list])
-    return to_json
+    return jsonify([temp_node.value.to_dict() for temp_node in tree_list])
 
 @bitree_bp.route('/create', methods=["GET", "POST"])
 def create_contact():

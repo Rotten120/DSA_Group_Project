@@ -389,7 +389,8 @@ async function handleDelete() {
 // Toggles the favorite status of the currently selected contact.
 async function toggleFavorite() {
     if (!selectedContact) return;
-    contacts = await toggleFavoriteContact(selectedContact.id)
+    contacts = await toggleFavoriteContact(selectedContact.id);
+    selectedContact.isFavorite = !selectedContact.isFavorite;
     btFavoriteToggle.classList.toggle('active', selectedContact.isFavorite);
     renderContactsList();
     renderFavorites();
@@ -449,7 +450,7 @@ async function getContacts() {
 // ------------ DELETE/CREATE CONTACTS (FETCHES CONTACTS) ------------//
 
 async function createContact(newContact) {
-    const res = await fetch("create", {
+    const res = await fetch("bitree/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({value: newContact})
@@ -460,7 +461,7 @@ async function createContact(newContact) {
 }
 
 async function deleteContact(cid) {
-    const res = await fetch(`delete/${cid}`, {
+    const res = await fetch(`bitree/delete/${cid}`, {
         method: "DELETE"
     });
 
@@ -471,7 +472,7 @@ async function deleteContact(cid) {
 // -------------- EDIT CONTACTS (UPDATES LOCAL CONTACTS ONLY) ------------ //
 
 async function editContact(cid, editedContact) {
-    const res = await fetch(`update/${cid}`, {
+    const res = await fetch(`bitree/update/${cid}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({value: editedContact})
@@ -482,7 +483,7 @@ async function editContact(cid, editedContact) {
 }
 
 async function toggleFavoriteContact(cid) {
-    const res = await fetch(`toggle-favorite/${cid}`, {
+    const res = await fetch(`bitree/toggle-favorite/${cid}`, {
         method: "PUT"
     });
 
