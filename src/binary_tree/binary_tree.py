@@ -1,15 +1,11 @@
-from src.binary_tree.node import Node 
+from src.binary_tree.node import Node
 
 class BinaryTree:
     def __init__(self, root=None):
-        self.root = None if root is None else Node(root)
+        self.root = root if root else Node(root, node_id = -1)
 
-    def insert_left(self, current_node, value):
-        new_node = Node(value)
-
-        if self.root is None:
-            self.root = new_node
-            return new_node
+    def insert_left(self, current_node, value, node_id = None):
+        new_node = Node(value, node_id)
         
         if current_node.left is None:
             current_node.left = new_node
@@ -19,12 +15,8 @@ class BinaryTree:
 
         return new_node
 
-    def insert_right(self, current_node, value):
-        new_node = Node(value)
-
-        if self.root is None:
-            self.root = new_node
-            return new_node
+    def insert_right(self, current_node, value, node_id = None):
+        new_node = Node(value, node_id)
 
         if current_node.right is None:
             current_node.right = new_node
@@ -55,7 +47,7 @@ class BinaryTree:
             traversal += (str(start.value) + '-')
         return traversal
 
-    def search(self, root, key, is_root_iterable=False):
+    def search_by_value(self, root, key, is_root_iterable=False):
         if root is None:
             return None
 
