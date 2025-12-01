@@ -2,7 +2,7 @@ from src.binary_tree.node import Node
 
 class BinaryTree:
     def __init__(self, root=None):
-        self.root = root if root else Node(root, node_id = -1)
+        self.root = root if not root else Node(root, node_id = 0)
 
     def insert_left(self, current_node, value, node_id = None):
         new_node = Node(value, node_id)
@@ -47,18 +47,32 @@ class BinaryTree:
             traversal += (str(start.value) + '-')
         return traversal
 
+    def search_by_id(self, root, key_id):
+        if root is None:
+            return None
+
+        if root.id == key_id:
+            return root
+
+        left_node = self.search(root.left, key_id)
+        right_node = self.search(root.right, key_id)
+        
+        if left_node:
+            return left_node
+        if right_node:
+            return right_node
+        return None
+
     def search_by_value(self, root, key, is_root_iterable=False):
         if root is None:
             return None
 
-        # search succeed
         if is_root_iterable:
             if root.value.__contains__(key):
                 return root
         elif root.value == key:
             return root
 
-        # continues the search
         left_node = self.search(root.left, key, is_root_iterable)
         right_node = self.search(root.right, key, is_root_iterable)
         
@@ -66,8 +80,6 @@ class BinaryTree:
             return left_node
         if right_node:
             return right_node
-
-        # in case something stupid happens
         return None
 
     def delete(self, root, key):
@@ -134,3 +146,53 @@ class BinaryTree:
                 queue.append(node.right)
 
         return result
+
+    def __dict__(self):
+        if self.root is None:
+            return []
+
+        result = {}
+        queue = [self.root]
+
+        while queue:
+            node = queue.pop(0)
+            result[node.id] = node.__dict__()
+
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+
+        return result
+  
+    @classmethod
+    def import_dict(cls, inp_dict):
+        node_dict = {}
+        for node_id in inp_dict:
+            temp_data = inp_dict[node_id]
+            node_dict[node_id] = Node(
+                temp_data["value"],
+                int(temp_data["id"]),
+                int(temp_data["left"]) if temp_data["left"] else None,
+                int(temp_data["right"]) if temp_data["right"] else None
+            )
+
+        BinaryTree.__connect_nodes(node_dict[0], node_dict)
+        temp_bitree = BinaryTree()
+        temp_bitree.root = node_dict[0]
+        return temp_bitree
+
+    @classmethod
+    def __connect_nodes(cls, root, inp_dict):
+        if root is None:
+            return
+
+        if root.left:
+            left_node = inp_dict[root.left]
+            root.left = left_node
+            BinaryTree.__connect_nodes(left_node, inp_dict)
+
+        if root.right:
+            right_node = inp_dict[root.right]
+            root.right = right_node
+            BinaryTree.__connect_nodes(right_node, inp_dict)

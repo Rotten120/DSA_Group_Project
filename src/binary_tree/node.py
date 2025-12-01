@@ -3,7 +3,7 @@ from uuid import uuid4
 class Node:
     def __init__(self, value, node_id = None, left = None, right = None):
         self.value = value
-        self.id = node_id if node_id else uuid4()
+        self.id = uuid4().int if node_id is None else node_id
         self.left = left
         self.right = right
 
