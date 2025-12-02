@@ -1,0 +1,100 @@
+<div class="bt-contact-form bt-hidden" id="btContactForm">
+    <div class="bt-form-header">
+        <button class="bt-cancel-btn" id="btCancelBtn">Cancel</button>
+        <button class="bt-done-btn" id="btDoneBtn">Done</button>
+    </div>
+
+
+    <div class="bt-header-upload">
+        <div class="bt-header-preview" id="btHeaderPreview">
+            <button class="bt-header-add-btn" id="btHeaderAddBtn">
+                <span><i class="fa-solid fa-camera"></i></span>
+                <span>Add Header Photo</span>
+            </button>
+        </div>
+        <input type="file" id="btHeaderInput" accept="image/*" hidden>
+    </div>
+
+
+    <div class="bt-form-content">
+        <div class="bt-avatar-upload">
+            <div class="bt-avatar-circle" id="btAvatarPreview">
+                <button class="bt-avatar-add-btn" id="btAvatarAddBtn"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <input type="file" id="btAvatarInput" accept="image/*" hidden>
+        </div>
+
+        <input type="text" class="bt-form-input bt-name-input" id="btNameInput" placeholder="NAME">
+
+        <select class="bt-form-input" id="btStatusInput">
+            <option value="NEW CONTACT">STATUS</option>
+            <option value="UNDERGRADUATE">UNDERGRADUATE</option>
+            <option value="GRADUATE">GRADUATE</option>
+        </select>
+
+        <!-- Mobile Phone Field -->
+        <div class="bt-form-field">
+            <button class="bt-field-add-btn" id="addPhoneBtn"><i class="fa-solid fa-mobile"></i></button>    
+            <div class="bt-field-content">
+                <label>ADD MOBILE</label>
+                <input type="tel" class="bt-field-input" id="btMobileInput" placeholder="+63 946 9876 980">
+            </div>
+        </div>
+
+
+        <!-- Email Field -->
+        <div class="bt-form-field">
+            <button class="bt-field-add-btn" id="addEmailBtn"><i class="fa-solid fa-envelope"></i></button>
+            <div class="bt-field-content">
+                <label>ADD EMAIL</label>
+                <input type="email" class="bt-field-input" id="btEmailInput" placeholder="email@example.com">
+            </div>
+        </div>
+
+
+        <!-- Instagram Field -->
+        <div class="bt-form-field">
+            <button class="bt-field-add-btn" id="addInstagramBtn"><i class="fa-brands fa-instagram"></i></button>
+            <div class="bt-field-content">
+                <label>ADD INSTAGRAM</label>
+                <input type="text" class="bt-field-input" id="btInstagramInput" placeholder="@username">
+            </div>
+        </div>
+
+
+        <!-- Telephone Field -->
+        <div class="bt-form-field">
+            <button class="bt-field-add-btn" id="addTelephoneBtn"><i class="fa-solid fa-phone"></i></button>
+            <div class="bt-field-content">
+                <label>ADD TELEPHONE</label>
+                <input type="tel" class="bt-field-input" id="btTelephoneInput" placeholder="(046) 512 9834">
+            </div>
+        </div>
+
+
+        <!-- Facebook Field -->
+        <div class="bt-form-field">
+            <button class="bt-field-add-btn" id="addFacebookBtn"><i class="fa-brands fa-facebook"></i></i></button>
+            <div class="bt-field-content">
+                <label>ADD FACEBOOK</label>
+                <input type="text" class="bt-field-input" id="btFacebookInput" placeholder="Facebook Profile">
+            </div>
+        </div>
+
+
+        <!-- Notes Field -->
+        <div class="bt-form-field">
+            <button class="bt-field-add-btn" id="addNotesBtn"><i class="fa-solid fa-note-sticky"></i></button>
+            <div class="bt-field-content">
+                <label>ADD NOTES</label>
+                <div class="bt-notes-wrapper">
+                    <textarea class="bt-field-input bt-field-textarea" id="btNotesInput" placeholder="Add notes here..." rows="3" maxlength="50"></textarea>
+                    
+                    <div class="bt-char-counter">
+                        <span id="btCharCount">0</span>/50
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

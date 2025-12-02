@@ -172,7 +172,7 @@ function cancelForm() {
 }
 
 // Validates and saves a new or edited contact to the contacts array.
-function saveContact() {
+async function saveContact() {
     const name = btNameInput.value.trim();
     if (!name) return alert('Please enter a name');
 
@@ -208,9 +208,8 @@ function saveContact() {
     };
 
     if (isEditing) {
-        const index = contacts.findIndex(c => c.id === selectedContact.id);
-        contacts[index] = contactData;
-    } else contacts.push(contactData);
+        contacts = await editContact(selectedContact.id, contactData);
+    } else contacts = await createContact(contactData);
 
     selectedContact = contactData;
     renderContactsList();
@@ -392,10 +391,10 @@ function handleEdit() {
 }
 
 // Deletes the currently selected contact after confirmation,
-function handleDelete() {
+async function handleDelete() {
     if (!selectedContact) return;
     if (confirm(`Delete ${selectedContact.name}?`)) {
-        contacts = contacts.filter(c => c.id !== selectedContact.id);
+        contacts = await deleteContact(selectedContact.id);
         selectedContact = null;
         btMenuDropdown.classList.add('bt-hidden');
         showView(contacts.length === 0 ? 'empty' : 'empty');
@@ -404,8 +403,9 @@ function handleDelete() {
 }
 
 // Toggles the favorite status of the currently selected contact.
-function toggleFavorite() {
+async function toggleFavorite() {
     if (!selectedContact) return;
+    contacts = await toggleFavoriteContact(selectedContact.id);
     selectedContact.isFavorite = !selectedContact.isFavorite;
     btFavoriteToggle.classList.toggle('active', selectedContact.isFavorite);
     renderContactsList();
@@ -452,4 +452,57 @@ function renderFavorites() {
             showContactDetails(contact);
         });
     });
+}
+
+
+//------------ CONNECTING TO PYTHON FLASK ---------------//
+
+async function getContacts() {
+    const res = await fetch("/get-contacts");
+    const temp_contacts = await res.json();
+    return temp_contacts;
+}
+
+// ------------ DELETE/CREATE CONTACTS (FETCHES CONTACTS) ------------//
+
+async function createContact(newContact) {
+    const res = await fetch("bitree/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({value: newContact})
+    });
+
+    const updatedContacts = await res.json();
+    return updatedContacts;
+}
+
+async function deleteContact(cid) {
+    const res = await fetch(`bitree/delete/${cid}`, {
+        method: "DELETE"
+    });
+
+    const updatedContacts = await res.json();
+    return updatedContacts;
+}
+
+// -------------- EDIT CONTACTS (UPDATES LOCAL CONTACTS ONLY) ------------ //
+
+async function editContact(cid, editedContact) {
+    const res = await fetch(`bitree/update/${cid}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({value: editedContact})
+    });
+
+    const updatedContacts = await res.json();
+    return updatedContacts;
+}
+
+async function toggleFavoriteContact(cid) {
+    const res = await fetch(`bitree/toggle-favorite/${cid}`, {
+        method: "PUT"
+    });
+
+    const updatedContacts = await res.json();
+    return updatedContacts;
 }
