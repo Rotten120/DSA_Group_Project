@@ -176,6 +176,7 @@ function saveContact() {
     const name = btNameInput.value.trim();
     if (!name) return alert('Please enter a name');
 
+    // Add validation for contacts.
     const mobile = btMobileInput.value.trim();
     if (mobile && (!/^\d{11}$/.test(mobile))) {
         return alert('Mobile number must be exactly 11 digit.');
