@@ -176,6 +176,21 @@ function saveContact() {
     const name = btNameInput.value.trim();
     if (!name) return alert('Please enter a name');
 
+    const mobile = btMobileInput.value.trim();
+    if (mobile && (!/^\d{11}$/.test(mobile))) {
+        return alert('Mobile number must be exactly 11 digit.');
+    }
+
+    const email = btEmailInput.value.trim();
+    if (email && (!email.includes('@') || !email.includes('.com'))) {
+        return alert('Email must contain @ and .com');
+    }
+
+    const telephone = btTelephoneInput.value.trim();
+    if (telephone && (!/^\d{11}$/.test(telephone))) {
+        return alert('Telephone number must be exactly 11 digits.');
+    }
+
     const contactData = {
         id: isEditing ? selectedContact.id : Date.now(),
         name,
