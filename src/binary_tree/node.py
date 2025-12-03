@@ -10,7 +10,7 @@ class Node:
     def __dict__(self):
         dict_value = None
         try:
-            dict_value = dict(self.value)
+            dict_value = self.value.__dict__()
         except ValueError:
             dict_value = self.value
 
