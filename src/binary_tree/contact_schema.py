@@ -45,8 +45,8 @@ class Contact:
         )
         return temp_contact
 
-    def to_list(self):
-        return [
+    def __list__(self):
+        return iter([
             self.id,
             self.name,
             self.avatar,
@@ -59,9 +59,9 @@ class Contact:
             self.facebook,
             self.notes,
             self.is_fav
-        ]
+        ])
 
-    def to_dict(self):
+    def __dict__(self):
         return {
             "id": self.id,
             "name": self.name,
@@ -78,4 +78,4 @@ class Contact:
         }
 
     def __contains__(self, key):
-        return key in self.to_list()
+        return key in list(self)

@@ -1,0 +1,22 @@
+{
+    "0": {
+        "value": {
+            "id": 0,
+            "name": "Von Zedric",
+            "avatar": null,
+            "headerImage": null,
+            "status": "UNDERGRADUATE",
+            "mobile": "+639395956000",
+            "email": "vonzedric012@gmail.com",
+            "instagram": "@zedr1c",
+            "telephone": "(123) 456",
+            "facebook": "Von Delos Reyes",
+            "notes": "I'm von",
+            "isFavorite": true
+        },
+        "id": 0,
+        "left": null,
+        "right": null
+    }
+}
+
