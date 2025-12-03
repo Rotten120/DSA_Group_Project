@@ -54,8 +54,8 @@ class BinaryTree:
         if root.id == key_id:
             return root
 
-        left_node = self.search(root.left, key_id)
-        right_node = self.search(root.right, key_id)
+        left_node = self.search_by_id(root.left, key_id)
+        right_node = self.search_by_id(root.right, key_id)
         
         if left_node:
             return left_node
@@ -73,8 +73,8 @@ class BinaryTree:
         elif root.value == key:
             return root
 
-        left_node = self.search(root.left, key, is_root_iterable)
-        right_node = self.search(root.right, key, is_root_iterable)
+        left_node = self.search_by_value(root.left, key, is_root_iterable)
+        right_node = self.search_by_value(root.right, key, is_root_iterable)
         
         if left_node:
             return left_node
@@ -156,7 +156,7 @@ class BinaryTree:
 
         while queue:
             node = queue.pop(0)
-            result[node.id] = node.__dict__()
+            result[str(node.id)] = node.__dict__()
 
             if node.left:
                 queue.append(node.left)
@@ -166,12 +166,13 @@ class BinaryTree:
         return result
   
     @classmethod
-    def import_dict(cls, inp_dict):
+    def import_dict(cls, inp_dict, constructor = None):
         node_dict = {}
+        
         for node_id in inp_dict:
             temp_data = inp_dict[node_id]
-            node_dict[node_id] = Node(
-                temp_data["value"],
+            node_dict[int(node_id)] = Node(
+                temp_data["value"] if constructor is None else constructor.import_dict(temp_data["value"]),
                 int(temp_data["id"]),
                 int(temp_data["left"]) if temp_data["left"] else None,
                 int(temp_data["right"]) if temp_data["right"] else None
@@ -180,7 +181,8 @@ class BinaryTree:
         BinaryTree.__connect_nodes(node_dict[0], node_dict)
         temp_bitree = BinaryTree()
         temp_bitree.root = node_dict[0]
-        return temp_bitree
+
+        return temp_bitree 
 
     @classmethod
     def __connect_nodes(cls, root, inp_dict):
