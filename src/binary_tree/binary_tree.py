@@ -82,50 +82,42 @@ class BinaryTree:
             return right_node
         return None
 
-    def delete(self, root, key):
+    def delete(self, root, key_id):
         if root is None:
             return None
 
-        if root.left is None and root.right is None:
-            if root.value == key:
+        root.left = self.delete(root.left, key_id)
+        root.right = self.delete(root.right, key_id)
+
+        if root.id == key_id:
+
+        # Case 1: No children
+            if root.left is None and root.right is None:
                 return None
+
+        # Case 2A: Only right child
+            if root.left is None:
+                return root.right
+
+        # Case 2B: Only left child
+            if root.right is None:
+                return root.left
+
+        # Case 3: Two children
+            successor_parent = root
+            successor = root.right
+        
+            while successor.left:
+                successor_parent = successor
+                successor = successor.left
+
+            root.value = successor.value
+            root.id = successor.id
+        
+            if successor_parent.left == successor:
+                successor_parent.left = successor.right
             else:
-                return root
-
-        queue = [root]
-        target_node = None
-        parent_of_deepest = None
-        deepest_node = None
-        last_direction = None  
-
-        while queue:
-            temp = queue.pop(0)
-
-            if temp.value == key:
-                target_node = temp
-
-            if temp.left:
-                parent_of_deepest = temp
-                last_direction = "left"
-                queue.append(temp.left)
-
-            if temp.right:
-                parent_of_deepest = temp
-                last_direction = "right"
-                queue.append(temp.right)
-
-            deepest_node = temp  
-
-        if target_node is None:
-            return root
-
-        target_node.value = deepest_node.value
-
-        if parent_of_deepest:
-            if last_direction == "left":
-                parent_of_deepest.left = None
-            else:
-                parent_of_deepest.right = None
+                successor_parent.right = successor.right
 
         return root
 

@@ -45,13 +45,18 @@ def create_contact():
 
     return get_contacts(is_updated = True)
 
-@bitree_bp.route('/delete/<int:cid>', methods=["GET", "DELETE"])
+@bitree_bp.route('/delete/<int:cid>', methods=["DELETE"])
 def delete_contact(cid):
     global bitree_out
-    
-    rm_node = bitree_out.search_by_id(bitree_out.root, cid)
-    bitree_out.delete(bitree_out.root, rm_node)
-    return get_contacts()
+
+    bitree_out.root = bitree_out.delete(bitree_out.root, cid)
+
+    tree_json = bitree_out.__dict__()
+    with open(filepath, 'w') as file:
+        json.dump(tree_json, file, indent=4)
+
+    return jsonify([tree_json[node_id]["value"] for node_id in tree_json])
+
 
 @bitree_bp.route('/update/<int:cid>', methods=["GET", "PUT"])
 def update_contact(cid):
