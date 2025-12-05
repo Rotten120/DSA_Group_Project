@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/general-bst.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/sidebar.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/view-graph.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/voew-order.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/view-order.css')}}">
 
     {% include 'components/fonts.html' %} 
     <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
@@ -19,19 +19,25 @@
   {% include 'components/sidebar.html' %}
   {% include 'components/header.html' %}
 
+  <div id="overlay" class="overlay"></div>
+
   <div class="container">
 
-    <!-- SIDEBAR by "" -->
+    <!-- SIDEBAR -->
     {% include 'components/binary-search-tree/sidebar.html' %}
         
         <div class="main-content">
             <div class="red-box">
 
-                <!-- VIEW GRAPH by ""-->
-                {% include 'components/binary-search-tree/view-graph.html' %}
+                <!-- VIEW GRAPH -->
+                <div class="tree-view active" id="treeView">
+                    <div class="tree-container" id="treeContainer"></div>
+                </div>
 
-                <!-- VIEW ORDER by ""-->
-                {% include 'components/binary-search-tree/view-order.html' %}
+                <!-- VIEW ORDER -->
+                <div class="order-view" id="orderView">
+                    <div class="order-list" id="orderList"></div>
+                </div>
                 
             </div>
 
@@ -42,6 +48,6 @@
         </div>
     </div>
 
-  <script src="{{url_for('static', filename='js/binary-tree.js')}}"></script>
+  <script src="{{url_for('static', filename='js/binary-search-tree.js')}}"></script>
 </body>
 </html>
