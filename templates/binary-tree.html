@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Tree</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/binary-tree.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/contacts.css')}}">
+
+    {% include 'components/fonts.html' %} 
+    <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
+</head>
+
+<body>
+
+  {% include 'components/sidebar.html' %}
+  {% include 'components/header.html' %}
+
+  <!-- OVERLAY -->
+  <div id="overlay" class="bt-overlay"></div>
+  <div class="page-center">
+    <div class="bt-wrapper">
+      <div class="bt-container">
+            <!-- Left Sidebar Area -->
+            {% include 'components/binary_tree/bt_left_sidebar.html' %} 
+            <!-- Right Content Area -->
+            {% include 'components/binary_tree/bt_right_sidebar.html' %}
+      </div>
+    </div>
+  </div>
+
+  <script src="{{url_for('static', filename='js/binary-tree.js')}}"></script>
+</body>
+</html>
