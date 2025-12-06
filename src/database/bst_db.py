@@ -22,9 +22,23 @@ class BstDB:
         return self.__data
 
 class BstFolderDB:
-    def __init__(self, folder_path: str):
+    def __init__(self, folder_path: str: fetch_data: bool = True):
+        if folder_path[-1] == '/':
+            folder_path = folder_path[:-1]
+
         self.folder_path = folder_path
         self.__data: dict[str, BstDB] | None = self.fetch_all() if fetch_data else None
+
+    def insert(self, name):
+        if name in self.__data:
+            return
+        self.__data[name] = BstDB(name + '.json', fetch_data = False)
+
+    def delete(self, name):
+        if not(name in self.__data):
+            return
+        os.remove(self.abs_path(name, 'json'))
+        del self.__data[name]
 
     def fetch(self, file: str):
         if file in self.__data:
@@ -48,6 +62,9 @@ class BstFolderDB:
     def get(self, file: str):
         if file in self.__data:
             return self.__data[file].get()
+    
+    def get_all(self):
+        return self.__data
 
     def rename_file(self, old_name: str, new_name: str):
         if not(old_name in self.__data) or new_name in self.__data:
