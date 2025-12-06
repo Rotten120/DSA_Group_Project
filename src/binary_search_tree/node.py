@@ -7,6 +7,6 @@ class Node:
     def __dict__(self):
         return {
             "value": self.value,
-            "left": self.left.id if self.left else None,
-            "right": self.right.id if self.right else None
+            "left": self.left.value if self.left else None,
+            "right": self.right.value if self.right else None
         }
