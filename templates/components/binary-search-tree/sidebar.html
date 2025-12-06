@@ -1,6 +1,7 @@
 <div class="left-sidebar">
     <div class="edit-button">EDIT GRAPH</div>
-        
+    
+    <!-- INITIAL -->
     <div class="saved-graph-box" >
         <div id="noSavedGraph" style="display:none;">  <!-- REMOVE style="display:none;" to see NO SAVE GRAPH -->
             <div class="graph-icon">
@@ -12,6 +13,7 @@
             <div class="saved-graph-text">NO SAVED GRAPH</div>
         </div>
 
+        <!-- LIST EDITOR -->
         <div id="node-listOrganizer" style="display:none; width: 100%; flex-direction: column;">   <!-- CHANGE style="display:flex; to style="display:none;--> 
 
             <div class="name-organizer-top" style="display:flex; justify-content:space-between; width:100%;">
@@ -34,8 +36,9 @@
             </div>
 
         </div>
-
-    <div id="node-listOrganizer_OutsideBox" style="display:flex; flex-direction: column; align-items: center;"> <!-- CHANGE style="display:flex; to style="display:none;--> 
+    
+    <!-- NODE LIST -->
+    <div id="node-listOrganizer_OutsideBox" style="display:none; flex-direction: column; align-items: center;"> <!-- CHANGE style="display:flex; to style="display:none;--> 
         <div class="graph-name" id="graphTitle_Outside" style="margin-top: 10px; margin-bottom: 5px;">
 
             My Name Organizer
@@ -48,7 +51,23 @@
         </div>
     </div>
 
+    <!--GRAPH LIST -->
+    <div id="graph-list-organizer" style="display:flex; width: 100%; flex-direction: column;">
+         <div class="graph-list-title">All Graphs</div>
+
+        <div class="graph-list-item">
+            <span>My Name Organizer</span>
+        </div>
+
+        <div class="graph-list-item">
+            <span>graph2</span>
+        </div>
+
+        <div class="graph-list-item">
+            <span>graph3</span>
+        </div>
     </div>
+</div>
 
     <div class="create-button-container">
         <div class="create-icon">

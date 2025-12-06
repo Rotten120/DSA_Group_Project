@@ -133,6 +133,35 @@
     margin-top: 20px;
 }
 
+#graph-list-organizer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 15px;
+    color: white;
+}
+.graph-list-title {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.graph-list-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    font-size: 16px;
+    color: #AAAAAA;
+    cursor: pointer;
+}
+
+
 .create-button-container {
     display: flex;
     gap: 10px;
