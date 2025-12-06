@@ -31,7 +31,7 @@ def update_node(old_value: str = None, new_value: str = None):
     return get_bst_json()
 
 @bst_bp.route('/delete', methods=["DELETE"])
-def delete_node(value: str = None):
+def delete_node(value: str):
     global bst_out
     bst_out.delete(bst.root, value)
     return get_bst_json()
