@@ -1,14 +1,37 @@
 <div class="left-sidebar">
     <div class="edit-button">EDIT GRAPH</div>
         
-    <div class="saved-graph-box">
-        <div class="graph-icon">
-            <div class="graph-icon-cell"></div>
-            <div class="graph-icon-cell"></div>
-            <div class="graph-icon-cell"></div>
-            <div class="graph-icon-cell"></div>
+    <div class="saved-graph-box" >
+        <div id="noSavedGraph" style="display:none;">  <!-- REMOVE style="display:none;" to see NO SAVE GRAPH -->
+            <div class="graph-icon">
+                <div class="graph-icon-cell"></div>
+                <div class="graph-icon-cell"></div>
+                <div class="graph-icon-cell"></div>
+                <div class="graph-icon-cell"></div>
+            </div>
+            <div class="saved-graph-text">NO SAVED GRAPH</div>
         </div>
-        <div class="saved-graph-text">NO SAVED GRAPH</div>
+
+        <div id="nameOrganizer" style="display:flex; width: 100%; flex-direction: column;">   <!-- CHANGE style="display:flex; to style="display:none;--> 
+
+            <div class="name-organizer-top" style="display:flex; justify-content:space-between; width:100%;">
+                <span class="cancel-btn" style="cursor:pointer; font-weight:bold;">Cancel</span>
+                <span class="save-btn" style="cursor:pointer; font-weight:bold;">Save</span>
+            </div>
+
+            <div class="name-organizer-list" id="nameList" style="margin-top:15px; display:flex; flex-direction:column; gap:8px;">
+                </div>
+
+            <div class="add-name" id="addNameBtn" style="margin-top:10px; cursor:pointer; font-weight:bold;">
+                + Add a name
+            </div>
+
+            <div class="graph-name" style="text-align:center; margin-top:20px; font-weight:bold;">
+                My Name Organizer 
+            </div>
+
+        </div>
+
     </div>
 
     <div class="create-button-container">
@@ -20,4 +43,3 @@
         <div class="create-button">CREATE NEW GRAPH</div>
     </div>
 </div>
-
