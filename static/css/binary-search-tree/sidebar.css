@@ -22,23 +22,16 @@
     background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
     border: 2px solid #991b1b;
     border-radius: 12px;
-    padding: 20px;
+    padding: 20px 10px; 
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    min-height: 200px;
+    justify-content: flex-start; 
+    
+    min-height: 150px;
     width: 270px;
     color: white;
-}
-
-.name-organizer {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    text-align: left;
-    flex-grow: 1;
 }
 
 .name-organizer-top {
@@ -47,6 +40,7 @@
     font-weight: bold;
     font-size: 16px;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .name-organizer-list {
@@ -54,14 +48,14 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    flex-grow: 1;
+    width: 100%;
 }
 
 .add-name {
     font-weight: bold;
     cursor: pointer;
     text-align: left;
-    margin-bottom: 15px;
+    margin-top: 15px;
     color: #AAAAAA; 
 }
 
@@ -69,10 +63,16 @@
     text-align: center;
     padding-top: 0px;
     margin-top: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: bold;
     font-size: 14px;
     color: #AAAAAA; 
+}
+
+.list-item {
+    color: #AAAAAA; 
+    text-align: center;
+    font-size: 16px; 
 }
 
 .graph-icon {
@@ -85,6 +85,8 @@
     gap: 4px;
     padding: 8px;
     margin-bottom: 15px;
+    margin-top: auto; 
+    margin-bottom: auto;
 }
 
 .graph-icon-cell {
@@ -97,6 +99,38 @@
     font-weight: bold;
     font-size: 14px;
     letter-spacing: 1px;
+    margin-bottom: auto;
+}
+
+/*Node List*/ 
+
+#node-listOrganizer_OutsideBox {
+    width: 100%;
+    margin-top: -10px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#node-listOrganizer_OutsideBox .graph-name {
+    color: white; 
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+#node-listOrganizer_InsideBox {
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#nodee-listOrganizer_InsideBox .name-organizer-list {
+    flex-grow: 1;
+}
+#node-listOrganizer_InsideBox .graph-name {
+    color: #AAAAAA;
+    margin-top: 20px;
 }
 
 .create-button-container {
