@@ -82,12 +82,19 @@ class BinarySearchTree:
                 yield node.value
                 yield from inorder(node.right)
 
-        return list(inorder(self.root)
+        return list(inorder(self.root))
 
-    def __list__(self):
+    def __dict__(self):
         def inorder(node):
             if node:
-                yield from inoder(node.left)
+                yield from inorder(node.left)
                 yield node.__dict__()
                 yield from inorder(node.right)
-        return iter(list(inorder(self.root)))
+
+        left_root = list(inorder(self.root.left))
+        right_root = list(inorder(self.root.right))
+        
+        return {
+            "root": self.root.__dict__(),
+            "children": left_root + right_root
+        }
