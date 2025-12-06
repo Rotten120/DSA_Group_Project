@@ -10,6 +10,7 @@ with open('data/profile_details.json', 'r') as file:
 @profile_bp.route('/<int:profile_id>')
 def profile(profile_id = 0):
     data = PROFILE_DETAIL[profile_id]
+    contacts = data['contacts']
     return render_template(
         'profile.html',
         cover_picture=data['cover'],
@@ -24,6 +25,11 @@ def profile(profile_id = 0):
         location=data['location'],
         skills=data['skills'],
         achievements=data['achievements'],
+        email=contacts['email'],
+        instagram=contacts['instagram'],
+        linkedin=contacts['linkedin'],
+        github=contacts['github'],
+        facebook=contacts['facebook'],
         prev_profile_id = len(PROFILE_DETAIL) - 1 if profile_id == 0 else profile_id - 1,
         next_profile_id = (profile_id + 1) % len(PROFILE_DETAIL)
     )

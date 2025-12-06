@@ -11,7 +11,14 @@
         "location": "Pasig City",
         "skills": "Web Development, Game Dev, Assembly Language, Circuit Analysis",
         "projects": ["Snake Game","Automated Bank","Lottery Game","Keyboard"],
-        "achievements": ["Consistent President's Lister","Graduated with Honors at PCSHS"]
+        "achievements": ["Consistent President's Lister","Graduated with Honors at PCSHS"],
+        "contacts": {
+          "email": "vonzedric012@gmail.com",
+          "instagram": "https://www.instagram.com/zedr1c/",
+          "linkedin": "https://www.linkedin.com/in/delosreyesvonzedric/",
+          "github": "https://github.com/Rotten120",
+          "facebook": "https://web.facebook.com/rotten.flesh.12/"
+        }
       },
       {
         "name": "Saint Trowa N. Tangco",
@@ -25,7 +32,14 @@
         "location": "Talipapa, Quezon City",
         "skills": "Javascript and  HTML (Beginner), Python (Intermediate), C++(Learning)",
         "projects": ["E-Commerce Platform","AI Chatbot","Portfolio Website","Mobile App"],
-        "achievements": ["Graduated with Honors in Ismael Mathay Senior Highschool"]
+        "achievements": ["Graduated with Honors in Ismael Mathay Senior Highschool"],
+        "contacts": {
+          "email": "sainttrowa@gmail.com",
+          "instagram": "",
+          "linkedin": "https://www.linkedin.com/in/trowa-tangco-954483332",
+          "github": "https://github.com/Trowa-Pups",
+          "facebook": "https://www.facebook.com/sainttrowa"
+        }
       },
       {
         "name": "Shane Craven L. Palomo",
@@ -39,7 +53,14 @@
         "location": "San Miguel, Bulacan",
         "skills": "Python, HTML, CSS",
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        "achievements": ["Consistent Dean Lister","Consistent with honors (Elementary-Senior High School)","Created own webpage for portfolio"]
+        "achievements": ["Consistent Dean Lister","Consistent with honors (Elementary-Senior High School)","Created own webpage for portfolio"],
+        "contacts": {
+          "email": "palomoshanecraven@gmail.com",
+          "instagram": "https://www.instagram.com/han_crvn/",
+          "linkedin": "https://www.linkedin.com/in/shane-craven-palomo-6a2464345/",
+          "github": "https://github.com/han-crvn",
+          "facebook": "https://www.facebook.com/han.crvn"
+        }
       },
       {
         "name": "Adrian Kurt O. Mari\u00f1as",
@@ -53,7 +74,14 @@
         "location": "Valenzuela City, Philippines",
         "skills": "Python",
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        "achievements": ["Consistent Dean Lister","Graduated with Honors at VPTNHS"]
+        "achievements": ["Consistent Dean Lister","Graduated with Honors at VPTNHS"],
+        "contacts": {
+          "email": "dilanmarinas@gmail.com ",
+          "instagram": "https://www.instagram.com/di.llann",
+          "linkedin": "https://www.linkedin.com/in/adrian-kurt-mariñas-a77a0536a",
+          "github": "https://github.com/dilankurty",
+          "facebook": "https://www.facebook.com/adriankurt.marinas"
+        }
       },
       {
         "name": "Carl Joshua M. Manaog",
@@ -67,7 +95,14 @@
         "location": "Muntinlupa City, Philippines",
         "skills": "Python, HTML, and slight CSS",
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        "achievements": ["Graduated with honors in STEM during Senior High School","Participated in a Cybersecurity seminar on digital identity and data care"]
+        "achievements": ["Graduated with honors in STEM during Senior High School","Participated in a Cybersecurity seminar on digital identity and data care"],
+        "contacts": {
+          "email": "manaogcarljoshuam@gmail.com",
+          "instagram": "https://www.instagram.com/joshuacarlm/",
+          "linkedin": "",
+          "github": "https://github.com/Encrypt75",
+          "facebook": "https://www.facebook.com/carljoshua.manaog"
+        }
       },
       {
         "name": "Ycz Aubhrey V. Dy",
@@ -81,7 +116,14 @@
         "location": "Sta. Mesa Manila, Philippines ",
         "skills": "C, C++, Java, Python",
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        "achievements": ["Consistent Academic Achiever","PUP ACCESS Secretary General"]
+        "achievements": ["Consistent Academic Achiever","PUP ACCESS Secretary General"],
+        "contacts": {
+          "email": "yczaubhreydy@gmail.com",
+          "instagram": "https://www.instagram.com/_yczzz/",
+          "linkedin": "https://www.linkedin.com/in/ycz-aubhrey-dy-473696296/",
+          "github": "https://github.com/Sheynn04",
+          "facebook": "https://www.facebook.com/selpon.22"
+        }
       },
       {
         "name": "Angel Laika L. Clarito",
@@ -95,7 +137,14 @@
         "location": "Taguig City, Philippines",
         "skills": "HTML, Python, CSS",
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        "achievements": ["Graduated with Honors from Olivarez College","Dean's and President's List (2024-2025)"]
+        "achievements": ["Graduated with Honors from Olivarez College","Dean's and President's List (2024-2025)"],
+        "contacts": {
+          "email": "angellaikaclarito04@gmail.com",
+          "instagram": "https://www.instagram.com/kudryavkalai/",
+          "linkedin": "https://www.linkedin.com/in/angel-laika-clarito-2234a02b6/",
+          "github": "https://github.com/itsnotangel",
+          "facebook": "https://www.facebook.com/angel.laika.316454/"
+        }
       },
       {
         "name": "Mary Chloe Anne A. Luna",
@@ -109,7 +158,14 @@
         "location": "Montalban, Rizal, Philippines",
         "skills": "Python",
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        "achievements": ["Graduated with High Honors in SJLSHS", "Surviving in College"]
+        "achievements": ["Graduated with High Honors in SJLSHS", "Surviving in College"],
+        "contacts": {
+          "email": "lunamarychloeanne@gmail.com",
+          "instagram": "https://www.instagram.com/mry_chlnn/",
+          "linkedin": "",
+          "github": "https://github.com/mrychlnn",
+          "facebook": "https://www.facebook.com/mrychlnn"
+        }
       },
       {
         "name": "Chris H. Mangahas",
@@ -123,6 +179,13 @@
         "location": "Quezon City, Philippines",
         "skills": "Python, HTML, CSS",
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
-        "achievements": ["ALS Graduate"," Consistent With Honors in SHS","PIO for Filipino Club in SHS"]
+        "achievements": ["ALS Graduate"," Consistent With Honors in SHS","PIO for Filipino Club in SHS"],
+        "contacts": {
+          "email": "",
+          "instagram": "https://www.instagram.com/chris_hm_07",
+          "linkedin": "",
+          "github": "",
+          "facebook": "https://www.facebook.com/chm075"
+        }
       }
 ]

@@ -52,8 +52,11 @@ const btContactFacebook = document.getElementById('btContactFacebook');
 const btContactNotes = document.getElementById('btContactNotes');
 
 // ===== INITIALIZE =====
-renderContactsList();
-showView('empty');
+fetch('/bitree/get-contacts?is_updated=false')
+.then(r => r.json())
+.then(data => contacts = data)
+.then(() => renderContactsList())
+.then(() => showView('empty'));
 
 // ===== EVENT LISTENERS =====
 btAddBtn.addEventListener('click', showAddForm);
@@ -175,6 +178,22 @@ function cancelForm() {
 async function saveContact() {
     const name = btNameInput.value.trim();
     if (!name) return alert('Please enter a name');
+
+    // Add validation for contacts.
+    const mobile = btMobileInput.value.trim();
+    if (mobile && (!/^\d{11}$/.test(mobile))) {
+        return alert('Mobile number must be exactly 11 digit.');
+    }
+
+    const email = btEmailInput.value.trim();
+    if (email && (!email.includes('@') || !email.includes('.com'))) {
+        return alert('Email must contain @ and .com');
+    }
+
+    const telephone = btTelephoneInput.value.trim();
+    if (telephone && (!/^\d{11}$/.test(telephone))) {
+        return alert('Telephone number must be exactly 11 digits.');
+    }
 
     const contactData = {
         id: isEditing ? selectedContact.id : Date.now(),
@@ -441,8 +460,8 @@ function renderFavorites() {
 
 //------------ CONNECTING TO PYTHON FLASK ---------------//
 
-async function getContacts() {
-    const res = await fetch("/get-contacts");
+async function getContacts(is_contacts_updated = false) {
+    const res = await fetch(`/bitree/get-contacts?is_updated=${is_contacts_updated}`);
     const temp_contacts = await res.json();
     return temp_contacts;
 }
@@ -450,7 +469,7 @@ async function getContacts() {
 // ------------ DELETE/CREATE CONTACTS (FETCHES CONTACTS) ------------//
 
 async function createContact(newContact) {
-    const res = await fetch("bitree/create", {
+    const res = await fetch("/bitree/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({value: newContact})
@@ -461,7 +480,7 @@ async function createContact(newContact) {
 }
 
 async function deleteContact(cid) {
-    const res = await fetch(`bitree/delete/${cid}`, {
+    const res = await fetch(`/bitree/delete/${cid}`, {
         method: "DELETE"
     });
 
@@ -472,7 +491,7 @@ async function deleteContact(cid) {
 // -------------- EDIT CONTACTS (UPDATES LOCAL CONTACTS ONLY) ------------ //
 
 async function editContact(cid, editedContact) {
-    const res = await fetch(`bitree/update/${cid}`, {
+    const res = await fetch(`/bitree/update/${cid}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({value: editedContact})
@@ -483,7 +502,7 @@ async function editContact(cid, editedContact) {
 }
 
 async function toggleFavoriteContact(cid) {
-    const res = await fetch(`bitree/toggle-favorite/${cid}`, {
+    const res = await fetch(`/bitree/toggle-favorite/${cid}`, {
         method: "PUT"
     });
 
