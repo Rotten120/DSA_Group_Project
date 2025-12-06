@@ -8,11 +8,17 @@ class BinarySearchTree:
         if node is None:
             return Node(value)
 
+        if node.value == value:
+            raise ValueError(f"Value {value} already exists in the tree")
         if value <= node.value:
             node.left = self.insert(node.left, value)
         else:
             node.right = self.insert(node.right, value)
         return node
+    
+    def update(self, node, old_value, new_value):
+        self.delete(searched_node, old_value)
+        self.insert(self.root, new_value)
 
     def search(self, node, value):
         if node is None:
