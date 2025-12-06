@@ -1,12 +1,12 @@
 from src.binary_search_tree.node import Node
 
 class BinarySearchTree:
-    def __init__(self, data = None):
-       self.root = None if data is None else Node(data)
+    def __init__(self, data = None, node_id = None):
+       self.root = None if data is None else Node(data, node_id)
 
-    def insert(self, node, value):
+    def insert(self, node, value, node_id = None):
         if node is None:
-            return Node(value)
+            return Node(value, node_id)
 
         if value <= node.value:
             node.left = self.insert(node.left, value)
@@ -14,15 +14,36 @@ class BinarySearchTree:
             node.right = self.insert(node.right, value)
         return node
 
-    def search(self, node, value):
+    def search_by_id(self, node, key_id):
         if node is None:
             return None
-        if value == node.value:
+
+        if node.id == key_id:
             return node
+
+        left_node = self.search_by_id(node.left, key_id)
+        right_node = self.search_by_id(node.right, key_id)
+
+        if left_node:
+            return left_node
+        if right_node:
+            return right_node
+        return None
+
+    def search_by_value(self, node, value, is_node_iterable = False):
+        if node is None:
+            return None
+
+        if is_node_iterable:
+            if node.value.__contains__(value):
+                return node
+        elif value == node.value:
+            return node
+
         if value < node.value:
-            return self.search(node.left, value)
+            return self.search_by_value(node.left, value)
         else:
-            return self.search(node.right, value)
+            return self.search_by_value(node.right, value)
 
     def delete(self, node, value):
         if node is None:
@@ -66,10 +87,6 @@ class BinarySearchTree:
         if node is None:
             return -1
         return 1 + max(self.get_height(node.left), self.get_height(node.right))
-
-    def export(self):
-        pass
-        """me na here: von"""
 
     def __iter__(self):
         """In-order traversal iterator"""
