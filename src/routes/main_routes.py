@@ -18,3 +18,8 @@ def profiles_menu():
 @main_bp.route('/binary-tree')
 def binary_tree():
     return render_template('binary-tree.html')
+
+# Temporary route for binary tree.
+@main_bp.route('/binary-search-tree')
+def binary_search_tree():
+    return render_template('binary-search-tree.html')

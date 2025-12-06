@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search Tree</title> />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/contacts.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/general-bst.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/sidebar.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/view-graph.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/view-order.css')}}">
+
+    {% include 'components/fonts.html' %} 
+    <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
+</head>
+
+<body>
+
+  {% include 'components/sidebar.html' %}
+  {% include 'components/header.html' %}
+
+  <div id="overlay" class="overlay"></div>
+
+  <div class="container">
+
+    <!-- SIDEBAR -->
+    {% include 'components/binary-search-tree/sidebar.html' %}
+        
+        <div class="main-content">
+            <div class="red-box">
+
+                <!-- VIEW GRAPH -->
+                <div class="tree-view active" id="treeView">
+                    <div class="tree-container" id="treeContainer"></div>
+                </div>
+
+                <!-- VIEW ORDER -->
+                <div class="order-view" id="orderView">
+                    <div class="order-list" id="orderList"></div>
+                </div>
+                
+            </div>
+
+            <div class="bottom-buttons">
+                <div class="view-button">VIEW ORDER</div>
+                <div class="view-button">VIEW GRAPH</div>
+            </div>
+        </div>
+    </div>
+
+  <script src="{{url_for('static', filename='js/binary-search-tree.js')}}"></script>
+</body>
+</html>
