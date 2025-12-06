@@ -1,12 +1,12 @@
 from src.binary_search_tree.node import Node
 
 class BinarySearchTree:
-    def __init__(self, data = None, node_id = None):
-       self.root = None if data is None else Node(data, node_id)
+    def __init__(self, data = None):
+       self.root = None if data is None else Node(data)
 
-    def insert(self, node, value, node_id = None):
+    def insert(self, node, value):
         if node is None:
-            return Node(value, node_id)
+            return Node(value)
 
         if value <= node.value:
             node.left = self.insert(node.left, value)
@@ -14,36 +14,15 @@ class BinarySearchTree:
             node.right = self.insert(node.right, value)
         return node
 
-    def search_by_id(self, node, key_id):
+    def search(self, node, value):
         if node is None:
             return None
-
-        if node.id == key_id:
+        if value == node.value:
             return node
-
-        left_node = self.search_by_id(node.left, key_id)
-        right_node = self.search_by_id(node.right, key_id)
-
-        if left_node:
-            return left_node
-        if right_node:
-            return right_node
-        return None
-
-    def search_by_value(self, node, value, is_node_iterable = False):
-        if node is None:
-            return None
-
-        if is_node_iterable:
-            if node.value.__contains__(value):
-                return node
-        elif value == node.value:
-            return node
-
         if value < node.value:
-            return self.search_by_value(node.left, value)
+            return self.search(node.left, value)
         else:
-            return self.search_by_value(node.right, value)
+            return self.search(node.right, value)
 
     def delete(self, node, value):
         if node is None:
