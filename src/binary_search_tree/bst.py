@@ -5,6 +5,10 @@ class BinarySearchTree:
        self.root = None if data is None else Node(data)
 
     def insert(self, node, value):
+        if self.root is None:
+            self.root = Node(value)
+            return
+
         if node is None:
             return Node(value)
 
@@ -85,6 +89,12 @@ class BinarySearchTree:
         return list(inorder(self.root))
 
     def __dict__(self):
+        if self.root is None:
+            return {
+                "root": None,
+                "children": []
+            }
+
         def inorder(node):
             if node:
                 yield from inorder(node.left)
@@ -98,3 +108,44 @@ class BinarySearchTree:
             "root": self.root.__dict__(),
             "children": left_root + right_root
         }
+
+    @classmethod
+    def import_dict(cls, inp_dict):
+        if inp_dict["root"] is None:
+            return BinarySearchTree()
+
+        def to_node(node_json):
+            return Node(
+                node_json["value"],
+                left = node_json["left"],
+                right = node_json["right"]
+            )
+
+        root_node = to_node(inp_dict["root"])
+        child_list = inp_dict["children"]
+        node_dict = {}
+
+        temp_bst = BinarySearchTree()
+        for node_json in child_list:
+            node_dict[node_json["value"]] = to_node(node_json)
+
+        BinarySearchTree.__connect_nodes(root_node, node_dict)
+        temp_bst = BinarySearchTree()
+        temp_bst.root = root_node
+
+        return temp_bst
+
+    @classmethod
+    def __connect_nodes(cls, root, inp_dict):
+        if root is None:
+            return
+
+        if root.left:
+            left_node = inp_dict[root.left]
+            root.left = left_node
+            BinarySearchTree.__connect_nodes(left_node, inp_dict)
+
+        if root.right:
+            right_node = inp_dict[root.right]
+            root.right = right_node
+            BinarySearchTree.__connect_nodes(right_node, inp_dict)
