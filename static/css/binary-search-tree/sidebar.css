@@ -22,7 +22,7 @@
     background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
     border: 2px solid #991b1b;
     border-radius: 12px;
-    padding: 40px;
+    padding: 20px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -61,14 +61,18 @@
     font-weight: bold;
     cursor: pointer;
     text-align: left;
-    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #AAAAAA; 
 }
 
 .graph-name {
     text-align: center;
-    margin-top: 20px;
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-bottom: 20px;
     font-weight: bold;
     font-size: 14px;
+    color: #AAAAAA; 
 }
 
 .graph-icon {
