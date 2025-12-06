@@ -73,7 +73,7 @@ class BinarySearchTree:
             return -1
         return 1 + max(self.get_height(node.left), self.get_height(node.right))
 
-    def __iter__(self):
+    def get_ordered(self):
         """In-order traversal iterator"""
 
         def inorder(node):
@@ -82,4 +82,12 @@ class BinarySearchTree:
                 yield node.value
                 yield from inorder(node.right)
 
+        return list(inorder(self.root)
+
+    def __list__(self):
+        def inorder(node):
+            if node:
+                yield from inoder(node.left)
+                yield node.__dict__()
+                yield from inorder(node.right)
         return iter(list(inorder(self.root)))
