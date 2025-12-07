@@ -22,7 +22,7 @@ class BstDB:
         return self.__data
 
 class BstFolderDB:
-    def __init__(self, folder_path: str: fetch_data: bool = True):
+    def __init__(self, folder_path: str, fetch_data: bool = True):
         if folder_path[-1] == '/':
             folder_path = folder_path[:-1]
 
