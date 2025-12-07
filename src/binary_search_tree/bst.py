@@ -8,8 +8,9 @@ class BinarySearchTree:
         if self.root is None:
             self.root = Node(value)
             return
-
+        print("TEST")
         if node is None:
+            print("EMPTY")
             return Node(value)
 
         if node.value == value:

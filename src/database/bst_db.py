@@ -5,18 +5,21 @@ import os
 class BstDB:
     def __init__(self, path: str, fetch_data: bool = True):
         self.path = path
-        self.__data: BinarySearchTree | None = self.fetch() if fetch_data else None
+        self.__data: BinarySearchTree | None = None
+
+        if fetch_data:
+            self.fetch()
 
     def fetch(self):
         temp_dict = {}
         with open(self.path, 'r') as file:
-            temp_dict = json.load(self.path)
+            temp_dict = json.load(file)
         self.__data = BinarySearchTree.import_dict(temp_dict)
 
     def upload(self):
         with open(self.path, 'w') as file:
-            temp_dict = self.data.__dict__() if self.data else None
-            json.dump(temp_dict, indent = 4)
+            temp_dict = self.__data.__dict__() if self.__data else None
+            json.dump(temp_dict, file, indent = 4)
 
     def get(self) -> dict:
         return self.__data
@@ -27,7 +30,10 @@ class BstFolderDB:
             folder_path = folder_path[:-1]
 
         self.folder_path = folder_path
-        self.__data: dict[str, BstDB] | None = self.fetch_all() if fetch_data else None
+        self.__data: dict[str, BstDB] | None = {}
+
+        if fetch_data:
+            self.fetch_all()
 
     def insert(self, name):
         if name in self.__data:
@@ -47,10 +53,10 @@ class BstFolderDB:
     def fetch_all(self):
         with os.scandir(self.folder_path) as entries:
             for entry in entries:
-                if entry.is_file() and os.path.splitext(entry.name)[1] == 'json':
+                if entry.is_file() and entry.name[entry.name.find('.') + 1:] == 'json':
                     #entry.name contains the file ext .json already
-                    self.__data[entry.name] = BstDB(self.abs_path(entry.name))
-
+                    self.__data[entry.name[:entry.name.find('.')]] = BstDB(self.abs_path(entry.name))
+                
     def upload(self, file: str):
         if file in self.__data:
             self.__data[file].upload()
