@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from src.binary_search_tree.bst import BinarySearchTree
 from src.database.bst_db import BstFolderDB
+from src.routes.bst_route import bst_out
 
 bst_node_bp = Blueprint('node', __name__)
 
