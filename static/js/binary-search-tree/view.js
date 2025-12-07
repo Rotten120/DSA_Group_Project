@@ -1,3 +1,6 @@
+import { getGraph } from '/static/api-js/bst-api.js';
+import { getCurrentGraph, initializeSidebar, setGraphChangeCallback } from './side-bar-bst.js';
+
 let treeData = null;
 let sortedData = null;
 
@@ -94,7 +97,7 @@ function drawTree() {
     const graph = getCurrentGraph();
     
     if (!graph) {
-        container.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-size: 18px;"><div style="font-size: 48px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div><div>No graphs available</div><div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "CREATE NEW GRAPH" to get started</div></div>';
+        container.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-size: 18px;"><div style="font-size: 48px; margin-top: 100px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div><div>No graphs available</div><div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "CREATE NEW GRAPH" to get started</div></div>';
         return;
     }
     
@@ -206,7 +209,7 @@ async function drawSortedList() {
     const graph = getCurrentGraph();
     
     if (!graph) {
-        listContainer.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-size: 18px;"><div style="font-size: 48px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div><div>No graphs available</div><div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "CREATE NEW GRAPH" to get started</div></div>';
+        listContainer.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-size: 18px;"><div style="font-size: 48px; margin-top: 100px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div><div>No graphs available</div><div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "CREATE NEW GRAPH" to get started</div></div>';
         return;
     }
     
@@ -253,6 +256,7 @@ async function drawSortedList() {
 }
 
 async function onGraphChanged() {
+    console.log('Graph changed, reloading data...');
     await initializeTreeData();
     
     const treeView = document.getElementById('treeView');
@@ -309,17 +313,13 @@ function initializeTreeView() {
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('DOM Content Loaded - Initializing BST Application');
     
-    if (typeof initializeSidebar === 'function') {
-        initializeSidebar();
-    } else {
-        console.error('side-bar-bst.js not loaded! Please include side-bar-bst.js before view.js');
-        return;
-    }
+    setGraphChangeCallback(onGraphChanged);
+    
+    initializeSidebar();
     
     const loaded = await initializeTreeData();
     if (!loaded) {
         console.error('Failed to load tree data from backend');
-        return;
     }
     
     initializeTreeView();
