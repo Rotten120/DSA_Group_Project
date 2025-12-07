@@ -34,6 +34,17 @@
     color: white;
 }
 
+#noSavedGraph {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 120px;
+    padding: 20px 0;
+}
+
 .name-organizer-top {
     display: flex;
     justify-content: space-between;
@@ -85,8 +96,6 @@
     gap: 4px;
     padding: 8px;
     margin-bottom: 15px;
-    margin-top: auto; 
-    margin-bottom: auto;
 }
 
 .graph-icon-cell {
@@ -99,10 +108,7 @@
     font-weight: bold;
     font-size: 14px;
     letter-spacing: 1px;
-    margin-bottom: auto;
-}
-
-/*Node List*/ 
+} 
 
 #node-listOrganizer_OutsideBox {
     width: 100%;
@@ -117,6 +123,7 @@
     margin-top: 15px;
     margin-bottom: 5px;
 }
+
 #node-listOrganizer_InsideBox {
     width: 100%;
     height: 100%;
@@ -125,9 +132,10 @@
     flex-direction: column;
 }
 
-#nodee-listOrganizer_InsideBox .name-organizer-list {
+#node-listOrganizer_InsideBox .name-organizer-list {
     flex-grow: 1;
 }
+
 #node-listOrganizer_InsideBox .graph-name {
     color: #AAAAAA;
     margin-top: 20px;
@@ -142,6 +150,7 @@
     gap: 15px;
     color: white;
 }
+
 .graph-list-title {
     color: white;
     font-size: 18px;
@@ -155,12 +164,21 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: left;
+    align-items: center;
     font-size: 16px;
     color: #AAAAAA;
     cursor: pointer;
+    transition: color 0.2s;
 }
 
+.graph-list-item:hover {
+    color: white;
+}
+
+.graph-list-item.active {
+    color: white;
+    font-weight: bold;
+}
 
 .create-button-container {
     display: flex;
