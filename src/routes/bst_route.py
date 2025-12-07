@@ -40,21 +40,17 @@ def delete_node(graph_name: str, value: str):
     graph.delete(graph.root, value)
     return get_bst_json(graph_name, True)
 
-@bst_bp.route('/graph/fetch/ordered/<str: graph_name>', methods=["GET"])
-def get_inorder_traversal(graph_name: str):
-    global bst_out
-    return jsonify(bst_out.get(graph_name).get_ordered())
-
 @bst_bp.route('/graph/fetch/<str: graph_name>', methods=["GET"])
 def get_bst_json(graph_name: str, is_updated: bool = False):
     global bst_out
     graph = bst_out.get(graph_name)
 
     dict_out = {
-        "value": list(graph),
+        "nodes": graph.__dict__(),
         "min": graph.get_min(graph.root),
         "max": graph.get_max(graph.root),
-        "height": graph.get_height(graph.root)
+        "height": graph.get_height(graph.root),
+        "order": graph.get_ordered()
     }
     
     if is_updated:
@@ -70,10 +66,11 @@ def get_bst(is_updated: bool = False):
     for graph_name in graphs:
         temp = graphs[graph_name].get()
         graphs_out[graph_name] = {
-            "value": list(temp),
+            "nodes": temp.__dict__(),
             "min": temp.get_min(temp.root),
             "max": temp.get_max(temp.root),
-            "height": temp.get_height(temp.root)
+            "height": temp.get_height(temp.root),
+            "order:" temp.get_ordered()
         }
 
     if is_updated:
@@ -91,7 +88,7 @@ def insert_bst(graph_name: str):
 def delete_bst(graph_name: str):
     global bst_out
 
-    bst_out.dete(graph_name)
+    bst_out.delete(graph_name)
     return get_bst(is_updated = True)
 
 @bst_bp.route('/graph/rename/<str: old_name>', methods=["PUT", "POST"])
