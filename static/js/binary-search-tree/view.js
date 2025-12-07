@@ -1,87 +1,3 @@
-// ============================================
-// TEMPORARY MOCK BACKEND API (Replace with real backend later)
-// ============================================
-
-const MockBackendAPI = {
-    // Simulate backend building BST and returning tree structure
-    async buildBST(names) {
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-        // Handle empty array
-        if (!names || names.length === 0) {
-            return {
-                success: true,
-                tree: null,
-                message: 'Empty graph'
-            };
-        }
-        
-        // Backend would build the tree and return the structure
-        const tree = this._buildTreeStructure(names);
-        return {
-            success: true,
-            tree: tree
-        };
-    },
-
-    // Simulate backend returning sorted order
-    async getSortedOrder(names) {
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 50));
-        
-        // Handle empty array
-        if (!names || names.length === 0) {
-            return {
-                success: true,
-                sorted: [],
-                message: 'Empty graph'
-            };
-        }
-        
-        // Backend would return sorted names
-        const sorted = [...names].sort((a, b) => 
-            a.toLowerCase().localeCompare(b.toLowerCase())
-        );
-        return {
-            success: true,
-            sorted: sorted
-        };
-    },
-
-    // Helper: Build tree structure (this logic would be in backend)
-    _buildTreeStructure(names) {
-        if (!names || names.length === 0) return null;
-
-        class TreeNode {
-            constructor(name) {
-                this.name = name;
-                this.left = null;
-                this.right = null;
-            }
-        }
-
-        let root = null;
-
-        const insert = (node, name) => {
-            if (!node) return new TreeNode(name);
-            
-            if (name.toLowerCase() < node.name.toLowerCase()) {
-                node.left = insert(node.left, name);
-            } else {
-                node.right = insert(node.right, name);
-            }
-            return node;
-        };
-
-        names.forEach(name => {
-            root = insert(root, name);
-        });
-
-        return root;
-    }
-};
-
 let treeData = null;
 let sortedData = null;
 
@@ -89,47 +5,77 @@ async function initializeTreeData() {
     try {
         const graph = getCurrentGraph();
         
-        // TODO: Replace with real backend API call
-        // const response = await fetch('/api/bst/build', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ names: graph.names })
-        // });
-        // const data = await response.json();
+        if (!graph) {
+            console.log('No graph selected');
+            return false;
+        }
         
-        const data = await MockBackendAPI.buildBST(graph.names);
+        const data = await getGraph(graph.name);
         
-        if (data.success) {
-            treeData = data.tree;
-            console.log('Tree data loaded from backend:', data.message || 'Success');
+        if (data && data.nodes) {
+            treeData = convertToTreeStructure(data.nodes);
+            sortedData = data.order || [];
+            console.log('Tree data loaded from backend');
             return true;
         }
-        return false;
+        
+        treeData = null;
+        sortedData = [];
+        return true;
     } catch (error) {
         console.error('Error loading tree data:', error);
         return false;
     }
 }
 
+function convertToTreeStructure(nodes) {
+    if (!nodes || !nodes.root) {
+        return null;
+    }
+    
+    const nodeMap = new Map();
+    
+    nodeMap.set(nodes.root.value, {
+        name: nodes.root.value,
+        left: nodes.root.left !== null ? nodes.root.left : null,
+        right: nodes.root.right !== null ? nodes.root.right : null
+    });
+    
+    if (nodes.children && nodes.children.length > 0) {
+        nodes.children.forEach(child => {
+            nodeMap.set(child.value, {
+                name: child.value,
+                left: child.left !== null ? child.left : null,
+                right: child.right !== null ? child.right : null
+            });
+        });
+    }
+    
+    function buildNode(value) {
+        if (value === null) return null;
+        
+        const nodeData = nodeMap.get(value);
+        if (!nodeData) return null;
+        
+        return {
+            name: nodeData.name,
+            left: buildNode(nodeData.left),
+            right: buildNode(nodeData.right)
+        };
+    }
+    
+    return buildNode(nodes.root.value);
+}
+
 async function getSortedNames() {
     try {
         const graph = getCurrentGraph();
         
-        // TODO: Replace with real backend API call
-        // const response = await fetch('/api/bst/sorted', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ names: graph.names })
-        // });
-        // const data = await response.json();
-        
-        const data = await MockBackendAPI.getSortedOrder(graph.names);
-        
-        if (data.success) {
-            sortedData = data.sorted;
-            return sortedData;
+        if (!graph) {
+            return [];
         }
-        return [];
+        
+        return sortedData || [];
     } catch (error) {
         console.error('Error loading sorted data:', error);
         return [];
@@ -147,9 +93,14 @@ function drawTree() {
     
     const graph = getCurrentGraph();
     
+    if (!graph) {
+        container.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-size: 18px;"><div style="font-size: 48px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div><div>No graphs available</div><div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "CREATE NEW GRAPH" to get started</div></div>';
+        return;
+    }
+    
     const titleEl = document.createElement('div');
     titleEl.className = 'graph-title';
-    titleEl.textContent = graph.title;
+    titleEl.textContent = graph.name;
     titleEl.style.cssText = `
         color: white;
         font-size: 24px;
@@ -253,9 +204,15 @@ async function drawSortedList() {
     listContainer.innerHTML = '';
 
     const graph = getCurrentGraph();
+    
+    if (!graph) {
+        listContainer.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-size: 18px;"><div style="font-size: 48px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div><div>No graphs available</div><div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "CREATE NEW GRAPH" to get started</div></div>';
+        return;
+    }
+    
     const titleEl = document.createElement('div');
     titleEl.className = 'graph-title';
-    titleEl.textContent = graph.title;
+    titleEl.textContent = graph.name;
     titleEl.style.cssText = `
         display: block;
         color: white;
@@ -277,7 +234,7 @@ async function drawSortedList() {
         const emptyMessage = document.createElement('div');
         emptyMessage.style.cssText = 'color: white; text-align: center; padding: 50px; font-size: 18px; opacity: 0.7;';
         emptyMessage.innerHTML = `
-            <div style="font-size: 48px; margin-bottom: 20px;">📝</div>
+            <div style="font-size: 48px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div>
             <div>This graph is empty</div>
             <div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "EDIT GRAPH" to add names</div>
         `;

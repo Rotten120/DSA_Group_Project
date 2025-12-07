@@ -1,285 +1,331 @@
-let allGraphs = [
-    { id: 1, title: "My Name Organizer", names: ["Angel", "Laika", "Clarito", "The", "Best", "Skye", "User"] },
-    { id: 2, title: "graph2", names: ["Alice", "Bob", "Charlie"] },
-    { id: 3, title: "graph3", names: ["Zara", "Mike", "Nina"] }
-];
-let currentGraphId = 1;
-let editMode = false;
+let treeData = null;
+let sortedData = null;
 
-function getCurrentGraph() {
-    if (!allGraphs || allGraphs.length === 0) {
+async function initializeTreeData() {
+    try {
+        const graph = getCurrentGraph();
+        
+        if (!graph) {
+            console.log('No graph selected');
+            return false;
+        }
+        
+        const data = await getGraph(graph.name);
+        
+        if (data && data.nodes) {
+            treeData = convertToTreeStructure(data.nodes);
+            sortedData = data.order || [];
+            console.log('Tree data loaded from backend');
+            return true;
+        }
+        
+        treeData = null;
+        sortedData = [];
+        return true;
+    } catch (error) {
+        console.error('Error loading tree data:', error);
+        return false;
+    }
+}
+
+function convertToTreeStructure(nodes) {
+    if (!nodes || !nodes.root) {
         return null;
     }
-    return allGraphs.find(g => g.id === currentGraphId);
+    
+    const nodeMap = new Map();
+    
+    nodeMap.set(nodes.root.value, {
+        name: nodes.root.value,
+        left: nodes.root.left !== null ? nodes.root.left : null,
+        right: nodes.root.right !== null ? nodes.root.right : null
+    });
+    
+    if (nodes.children && nodes.children.length > 0) {
+        nodes.children.forEach(child => {
+            nodeMap.set(child.value, {
+                name: child.value,
+                left: child.left !== null ? child.left : null,
+                right: child.right !== null ? child.right : null
+            });
+        });
+    }
+    
+    function buildNode(value) {
+        if (value === null) return null;
+        
+        const nodeData = nodeMap.get(value);
+        if (!nodeData) return null;
+        
+        return {
+            name: nodeData.name,
+            left: buildNode(nodeData.left),
+            right: buildNode(nodeData.right)
+        };
+    }
+    
+    return buildNode(nodes.root.value);
 }
 
-function updateGraphList() {
-    const graphListContainer = document.getElementById('graph-list-organizer');
-    const noSavedGraph = document.getElementById('noSavedGraph');
-    
-    if (!graphListContainer) return;
-
-    if (!allGraphs || allGraphs.length === 0) {
-        graphListContainer.style.display = 'none';
-        if (noSavedGraph) {
-            noSavedGraph.style.display = 'flex';
+async function getSortedNames() {
+    try {
+        const graph = getCurrentGraph();
+        
+        if (!graph) {
+            return [];
         }
+        
+        return sortedData || [];
+    } catch (error) {
+        console.error('Error loading sorted data:', error);
+        return [];
+    }
+}
+
+function drawTree() {
+    const container = document.getElementById('treeContainer');
+    if (!container) {
+        console.error('Tree container not found');
+        return;
+    }
+    
+    container.innerHTML = '';
+    
+    const graph = getCurrentGraph();
+    
+    if (!graph) {
+        container.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-size: 18px;"><div style="font-size: 48px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div><div>No graphs available</div><div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "CREATE NEW GRAPH" to get started</div></div>';
+        return;
+    }
+    
+    const titleEl = document.createElement('div');
+    titleEl.className = 'graph-title';
+    titleEl.textContent = graph.name;
+    titleEl.style.cssText = `
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        font-style: italic;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px 30px;
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 800px;
+        box-sizing: border-box;
+    `;
+    container.appendChild(titleEl);
+    
+    if (!treeData) {
+        console.log('Empty graph - no tree to display');
+        const emptyMessage = document.createElement('div');
+        emptyMessage.style.cssText = 'color: white; text-align: center; padding: 50px; font-size: 18px; opacity: 0.7;';
+        emptyMessage.innerHTML = `
+            <div style="font-size: 48px; margin-top: 50px; margin-bottom: 20px;"><i class="fa-solid fa-file"></i></div>
+            <div>This graph is empty</div>
+            <div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "EDIT GRAPH" to add names</div>
+        `;
+        container.appendChild(emptyMessage);
         return;
     }
 
-    graphListContainer.style.display = 'flex';
-    if (noSavedGraph) {
-        noSavedGraph.style.display = 'none';
+    const levelGap = 100;
+    const startX = 400;
+    const startY = 130; 
+    const initialOffset = 400;
+    const positions = new Map();
+
+    function calculatePositions(node, x, y, level, xOffset) {
+        if (!node) return;
+        positions.set(node, { x, y });
+        const gap = xOffset / 2;
+        if (node.left) {
+            calculatePositions(node.left, x - gap, y + levelGap, level + 1, gap);
+        }
+        if (node.right) {
+            calculatePositions(node.right, x + gap, y + levelGap, level + 1, gap);
+        }
     }
 
-    const titleDiv = graphListContainer.querySelector('.graph-list-title');
-    graphListContainer.innerHTML = '';
+    calculatePositions(treeData, startX, startY, 0, initialOffset);
+
+    positions.forEach((pos, node) => {
+        if (node.left) {
+            const childPos = positions.get(node.left);
+            drawLine(pos.x, pos.y, childPos.x, childPos.y, container);
+        }
+        if (node.right) {
+            const childPos = positions.get(node.right);
+            drawLine(pos.x, pos.y, childPos.x, childPos.y, container);
+        }
+    });
+
+    positions.forEach((pos, node) => {
+        const nodeEl = document.createElement('div');
+        nodeEl.className = 'tree-node';
+        nodeEl.textContent = node.name;
+        nodeEl.style.left = pos.x + 'px';
+        nodeEl.style.top = pos.y + 'px';
+        container.appendChild(nodeEl);
+    });
+
+    console.log('Tree drawn with', positions.size, 'nodes');
+}
+
+function drawLine(x1, y1, x2, y2, container) {
+    const line = document.createElement('div');
+    line.className = 'tree-line';
     
-    if (titleDiv) {
-        graphListContainer.appendChild(titleDiv);
-    } else {
-        const newTitle = document.createElement('div');
-        newTitle.className = 'graph-list-title';
-        newTitle.textContent = 'All Graphs';
-        graphListContainer.appendChild(newTitle);
+    const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+    
+    line.style.width = length + 'px';
+    line.style.left = x1 + 'px';
+    line.style.top = y1 + 'px';
+    line.style.transform = `rotate(${angle}deg)`;
+    
+    container.appendChild(line);
+}
+
+async function drawSortedList() {
+    const listContainer = document.getElementById('orderList');
+    
+    if (!listContainer) {
+        console.error('Order list container not found');
+        return;
+    }
+    
+    listContainer.innerHTML = '<div style="color: white; text-align: center; padding: 20px;">Loading...</div>';
+
+    const sortedNames = await getSortedNames();
+    
+    console.log('Drawing sorted list with names:', sortedNames);
+    listContainer.innerHTML = '';
+
+    const graph = getCurrentGraph();
+    
+    if (!graph) {
+        listContainer.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-size: 18px;"><div style="font-size: 48px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div><div>No graphs available</div><div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "CREATE NEW GRAPH" to get started</div></div>';
+        return;
+    }
+    
+    const titleEl = document.createElement('div');
+    titleEl.className = 'graph-title';
+    titleEl.textContent = graph.name;
+    titleEl.style.cssText = `
+        display: block;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        font-style: italic;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px 30px;
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    `;
+    listContainer.appendChild(titleEl);
+
+    if (!sortedNames || sortedNames.length === 0) {
+        console.log('Empty graph - no order to display');
+        const emptyMessage = document.createElement('div');
+        emptyMessage.style.cssText = 'color: white; text-align: center; padding: 50px; font-size: 18px; opacity: 0.7;';
+        emptyMessage.innerHTML = `
+            <div style="font-size: 48px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div>
+            <div>This graph is empty</div>
+            <div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "EDIT GRAPH" to add names</div>
+        `;
+        listContainer.appendChild(emptyMessage);
+        return;
     }
 
-    allGraphs.forEach(graph => {
+    sortedNames.forEach(name => {
         const item = document.createElement('div');
-        item.className = 'graph-list-item';
-        if (graph.id === currentGraphId) {
-            item.classList.add('active');
-        }
-        
-        const titleSpan = document.createElement('span');
-        titleSpan.textContent = graph.title;
-        titleSpan.style.cursor = 'pointer';
-        titleSpan.style.flex = '1';
-        
-        const deleteBtn = document.createElement('span');
-        deleteBtn.textContent = '×';
-        deleteBtn.className = 'delete-graph-btn';
-        deleteBtn.style.cssText = 'cursor: pointer; font-size: 20px; margin-left: 10px; padding: 0 5px; opacity: 0.7; transition: opacity 0.2s;';
-        deleteBtn.title = 'Delete graph';
-        
-        deleteBtn.addEventListener('mouseenter', () => {
-            deleteBtn.style.opacity = '1';
-        });
-        
-        deleteBtn.addEventListener('mouseleave', () => {
-            deleteBtn.style.opacity = '0.7';
-        });
-        
-        deleteBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            deleteGraph(graph.id);
-        });
-        
-        item.appendChild(titleSpan);
-        item.appendChild(deleteBtn);
-        item.style.cursor = 'pointer';
-        item.style.display = 'flex';
-        item.style.alignItems = 'center';
-        item.style.justifyContent = 'space-between';
-        
-        titleSpan.addEventListener('click', () => {
-            selectGraph(graph.id);
-        });
-        
-        graphListContainer.appendChild(item);
+        item.className = 'order-item';
+        item.textContent = name;
+        listContainer.appendChild(item);
     });
+
+    console.log('Sorted list drawn with', sortedNames.length, 'items');
 }
 
-async function selectGraph(graphId) {
-    currentGraphId = graphId;
+async function onGraphChanged() {
+    await initializeTreeData();
     
-    if (typeof onGraphChanged === 'function') {
-        await onGraphChanged();
-    }
-    
-    updateGraphList();
-}
-
-function showEditMode() {
-    editMode = true;
-    const graph = getCurrentGraph();
-    
-    document.getElementById('graph-list-organizer').style.display = 'none';
-    document.getElementById('node-listOrganizer').style.display = 'flex';
-    const noSavedGraph = document.getElementById('noSavedGraph');
-    if (noSavedGraph) {
-        noSavedGraph.style.display = 'none';
-    }
-    
-    const nameList = document.getElementById('nameList');
-    const graphTitle = document.getElementById('graphTitle');
-    
-    nameList.innerHTML = '';
-    if (graph.names && graph.names.length > 0) {
-        graph.names.forEach((name, index) => {
-            addNameToList(name, index);
-        });
+    const treeView = document.getElementById('treeView');
+    if (treeView && treeView.classList.contains('active')) {
+        drawTree();
     } else {
-        console.log('Empty graph - no names to display');
+        await drawSortedList();
     }
-    
-    graphTitle.textContent = graph.title;
 }
 
-function addNameToList(name = '', index = null) {
-    const nameList = document.getElementById('nameList');
-    const item = document.createElement('div');
-    item.className = 'list-item';
-    item.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 5px;';
+function initializeTreeView() {
+    console.log('Initializing tree view...');
     
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = name;
-    input.placeholder = 'Enter name...';
-    input.style.cssText = 'background: transparent; border: none; color: white; flex: 1; outline: none;';
-    input.dataset.index = index !== null ? index : nameList.children.length;
-    
-    const deleteBtn = document.createElement('span');
-    deleteBtn.textContent = '×';
-    deleteBtn.style.cssText = 'cursor: pointer; font-size: 20px; color: white; margin-left: 10px;';
-    deleteBtn.addEventListener('click', () => {
-        item.remove();
+    const buttons = document.querySelectorAll('.view-button');
+    const treeView = document.getElementById('treeView');
+    const orderView = document.getElementById('orderView');
+
+    if (!buttons.length || !treeView || !orderView) {
+        console.error('Required elements not found');
+        return;
+    }
+
+    treeView.classList.add('active');
+    orderView.classList.remove('active');
+
+    buttons.forEach((button) => {
+        button.addEventListener('click', function() {
+            console.log('View button clicked:', this.textContent.trim());
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            this.classList.add('active');
+
+            const buttonText = this.textContent.trim().toLowerCase();
+            
+            if (buttonText.includes('order')) {
+                console.log('Switching to ORDER view');
+                treeView.classList.remove('active');
+                orderView.classList.add('active');
+                drawSortedList();
+            } 
+            else if (buttonText.includes('graph')) {
+                console.log('Switching to GRAPH view');
+                orderView.classList.remove('active');
+                treeView.classList.add('active');
+                drawTree();
+            }
+        });
     });
-    
-    item.appendChild(input);
-    item.appendChild(deleteBtn);
-    nameList.appendChild(item);
-    
-    if (!name) {
-        input.focus();
-    }
+
+    console.log('Tree view initialized successfully');
 }
 
-function hideEditMode() {
-    editMode = false;
-    document.getElementById('node-listOrganizer').style.display = 'none';
-    document.getElementById('graph-list-organizer').style.display = 'flex';
-}
-
-async function saveEditedGraph() {
-    const nameList = document.getElementById('nameList');
-    const inputs = nameList.querySelectorAll('input');
-    const newNames = Array.from(inputs)
-        .map(input => input.value.trim())
-        .filter(name => name.length > 0);
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('DOM Content Loaded - Initializing BST Application');
     
-    const graphTitle = document.getElementById('graphTitle');
-    const newTitle = graphTitle.textContent.trim() || 'My Name Organizer';
-    
-    const graph = getCurrentGraph();
-    graph.names = newNames;
-    graph.title = newTitle;
-    
-    // TODO: Replace with real backend API call to save graph
-    // const response = await fetch('/api/graphs/update', {
-    //     method: 'PUT',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ id: graph.id, title: newTitle, names: newNames })
-    // });
-    
-    hideEditMode();
-    updateGraphList();
-    
-    if (typeof onGraphChanged === 'function') {
-        await onGraphChanged();
-    }
-    
-    console.log('Graph saved:', graph);
-}
-
-function createNewGraph() {
-    const newId = Math.max(...allGraphs.map(g => g.id)) + 1;
-    const newGraph = {
-        id: newId,
-        title: `Graph ${newId}`,
-        names: []
-    };
-    
-    // TODO: Replace with real backend API call to create graph
-    // const response = await fetch('/api/graphs/create', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(newGraph)
-    // });
-    
-    allGraphs.push(newGraph);
-    selectGraph(newId);
-    showEditMode();
-}
-
-async function deleteGraph(graphId) {
-    const graphToDelete = allGraphs.find(g => g.id === graphId);
-    if (!confirm(`Are you sure you want to delete "${graphToDelete.title}"?`)) {
+    if (typeof initializeSidebar === 'function') {
+        initializeSidebar();
+    } else {
+        console.error('side-bar-bst.js not loaded! Please include side-bar-bst.js before view.js');
         return;
     }
     
-    // TODO: Replace with real backend API call to delete graph
-    // const response = await fetch(`/api/graphs/${graphId}`, {
-    //     method: 'DELETE',
-    //     headers: { 'Content-Type': 'application/json' }
-    // });
-    
-    allGraphs = allGraphs.filter(g => g.id !== graphId);
-    
-    if (currentGraphId === graphId && allGraphs.length > 0) {
-        currentGraphId = allGraphs[0].id;
-        
-        if (typeof onGraphChanged === 'function') {
-            await onGraphChanged();
-        }
-    } else if (allGraphs.length === 0) {
-        currentGraphId = null;
-        const treeContainer = document.getElementById('treeContainer');
-        const orderList = document.getElementById('orderList');
-        
-        if (treeContainer) {
-            treeContainer.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-size: 18px;"><div style="font-size: 48px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div><div>No graphs available</div><div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "CREATE NEW GRAPH" to get started</div></div>';
-        }
-        
-        if (orderList) {
-            orderList.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-size: 18px;"><div style="font-size: 48px; margin-bottom: 20px;"><i class="fa-solid fa-chart-area"></i></div><div>No graphs available</div><div style="font-size: 14px; margin-top: 10px; opacity: 0.6;">Click "CREATE NEW GRAPH" to get started</div></div>';
-        }
+    const loaded = await initializeTreeData();
+    if (!loaded) {
+        console.error('Failed to load tree data from backend');
+        return;
     }
     
-    updateGraphList();
+    initializeTreeView();
     
-    console.log(`Graph ${graphId} deleted successfully`);
-}
-
-function initializeSidebar() {
-    console.log('Initializing sidebar...');
+    console.log('Drawing initial tree');
+    drawTree();
     
-    updateGraphList();
-    
-    const editBtn = document.querySelector('.edit-button');
-    if (editBtn) {
-        editBtn.addEventListener('click', showEditMode);
-    }
-    
-    const cancelBtn = document.querySelector('.cancel-btn');
-    if (cancelBtn) {
-        cancelBtn.addEventListener('click', hideEditMode);
-    }
-    
-    const saveBtn = document.querySelector('.save-btn');
-    if (saveBtn) {
-        saveBtn.addEventListener('click', saveEditedGraph);
-    }
-    
-    const addNameBtn = document.getElementById('addNameBtn');
-    if (addNameBtn) {
-        addNameBtn.addEventListener('click', () => addNameToList());
-    }
-
-    const createBtn = document.querySelector('.create-button');
-    if (createBtn) {
-        createBtn.addEventListener('click', createNewGraph);
-    }
-    
-    console.log('Sidebar initialized successfully');
-}
+    console.log('BST Application initialized successfully');
+});
