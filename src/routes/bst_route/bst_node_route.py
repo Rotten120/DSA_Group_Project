@@ -4,7 +4,7 @@ from src.database.bst_db import BstFolderDB
 
 bst_node_bp = Blueprint('node', __name__)
 
-@bst_bp.route('/node/create/<str: graph_name>', methods=["GET", "POST"])
+@bst_node_bp.route('/create/<string:graph_name>', methods=["GET", "POST"])
 def insert_node(graph_name: str, value: str = None):
     global bst_out
 
@@ -16,7 +16,7 @@ def insert_node(graph_name: str, value: str = None):
         print(err)
     return get_bst_json(graph_name, True)
 
-@bst_bp.route('/node/update/<str: graph_name>', methods=["GET", "PUT"])
+@bst_node_bp.route('/update/<string:graph_name>', methods=["GET", "PUT"])
 def update_node(graph_name: str, old_value: str = None, new_value: str = None):
     global bst_out
 
@@ -28,7 +28,7 @@ def update_node(graph_name: str, old_value: str = None, new_value: str = None):
         print(err)
     return get_bst_json(graph_name, True)
 
-@bst_bp.route('/node/delete/<str: graph_name>', methods=["DELETE"])
+@bst_node_bp.route('/delete/<string:graph_name>', methods=["DELETE"])
 def delete_node(graph_name: str, value: str):
     global bst_out
     graph = bst_out.get(graph_name)
