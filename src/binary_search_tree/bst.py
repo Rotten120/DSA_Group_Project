@@ -1,4 +1,4 @@
-from src.binary_search_tree.node import Node
+from .node import Node
 
 class BinarySearchTree:
     def __init__(self, data = None, val_import = None, val_export = None):
