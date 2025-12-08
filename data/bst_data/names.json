@@ -1,0 +1,19 @@
+{
+    "root": {
+        "value": "5",
+        "left": "3",
+        "right": "7"
+    },
+    "children": [
+        {
+            "value": "3",
+            "left": null,
+            "right": null
+        },
+        {
+            "value": "7",
+            "left": null,
+            "right": null
+        }
+    ]
+}
