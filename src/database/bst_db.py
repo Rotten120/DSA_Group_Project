@@ -18,7 +18,7 @@ class BstDB:
 
     def upload(self):
         with open(self.path, 'w') as file:
-            temp_dict = self.__data.__dict__() if self.__data else None
+            temp_dict = self.__data.export() if self.__data else None
             json.dump(temp_dict, file, indent = 4)
 
     def get(self) -> dict:

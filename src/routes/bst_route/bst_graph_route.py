@@ -13,7 +13,7 @@ def get_bst_json(graph_name: str, is_updated: bool = False):
     graph = bst_out.get(graph_name)
 
     dict_out = {
-        "nodes": graph.__dict__(),
+        "nodes": graph.export(),
         "min": graph.get_min(graph.root).value,
         "max": graph.get_max(graph.root).value,
         "height": graph.get_height(graph.root),
@@ -35,7 +35,7 @@ def get_bst(is_updated: bool = False):
     for graph_name in graphs:
         temp = graphs[graph_name].get()
         graphs_out[graph_name] = {
-            "nodes": temp.__dict__(),
+            "nodes": temp.export(),
             "min": temp.get_min(temp.root).value,
             "max": temp.get_max(temp.root).value,
             "height": temp.get_height(temp.root),

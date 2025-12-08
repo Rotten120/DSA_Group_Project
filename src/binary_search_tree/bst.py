@@ -1,8 +1,10 @@
 from src.binary_search_tree.node import Node
 
 class BinarySearchTree:
-    def __init__(self, data = None):
-       self.root = None if data is None else Node(data)
+    def __init__(self, data = None, value_import_method = None, value_export_method = None):
+        self.root = None if data is None else Node(data)
+        self.val_import = value_import_method
+        self.val_export = value_export_method
 
     def insert(self, node, value):
         if self.root is None:
@@ -88,11 +90,13 @@ class BinarySearchTree:
 
         return list(inorder(self.root))
 
-    def __dict__(self):
+    """ CLASS IMPORT/EXPORT METHODS """
+
+    def export(self):
         def inorder(node):
             if node:
                 yield from inorder(node.left)
-                yield node.__dict__()
+                yield node.export(self.val_export)
                 yield from inorder(node.right)
 
         bst_dict = {"root": None, "children": []}
@@ -102,36 +106,32 @@ class BinarySearchTree:
         left_root = list(inorder(self.root.left))
         right_root = list(inorder(self.root.right))
        
-        bst_dict["root"] = self.root.__dict__()
+        bst_dict["root"] = self.root.export(self.val_export)
         bst_dict["children"] = left_root + right_root
 
         return bst_dict
 
     @classmethod
-    def import_dict(cls, inp_dict):
-        def to_node(inp):
-            return Node(
-                inp["value"],
-                left = inp["left"],
-                right = inp["right"]
-            )
+    def import_dict(cls, inp_dict, val_import = None, val_export = None):
+        temp_bst = BinarySearchTree(
+            value_import_method = val_import,
+            value_export_method = val_export
+        )
 
         if inp_dict["root"] is None:
-            return BinarySearchTree()
+            return temp_bst
 
-        root_node = to_node(inp_dict["root"])
         child_list = inp_dict["children"]
         node_dict = {}
 
-        temp_bst = BinarySearchTree()
         for node_json in child_list:
             value = node_json["value"]
-            node_dict[value] = to_node(node_json)
+            node_dict[value] = Node.import_dict(node_json)
 
-        BinarySearchTree.__connect_nodes(root_node, node_dict)
-        temp_bst = BinarySearchTree()
+        root_node = Node.import_dict(inp_dict["root"], val_import)
         temp_bst.root = root_node
-
+        
+        BinarySearchTree.__connect_nodes(root_node, node_dict)
         return temp_bst
 
     @classmethod
