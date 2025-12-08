@@ -1,10 +1,10 @@
 from src.binary_search_tree.node import Node
 
 class BinarySearchTree:
-    def __init__(self, data = None, value_import_method = None, value_export_method = None):
+    def __init__(self, data = None, val_import = None, val_export = None):
         self.root = None if data is None else Node(data)
-        self.val_import = value_import_method
-        self.val_export = value_export_method
+        self.val_import = val_import
+        self.val_export = val_export
 
     def insert(self, node, value):
         if self.root is None:
@@ -114,8 +114,8 @@ class BinarySearchTree:
     @classmethod
     def import_dict(cls, inp_dict, val_import = None, val_export = None):
         temp_bst = BinarySearchTree(
-            value_import_method = val_import,
-            value_export_method = val_export
+            val_import = val_import,
+            val_export = val_export
         )
 
         if inp_dict["root"] is None:
