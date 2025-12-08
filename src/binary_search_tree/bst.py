@@ -8,9 +8,8 @@ class BinarySearchTree:
         if self.root is None:
             self.root = Node(value)
             return
-        print("TEST")
+
         if node is None:
-            print("EMPTY")
             return Node(value)
 
         if node.value == value:
@@ -90,37 +89,35 @@ class BinarySearchTree:
         return list(inorder(self.root))
 
     def __dict__(self):
-        if self.root is None:
-            return {
-                "root": None,
-                "children": []
-            }
-
         def inorder(node):
             if node:
                 yield from inorder(node.left)
                 yield node.__dict__()
                 yield from inorder(node.right)
 
+        bst_dict = {"root": None, "children": []}
+        if self.root is None:
+            return bst_dict
+
         left_root = list(inorder(self.root.left))
         right_root = list(inorder(self.root.right))
-        
-        return {
-            "root": self.root.__dict__(),
-            "children": left_root + right_root
-        }
+       
+        bst_dict["root"] = self.root.__dict__()
+        bst_dict["children"] = left_root + right_root
+
+        return bst_dict
 
     @classmethod
     def import_dict(cls, inp_dict):
+        def to_node(inp):
+            return Node(
+                inp["value"],
+                left = inp["left"],
+                right = inp["right"]
+            )
+
         if inp_dict["root"] is None:
             return BinarySearchTree()
-
-        def to_node(node_json):
-            return Node(
-                node_json["value"],
-                left = node_json["left"],
-                right = node_json["right"]
-            )
 
         root_node = to_node(inp_dict["root"])
         child_list = inp_dict["children"]
@@ -128,7 +125,8 @@ class BinarySearchTree:
 
         temp_bst = BinarySearchTree()
         for node_json in child_list:
-            node_dict[node_json["value"]] = to_node(node_json)
+            value = node_json["value"]
+            node_dict[value] = to_node(node_json)
 
         BinarySearchTree.__connect_nodes(root_node, node_dict)
         temp_bst = BinarySearchTree()
