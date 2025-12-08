@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from src.queue_deque.dataqueue import Queue
+from src.queue_deque import Queue
 
 queue_bp = Blueprint('queue', __name__)
 queue_out = Queue()

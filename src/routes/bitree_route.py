@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-from src.binary_tree import *
+from src.binary_tree import BinaryTree, Node, Contact 
 import json
 
 bitree_bp = Blueprint('bitree', __name__)
