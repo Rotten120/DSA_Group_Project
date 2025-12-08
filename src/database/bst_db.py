@@ -2,10 +2,29 @@ from src.logic.binary_search_tree import BinarySearchTree
 import json
 import os
 
+"""
+WARNING:
+
+BstFolderDB, BstDB, and BinarySearchTree all
+contains attributed called val_import and val_export
+which are all stored and passed around until they are
+needed for node.value #refer to documentation#
+
+Better if this pain the rear is changed (by: be-dev)
+"""
+
 class BstDB:
-    def __init__(self, path: str, fetch_data: bool = True):
+    def __init__(
+        self,
+        path: str,
+        fetch_data: bool = True,
+        val_import = None,
+        val_export = None
+    ):
         self.path = path
-        self.__data: BinarySearchTree | None = BinarySearchTree()
+        self.__data = BinarySearchTree()
+        self.val_import = val_import
+        self.val_export = val_export
 
         if fetch_data:
             self.fetch()
@@ -14,7 +33,11 @@ class BstDB:
         temp_dict = {}
         with open(self.path, 'r') as file:
             temp_dict = json.load(file)
-        self.__data = BinarySearchTree.import_dict(temp_dict)
+        self.__data = BinarySearchTree.import_dict(
+            temp_dict,
+            val_import = self.val_import,
+            val_export = self.val_export
+        )
 
     def upload(self):
         with open(self.path, 'w') as file:
@@ -24,12 +47,20 @@ class BstDB:
         return self.__data
 
 class BstFolderDB:
-    def __init__(self, folder_path: str, fetch_data: bool = True):
+    def __init__(
+        self,
+        folder_path: str,
+        fetch_data: bool = True,
+        val_import = None,
+        val_export = None
+    ):
         if folder_path[-1] == '/':
             folder_path = folder_path[:-1]
 
         self.folder_path = folder_path
         self.__data: dict[str, BstDB] = {}
+        self.val_import = val_import
+        self.val_export = val_export
 
         if fetch_data:
             self.fetch_all()
@@ -50,11 +81,19 @@ class BstFolderDB:
             self.__data[file].fetch()
 
     def fetch_all(self):
+        def fetch_entry(entry_name):
+            filename = entry_name[:entry_name.find('.')]
+            self.__data[filename] = BstDB(
+                self.abs_path(entry_name),
+                val_import = self.val_import,
+                val_export = self.val_export
+            )
+
         with os.scandir(self.folder_path) as entries:
             for entry in entries:
-                if entry.is_file() and entry.name[entry.name.find('.') + 1:] == 'json':
-                    #entry.name contains the file ext .json already
-                    self.__data[entry.name[:entry.name.find('.')]] = BstDB(self.abs_path(entry.name))
+                ext = entry.name[entry.name.find('.') + 1:]
+                if entry.is_file() and ext == 'json':
+                    fetch_entry(entry.name)
                 
     def upload(self, file: str):
         if file in self.__data:
