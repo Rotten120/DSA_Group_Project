@@ -1,3 +1,6 @@
+import { getCurrentGraph } from './side-bar-bst.js';
+import { getGraph } from '/static/api-js/bst-api.js';
+
 class InfoButton {
     constructor(buttonId, popupId, minValueId, maxValueId, heightId) {
         this.infoButton = null;
@@ -110,7 +113,6 @@ let infoButtonTop = null;
 let infoButtonBottom = null;
 
 function initInfoButtons() {
-
     infoButtonTop = new InfoButton(
         'infoButtonTop',
         'infoPopupTop',
@@ -132,6 +134,82 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initInfoButtons);
 } else {
     initInfoButtons();
+}
+
+function convertToTreeStructure(nodes) {
+    if (!nodes || !nodes.root) {
+        return null;
+    }
+    
+    const nodeMap = new Map();
+    
+    nodeMap.set(nodes.root.value, {
+        name: nodes.root.value,
+        left: nodes.root.left !== null ? nodes.root.left : null,
+        right: nodes.root.right !== null ? nodes.root.right : null
+    });
+    
+    if (nodes.children && nodes.children.length > 0) {
+        nodes.children.forEach(child => {
+            nodeMap.set(child.value, {
+                name: child.value,
+                left: child.left !== null ? child.left : null,
+                right: child.right !== null ? child.right : null
+            });
+        });
+    }
+    
+    function buildNode(value) {
+        if (value === null) return null;
+        
+        const nodeData = nodeMap.get(value);
+        if (!nodeData) return null;
+        
+        return {
+            name: nodeData.name,
+            left: buildNode(nodeData.left),
+            right: buildNode(nodeData.right)
+        };
+    }
+    
+    return buildNode(nodes.root.value);
+}
+
+async function calculateTreeStatsFromCurrentGraph() {
+    try {
+        const graph = getCurrentGraph();
+        
+        if (!graph) {
+            console.log('No graph selected');
+            return {
+                minValue: 'N/A',
+                maxValue: 'N/A',
+                height: 0
+            };
+        }
+        
+        const data = await getGraph(graph.name);
+        
+        if (!data || !data.nodes || !data.order || data.order.length === 0) {
+            return {
+                minValue: 'N/A',
+                maxValue: 'N/A',
+                height: 0
+            };
+        }
+
+        const treeData = convertToTreeStructure(data.nodes);
+        const sortedData = data.order;
+        
+        return calculateTreeStats(treeData, sortedData);
+    } catch (error) {
+        console.error('Error calculating tree stats:', error);
+        return {
+            minValue: 'N/A',
+            maxValue: 'N/A',
+            height: 0
+        };
+    }
 }
 
 function calculateTreeStats(treeData, sortedData) {
@@ -162,8 +240,14 @@ function calculateTreeStats(treeData, sortedData) {
     };
 }
 
-function updateAllInfoButtons(treeData, sortedData) {
-    const stats = calculateTreeStats(treeData, sortedData);
+async function updateAllInfoButtons(treeData = null, sortedData = null) {
+    let stats;
+
+    if (treeData === null || sortedData === null) {
+        stats = await calculateTreeStatsFromCurrentGraph();
+    } else {
+        stats = calculateTreeStats(treeData, sortedData);
+    }
     
     if (infoButtonTop) {
         infoButtonTop.setTreeInfo(stats.minValue, stats.maxValue, stats.height);
@@ -175,6 +259,23 @@ function updateAllInfoButtons(treeData, sortedData) {
     console.log('Info buttons updated:', stats);
 }
 
+export { 
+    InfoButton, 
+    updateAllInfoButtons, 
+    calculateTreeStats,
+    calculateTreeStatsFromCurrentGraph 
+};
+
+if (typeof window !== 'undefined') {
+    window.updateAllInfoButtons = updateAllInfoButtons;
+    window.calculateTreeStatsFromCurrentGraph = calculateTreeStatsFromCurrentGraph;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { InfoButton, updateAllInfoButtons, calculateTreeStats };
+    module.exports = { 
+        InfoButton, 
+        updateAllInfoButtons, 
+        calculateTreeStats,
+        calculateTreeStatsFromCurrentGraph 
+    };
 }

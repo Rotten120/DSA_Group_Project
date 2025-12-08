@@ -1,5 +1,6 @@
 import { getGraph } from '/static/api-js/bst-api.js';
 import { getCurrentGraph, initializeSidebar, setGraphChangeCallback } from './side-bar-bst.js';
+import { updateAllInfoButtons } from './information.js';
 
 let treeData = null;
 let sortedData = null;
@@ -10,7 +11,7 @@ async function initializeTreeData() {
         
         if (!graph) {
             console.log('No graph selected');
-             updateAllInfoButtons(null, []);
+            updateAllInfoButtons(null, []);
             return false;
         }
         
@@ -26,9 +27,11 @@ async function initializeTreeData() {
         
         treeData = null;
         sortedData = [];
+        updateAllInfoButtons(null, []);
         return true;
     } catch (error) {
         console.error('Error loading tree data:', error);
+        updateAllInfoButtons(null, []);
         return false;
     }
 }
