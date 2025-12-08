@@ -11,11 +11,13 @@ def get_bst_json(graph_name: str, is_updated: bool = False):
     is_updated = request.args.get("is_updated", default = is_updated)
 
     graph = bst_out.get(graph_name)
+    min_node = graph.get_min(graph.root)
+    max_node = graph.get_max(graph.root)
 
     dict_out = {
         "nodes": graph.export(),
-        "min": graph.get_min(graph.root).value,
-        "max": graph.get_max(graph.root).value,
+        "min": min_node.value if not min_node is None else None,
+        "max": max_node.value if not max_node is None else None,
         "height": graph.get_height(graph.root),
         "order": graph.get_ordered()
     }
@@ -34,10 +36,13 @@ def get_bst(is_updated: bool = False):
 
     for graph_name in graphs:
         temp = graphs[graph_name].get()
+        min_node = temp.get_min(temp.root)
+        max_node = temp.get_max(temp.root)
+
         graphs_out[graph_name] = {
             "nodes": temp.export(),
-            "min": temp.get_min(temp.root).value,
-            "max": temp.get_max(temp.root).value,
+            "min": min_node.value if not min_node is None else None,
+            "max": max_node.value if not max_node is None else None,
             "height": temp.get_height(temp.root),
             "order": temp.get_ordered()
         }
