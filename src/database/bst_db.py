@@ -1,4 +1,4 @@
-from src.binary_search_tree.bst import BinarySearchTree
+from src.logic.binary_search_tree import BinarySearchTree
 import json
 import os
 

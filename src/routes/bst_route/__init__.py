@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-from src.binary_search_tree.bst import BinarySearchTree
+from src.logic.binary_search_tree.bst import BinarySearchTree
 from src.database.bst_db import BstFolderDB
 
 bst_out = BstFolderDB("data/bst_data")
