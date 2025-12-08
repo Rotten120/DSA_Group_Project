@@ -5,7 +5,7 @@ import os
 class BstDB:
     def __init__(self, path: str, fetch_data: bool = True):
         self.path = path
-        self.__data: BinarySearchTree | None = None
+        self.__data: BinarySearchTree | None = BinarySearchTree()
 
         if fetch_data:
             self.fetch()
@@ -18,8 +18,7 @@ class BstDB:
 
     def upload(self):
         with open(self.path, 'w') as file:
-            temp_dict = self.__data.export() if self.__data else None
-            json.dump(temp_dict, file, indent = 4)
+            json.dump(self.__data.export(), file, indent = 4)
 
     def get(self) -> dict:
         return self.__data
@@ -30,7 +29,7 @@ class BstFolderDB:
             folder_path = folder_path[:-1]
 
         self.folder_path = folder_path
-        self.__data: dict[str, BstDB] | None = {}
+        self.__data: dict[str, BstDB] = {}
 
         if fetch_data:
             self.fetch_all()
@@ -38,7 +37,7 @@ class BstFolderDB:
     def insert(self, name):
         if name in self.__data:
             return
-        self.__data[name] = BstDB(name + '.json', fetch_data = False)
+        self.__data[name] = BstDB(self.abs_path(name, 'json'), fetch_data = False)
 
     def delete(self, name):
         if not(name in self.__data):
