@@ -1,17 +1,17 @@
 {
     "root": {
-        "value": "5",
-        "left": "3",
-        "right": "7"
+        "value": "Duraludon",
+        "left": "Incineroar",
+        "right": "Zubat"
     },
     "children": [
         {
-            "value": "3",
+            "value": "Incineroar",
             "left": null,
             "right": null
         },
         {
-            "value": "7",
+            "value": "Zubat",
             "left": null,
             "right": null
         }
