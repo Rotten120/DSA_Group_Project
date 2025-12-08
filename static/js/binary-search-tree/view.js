@@ -10,6 +10,7 @@ async function initializeTreeData() {
         
         if (!graph) {
             console.log('No graph selected');
+             updateAllInfoButtons(null, []);
             return false;
         }
         
@@ -18,6 +19,7 @@ async function initializeTreeData() {
         if (data && data.nodes) {
             treeData = convertToTreeStructure(data.nodes);
             sortedData = data.order || [];
+            updateAllInfoButtons(treeData, sortedData);
             console.log('Tree data loaded from backend');
             return true;
         }
