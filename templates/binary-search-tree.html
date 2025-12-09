@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/sidebar.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/view-graph.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/view-order.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/binary-search-tree/information.css')}}">
 
     {% include 'components/fonts.html' %} 
     <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
@@ -44,11 +45,16 @@
             <div class="bottom-buttons">
                 <div class="view-button">VIEW ORDER</div>
                 <div class="view-button">VIEW GRAPH</div>
+
+                <!-- INFO BUTTON BOTTOM -->
+                {% include 'components/binary-search-tree/information.html' %}
             </div>
         </div>
     </div>
 
     <script type="module" src="{{url_for('static', filename='js/binary-search-tree/side-bar-bst.js')}}"></script>
     <script type="module" src="{{url_for('static', filename='js/binary-search-tree/view.js')}}"></script>
+    <script type="module" src="{{url_for('static', filename='js/binary-search-tree/information.js')}}"></script>
+    <script src="{{url_for('static', filename='api-js/bst-api.js')}}"></script>
 </body>
 </html>
