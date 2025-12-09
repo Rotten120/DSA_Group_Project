@@ -9,7 +9,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+    background: linear-gradient(135deg, #7f1d1d 0%, #7a0000 100%);
     border: 3px solid white;
     color: white;
     font-size: 24px;
@@ -23,7 +23,7 @@
 }
 
 .info-button:hover {
-    background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);
+    background: linear-gradient(135deg, #7f1d1d 0%, #7a0000 100%);
     transform: scale(1.05);
 }
 
@@ -35,7 +35,7 @@
     position: absolute;
     bottom: 60px;
     right: 0;
-    background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+    background: linear-gradient(135deg, #7f1d1d 0%, #7a0000 100%);
     border: 3px solid white;
     border-radius: 12px;
     padding: 20px 25px;
@@ -75,7 +75,7 @@
     height: 0;
     border-left: 9px solid transparent;
     border-right: 9px solid transparent;
-    border-top: 9px solid #450a0a;
+    border-top: 9px solid white;
     z-index: 1;
 }
 
@@ -128,7 +128,7 @@
 }
 
 .view-button {
-    background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+    background: linear-gradient(135deg, #7f1d1d 0%, #7a0000 100%);
     color: #fff;
     padding: 20px;
     border-radius: 12px;
@@ -145,7 +145,7 @@
 }
 
 .view-button:hover {
-    background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);
+    background: linear-gradient(135deg, #991b1b 0%, #7a0000 100%);
 }
 
 .info-button-container {

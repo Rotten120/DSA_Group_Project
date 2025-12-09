@@ -7,7 +7,7 @@
 
 .edit-button {
     background-color: #e5e5e5;
-    color: #7f1d1d;
+    color: #7a0000;
     padding: 20px 10px;
     border-radius: 20px 0 0 20px;
     text-align: center;
@@ -30,8 +30,8 @@
 }
 
 .saved-graph-box {
-    background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
-    border: 2px solid #991b1b;
+    background: linear-gradient(135deg, #7f1d1d 0%, #7a0000 100%);
+    border: 2px solid white;
     border-radius: 12px;
     padding: 20px 10px; 
     text-align: center;
@@ -221,7 +221,7 @@
 
 .create-icon {
     background-color: #e5e5e5;
-    color: #7f1d1d;
+    color: #7a0000;
     border: 2px solid #d4d4d4;
     border-radius: 8px;
     padding: 12px;
@@ -331,7 +331,7 @@
 }
 
 .confirm-btn {
-    background: #7f1d1d;
+    background: #7a0000;
     color: white;
 }
 
