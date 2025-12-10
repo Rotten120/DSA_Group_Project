@@ -6,7 +6,7 @@ class BinarySearchTree:
         self.val_import = val_import
         self.val_export = val_export
 
-    def insert(self, node, value):
+    def insert(self, node: Node | None, value) -> Node | None:
         if self.root is None:
             self.root = Node(value)
             return
@@ -22,11 +22,11 @@ class BinarySearchTree:
             node.right = self.insert(node.right, value)
         return node
     
-    def update(self, node, old_value, new_value):
-        self.delete(searched_node, old_value)
+    def update(self, node: Node | None, old_value, new_value):
+        self.delete(node, old_value)
         self.insert(self.root, new_value)
 
-    def search(self, node, value):
+    def search(self, node: Node | None, value) -> Node | None:
         if node is None:
             return None
         if value == node.value:
@@ -36,7 +36,7 @@ class BinarySearchTree:
         else:
             return self.search(node.right, value)
 
-    def delete(self, node, value):
+    def delete(self, node: Node | None, value) -> Node | None:
         if node is None:
             return None
 
@@ -60,26 +60,26 @@ class BinarySearchTree:
 
         return node
 
-    def get_max(self, node):
+    def get_max(self, node: Node | None) -> Node | None:
         if node is None:
             return None
         while node.right is not None:
             node = node.right
         return node
 
-    def get_min(self, node):
+    def get_min(self, node: Node | None) -> Node | None:
         if node is None:
             return None
         while node.left is not None:
             node = node.left
         return node
 
-    def get_height(self, node):
+    def get_height(self, node: Node | None) -> int:
         if node is None:
             return -1
         return 1 + max(self.get_height(node.left), self.get_height(node.right))
 
-    def get_ordered(self):
+    def get_ordered(self) -> list:
         """In-order traversal iterator"""
 
         def inorder(node):
@@ -92,7 +92,7 @@ class BinarySearchTree:
 
     """ CLASS IMPORT/EXPORT METHODS """
 
-    def export(self):
+    def export(self) -> dict:
         def inorder(node):
             if node:
                 yield from inorder(node.left)
@@ -112,7 +112,12 @@ class BinarySearchTree:
         return bst_dict
 
     @classmethod
-    def import_dict(cls, inp_dict, val_import = None, val_export = None):
+    def import_dict(
+        cls,
+        inp_dict: dict,
+        val_import = None,
+        val_export = None
+    ) -> BinarySearchTree:
         temp_bst = BinarySearchTree(
             val_import = val_import,
             val_export = val_export
@@ -135,7 +140,11 @@ class BinarySearchTree:
         return temp_bst
 
     @classmethod
-    def __connect_nodes(cls, root, inp_dict):
+    def __connect_nodes(
+        cls,
+        root: Node | None,
+        inp_dict: dict
+    ):
         if root is None:
             return
 
