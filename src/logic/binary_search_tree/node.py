@@ -2,8 +2,8 @@ class Node:
     def __init__(
         self,
         value,
-        left: Node | None = None,
-        right: Node | None = None
+        left = None,
+        right = None
     ):
         self.value = value
         self.left = left

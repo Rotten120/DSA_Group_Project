@@ -117,7 +117,7 @@ class BinarySearchTree:
         inp_dict: dict,
         val_import = None,
         val_export = None
-    ) -> BinarySearchTree:
+    ):
         temp_bst = BinarySearchTree(
             val_import = val_import,
             val_export = val_export

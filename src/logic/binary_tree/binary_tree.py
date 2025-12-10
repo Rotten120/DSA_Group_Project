@@ -197,7 +197,7 @@ class BinaryTree:
         cls,
         inp_dict: bool,
         constructor = None
-    ) -> BinaryTree:
+    ):
         node_dict = {}
         
         for node_id in inp_dict:
