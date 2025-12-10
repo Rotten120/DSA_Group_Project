@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from src.queue_deque.datadeque import DeQue
+from src.logic.queue_deque import DeQue
 
 deque_bp = Blueprint('deque', __name__)
 deque_out = DeQue()

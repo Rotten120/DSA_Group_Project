@@ -1,10 +1,15 @@
-from src.binary_tree.node import Node
+from .node import Node
 
 class BinaryTree:
-    def __init__(self, root=None):
+    def __init__(self, root = None):
         self.root = root if not root else Node(root, node_id = 0)
 
-    def insert_left(self, current_node, value, node_id = None):
+    def insert_left(
+        self,
+        current_node: Node,
+        value,
+        node_id: int | None = None
+    ) -> Node:
         new_node = Node(value, node_id)
         
         if current_node.left is None:
@@ -15,7 +20,12 @@ class BinaryTree:
 
         return new_node
 
-    def insert_right(self, current_node, value, node_id = None):
+    def insert_right(
+        self,
+        current_node: Node,
+        value,
+        node_id: int | None = None
+    ) -> Node:
         new_node = Node(value, node_id)
 
         if current_node.right is None:
@@ -26,28 +36,44 @@ class BinaryTree:
 
         return new_node
 
-    def inorder_traversal(self, start, traversal=""):
+    def inorder_traversal(
+        self,
+        start: Node | None,
+        traversal: str = ""
+    ) -> str:
         if start:
             traversal = self.inorder_traversal(start.left, traversal)
             traversal += (str(start.value) + '-')
             traversal = self.inorder_traversal(start.right, traversal)
         return traversal
 
-    def preorder_traversal(self, start, traversal=""):
+    def preorder_traversal(
+        self,
+        start: Node | None,
+        traversal: str = ""
+    ) -> str:
         if start:
             traversal += (str(start.value) + '-')
             traversal = self.preorder_traversal(start.left, traversal)
             traversal = self.preorder_traversal(start.right, traversal)
         return traversal
 
-    def postorder_traversal(self, start, traversal=""):
+    def postorder_traversal(
+        self,
+        start: Node | None,
+        traversal: str=""
+    ) -> str:
         if start:
             traversal = self.postorder_traversal(start.left, traversal)
             traversal = self.postorder_traversal(start.right, traversal)
             traversal += (str(start.value) + '-')
         return traversal
 
-    def search_by_id(self, root, key_id):
+    def search_by_id(
+        self,
+        root: Node | None,
+        key_id: int
+    ) -> Node | None:
         if root is None:
             return None
 
@@ -63,7 +89,12 @@ class BinaryTree:
             return right_node
         return None
 
-    def search_by_value(self, root, key, is_root_iterable=False):
+    def search_by_value(
+        self,
+        root: Node | None,
+        key,
+        is_root_iterable: bool = False
+    ) -> Node | None:
         if root is None:
             return None
 
@@ -82,7 +113,11 @@ class BinaryTree:
             return right_node
         return None
 
-    def delete(self, root, key_id):
+    def delete(
+        self,
+        root: Node | None,
+        key_id: int
+    ) -> Node | None:
         if root is None:
             return None
 
@@ -158,7 +193,11 @@ class BinaryTree:
         return result
   
     @classmethod
-    def import_dict(cls, inp_dict, constructor = None):
+    def import_dict(
+        cls,
+        inp_dict: bool,
+        constructor = None
+    ):
         node_dict = {}
         
         for node_id in inp_dict:
@@ -177,16 +216,20 @@ class BinaryTree:
         return temp_bitree 
 
     @classmethod
-    def __connect_nodes(cls, root, inp_dict):
+    def __connect_nodes(
+        cls,
+        root: Node | None,
+        node_dict: dict
+    ):
         if root is None:
             return
 
         if root.left:
-            left_node = inp_dict[root.left]
+            left_node = node_dict[root.left]
             root.left = left_node
-            BinaryTree.__connect_nodes(left_node, inp_dict)
+            BinaryTree.__connect_nodes(left_node, node_dict)
 
         if root.right:
-            right_node = inp_dict[root.right]
+            right_node = node_dict[root.right]
             root.right = right_node
-            BinaryTree.__connect_nodes(right_node, inp_dict)
+            BinaryTree.__connect_nodes(right_node, node_dict)

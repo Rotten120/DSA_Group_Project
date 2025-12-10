@@ -43,7 +43,7 @@
       },
       {
         "name": "Shane Craven L. Palomo",
-        "role": "Chief Frontend Developer",
+        "role": "Frontend Developer/API Integrator",
         "photo": "../static/images/profile_pics/palomo.webp",
         "cover": "../static/images/cover_pics/palomo.jpg",
         "bio": "As a Computer Engineering student, I am driven by a strong enthusiasm for technology and creative problem-solving. My academic and project interests revolve around hardware design, data science, and software development.",
@@ -64,7 +64,7 @@
       },
       {
         "name": "Adrian Kurt O. Mari\u00f1as",
-        "role": "UI/UX Designer",
+        "role": "UI/UX Designer/Technical Writer",
         "photo": "../static/images/profile_pics/marinas.jpg",
         "cover": "../static/images/cover_pics/marinas.png",
         "bio": " I am a 2nd year Computer Engineering Student at the Polytechnic University of the Philippines, Sta. Mesa Branch.",
@@ -76,16 +76,16 @@
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
         "achievements": ["Consistent Dean Lister","Graduated with Honors at VPTNHS"],
         "contacts": {
-          "email": "",
-          "instagram": "",
-          "linkedin": "",
-          "github": "",
-          "facebook": ""
+          "email": "dilanmarinas@gmail.com ",
+          "instagram": "https://www.instagram.com/di.llann",
+          "linkedin": "https://www.linkedin.com/in/adrian-kurt-mariñas-a77a0536a",
+          "github": "https://github.com/dilankurty",
+          "facebook": "https://www.facebook.com/adriankurt.marinas"
         }
       },
       {
         "name": "Carl Joshua M. Manaog",
-        "role": "Quality Assurance",
+        "role": "Quality Assurance/Database Manager",
         "photo": "../static/images/profile_pics/manaog.png",
         "cover": "../static/images/cover_pics/manaog.png",
         "bio": "I'm a 2nd-year Computer Engineering student at Polytechnic University of the Philippines, interested in understanding how computers and electricity work together to create technology.",
@@ -106,7 +106,7 @@
       },
       {
         "name": "Ycz Aubhrey V. Dy",
-        "role": "Frontend Developer",
+        "role": "Frontend Developer/API Integrator",
         "photo": "../static/images/profile_pics/dy.jpeg",
         "cover": "../static/images/cover_pics/dy.jpeg",
         "bio": "I am a pretty Computer Engineering Student trying to pass Engineering.",
@@ -127,7 +127,7 @@
       },
       {
         "name": "Angel Laika L. Clarito",
-        "role": "UI/UX Designer",
+        "role": "UI/UX Designer/Frontend Developer",
         "photo": "../static/images/profile_pics/clarito.jpg",
         "cover": "../static/images/cover_pics/clarito.jpg",
         "bio": "I am a dedicated Computer Engineering undergraduate with a strong interest in both hardware and software development. Passionate about problem-solving and technology.",
@@ -139,16 +139,16 @@
         "projects": ["Mobile UI Kit","Brand Identity","Dashboard Design","Icon Set"],
         "achievements": ["Graduated with Honors from Olivarez College","Dean's and President's List (2024-2025)"],
         "contacts": {
-          "email": "",
-          "instagram": "",
-          "linkedin": "",
-          "github": "",
-          "facebook": ""
+          "email": "angellaikaclarito04@gmail.com",
+          "instagram": "https://www.instagram.com/kudryavkalai/",
+          "linkedin": "https://www.linkedin.com/in/angel-laika-clarito-2234a02b6/",
+          "github": "https://github.com/itsnotangel",
+          "facebook": "https://www.facebook.com/angel.laika.316454/"
         }
       },
       {
         "name": "Mary Chloe Anne A. Luna",
-        "role": "Backend Developer",
+        "role": "Core Backend Logic Developer",
         "photo": "../static/images/profile_pics/luna.jpg",
         "cover": "../static/images/cover_pics/luna.jpg",
         "bio": "I'm a 2nd year Computer Engineering Student in PUP Manila.",
@@ -169,7 +169,7 @@
       },
       {
         "name": "Chris H. Mangahas",
-        "role": "Backend Developer",
+        "role": "Technical Writer",
         "photo": "../static/images/profile_pics/mangahas.jpg",
         "cover": "../static/images/cover_pics/mangahas.jpg",
         "bio": "Just a guy making do with what life gives me, and doing it happily.",
@@ -182,10 +182,10 @@
         "achievements": ["ALS Graduate"," Consistent With Honors in SHS","PIO for Filipino Club in SHS"],
         "contacts": {
           "email": "",
-          "instagram": "",
+          "instagram": "https://www.instagram.com/chris_hm_07",
           "linkedin": "",
           "github": "",
-          "facebook": ""
+          "facebook": "https://www.facebook.com/chm075"
         }
       }
 ]

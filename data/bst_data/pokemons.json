@@ -1,0 +1,29 @@
+{
+    "root": {
+        "value": "Incineroar",
+        "left": "Duraludon",
+        "right": "Rhypherior"
+    },
+    "children": [
+        {
+            "value": "Duraludon",
+            "left": null,
+            "right": "Gliscor"
+        },
+        {
+            "value": "Feraligatr",
+            "left": null,
+            "right": null
+        },
+        {
+            "value": "Gliscor",
+            "left": "Feraligatr",
+            "right": null
+        },
+        {
+            "value": "Rhypherior",
+            "left": null,
+            "right": null
+        }
+    ]
+}
