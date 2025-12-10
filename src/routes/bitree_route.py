@@ -19,7 +19,7 @@ def bitree_update():
     return render_template('binary-tree.html')
 
 @bitree_bp.route('/get-contacts')
-def get_contacts(is_updated = False):
+def get_contacts(is_updated: bool = False):
     global bitree_out
     tree_json = bitree_out.__dict__()
 
@@ -59,7 +59,7 @@ def delete_contact(cid):
 
 
 @bitree_bp.route('/update/<int:cid>', methods=["GET", "PUT"])
-def update_contact(cid):
+def update_contact(cid: int):
     global bitree_out
     value = request.json.get("value")
 
@@ -68,7 +68,7 @@ def update_contact(cid):
     return get_contacts(is_updated = True)
 
 @bitree_bp.route('/toggle-favorite/<int:cid>', methods=["GET", "PUT"])
-def toggle_favorite(cid):
+def toggle_favorite(cid: int):
     global bitree_out
     
     searched_node = bitree_out.search_by_id(bitree_out.root, cid)

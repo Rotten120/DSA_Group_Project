@@ -1,7 +1,13 @@
 from uuid import uuid4
 
 class Node:
-    def __init__(self, value, node_id = None, left = None, right = None):
+    def __init__(
+        self,
+        value,
+        node_id: int | None = None,
+        left: Node | None = None,
+        right: Node | None = None
+    ):
         self.value = value
         self.id = uuid4().int if node_id is None else node_id
         self.left = left

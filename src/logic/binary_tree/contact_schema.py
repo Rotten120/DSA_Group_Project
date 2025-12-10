@@ -1,18 +1,18 @@
 class Contact:
     def __init__(
             self,
-            contact_id=None,
-            name="",
-            status="", 
-            mobile=None,
-            email=None,
-            instagram=None,
-            telephone=None,
-            facebook=None,
-            notes="",
-            is_fav=False,
-            avatar="",
-            background=""
+            contact_id: str | None = None,
+            name: str = "",
+            status: str = "", 
+            mobile: str | None = None,
+            email: str | None = None,
+            instagram: str | None = None,
+            telephone: str | None = None,
+            facebook: str | None = None,
+            notes: str | None = "",
+            is_fav: bool = False,
+            avatar: str = "",
+            background: str = ""
     ):
         self.id = contact_id
         self.name = name
@@ -28,7 +28,7 @@ class Contact:
         self.is_fav = is_fav
 
     @classmethod
-    def import_dict(self, inp_dict):
+    def import_dict(self, inp_dict: dict):
         temp_contact = Contact(
             contact_id=inp_dict["id"],
             name=inp_dict["name"],

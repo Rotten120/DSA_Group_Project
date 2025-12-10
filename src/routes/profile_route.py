@@ -8,7 +8,7 @@ with open('data/profile_details.json', 'r') as file:
     PROFILE_DETAIL = json.load(file)
 
 @profile_bp.route('/<int:profile_id>')
-def profile(profile_id = 0):
+def profile(profile_id: int = 0):
     data = PROFILE_DETAIL[profile_id]
     contacts = data['contacts']
     return render_template(

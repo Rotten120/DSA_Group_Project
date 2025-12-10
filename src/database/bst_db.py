@@ -65,12 +65,12 @@ class BstFolderDB:
         if fetch_data:
             self.fetch_all()
 
-    def insert(self, name):
+    def insert(self, name: str):
         if name in self.__data:
             return
         self.__data[name] = BstDB(self.abs_path(name, 'json'), fetch_data = False)
 
-    def delete(self, name):
+    def delete(self, name: str):
         if not(name in self.__data):
             return
         os.remove(self.abs_path(name, 'json'))
@@ -103,11 +103,11 @@ class BstFolderDB:
         for file in self.__data:
             self.__data[file].upload()
 
-    def get(self, file: str):
+    def get(self, file: str) -> dict:
         if file in self.__data:
             return self.__data[file].get()
     
-    def get_all(self):
+    def get_all(self) -> dict[str, BstDB]:
         return self.__data
 
     def rename_file(self, old_name: str, new_name: str):
@@ -123,8 +123,8 @@ class BstFolderDB:
 
         del self.__data[old_name]
 
-    def abs_path(self, filename: str, ext = None) -> str:
+    def abs_path(self, filename: str, ext: str = "") -> str:
         temp_path = self.folder_path + '/' + filename
-        if not ext is None:
+        if ext:
             temp_path += '.' + ext
         return temp_path
