@@ -30,12 +30,12 @@ class TestBinaryTree(unittest.TestCase):
         self.assertEqual(result, "4-5-2-3-1-")
 
     def test_search_found(self):
-        node = self.tree.search(self.tree.root, 5)
+        node = self.tree.search_by_value(self.tree.root, 5)
         self.assertIsNotNone(node)
         self.assertEqual(node.value, 5)
 
     def test_search_not_found(self):
-        node = self.tree.search(self.tree.root, 99)
+        node = self.tree.search_by_value(self.tree.root, 99)
         self.assertIsNone(node)
 
     def test_delete_leaf(self):
@@ -44,11 +44,12 @@ class TestBinaryTree(unittest.TestCase):
 
     def test_delete_root(self):
         self.tree.delete(self.tree.root, 1)
-        self.assertIn(self.tree.root.value, self.tree.to_list())
+        self.assertIn(self.tree.root, self.tree.to_list())
     
     def test_to_list(self):
         lst = self.tree.to_list()
-        self.assertEqual(lst, [1, 2, 3, 4, 5])
+        out = [node.value for node in lst]
+        self.assertEqual(out, [1, 2, 3, 4, 5])
 
 if __name__ == "__main__":
     unittest.main()
