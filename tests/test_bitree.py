@@ -1,6 +1,5 @@
 import unittest
-from src.binary_tree.binary_tree import BinaryTree
-from src.binary_tree.node import Node
+from src.logic.binary_tree import BinaryTree, Node
 
 class TestBinaryTree(unittest.TestCase):
 
@@ -46,7 +45,7 @@ class TestBinaryTree(unittest.TestCase):
     def test_delete_root(self):
         self.tree.delete(self.tree.root, 1)
         self.assertIn(self.tree.root.value, self.tree.to_list())
-
+    
     def test_to_list(self):
         lst = self.tree.to_list()
         self.assertEqual(lst, [1, 2, 3, 4, 5])
