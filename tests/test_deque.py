@@ -1,5 +1,5 @@
-from unit_test import *
-from datadeque import DeQue
+import unittest
+from src.logic.queue_deque import DeQue
 
 class TestDeQue(unittest.TestCase):
     def test_deque(self):
