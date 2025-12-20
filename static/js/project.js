@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", async ()=> {
     const overlay = document.getElementById('popup-overlay');
     const closeBtn = document.getElementById('closePopup');
     const linkBoxes = document.querySelectorAll('.link-box a');
-    const prevBtn = document.querySelector('.left-button .inner-btn');
-    const nextBtn = document.querySelector('.right-button .inner-btn');
-    const continueBtn = document.querySelector('.center-button .inner-btn');
+    const exitBtn = document.querySelector('.left-button .inner-btn');
+    const continueBtn= document.querySelector('.right-button .inner-btn');
 
     let position = 0;
     const slideWidth = 200;
@@ -42,15 +41,15 @@ document.addEventListener("DOMContentLoaded", async ()=> {
                 { 
                     key: 'placeholder5', 
                     title: 'Coming Soon', 
-                    desc: 'This data structure information is coming soon!', 
-                    'bg-img': 'https://via.placeholder.com/400x300/gray/white?text=Coming+Soon', 
+                    desc: 'This project is coming soon! Please wait for it!', 
+                    'bg-img': 'coming_soon.jpg',
                     route: null 
                 },
                 { 
                     key: 'placeholder6', 
                     title: 'Coming Soon', 
-                    desc: 'This data structure information is coming soon!', 
-                    'bg-img': 'https://via.placeholder.com/400x300/gray/white?text=Coming+Soon', 
+                    desc: 'This project is coming soon! Please wait for it!', 
+                    'bg-img': 'coming_soon.jpg',
                     route: null 
                 }
             ];
@@ -97,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async ()=> {
         'QUEUE': 0,
         'DEQUE': 1,
         'BINARY-TREE': 2,
-        'BINARY       SEARCH TREE': 3,
+        'BINARY SEARCH TREE': 3,
         '5': 4,
         '6': 5
     };
@@ -118,17 +117,12 @@ document.addEventListener("DOMContentLoaded", async ()=> {
         });
     });
 
-    // Previous button
-    if (prevBtn) {
-        prevBtn.addEventListener('click', (e) => {
+    // Exit button
+    if (exitBtn) {
+        exitBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            
-            if (currentIndex > 0) {
-                currentIndex--;
-                updatePopupContent(currentIndex);
-                updateButtonStates();
-            }
+            closePopup();
         });
     }
 
@@ -143,68 +137,6 @@ document.addEventListener("DOMContentLoaded", async ()=> {
             if (currentData && currentData.route) {
                 window.location.href = currentData.route;
             }
-        });
-    }
-
-    // Next button
-    if (nextBtn) {
-        nextBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            if (currentIndex < dataStructuresArray.length - 1) {
-                currentIndex++;
-                updatePopupContent(currentIndex);
-                updateButtonStates();
-            }
-        });
-    }
-
-    // Update button states
-    function updateButtonStates() {
-        const currentData = dataStructuresArray[currentIndex];
-        
-        if (prevBtn) {
-            if (currentIndex === 0) {
-                prevBtn.style.opacity = '0.5';
-                prevBtn.style.cursor = 'not-allowed';
-                prevBtn.disabled = true;
-            } else {
-                prevBtn.style.opacity = '1';
-                prevBtn.style.cursor = 'pointer';
-                prevBtn.disabled = false;
-            }
-        }
-
-        if (nextBtn) {
-            if (currentIndex === dataStructuresArray.length - 1) {
-                nextBtn.style.opacity = '0.5';
-                nextBtn.style.cursor = 'not-allowed';
-                nextBtn.disabled = true;
-            } else {
-                nextBtn.style.opacity = '1';
-                nextBtn.style.cursor = 'pointer';
-                nextBtn.disabled = false;
-            }
-        }
-
-        if (imgContainer) {
-            if (currentData && currentData.route) {
-                imgContainer.style.cursor = 'pointer';
-                imgContainer.title = 'Click to go to ' + currentData.title;
-            } else {
-                imgContainer.style.cursor = 'default';
-                imgContainer.title = '';
-            }
-        }
-    }
-
-    // Close popup
-    if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            closePopup();
         });
     }
 

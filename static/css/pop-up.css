@@ -34,63 +34,47 @@ body {
     background-color: #aa1313;
     max-width: 800px;
     min-width: 800px;
-    min-height: 550px;
-    max-height: 1000px;
+    min-height: 600px;
+    max-height: 1200px;
     border-radius: 20px;
-}
-
-.close-btn {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 30px;
-}
-
-.close-btn i {
-    margin-top: 10px;
-    margin-right: 10px;
-    color: rgba(255, 255, 255, 0.607);
-    cursor: pointer;
-    transition: 0.1s;
-}
-
-.close-btn i:hover {
-   opacity: 0.7;
-}
-
-.close-btn i:active {
-   opacity: 0.7;
 }
 
 .main-content {
     display: flex;
     gap: 20px;
     padding: 0 20px;
-    margin: auto;
+    margin-top: 30px;
 }
 
 .left-content {
     flex: 1;
-    max-width: 400px;
+    max-width: 600px;
     color: white;
     margin-top: 40px;
-    margin-left: 20px;
+    margin-left: 12px;
 }
 
 .text-content {
     display: flex;
     flex-direction: column;
-    height: 300px;
+    height: 380px;
+    overflow-y: auto;
 }
 
 h2 {
     text-align: left;
-    font-size: 35px;
+    font-size: 44px;
     margin: 0;
 }
 
 p {
-    margin-top: 10px;
+    margin-top: 20px;
     text-align: justify;
+    font-size: 18px;
+    line-height: 30px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    padding-right: 8px;
 }
 
 .button-content {
@@ -109,9 +93,10 @@ p {
 }
 
 .inner-btn {
-    padding: 15px 28px;
+    padding: 15px 0px;
+    width: 150px;
     background-color: #600505;
-    border-color: black 0.5px;
+    border: none;
     color: white;
     font-size: 16px;
     border-radius: 20px;
@@ -120,7 +105,11 @@ p {
 }
 
 .inner-btn:hover {
-    background-color: #800707;
+    opacity: 0.7;
+}
+
+.inner-btn:active {
+    opacity: 0.4;
 }
 
 .img-container {
@@ -133,21 +122,11 @@ p {
 }
 
 .img-container img {
-    height: 440px;
+    height: 500px;
     width: 300px;
     border-radius: 10px;
     margin-top: 30px;
-    cursor: pointer;
-    transition: 0.1s;
     object-fit: cover;
     display: block;
-}
-
-img:hover {
-   opacity: 0.7;
-}
-
-img:active {
-   opacity: 0.4;
 }
 
