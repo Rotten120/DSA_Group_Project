@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, send_from_directory
 
 main_bp = Blueprint('main', __name__)
 
@@ -19,3 +19,8 @@ def binary_tree():
 @main_bp.route('/binary-search-tree')
 def binary_search_tree():
     return render_template('binary-search-tree.html')
+
+# Temporary route for everything.
+@main_bp.route('/data/<path:filename>')
+def serve_data(filename):
+    return send_from_directory('data', filename)

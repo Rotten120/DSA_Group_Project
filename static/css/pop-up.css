@@ -1,0 +1,153 @@
+body {
+    font-family: sans-serif;
+}
+
+/* POPUP OVERLAY */
+.popup-overlay-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.popup-overlay-wrapper.active {
+    display: flex;
+    pointer-events: all;
+}
+
+.popup-overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #aa1313;
+    max-width: 800px;
+    min-width: 800px;
+    min-height: 550px;
+    max-height: 1000px;
+    border-radius: 20px;
+}
+
+.close-btn {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 30px;
+}
+
+.close-btn i {
+    margin-top: 10px;
+    margin-right: 10px;
+    color: rgba(255, 255, 255, 0.607);
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.close-btn i:hover {
+   opacity: 0.7;
+}
+
+.close-btn i:active {
+   opacity: 0.7;
+}
+
+.main-content {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+    margin: auto;
+}
+
+.left-content {
+    flex: 1;
+    max-width: 400px;
+    color: white;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}
+
+h2 {
+    text-align: left;
+    font-size: 35px;
+    margin: 0;
+}
+
+p {
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.button-content {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-top: 60px;
+}
+
+.left-button {
+    display: flex;
+}
+
+.right-button {
+    display: flex;
+}
+
+.inner-btn {
+    padding: 15px 28px;
+    background-color: #600505;
+    border-color: black 0.5px;
+    color: white;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.inner-btn:hover {
+    background-color: #800707;
+}
+
+.img-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-container img {
+    height: 440px;
+    width: 300px;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: 0.1s;
+    object-fit: cover;
+    display: block;
+}
+
+img:hover {
+   opacity: 0.7;
+}
+
+img:active {
+   opacity: 0.4;
+}
+

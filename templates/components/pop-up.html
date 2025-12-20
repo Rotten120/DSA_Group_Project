@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="{{url_for('static', filename='css/pop-up.css')}}">
+{% include 'components/fonts.html' %} 
+
+<div class="popup-overlay" id="popup">
+    <div class="popup-content">
+
+        <div class="close-btn" id="closePopup">
+            <i class="fa-regular fa-circle-xmark"></i>
+        </div>
+
+        <div id='main-content' class='main-content'>
+            <div id='left-content' class='left-content'>
+                <div id='text-content' class='text-content'>
+                    <h2>
+                    </h2>
+                    <p>
+                    </p>
+                </div>
+                <div id='button-content' class='button-content'>
+                    <div class="left-button">
+                        <button class="inner-btn"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp; Back</button>
+                    </div>
+                    <div class="center-button">
+                        <button class="inner-btn">CONTINUE</button>
+                    </div>
+                    <div class="right-button">
+                        <button class="inner-btn"> Next&nbsp;&nbsp; <i class="fa-solid fa-arrow-right"></i> </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id='img-content' class='img-content'>
+                <a class="img-container">
+                    <img src=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

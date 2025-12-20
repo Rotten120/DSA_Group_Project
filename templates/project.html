@@ -23,24 +23,26 @@
 </head>
 
 <body>
-  {% include 'components/sidebar.html' %}
   {% include 'components/header.html' %}
+  <div id="sidebar-overlay" class="sidebar-overlay">
+    {% include 'components/sidebar.html' %}
+  </div>
 
   <div class="vertical-links">
     <div class="link-slider">
       <div class="slider-track">
         <div class="slide-link">
           <div class="link-box">
-            <a href="/queue/init">QUEUE</a>
+            <a href="#">QUEUE</a>
           </div>
           <div class="link-box">
-            <a href="/deque/init">DEQUE</a>
+            <a href="#">DEQUE</a>
           </div>
           <div class="link-box">
-            <a href="/bitree">BINARY-TREE</a>
+            <a href="#">BINARY-TREE</a>
           </div>
           <div class="link-box">
-            <a href="/bst">BINARY SEARCH TREE</a>
+            <a href="#">BINARY SEARCH TREE</a>
           </div>
           <div class="link-box">
             <a href="#">5</a>
@@ -55,6 +57,8 @@
   
 
   <!-- OVERLAY -->
-  <div id="overlay" class="overlay"></div>
+  <div id="popup-overlay" class="popup-overlay-wrapper">
+    {% include 'components/pop-up.html' %}
+  </div>
   </body>
 </html>

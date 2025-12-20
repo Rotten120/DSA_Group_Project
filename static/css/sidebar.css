@@ -49,8 +49,8 @@
   background-color: #a50204;
 }
 
-/* OVERLAY */
-.overlay {
+/* SIDEBAR OVERLAY */
+.sidebar-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -63,7 +63,7 @@
   z-index: 1700;
 }
 
-.overlay.active {
+.sidebar-overlay.active {
   opacity: 1;
   pointer-events: auto;
 }
