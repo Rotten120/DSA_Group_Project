@@ -1,0 +1,28 @@
+{
+    "queue": {
+        "title": "Queue",
+        "route": "/queue/init",
+        "desc": "Insert Description here",
+        "bg-img": "queue.jpeg"
+    },
+    "deque": {
+        "title": "DeQue",
+        "route": "/deque/init",
+        "desc": "Insert Description here",
+        "bg-img": "deque.jpeg"
+ 
+    },
+    "bitree": {
+        "title": "Binary Tree",
+        "route": "/bitree",
+        "desc": "Insert Description here",
+        "bg-img": "bitree.avif"
+
+    },
+    "bst": {
+        "title": "Binary Search Tree",
+        "route": "/bst",
+        "desc": "Insert Description here",
+        "bg-img": "bst.webp"
+    }
+}
