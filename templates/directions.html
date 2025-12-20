@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackIt - Train Route Tracker</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/directions.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+
+    <style> body {
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(to bottom, #1a0000 0%, #000000 100%);
+        color: white;
+        min-height: 100vh;
+    }
+    </style>
+    
+    {% include 'components/fonts.html' %}
+</head>
+<body>
+    
+    {% include 'components/header.html' %}
+    <div class="main-container">
+        {% include 'components/sidebar.html' %}
+        <div class="tracksidebar">
+            <div class="tracksidebar-header">TrackIt</div>
+            <div class="input-section">
+                <div class="dots-column">
+                    <div class="dot filled"></div>
+                    <div class="connector"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="inputs-column">
+                    <div class="input-row">
+                        <label>Origin</label>
+                        <input type="text" id="origin" placeholder="Enter origin station">
+                    </div>
+                    <div class="input-row">
+                        <label>Destination</label>
+                        <input type="text" id="destination" placeholder="Enter destination station">
+                    </div>
+                </div>
+                <div class="refresh-btn" title="Refresh">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="illustration-section">
+                <div class="train-illustration">
+                    <img src="/static/images/train_illustration.png" alt="Train Station">
+                </div>
+                <div class="message">Please enter both origin and destination.</div>
+            </div>
+        </div>
+        <div class="map-container">
+            <div class="map-content"></div>
+            <div class="map-overlay">
+                <!-- Yellow Line Stations LRT-1 - Vertical line on the left -->
+                <div class="station yellow-line" style="left: 20%; top: 10%;" title="Monumento">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 20%; top: 17%;" title="5th Ave.">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 20%; top: 23%;" title="R. Papa">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 20%; top: 27%;" title="Abad Santos">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 20%; top: 33%;" title="Blumentritt">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 20%; top: 36%;" title="Tayuman">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 20%; top: 41%;" title="Bambang">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 20%; top: 45%;" title="Doroteo Jose">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 20%; top: 49%;" title="Carriedo">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 20%; top: 53%;" title="Central Terminal">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 21%; top: 60%;" title="United Nations">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 23%; top: 65%;" title="Pedro Gil">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 25%; top: 69%;" title="Quirino Ave.">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 28%; top: 74%;" title="Vito Cruz">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 30%; top: 80%;" title="Gil Puyat">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 31%; top: 85%;" title="Libertad">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 32%; top: 91%;" title="EDSA">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line" style="left: 31%; top: 94%;" title="Baclaran">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line transfer" style="left: 27%; top: 9%;" title="Malvar">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line transfer" style="left: 32%; top: 9%;" title="Balintawak">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line transfer" style="left: 44%; top: 9%;" title="Roosevelt">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station yellow-line transfer" style="left: 50%; top: 9%;" title="North Ave.">
+                    <div class="station-dot"></div>
+                </div>
+
+
+                <!-- Blue Line Stations LRT-2 -->
+                
+                <div class="station blue-line" style="left: 52%; top: 10%;" title="North Ave.">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line" style="left: 58%; top: 19%;" title="Quezon Ave.">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line" style="left: 61%; top: 23%;" title="Kamuning">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line transfer" style="left: 66%; top: 35%;" title="Araneta Center-Cubao">
+                    <div class="station-dot"></div> 
+                </div>
+                <div class="station blue-line" style="left: 70%; top: 42%;" title="Santolan">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line" style="left: 70%; top: 57%;" title="Ortigas">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line" style="left: 68%; top: 61%;" title="Shaw Blvd.">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line" style="left: 65%; top: 67%;" title="Boni">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line" style="left: 63%; top: 71%;" title="Guadalupe">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line" style="left: 55%; top: 80%;" title="Buendia">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line" style="left: 50%; top: 84%;" title="Ayala">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line" style="left: 45%; top: 89%;" title="Magallanes">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station blue-line" style="left: 34%; top: 92%;" title="Taft">
+                    <div class="station-dot"></div>
+                </div>
+
+
+                <!-- Purple Line Stations MRT-3 - Diagonal line -->
+                <div class="station purple-line" style="left: 21%; top: 46%;" title="Recto">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station purple-line" style="left: 27%; top: 49%;" title="Legarda">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station purple-line" style="left: 35%; top: 48%;" title="Pureza">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station purple-line" style="left: 43%; top: 46%;" title="V. Mapa">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station purple-line" style="left: 49%; top: 41%;" title="J. Ruiz">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station purple-line" style="left: 55%; top: 39%;" title="Gilmore">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station purple-line" style="left: 61%; top: 36%;" title="Betty Go-Belmonte">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station purple-line transfer" style="left: 67%; top: 33%;" title="Araneta Center-Cubao">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station purple-line" style="left: 76%; top: 29%;" title="Anonas">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station purple-line" style="left: 81%; top: 26%;" title="Katipunan">
+                    <div class="station-dot"></div>
+                </div>
+                <div class="station purple-line" style="left: 90%; top: 33%;" title="Santolan">
+                    <div class="station-dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

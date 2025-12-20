@@ -1,0 +1,176 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            overflow-x: hidden;
+            background: #000000;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            background: #000000;
+            position: relative;
+        }
+
+
+        /* Hero Content */
+        .hero-content {
+            display: flex;
+            align-items: stretch;
+            min-height: calc(100vh - 100px);
+            position: relative;
+        }
+
+        .content-box {
+            flex: 2;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('/static/images/train.png');
+            background-size: cover;
+            background-position: center 90%;
+            background-repeat: no-repeat;
+            padding: 4rem;
+            display: flex; 
+            flex-direction: column;
+            position: relative;
+            margin: 6rem 2rem 2rem 2rem;        
+            border-radius: 24px;    
+            overflow: hidden;
+            
+        }
+        .content-wrapper {
+            max-width: 700px;
+            z-index: 10;
+            margin-left: 100px;
+            margin-top: -180px;
+            text-align: center;
+        }
+
+        .train-logo {
+            width: 200px;
+            height: 200px;
+            margin-top: 250px;
+            margin-bottom: -50px;
+            margin-left: 200px; 
+            background-image: url('/static/images/train_logo.png');
+            background-size: autp;
+            background-repeat: no-repeat;
+            background-position-x: -5px;
+        }
+
+        .train-text {
+            color: #dc2626;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: white;
+            margin-left: -200px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2.5rem;
+            opacity: 50%;
+            margin-left: -200px;
+        }
+
+        .hero-image {
+            display: none;
+        }
+
+        /* Search Box */
+        .search-container {
+            display: flex;
+            gap: 0;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid white;       
+            border-radius: 4px;            
+            overflow: hidden;  
+            padding: 2px;
+            opacity: 50%;             
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
+        .search-button {
+            padding: 1rem 2.5rem;
+            background: #dc2626;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 0 4px 4px 0;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            opacity: 50%;
+        }
+
+        .search-button:hover {
+            background: #b91c1c;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-box {
+                padding: 3rem;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+        
+            .content-box {
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .search-input,
+            .search-button {
+                border-radius: 4px;
+            }
+        }

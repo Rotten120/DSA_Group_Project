@@ -1,0 +1,287 @@
+
+.main-container * {
+    box-sizing: border-box;
+}
+
+header {
+    margin-left: 20px;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background: linear-gradient(to bottom, #1a0000 0%, #000000 100%);
+    color: white;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    display: flex;
+    padding: 20px 40px;
+    gap: 20px;
+    height: calc(100vh - 100px);
+    margin-top: 80px;
+}
+
+.tracksidebar {
+    width: 400px;
+    min-width: 400px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.tracksidebar-header {
+    background: #8B0000;
+    padding: 20px;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.tracksidebar .input-section {
+    padding: 10px;
+    background: white;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    position: relative;
+}
+
+.tracksidebar .dots-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    position: relative;
+}
+
+.tracksidebar .dots-column .dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 80%;
+    border: 3px solid #333;
+    background: white;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 2;
+}
+
+.tracksidebar .dots-column .dot:hover {
+    transform: scale(1.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tracksidebar .dots-column .dot.filled {
+    background: #333;
+}
+
+/* Connector line between dots */
+.tracksidebar .dots-column .connector {
+    width: 3px;
+    height: 30px;
+    background: #333;
+    margin: 0;
+}
+
+/* Column for inputs */
+.tracksidebar .inputs-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.tracksidebar .input-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tracksidebar .input-row label {
+    color: #333;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.tracksidebar .input-row input {
+    padding: 8px 0;
+    border: none;
+    font-size: 0.95rem;
+    outline: none;
+    background: transparent;
+    color: #333;
+}
+
+.tracksidebar .input-row input::placeholder {
+    color: #999;
+}
+
+.tracksidebar .refresh-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: white;
+    border: 2px solid #8B0000;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 10;
+}
+
+.tracksidebar .refresh-btn:hover {
+    background: #8B0000;
+}
+
+.tracksidebar .refresh-btn:hover svg {
+    stroke: white;
+}
+
+.tracksidebar .refresh-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: #8B0000;
+    stroke-width: 2;
+    fill: none;
+    transition: stroke 0.3s;
+}
+
+.tracksidebar .illustration-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -20px;
+    padding: 20px;
+    background: linear-gradient(to bottom, #8a8888 0%, #ffffff 100%);
+
+}
+.tracksidebar .train-illustration img {
+    width: 120%;
+    height: 120%;
+    object-fit: contain;
+    margin-left: -30px;
+}
+
+.tracksidebar .train-illustration {
+    width: 200px;
+    height: 120px;
+    margin-bottom: 30px;
+}
+
+.tracksidebar .train-illustration svg {
+    width: 100%;
+    height: 100%;
+}
+
+.tracksidebar .message {
+    color: #8B0000;
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.map-container {
+    flex: 1;
+    min-width: 0;
+    background: #d0d0d0;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    padding: 0;
+    margin: 0;
+}
+
+.map-content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/images/lrt_map.png');
+    background-size: 100% 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.station {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+}
+
+.station:hover {
+    transform: scale(1.3);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.station-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid currentColor;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    aspect-ratio: 1/1;
+    flex-shrink: 0;
+}
+
+.station.transfer .station-dot {
+    width: 16px;
+    height: 16px;
+    border-width: 4px;
+    background: white;
+    box-shadow: 0 0 0 2px white, 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.yellow-line { color: #FFD700; }
+.blue-line { color: #4169E1; }
+.purple-line { color: #a187d4; }
+
+@media (max-width: 1024px) {
+    .main-container {
+        flex-direction: column;
+        height: auto;
+    }
+    .tracksidebar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 15px 20px;
+    }
+}
