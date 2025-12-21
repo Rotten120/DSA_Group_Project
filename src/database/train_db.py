@@ -19,7 +19,7 @@ class TrainDB:
                     self.__add_stations(temp_dict["stations"])
        
         intersection_dict = self.fetch_entry(intersection_filename)
-        self.__add_intersections(intersection_dict)
+        self.__add_intersections(folder_path + "/" + intersection_dict)
         
     def fetch_entry(self, entry_name: str) -> dict:
         temp_dict = {}
@@ -45,3 +45,6 @@ class TrainDB:
             self.__data.add_vertex(it)
             self.__data.add_edge(it["station1"], it)
             self.__data.add_edge(it["station2"], it)
+
+    def get(self) -> Graph:
+        return self.__data
