@@ -24,5 +24,11 @@
         "route": "/bst",
         "desc": "Insert Description here",
         "bg-img": "bst.webp"
+    },
+    "template_": {
+        "title": "Coming Soon",
+        "route": "/projects",
+        "desc": "This project is comming soon! Please wait for it!",
+        "bg-img": "coming_soon.jpg" 
     }
 }
