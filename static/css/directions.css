@@ -30,7 +30,7 @@ body {
 
 /* Sidebar */
 .tracksidebar {
-    width: 400px;
+    width: 350px;
     min-width: 400px;
     flex-shrink: 0;
     background: white;
@@ -42,13 +42,14 @@ body {
     position: relative;
     z-index: 1000 !important;
     pointer-events: auto !important;
+    margin-left: 50px;
 }
 
 .tracksidebar-header {
     background: #8B0000;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.2rem;
     color: white;
     font-weight: 700;
     flex-shrink: 0;
@@ -322,7 +323,7 @@ body {
 
 /* Journey Card */
 .journey-card {
-    margin: 20px;
+    margin: 10px;
     background: white;
     border-radius: 15px;
     padding: 20px;
@@ -703,6 +704,7 @@ body {
     position: relative;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     z-index: 1 !important;
+    margin-right: 50px;
 }
 
 .map-content {
@@ -716,6 +718,7 @@ body {
     background-position: top center;
     background-repeat: no-repeat;
     background-color: #d0d0d0;
+    
 }
 
 .map-overlay {

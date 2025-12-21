@@ -1,5 +1,5 @@
 /**
- * TRACKIT - RAILWAY ROUTING LOGIC (OPTIMIZED)
+ * TRACKIT - RAILWAY ROUTING LOGIC (FIXED)
  * Logic: Graph-Based Breadth-First Search (BFS)
  */
 
@@ -8,7 +8,8 @@
 // ==========================================
 const originInput = document.getElementById('origin');
 const destinationInput = document.getElementById('destination');
-const refreshBtn = document.querySelector('.refresh-btn');
+const swapBtn = document.querySelector('.refresh-btn');
+const refreshJourneyBtn = document.querySelector('.refresh-journey-btn');
 const backButton = document.getElementById('backButton');
 const originalView = document.querySelector('.original-view');
 const newView = document.querySelector('.new-view');
@@ -32,25 +33,139 @@ const clickableStations = Array.from(stations).filter(station =>
 );
 
 // ==========================================
-// 2. DATA: STATIONS & LINES
+// 2. DATA: STATIONS & LINES (UPDATED)
 // ==========================================
 
 const trainLines = {
-    'LRT-1': ['Baclaran', 'EDSA', 'Libertad', 'Gil Puyat', 'Vito Cruz', 'Quirino Ave.', 'Pedro Gil', 'United Nations', 'Central Terminal', 'Carriedo', 'Doroteo Jose', 'Bambang', 'Tayuman', 'Blumentritt', 'Abad Santos', 'R. Papa', '5th Ave.', 'Monumento', 'Malvar', 'Balintawak', 'Roosevelt', 'North Ave. LRT-1'],
-    'MRT-3': ['North Ave. MRT-3', 'Quezon Ave.', 'Kamuning', 'Araneta Center-Cubao MRT-3', 'Santolan MRT-3', 'intersection-1','Ortigas', 'Shaw Blvd.', 'Boni', 'Guadalupe', 'Buendia', 'Ayala', 'Magallanes', 'Taft'],
-    'LRT-2': ['Recto', 'Legarda', 'Pureza', 'V. Mapa', 'J. Ruiz', 'Gilmore', 'Betty Go-Belmonte', 'Araneta Center-Cubao LRT-2', 'Anonas', 'Katipunan', 'Santolan LRT-2']
+    // LRT-1: From North to South (Roosevelt to Dr. Santos)
+    'LRT-1': [
+        'Roosevelt',
+        'Balintawak', 
+        'Monumento',
+        'R. Papa',
+        'Abad Santos',
+        'Blumentritt',
+        'Tayuman',
+        'Bambang',
+        'Doroteo Jose',
+        'Carriedo',
+        'Central Terminal',
+        'United Nations',
+        'Pedro Gil',
+        'Quirino Ave.',
+        'Vito Cruz',
+        'Gil Puyat',
+        'Libertad',
+        'EDSA',
+        'Baclaran',
+        'Redemption-ASEANA',
+        'MIA Road',
+        'ASIA World',
+        'Ninoy Aquino Ave.',
+        'Dr. Santos'
+    ],
+    // MRT-3: From North Ave to Taft
+    'MRT-3': [
+        'North Ave. MRT-3',
+        'Quezon Ave.',
+        'Kamuning',
+        'Araneta Center-Cubao MRT-3',
+        'Santolan MRT-3',
+        'Ortigas',
+        'Shaw Blvd.',
+        'Boni',
+        'Guadalupe',
+        'Buendia',
+        'Ayala',
+        'Magallanes',
+        'Taft'
+    ],
+    // LRT-2: From Recto to Antipolo
+    'LRT-2': [
+        'Recto',
+        'Legarda',
+        'Pureza',
+        'V. Mapa',
+        'J. Ruiz',
+        'Gilmore',
+        'Betty Go-Belmonte',
+        'Araneta Center-Cubao LRT-2',
+        'Anonas',
+        'Katipunan',
+        'Santolan',
+        'Marikina-Pasig',
+        'Antipolo'
+    ]
 };
 
-// Connecting Stations (Edges between lines)
+// Connecting Stations (Transfer Hubs)
 const transferHubs = [
     { lineA: 'LRT-1', stationA: 'Doroteo Jose', lineB: 'LRT-2', stationB: 'Recto' },
     { lineA: 'LRT-2', stationA: 'Araneta Center-Cubao LRT-2', lineB: 'MRT-3', stationB: 'Araneta Center-Cubao MRT-3' },
-    { lineA: 'LRT-1', stationA: 'EDSA', lineB: 'MRT-3', stationB: 'Taft' },
-    { lineA: 'LRT-1', stationA: 'North Ave. LRT-1', lineB: 'MRT-3', stationB: 'North Ave. MRT-3' }
+    { lineA: 'LRT-1', stationA: 'EDSA', lineB: 'MRT-3', stationB: 'Taft' }
 ];
 
+// Station coordinates for geolocation (approximate Manila coordinates)
+const stationCoordinates = {
+    // LRT-1
+    'Roosevelt': { lat: 14.6541, lng: 121.0198 },
+    'Balintawak': { lat: 14.6537, lng: 120.9843 },
+    'Monumento': { lat: 14.6544, lng: 120.9840 },
+    'R. Papa': { lat: 14.6189, lng: 120.9895 },
+    'Abad Santos': { lat: 14.6134, lng: 120.9886 },
+    'Blumentritt': { lat: 14.6095, lng: 120.9835 },
+    'Tayuman': { lat: 14.6040, lng: 120.9835 },
+    'Bambang': { lat: 14.6013, lng: 120.9835 },
+    'Doroteo Jose': { lat: 14.5985, lng: 120.9835 },
+    'Carriedo': { lat: 14.5924, lng: 120.9835 },
+    'Central Terminal': { lat: 14.5890, lng: 120.9835 },
+    'United Nations': { lat: 14.5802, lng: 120.9835 },
+    'Pedro Gil': { lat: 14.5730, lng: 120.9935 },
+    'Quirino Ave.': { lat: 14.5676, lng: 121.0035 },
+    'Vito Cruz': { lat: 14.5623, lng: 121.0135 },
+    'Gil Puyat': { lat: 14.5534, lng: 121.0235 },
+    'Libertad': { lat: 14.5454, lng: 121.0335 },
+    'EDSA': { lat: 14.5388, lng: 121.0435 },
+    'Baclaran': { lat: 14.5366, lng: 121.0117 },
+    'Redemption-ASEANA': { lat: 14.5300, lng: 120.9900 },
+    'MIA Road': { lat: 14.5100, lng: 120.9900 },
+    'ASIA World': { lat: 14.4900, lng: 120.9900 },
+    'Ninoy Aquino Ave.': { lat: 14.4800, lng: 121.0000 },
+    'Dr. Santos': { lat: 14.4600, lng: 120.9900 },
+    
+    // MRT-3
+    'North Ave. MRT-3': { lat: 14.6562, lng: 121.0318 },
+    'Quezon Ave.': { lat: 14.6352, lng: 121.0497 },
+    'Kamuning': { lat: 14.6264, lng: 121.0650 },
+    'Araneta Center-Cubao MRT-3': { lat: 14.6195, lng: 121.0518 },
+    'Santolan MRT-3': { lat: 14.6103, lng: 121.0855 },
+    'Ortigas': { lat: 14.5867, lng: 121.0565 },
+    'Shaw Blvd.': { lat: 14.5814, lng: 121.0533 },
+    'Boni': { lat: 14.5690, lng: 121.0521 },
+    'Guadalupe': { lat: 14.5585, lng: 121.0448 },
+    'Buendia': { lat: 14.5529, lng: 121.0329 },
+    'Ayala': { lat: 14.5485, lng: 121.0279 },
+    'Magallanes': { lat: 14.5425, lng: 121.0198 },
+    'Taft': { lat: 14.5388, lng: 121.0435 },
+    
+    // LRT-2
+    'Recto': { lat: 14.5985, lng: 120.9910 },
+    'Legarda': { lat: 14.6012, lng: 121.0012 },
+    'Pureza': { lat: 14.6035, lng: 121.0135 },
+    'V. Mapa': { lat: 14.6058, lng: 121.0235 },
+    'J. Ruiz': { lat: 14.6090, lng: 121.0335 },
+    'Gilmore': { lat: 14.6113, lng: 121.0435 },
+    'Betty Go-Belmonte': { lat: 14.6140, lng: 121.0535 },
+    'Araneta Center-Cubao LRT-2': { lat: 14.6195, lng: 121.0518 },
+    'Anonas': { lat: 14.6268, lng: 121.0635 },
+    'Katipunan': { lat: 14.6310, lng: 121.0735 },
+    'Santolan': { lat: 14.6380, lng: 121.0935 },
+    'Marikina-Pasig': { lat: 14.6420, lng: 121.1035 },
+    'Antipolo': { lat: 14.6450, lng: 121.1835 }
+};
+
 // ==========================================
-// 3. GRAPH & ALGORITHM (THE FIX)
+// 3. GRAPH & ALGORITHM
 // ==========================================
 
 // Helper: Find which line a station belongs to
@@ -62,7 +177,6 @@ function findStationLine(stationName) {
 }
 
 // 1. Build Adjacency Graph
-// This turns the lists of stations into a connected web
 function buildGraph() {
     const graph = {};
 
@@ -93,30 +207,26 @@ function buildGraph() {
 }
 
 // 2. Breadth-First Search (BFS)
-// Finds the path with the fewest number of "hops" (stops + transfers)
 function findRoute(origin, destination) {
     if (origin === destination) return null;
 
     const graph = buildGraph();
-    let queue = [[origin]]; // Queue of paths
+    let queue = [[origin]];
     let visited = new Set();
     visited.add(origin);
 
     while (queue.length > 0) {
-        let path = queue.shift(); // Dequeue the first path
+        let path = queue.shift();
         let currentStation = path[path.length - 1];
 
-        // Did we reach the destination?
         if (currentStation === destination) {
             return formatRouteResult(path);
         }
 
-        // Check neighbors
         if (graph[currentStation]) {
             for (let neighbor of graph[currentStation]) {
                 if (!visited.has(neighbor)) {
                     visited.add(neighbor);
-                    // Create new path extending to this neighbor
                     let newPath = [...path, neighbor];
                     queue.push(newPath);
                 }
@@ -124,36 +234,30 @@ function findRoute(origin, destination) {
         }
     }
 
-    // Fallback if no route found
     return {
-        time: 'N/A', cost: 0, line: 'No Route',
+        time: 'N/A', 
+        cost: 0, 
+        line: 'No Route',
         route: 'No connecting route found',
         stations: [origin, destination]
     };
 }
 
 // 3. Formatter
-// Takes the raw list of stations from BFS and calculates price/time
 function formatRouteResult(stationPath) {
     const origin = stationPath[0];
     const destination = stationPath[stationPath.length - 1];
     const originLine = findStationLine(origin);
     
-    // Calculate Stats
-    // Note: We subtract 1 because N stations = N-1 travel segments
-    const totalStops = stationPath.length - 1; 
+    const totalStops = stationPath.length - 1;
 
-    // Detect transfers
     let distinctLines = new Set();
     let transferCount = 0;
     
-    // Simple logic to count how many unique lines we touched
-    // This isn't perfect for "common stations" but works for display
     stationPath.forEach((st, index) => {
         const line = findStationLine(st);
         if (line) distinctLines.add(line);
         
-        // Check if we switched lines between this station and the last
         if (index > 0) {
             const prevLine = findStationLine(stationPath[index-1]);
             if (prevLine && line && prevLine !== line) {
@@ -164,19 +268,15 @@ function formatRouteResult(stationPath) {
 
     const isMultiLine = distinctLines.size > 1;
 
-    // Pricing Model (Example: Base 15 + 3 per stop + 5 per transfer)
     const estimatedCost = 15 + (totalStops * 2) + (transferCount * 5);
-    
-    // Time Model (3 mins per stop + 10 mins buffer per transfer)
     const minTime = (totalStops * 3) + (transferCount * 5);
     const maxTime = (totalStops * 4) + (transferCount * 10);
 
-    // Route Description
     let routeDesc = '';
     if (isMultiLine) {
-        routeDesc = `Via ${Array.from(distinctLines).join(' > ')}`;
+        routeDesc = `Via ${Array.from(distinctLines).join(' → ')}`;
     } else {
-        routeDesc = `${originLine} Direct`;
+        routeDesc = `${originLine}: ${origin} → ${destination}`;
     }
 
     return {
@@ -186,12 +286,12 @@ function formatRouteResult(stationPath) {
         route: routeDesc,
         getOn: origin,
         getOff: destination,
-        stations: stationPath // Used for map drawing
+        stations: stationPath
     };
 }
 
 // ==========================================
-// 4. MAP & GEOLOCATION UTILS
+// 4. GEOLOCATION UTILS
 // ==========================================
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -209,7 +309,10 @@ function findNearestStation(lat, lng) {
     let nearest = null, minDst = Infinity;
     for (const [stn, crd] of Object.entries(stationCoordinates)) {
         const dst = calculateDistance(lat, lng, crd.lat, crd.lng);
-        if (dst < minDst) { minDst = dst; nearest = stn; }
+        if (dst < minDst) { 
+            minDst = dst; 
+            nearest = stn; 
+        }
     }
     return nearest;
 }
@@ -234,7 +337,6 @@ function displayRoute() {
     document.getElementById('routeInfo').classList.add('active');
     selectedJourneyView.classList.remove('active');
 
-    // Run the new BFS Algorithm
     const routeData = findRoute(origin, destination);
     currentRouteData = routeData;
 
@@ -276,12 +378,20 @@ function selectStation(stationName) {
     displayRoute();
 }
 
-// Station Click Handlers
+// Station Click Handlers - FIXED
 clickableStations.forEach(station => {
-    station.addEventListener('click', () => {
+    station.addEventListener('click', (e) => {
+        e.stopPropagation();
         const stationName = station.getAttribute('data-station');
-        if (currentMode) selectStation(stationName);
+        console.log('Station clicked:', stationName); // Debug log
+        if (currentMode) {
+            selectStation(stationName);
+        }
     });
+    
+    // Ensure stations are clickable
+    station.style.cursor = 'pointer';
+    station.style.pointerEvents = 'auto';
 });
 
 // Search Logic
@@ -307,16 +417,37 @@ searchInput.addEventListener('keypress', (e) => {
         const searchTerm = searchInput.value.toLowerCase().trim();
         if (!searchTerm) return;
         
-        let match = Array.from(clickableStations).find(s => s.getAttribute('data-station').toLowerCase() === searchTerm);
-        if (!match) match = Array.from(clickableStations).find(s => s.getAttribute('data-station').toLowerCase().includes(searchTerm));
+        let match = Array.from(clickableStations).find(s => 
+            s.getAttribute('data-station').toLowerCase() === searchTerm
+        );
+        if (!match) {
+            match = Array.from(clickableStations).find(s => 
+                s.getAttribute('data-station').toLowerCase().includes(searchTerm)
+            );
+        }
         
         if (match) selectStation(match.getAttribute('data-station'));
         else alert(`No station found matching "${searchTerm}"`);
     }
 });
 
-// Reset Logic
-refreshBtn.addEventListener('click', () => {
+// Reset Logic - Swap button functionality
+swapBtn.addEventListener('click', () => {
+    const tempOrigin = originInput.value;
+    const tempDestination = destinationInput.value;
+    
+    // Swap the values
+    originInput.value = tempDestination;
+    destinationInput.value = tempOrigin;
+    
+    // Recalculate route if both fields have values
+    if (originInput.value && destinationInput.value) {
+        displayRoute();
+    }
+});
+
+// Refresh Journey Button - Reset everything
+refreshJourneyBtn.addEventListener('click', () => {
     originInput.value = '';
     destinationInput.value = '';
     originalView.classList.remove('hidden');
@@ -391,8 +522,11 @@ function getUserLocation() {
 getUserLocation();
 
 currentLocationBtn.addEventListener('click', () => {
-    if (currentMode && userCurrentStation) selectStation(userCurrentStation);
-    else if (currentMode) alert('Location not available.');
+    if (currentMode && userCurrentStation) {
+        selectStation(userCurrentStation);
+    } else if (currentMode) {
+        alert('Location not available.');
+    }
 });
 
 // ==========================================
@@ -403,7 +537,6 @@ function highlightRouteOnMap(stationNames) {
     clearRouteOnMap();
     const routeStations = [];
     
-    // Convert names back to DOM elements
     stationNames.forEach(name => {
         stations.forEach(stn => {
             if (stn.getAttribute('data-station') === name && !routeStations.includes(stn)) {
@@ -434,8 +567,7 @@ function drawRouteLines(routeStations) {
         const st1 = routeStations[i];
         const st2 = routeStations[i + 1];
         
-        // Skip drawing if station names are the same (e.g. self-transfer logic in same hub)
-        if(st1 === st2) continue; 
+        if(st1 === st2) continue;
 
         const r1 = st1.getBoundingClientRect();
         const r2 = st2.getBoundingClientRect();
@@ -456,7 +588,10 @@ function drawRouteLines(routeStations) {
         line.style.left = x1 + 'px';
         line.style.top = y1 + 'px';
         line.style.transform = `rotate(${angle}deg)`;
-        line.style.transformOrigin = '0 50%';
+        line.style.transformOrigin = '0 0';
+        line.style.position = 'absolute';
+        line.style.backgroundColor = '#FFD700';
+        line.style.zIndex = '1';
         
         mapOverlay.appendChild(line);
     }
@@ -469,3 +604,8 @@ function clearRouteOnMap() {
     });
     document.querySelectorAll('.route-connector').forEach(c => c.remove());
 }
+
+// Debug: Log station information on page load
+console.log('Total stations found:', stations.length);
+console.log('Clickable stations:', clickableStations.length);
+console.log('All station names:', Array.from(clickableStations).map(s => s.getAttribute('data-station')));
