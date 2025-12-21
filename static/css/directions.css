@@ -4,7 +4,17 @@
     box-sizing: border-box;
 }
 
+.main-container * {
+    box-sizing: border-box;
+}
+
+header {
+    margin-left: 20px;
+    margin-top: -80px;
+}
+
 body {
+    margin-top: 100px;
     font-family: "Montserrat", sans-serif;
     background: linear-gradient(to bottom, #1a0000 0%, #000000 100%);
     color: white;
