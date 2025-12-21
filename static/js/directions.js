@@ -26,65 +26,18 @@ let currentMode = '';
 let currentRouteData = null;
 let userCurrentStation = null;
 
+// Filter out intersection-1 from clickable stations
+const clickableStations = Array.from(stations).filter(station => 
+    station.getAttribute('data-station') !== 'intersection-1'
+);
+
 // ==========================================
 // 2. DATA: STATIONS & LINES
 // ==========================================
 
-const stationCoordinates = {
-    // LRT-1
-    'Baclaran': { lat: 14.5369, lng: 121.0011 },
-    'EDSA': { lat: 14.5391, lng: 121.0034 },
-    'Libertad': { lat: 14.5461, lng: 121.0056 },
-    'Gil Puyat': { lat: 14.5538, lng: 121.0103 },
-    'Vito Cruz': { lat: 14.5612, lng: 121.0168 },
-    'Quirino Ave.': { lat: 14.5706, lng: 121.0223 },
-    'Pedro Gil': { lat: 14.5774, lng: 121.0293 },
-    'United Nations': { lat: 14.5815, lng: 121.0333 },
-    'Central Terminal': { lat: 14.5889, lng: 121.0417 },
-    'Carriedo': { lat: 14.5944, lng: 121.0467 },
-    'Doroteo Jose': { lat: 14.6001, lng: 121.0517 },
-    'Bambang': { lat: 14.6059, lng: 121.0556 },
-    'Tayuman': { lat: 14.6101, lng: 121.0596 },
-    'Blumentritt': { lat: 14.6159, lng: 121.0636 },
-    'Abad Santos': { lat: 14.6201, lng: 121.0686 },
-    'R. Papa': { lat: 14.6231, lng: 121.0736 },
-    '5th Ave.': { lat: 14.6281, lng: 121.0786 },
-    'Monumento': { lat: 14.6541, lng: 121.0836 },
-    'Malvar': { lat: 14.6587, lng: 121.0876 },
-    'Balintawak': { lat: 14.6633, lng: 121.0916 },
-    'Roosevelt': { lat: 14.6547, lng: 121.1008 },
-    'North Ave. LRT-1': { lat: 14.6522, lng: 121.0323 },
-    // MRT-3
-    'North Ave. MRT-3': { lat: 14.6565, lng: 121.0321 },
-    'Quezon Ave.': { lat: 14.6373, lng: 121.0388 },
-    'Kamuning': { lat: 14.6277, lng: 121.0432 },
-    'Araneta Center-Cubao MRT-3': { lat: 14.6191, lng: 121.0519 },
-    'Santolan MRT-3': { lat: 14.6099, lng: 121.0854 },
-    'Ortigas': { lat: 14.5865, lng: 121.0567 },
-    'Shaw Blvd.': { lat: 14.5815, lng: 121.0548 },
-    'Boni': { lat: 14.5743, lng: 121.0528 },
-    'Guadalupe': { lat: 14.5643, lng: 121.0488 },
-    'Buendia': { lat: 14.5565, lng: 121.0330 },
-    'Ayala': { lat: 14.5488, lng: 121.0288 },
-    'Magallanes': { lat: 14.5433, lng: 121.0198 },
-    'Taft': { lat: 14.5378, lng: 121.0138 },
-    // LRT-2
-    'Recto': { lat: 14.6031, lng: 120.9920 },
-    'Legarda': { lat: 14.6067, lng: 120.9960 },
-    'Pureza': { lat: 14.6102, lng: 121.0050 },
-    'V. Mapa': { lat: 14.6138, lng: 121.0130 },
-    'J. Ruiz': { lat: 14.6173, lng: 121.0220 },
-    'Gilmore': { lat: 14.6209, lng: 121.0310 },
-    'Betty Go-Belmonte': { lat: 14.6244, lng: 121.0400 },
-    'Araneta Center-Cubao LRT-2': { lat: 14.6195, lng: 121.0511 },
-    'Anonas': { lat: 14.6315, lng: 121.0570 },
-    'Katipunan': { lat: 14.6351, lng: 121.0660 },
-    'Santolan LRT-2': { lat: 14.6380, lng: 121.0750 },
-};
-
 const trainLines = {
     'LRT-1': ['Baclaran', 'EDSA', 'Libertad', 'Gil Puyat', 'Vito Cruz', 'Quirino Ave.', 'Pedro Gil', 'United Nations', 'Central Terminal', 'Carriedo', 'Doroteo Jose', 'Bambang', 'Tayuman', 'Blumentritt', 'Abad Santos', 'R. Papa', '5th Ave.', 'Monumento', 'Malvar', 'Balintawak', 'Roosevelt', 'North Ave. LRT-1'],
-    'MRT-3': ['North Ave. MRT-3', 'Quezon Ave.', 'Kamuning', 'Araneta Center-Cubao MRT-3', 'Santolan MRT-3', 'Ortigas', 'Shaw Blvd.', 'Boni', 'Guadalupe', 'Buendia', 'Ayala', 'Magallanes', 'Taft'],
+    'MRT-3': ['North Ave. MRT-3', 'Quezon Ave.', 'Kamuning', 'Araneta Center-Cubao MRT-3', 'Santolan MRT-3', 'intersection-1','Ortigas', 'Shaw Blvd.', 'Boni', 'Guadalupe', 'Buendia', 'Ayala', 'Magallanes', 'Taft'],
     'LRT-2': ['Recto', 'Legarda', 'Pureza', 'V. Mapa', 'J. Ruiz', 'Gilmore', 'Betty Go-Belmonte', 'Araneta Center-Cubao LRT-2', 'Anonas', 'Katipunan', 'Santolan LRT-2']
 };
 
@@ -324,7 +277,7 @@ function selectStation(stationName) {
 }
 
 // Station Click Handlers
-stations.forEach(station => {
+clickableStations.forEach(station => {
     station.addEventListener('click', () => {
         const stationName = station.getAttribute('data-station');
         if (currentMode) selectStation(stationName);
@@ -334,7 +287,7 @@ stations.forEach(station => {
 // Search Logic
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase().trim();
-    stations.forEach(station => {
+    clickableStations.forEach(station => {
         const stationName = station.getAttribute('data-station').toLowerCase();
         if (!searchTerm || stationName.includes(searchTerm)) {
             station.style.opacity = '1';
@@ -354,8 +307,8 @@ searchInput.addEventListener('keypress', (e) => {
         const searchTerm = searchInput.value.toLowerCase().trim();
         if (!searchTerm) return;
         
-        let match = Array.from(stations).find(s => s.getAttribute('data-station').toLowerCase() === searchTerm);
-        if (!match) match = Array.from(stations).find(s => s.getAttribute('data-station').toLowerCase().includes(searchTerm));
+        let match = Array.from(clickableStations).find(s => s.getAttribute('data-station').toLowerCase() === searchTerm);
+        if (!match) match = Array.from(clickableStations).find(s => s.getAttribute('data-station').toLowerCase().includes(searchTerm));
         
         if (match) selectStation(match.getAttribute('data-station'));
         else alert(`No station found matching "${searchTerm}"`);

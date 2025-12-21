@@ -711,7 +711,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url('/static/images/lrt_map.png');
+    background-image: url('/static/images/lrt_map.jpg');
     background-size: 100% 100%;
     background-position: top center;
     background-repeat: no-repeat;
@@ -767,6 +767,11 @@ body {
 .yellow-line { color: #FFD700; }
 .blue-line { color: #4169E1; }
 .purple-line { color: #a187d4; }
+
+.station.intersection {
+    pointer-events: none;
+    opacity: 0;
+}
 
 .station.on-route .station-dot {
     background: #8B0000;
