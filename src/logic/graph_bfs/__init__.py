@@ -1,2 +1,2 @@
-from .bfs import BreathFirstSearch
+from .graph import Graph
 from .node import Node

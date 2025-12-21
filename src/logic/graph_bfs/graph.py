@@ -2,7 +2,7 @@ from typing import Dict, List
 from collections import deque
 from .node import Node
 
-class BreathFirstSearch:
+class Graph:
     def __init__(self) -> None:
         self.vertices: Dict[str, Node] = {}
 
