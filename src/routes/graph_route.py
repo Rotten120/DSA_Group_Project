@@ -15,4 +15,8 @@ def graph_update():
 @graph_bp.route('/search/path/<string:start>/<string:end>')
 def search_shortest_path_by_stations(start: str, end: str):
     global graph_bp
-    return jsonify(graph_bp.get().bfs(start, end))
+    return jsonify({
+        "stations": graph_bp.get().bfs(start, end),
+        "time": 0,
+        "cost": 0
+    )
