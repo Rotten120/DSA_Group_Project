@@ -61,7 +61,7 @@ class Graph:
         if to_station in self.vertices:
             self.vertices[to_station].neighbors.pop(from_station, None)
 
-    def shortest_path(self, start: str, end: str) -> List[str]:
+    def bfs(self, start: str, end: str) -> List[str]:
         # Find the shortest path between two stations using BFS
         if start not in self.vertices or end not in self.vertices:
             return []
