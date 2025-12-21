@@ -767,9 +767,9 @@ body {
     box-shadow: 0 0 0 2px white, 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-.yellow-line { color: #FFD700; }
-.blue-line { color: #4169E1; }
-.purple-line { color: #a187d4; }
+.yellow-line { color: #97f152; }
+.blue-line { color: #4189e1; }
+.purple-line { color: #d77122; }
 
 .station.intersection {
     pointer-events: none;
