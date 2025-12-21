@@ -1,0 +1,14 @@
+{
+    "root": {
+        "value": "Von",
+        "left": "Carl",
+        "right": null
+    },
+    "children": [
+        {
+            "value": "Carl",
+            "left": null,
+            "right": null
+        }
+    ]
+}

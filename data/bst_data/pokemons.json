@@ -21,8 +21,13 @@
             "right": null
         },
         {
-            "value": "Rhypherior",
+            "value": "Raichu",
             "left": null,
+            "right": null
+        },
+        {
+            "value": "Rhypherior",
+            "left": "Raichu",
             "right": null
         }
     ]
