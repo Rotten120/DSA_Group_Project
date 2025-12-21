@@ -20,3 +20,11 @@ def search_shortest_path_by_stations(start: str, end: str):
         "time": 0,
         "cost": 0
     )
+
+@graph_bp.route('/search/time/<string:start>/<string:start>')
+def search_shortest_path_by_time(start: str, end: str):
+    raise Exception("API still in development")
+
+@graph_bp.route('/search/cost/<string:start>/<string:start>')
+def search_shortest_path_by_cost(start: str, end: str):
+    raise Exception("API still in development")
