@@ -42,7 +42,7 @@ body {
     position: relative;
     z-index: 1000 !important;
     pointer-events: auto !important;
-    margin-left: 50px;
+    margin-left: 80px;
 }
 
 .tracksidebar-header {
@@ -704,7 +704,7 @@ body {
     position: relative;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     z-index: 1 !important;
-    margin-right: 50px;
+    margin-right: 80px;
 }
 
 .map-content {
@@ -713,7 +713,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url('/static/images/lrt_map.jpg');
+    background-image: url('/static/images/lrt_map-1.jpg');
     background-size: 100% 100%;
     background-position: top center;
     background-repeat: no-repeat;
@@ -760,16 +760,16 @@ body {
 }
 
 .station.transfer .station-dot {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     border-width: 4px;
     background: white;
     box-shadow: 0 0 0 2px white, 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-.yellow-line { color: #FFD700; }
-.blue-line { color: #4169E1; }
-.purple-line { color: #a187d4; }
+.yellow-line { color: #97f152; }
+.blue-line { color: #4189e1; }
+.purple-line { color: #d77122; }
 
 .station.intersection {
     pointer-events: none;
