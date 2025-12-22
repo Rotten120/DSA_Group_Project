@@ -6,10 +6,10 @@ class Graph:
     def __init__(self) -> None:
         self.vertices: Dict[str, Node] = {}
 
-    def add_vertex(self, station_name: str, tag: str = None) -> None:
+    def add_vertex(self, station_name: str) -> None:
         # Add a station (vertex)
         if station_name not in self.vertices:
-            self.vertices[station_name] = Node(station_name, tag)
+            self.vertices[station_name] = Node(station_name)
 
     def remove_vertex(self, station_name: str) -> None:
         # Remove station and all connected edges (vertex)
@@ -37,15 +37,15 @@ class Graph:
         if to_station in self.vertices:
             self.vertices[to_station].neighbors.pop(from_station, None)
 
-    def bfs(self, start: str, end: str) -> Tuple[List[str], int]:
+    def bfs(self, start: str, end: str, initial_weight, include_tags: bool = False) -> Tuple[List[str], int, List[str]]:
         # Find the shortest path between two stations using BFS
         if start not in self.vertices or end not in self.vertices:
-            return [], 0
+            return [], 0, []
 
         visited: set[str] = set()
         queue: deque[Tuple[List[str], int]] = deque()
 
-        queue.append(([start], w_counter))
+        queue.append(([start], initial_weight))
         visited.add(start)
 
         while queue:
@@ -53,7 +53,8 @@ class Graph:
             current = path[-1]
 
             if current == end:
-                return path, current_weight
+                tags = [self.vertices[p].tag for p in path] if include_tags else [] 
+                return path, current_weight, tags
 
             for neighbor, weight in self.vertices[current].neighbors.items():
                 if neighbor not in visited:
@@ -62,5 +63,7 @@ class Graph:
                         (path + [neighbor], current_weight + weight)
                     )
 
-        return [], 0
+        return [], 0, []
     
+
+
