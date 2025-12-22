@@ -15,8 +15,6 @@ def graph_update():
 @graph_bp.route('/search/path/<string:start>/<string:end>')
 def search_shortest_path_by_stations(start: str, end: str):
     global graph_bp
-    stations = graph_bp.get().bfs(start, end) 
-
     #stations is empty
     if not stations:
         return jsonify(message = "Start or End stations does not exist"), 404

@@ -38,8 +38,20 @@
           </p>
 
           <div class="search-container">
-            <input type="text" class="search-input" placeholder="Starting station?">
-            <button class="search-button">Go</button>
+            <input
+              type="text"
+              lass="search-input"
+              placeholder="Starting station?"
+              readonly
+              onclick="window.location.href='directions'"
+              class="search-input"
+            >
+            <button
+              class="search-button"
+              onclick="window.location.href='directions'"
+            >
+              Go
+            </button>
           </div>
         </div>
       </div>
