@@ -1,26 +1,30 @@
-{
-  "mrt-lrt1-north": {
+[
+  {
     "station1": "North Ave.",
     "station2": "Fernando Poe Jr.",
-    "value": 0,
+    "stored value": 0,
+    "single journey": 0,
     "time": 0
   },
-  "mrt-lrt1-south": {
+  {
     "station1": "Taft Ave.",
     "station2": "Dr. Santos",
-    "value": 0,
+    "stored value": 0,
+    "single journey": 0,
     "time": 0
   },
-  "lrt1-lrt2-west": {
+  {
     "station1": "Doroteo Jose",
     "station2": "Recto",
-    "value": 0,
+    "stored value": 0,
+    "single journey": 0,
     "time": 0
   },
-  "mrt-lrt2-east": {
+  {
     "station1": "Araneta-Cubao",
     "station2": "Araneta Center-Cubao",
-    "value": 0,
+    "stored value": 0,
+    "single journey": 0,
     "time": 0
   }
-}
+]
