@@ -18,13 +18,19 @@ def search_shortest_path_by_stations(start: str, end: str):
 
         if not raw_stations or len(raw_stations) == 0:
             return jsonify(message="Start or End stations does not exist"), 404
-        stations = [s for s in raw_stations if not s.startswith("intersection-")]
+    
+        stations = []
+        
+        for i, station in enumerate(raw_stations):
+            if not station.startswith("intersection-"):
+                stations.append(station)
         
         if len(stations) == 0:
             return jsonify(message="No valid route found"), 404
-        
+    
         body = {
             "stations": stations,
+            "raw_path": raw_stations
         }
         
         return jsonify(body), 200
