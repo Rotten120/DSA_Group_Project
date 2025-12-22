@@ -34,13 +34,14 @@ class Graph:
         for vertex in self.vertices.values():
             vertex.neighbors.pop(station_name, None)
 
-    def add_edge(self, from_station: str, to_station: str) -> None:
+    def add_edge(self, from_station: str, to_station: str, weight, two_way: bool = False) -> None:
         # Add a connection (edge) between two stations
         if from_station not in self.vertices or to_station not in self.vertices:
             return
 
-        self.vertices[from_station].neighbors[to_station] = 1
-        self.vertices[to_station].neighbors[from_station] = 1
+        self.vertices[from_station].neighbors[to_station] = weight
+        if two_way:
+            self.vertices[to_station].neighbors[from_station] = weight
 
     def edit_edge(self, from_station: str, old_to: str, new_to: str) -> None:
         # Edit a connection (edge) from one station to another
@@ -52,7 +53,7 @@ class Graph:
             return
 
         self.vertices[from_station].neighbors.pop(old_to)
-        self.vertices[from_station].neighbors[new_to] = 1
+        self.vertices[from_station].neighbors[new_to] = 1  
 
     def remove_edge(self, from_station: str, to_station: str) -> None:
         # Remove a connection (edge) between two stations
