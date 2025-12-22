@@ -1,4 +1,5 @@
 from src.logic.graph_bfs import Graph
+from src.logic.travel_weight import TravelWeight
 import json
 import os
 
@@ -16,7 +17,7 @@ class TrainDB:
                 #_intersections.json is handled separately
                 if entry.is_file() and ext == 'json' and entry.name[0] != '_':
                     temp_dict = self.fetch_entry(entry.name)
-                    self.__add_stations(temp_dict["stations"])
+                    self.__add_stations(temp_dict)
        
         intersection_dict = self.fetch_entry(intersection_filename)
         self.__add_intersections(intersection_dict)
@@ -34,18 +35,43 @@ class TrainDB:
             i.e. ["A", "B", "C"], the graph looks like A <-> B <-> C
         """
 
-        for station in stations:
-            self.__data.add_vertex(station)
-        for i in range(len(stations) - 1):
-            station_a = stations[i]
-            station_b = stations[i + 1]
-            self.__data.add_edge(station_a, station_b)
+        station_names = stations["stations"]
+        station_count = len(station_names)
 
-    def __add_intersections(self, intersects: dict) -> None:
+        for station in station_names:
+            self.__data.add_vertex(station)
+
+        for n in range(station_count):
+            for m in range(station_count):
+                from_station = station_names[n]
+                to_station = station_names[m]
+
+                weight = TravelWeight(
+                    stations["stored value"][from_station][m],
+                    stations["single journey"][from_station][m],
+                    stations["time"][from_station][m]
+                )
+    
+                self.__data.add_edge(
+                    from_station,
+                    to_station,
+                    weight
+                )
+
+    def __add_intersections(self, intersects: list[dict]) -> None:
         for it in intersects:
-            self.__data.add_vertex(it)
-            self.__data.add_edge(intersects[it]["station1"], it)
-            self.__data.add_edge(intersects[it]["station2"], it)
+            weight = TravelWeight(
+                it["stored value"],
+                it["single journey"],
+                it["time"]
+            )
+
+            self.__data.add_edge(
+                it["station1"],
+                it["station2"],
+                weight,
+                two_way = True
+            )
 
     def get(self) -> Graph:
         return self.__data
