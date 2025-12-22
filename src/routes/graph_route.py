@@ -15,11 +15,17 @@ def graph_update():
 @graph_bp.route('/search/path/<string:start>/<string:end>')
 def search_shortest_path_by_stations(start: str, end: str):
     global graph_bp
-    return jsonify({
-        "stations": graph_bp.get().bfs(start, end),
-        "time": 0,
-        "cost": 0
-    )
+    stations = graph_bp.get().bfs(start, end) 
+
+    #stations is empty
+    if not stations:
+        return jsonify(message = "Start or End stations does not exist"), 404
+
+    body = {"stations": stations, "time": 0, "cost": 0}
+    return jsonify(
+        body = body,
+        message = "Search successful"
+    ), 200
 
 @graph_bp.route('/search/time/<string:start>/<string:start>')
 def search_shortest_path_by_time(start: str, end: str):
