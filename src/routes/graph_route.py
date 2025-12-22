@@ -5,9 +5,9 @@ import json
 
 graph_bp = Blueprint('graph_', __name__)
 folder_path = "data/railway_fare"
-graph_out = TrainDB(folder_path, fetch_data = True) -> dict:
+graph_out = TrainDB(folder_path, fetch_data = True)
 
-def parse_bfs(path: List[str], weight: TrainWeight, tags: List[str]):
+def parse_bfs(path: list[str], weight: TrainWeight, tags: list[str]):
     parsed_dict = {
         "path": [],
         "stored value": weight.stored,
@@ -37,10 +37,10 @@ def search_shortest_path_by_stations(start: str, end: str):
             include_tags = True
         )
 
-        if not raw_stations or len(raw_stations) == 0:
+        if not path or len(path) == 0:
             return jsonify(message="Start or End stations does not exist"), 404
     
-        if len(stations) == 0:
+        if len(path) == 0:
             return jsonify(message="No valid route found"), 404
      
         return jsonify({parse_bfs(path, weight, tags)}), 200

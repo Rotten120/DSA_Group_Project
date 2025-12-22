@@ -6,10 +6,10 @@ class Graph:
     def __init__(self) -> None:
         self.vertices: Dict[str, Node] = {}
 
-    def add_vertex(self, station_name: str) -> None:
+    def add_vertex(self, station_name, tag: str = None ) -> None:
         # Add a station (vertex)
         if station_name not in self.vertices:
-            self.vertices[station_name] = Node(station_name)
+            self.vertices[station_name] = Node(station_name, tag)
 
     def remove_vertex(self, station_name: str) -> None:
         # Remove station and all connected edges (vertex)
