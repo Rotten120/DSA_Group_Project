@@ -42,7 +42,7 @@ body {
     position: relative;
     z-index: 1000 !important;
     pointer-events: auto !important;
-    margin-left: 50px;
+    margin-left: 80px;
 }
 
 .tracksidebar-header {
@@ -704,7 +704,7 @@ body {
     position: relative;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     z-index: 1 !important;
-    margin-right: 50px;
+    margin-right: 80px;
 }
 
 .map-content {
@@ -767,9 +767,9 @@ body {
     box-shadow: 0 0 0 2px white, 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-.yellow-line { color: #FFD700; }
-.blue-line { color: #4169E1; }
-.purple-line { color: #a187d4; }
+.yellow-line { color: #97f152; }
+.blue-line { color: #4189e1; }
+.purple-line { color: #d77122; }
 
 .station.intersection {
     pointer-events: none;

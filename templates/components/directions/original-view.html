@@ -1,0 +1,42 @@
+<!-- Original View (Enter Origin/Destination) -->
+<div class="original-view">
+    <div class="input-section">
+        <div class="dots-column">
+            <div class="dot filled"></div>
+            <div class="connector"></div>
+            <div class="dot"></div>
+        </div>
+        <div class="inputs-column">
+            <div class="input-row">
+                <label>Origin</label>
+                <input type="text" id="origin" placeholder="Enter origin station" readonly>
+            </div>
+            <div class="input-row">
+                <label>Destination</label>
+                <input type="text" id="destination" placeholder="Enter destination station" readonly>
+            </div>
+        </div>
+        <div class="refresh-btn" title="Refresh">
+            <svg viewBox="0 0 24 24">
+                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+            </svg>
+        </div>
+    </div>
+    
+    <div class="illustration-section">
+        <div class="train-illustration">
+            <svg viewBox="0 0 200 100" fill="none">
+                <rect x="40" y="30" width="120" height="50" rx="10" fill="#8B0000"/>
+                <rect x="50" y="40" width="30" height="20" fill="#FFD700"/>
+                <rect x="90" y="40" width="30" height="20" fill="#FFD700"/>
+                <rect x="130" y="40" width="20" height="20" fill="#FFD700"/>
+                <circle cx="60" cy="85" r="8" fill="#333"/>
+                <circle cx="140" cy="85" r="8" fill="#333"/>
+            </svg>
+        </div>
+        <div class="message">Please enter both origin and destination.</div>
+    </div>
+
+    {% include 'components/directions/route-info.html' %}
+    {% include 'components/directions/selected-journey.html' %}
+</div>
