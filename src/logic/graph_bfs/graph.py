@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Tuple
 from collections import deque
 from .node import Node
 
@@ -37,27 +37,30 @@ class Graph:
         if to_station in self.vertices:
             self.vertices[to_station].neighbors.pop(from_station, None)
 
-    def bfs(self, start: str, end: str, w_counter = 0) -> List[str]:
+    def bfs(self, start: str, end: str) -> Tuple[List[str], int]:
         # Find the shortest path between two stations using BFS
         if start not in self.vertices or end not in self.vertices:
-            return []
+            return [], 0
 
         visited: set[str] = set()
-        queue: deque[List[str]] = deque()
+        queue: deque[Tuple[List[str], int]] = deque()
 
-        queue.append([start])
+        queue.append(([start], w_counter))
         visited.add(start)
 
         while queue:
-            path = queue.popleft()
+            path, current_weight = queue.popleft()
             current = path[-1]
 
             if current == end:
-                return path
+                return path, current_weight
 
-            for neighbor in self.vertices[current].neighbors:
+            for neighbor, weight in self.vertices[current].neighbors.items():
                 if neighbor not in visited:
                     visited.add(neighbor)
-                    queue.append(path + [neighbor])
+                    queue.append(
+                        (path + [neighbor], current_weight + weight)
+                    )
 
-        return [], w_counter
+        return [], 0
+    
