@@ -1,5 +1,4 @@
-from src.logic.graph_bfs import Graph
-from src.logic.travel_weight import TravelWeight
+from src.logic.graph_bfs import Graph, TrainWeight
 import json
 import os
 
@@ -47,10 +46,10 @@ class TrainDB:
                 from_station = station_names[n]
                 to_station = station_names[m]
 
-                weight = TravelWeight(
+                weight = TrainWeight(
                     stations["stored value"][from_station][m],
                     stations["single journey"][from_station][m],
-                    stations["time"][from_station][m]
+                    0
                 )
     
                 self.__data.add_edge(
@@ -61,7 +60,7 @@ class TrainDB:
 
     def __add_intersections(self, intersects: list[dict]) -> None:
         for it in intersects:
-            weight = TravelWeight(
+            weight = TrainWeight(
                 it["stored value"],
                 it["single journey"],
                 it["time"]
