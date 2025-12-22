@@ -28,6 +28,6 @@ def binary_search_tree():
 def train():
     return render_template("train.html")
 
-@main_bp.route("/directions")
+@main_bp.route("/directions/main-railway")
 def directions():
-    return render_template("directions.html")
+    return render_template("components/directions/main-railway.html")

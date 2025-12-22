@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackIt - Train Route Tracker</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/directions.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/trackit-styles.css') }}">
+
+    <style>
+        body {
+            font-family: "Montserrat", sans-serif;
+            background: linear-gradient(to bottom, #1a0000 0%, #000000 100%);
+            color: white;
+            min-height: 100vh;
+        }
+    </style>
+    
+    {% include 'components/fonts.html' %}
+</head>
+
+<body>
+    {% include 'components/header.html' %}
+   
+    <div class="main-container">
+        {% include 'components/sidebar.html' %}
+        {% include 'components/directions/tracksidebar.html' %}
+        {% include 'components/directions/map.html' %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/directions.js') }}"></script>
+</body>
+</html>
