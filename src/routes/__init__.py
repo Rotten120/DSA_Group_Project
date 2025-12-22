@@ -3,6 +3,7 @@ from .profile_route import profile_bp
 from .deque_routes import deque_bp 
 from .queue_routes import queue_bp 
 from .bitree_route import bitree_bp
+from .graph_route import graph_bp
 
 from .bst_route import register_bst_bps
 
@@ -12,5 +13,6 @@ def register_routes(app):
     app.register_blueprint(deque_bp, url_prefix="/deque")
     app.register_blueprint(queue_bp, url_prefix="/queue")
     app.register_blueprint(bitree_bp, url_prefix="/bitree")
-    
+    app.register_blueprint(graph_bp, url_prefix="/graph")   
+
     register_bst_bps(app)
