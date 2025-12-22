@@ -34,12 +34,13 @@ class TrainDB:
             In this case, the stations are assumed to be connected end-to-end
             i.e. ["A", "B", "C"], the graph looks like A <-> B <-> C
         """
-
+        
+        train_system = stations["tag"]
         station_names = stations["stations"]
         station_count = len(station_names)
 
         for station in station_names:
-            self.__data.add_vertex(station)
+            self.__data.add_vertex(station, train_system)
 
         for n in range(station_count):
             for m in range(station_count):
