@@ -77,32 +77,7 @@ function buildRouteString(stationList) {
     return stationList.map((station, i) => `${i + 1}. ${station}`).join('<br>');
 }
 
-// 4. GEOLOCATION UTILS
-
-function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371;
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-              Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    return R * c;
-}
-
-function findNearestStation(lat, lng) {
-    let nearest = null, minDst = Infinity;
-    for (const [stn, crd] of Object.entries(stationCoordinates)) {
-        const dst = calculateDistance(lat, lng, crd.lat, crd.lng);
-        if (dst < minDst) { 
-            minDst = dst; 
-            nearest = stn; 
-        }
-    }
-    return nearest;
-}
-
-// 5. API INTEGRATION & ROUTE DISPLAY
+// 4. API INTEGRATION & ROUTE DISPLAY
 
 async function displayRoute() {
     const origin = originInput.value.trim();
@@ -192,7 +167,7 @@ async function displayRoute() {
     }
 }
 
-// 6. UI INTERACTION
+// 5. UI INTERACTION
 
 function switchView(mode) {
     currentMode = mode;
@@ -328,7 +303,7 @@ selectedBackBtn.addEventListener('click', () => {
     journeyExpandable.classList.remove('selected');
 });
 
-// MAP VISUALIZATION
+// 6. MAP VISUALIZATION
 
 function highlightRouteOnMap(stationNames) {
     clearRouteOnMap();
