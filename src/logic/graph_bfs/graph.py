@@ -11,19 +11,6 @@ class Graph:
         if station_name not in self.vertices:
             self.vertices[station_name] = Node(station_name)
 
-    def edit_vertex(self, old_name: str, new_name: str) -> None:
-        # Edit a station's name (vertex)
-        if old_name not in self.vertices:
-            return
-
-        node = self.vertices.pop(old_name)
-        node.name = new_name
-        self.vertices[new_name] = node
-
-        for vertex in self.vertices.values():
-            if old_name in vertex.neighbors:
-                vertex.neighbors[new_name] = vertex.neighbors.pop(old_name)
-
     def remove_vertex(self, station_name: str) -> None:
         # Remove station and all connected edges (vertex)
         if station_name not in self.vertices:
