@@ -19,7 +19,7 @@ def search_shortest_path_by_stations(start: str, end: str):
         "stations": graph_bp.get().bfs(start, end),
         "time": 0,
         "cost": 0
-    )
+    })
 
 @graph_bp.route('/search/time/<string:start>/<string:start>')
 def search_shortest_path_by_time(start: str, end: str):

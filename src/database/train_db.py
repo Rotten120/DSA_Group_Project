@@ -9,7 +9,7 @@ class TrainDB:
         if fetch_data:
             self.fetch()
 
-    def fetch(self, intersection_filename:s tr = "_intersections.json") -> None:
+    def fetch(self, intersection_filename:str = "_intersections.json") -> None:
         with os.scandir(self.folder_path) as entries:
             for entry in entries:
                 ext = entry.name[entry.name.find('.') + 1:]
