@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify
 from src.logic.graph_bfs import Graph, Node
-from database.train_db import TrainDB
+from src.database.train_db import TrainDB
 import json
 
 graph_bp = Blueprint('graph', __name__)
