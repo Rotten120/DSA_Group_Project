@@ -6,10 +6,10 @@ class Graph:
     def __init__(self) -> None:
         self.vertices: Dict[str, Node] = {}
 
-    def add_vertex(self, station_name: str) -> None:
+    def add_vertex(self, station_name, tag: str = None) -> None:
         # Add a station (vertex)
         if station_name not in self.vertices:
-            self.vertices[station_name] = Node(station_name)
+            self.vertices[station_name] = Node(station_name, tag)
 
     def remove_vertex(self, station_name: str) -> None:
         # Remove station and all connected edges (vertex)
@@ -37,7 +37,13 @@ class Graph:
         if to_station in self.vertices:
             self.vertices[to_station].neighbors.pop(from_station, None)
 
-    def bfs(self, start: str, end: str, initial_weight, include_tags: bool = False) -> Tuple[List[str], int, List[str]]:
+    def bfs(
+            self,
+            start: str,
+            end: str,
+            initial_weight,
+            include_tags: bool = False
+     ) -> Tuple[List[str], int, List[str]]:
         # Find the shortest path between two stations using BFS
         if start not in self.vertices or end not in self.vertices:
             return [], 0, []
@@ -64,6 +70,3 @@ class Graph:
                     )
 
         return [], 0, []
-    
-
-
