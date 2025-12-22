@@ -9,21 +9,29 @@ graph_out = TrainDB(folder_path, fetch_data = True)
 
 @graph_bp.route('/')
 def graph_update():
-    global graph_bp
     return render_template('directions.html')
 
 @graph_bp.route('/search/path/<string:start>/<string:end>')
 def search_shortest_path_by_stations(start: str, end: str):
-    global graph_bp
-    #stations is empty
-    if not stations:
-        return jsonify(message = "Start or End stations does not exist"), 404
+    try:
+        raw_stations = graph_out.get().bfs(start, end)
 
-    body = {"stations": stations, "time": 0, "cost": 0}
-    return jsonify(
-        body
-    ), 200
-
+        if not raw_stations or len(raw_stations) == 0:
+            return jsonify(message="Start or End stations does not exist"), 404
+        stations = [s for s in raw_stations if not s.startswith("intersection-")]
+        
+        if len(stations) == 0:
+            return jsonify(message="No valid route found"), 404
+        
+        body = {
+            "stations": stations,
+        }
+        
+        return jsonify(body), 200
+        
+    except Exception as e:
+        return jsonify(message=f"Error processing route: {str(e)}"), 500
+    
 @graph_bp.route('/search/time/<string:start>/<string:end>')
 def search_shortest_path_by_time(start: str, end: str):
     raise Exception("API still in development")
