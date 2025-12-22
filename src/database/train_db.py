@@ -9,7 +9,7 @@ class TrainDB:
         if fetch_data:
             self.fetch()
 
-    def fetch(self, intersection_filename:s tr = "_intersections.json") -> None:
+    def fetch(self, intersection_filename: str = "_intersections.json") -> None:
         with os.scandir(self.folder_path) as entries:
             for entry in entries:
                 ext = entry.name[entry.name.find('.') + 1:]
@@ -19,11 +19,12 @@ class TrainDB:
                     self.__add_stations(temp_dict["stations"])
        
         intersection_dict = self.fetch_entry(intersection_filename)
-        self.__add_intersections(folder_path + "/" + intersection_dict)
+        self.__add_intersections(intersection_dict)
         
     def fetch_entry(self, entry_name: str) -> dict:
         temp_dict = {}
-        with open(entry_name, 'r') as file:
+        entry_path = self.abs_path(entry_name)
+        with open(entry_path, 'r') as file:
             temp_dict = json.load(file)
         return temp_dict
 
@@ -43,8 +44,14 @@ class TrainDB:
     def __add_intersections(self, intersects: dict) -> None:
         for it in intersects:
             self.__data.add_vertex(it)
-            self.__data.add_edge(it["station1"], it)
-            self.__data.add_edge(it["station2"], it)
+            self.__data.add_edge(intersects[it]["station1"], it)
+            self.__data.add_edge(intersects[it]["station2"], it)
 
     def get(self) -> Graph:
         return self.__data
+
+    def abs_path(self, filename: str, ext: str = "") -> str:
+        temp_path = self.folder_path + '/' + filename
+        if ext:
+            temp_path += '.' + ext
+        return temp_path

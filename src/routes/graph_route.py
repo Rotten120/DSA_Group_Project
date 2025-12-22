@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, jsonify
 from src.logic.graph_bfs import Graph, Node
-from database.train_db import TrainDB
+from src.database.train_db import TrainDB
 import json
 
-graph_bp = Blueprint('graph', __name__)
-folder_path = "data/railway_fare/"
+graph_bp = Blueprint('graph_', __name__)
+folder_path = "data/railway_fare"
 graph_out = TrainDB(folder_path, fetch_data = True)
 
 @graph_bp.route('/')
@@ -23,14 +23,13 @@ def search_shortest_path_by_stations(start: str, end: str):
 
     body = {"stations": stations, "time": 0, "cost": 0}
     return jsonify(
-        body = body,
-        message = "Search successful"
+        body
     ), 200
 
-@graph_bp.route('/search/time/<string:start>/<string:start>')
+@graph_bp.route('/search/time/<string:start>/<string:end>')
 def search_shortest_path_by_time(start: str, end: str):
     raise Exception("API still in development")
 
-@graph_bp.route('/search/cost/<string:start>/<string:start>')
+@graph_bp.route('/search/cost/<string:start>/<string:end>')
 def search_shortest_path_by_cost(start: str, end: str):
     raise Exception("API still in development")
