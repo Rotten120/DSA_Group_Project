@@ -28,7 +28,7 @@ class Graph:
 
         self.vertices[from_station].neighbors[to_station] = weight
         if two_way:
-            self.vertices[to_station].neighbors[from_station] = weight 
+            self.vertices[to_station].neighbors[from_station] = weight
 
     def remove_edge(self, from_station: str, to_station: str) -> None:
         # Remove a connection (edge) between two stations

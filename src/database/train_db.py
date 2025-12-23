@@ -22,7 +22,7 @@ class TrainDB:
        
         intersection_dict = self.fetch_entry(intersection_filename)
         self.__add_intersections(intersection_dict)
-        
+ 
     def fetch_entry(self, entry_name: str) -> dict:
         temp_dict = {}
         entry_path = self.abs_path(entry_name)
@@ -46,7 +46,7 @@ class TrainDB:
         for s in range(station_count - 1):
             from_station = station_names[s]
             to_station = station_names[s + 1]
-            self.__data.add_edge(from_station, to_station)
+            self.__data.add_edge(from_station, to_station, two_way = True)
 
         for n in range(station_count):
             for m in range(station_count):
