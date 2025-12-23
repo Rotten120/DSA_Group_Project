@@ -13,12 +13,24 @@ class TrainWeight:
         return TrainWeight(
             stored = self.stored + weight.stored,
             single = self.single + weight.single,
-            time = self.time + self.time
+            time = self.time + weight.time
         )
 
     def __sub__(self, weight):
         return TrainWeight(
             stored = self.stored - weight.stored,
             single = self.single - weight.single,
-            time = self.time - self.time
+            time = self.time - weight.time
         )
+
+    def __iadd__(self, weight):
+        self.stored += weight.stored
+        self.single += weight.single
+        self.time += weight.time
+        return self
+
+    def __isub__(self, weight):
+        self.stored -= weight.stored
+        self.single -= weight.single
+        self.time -= weight.time
+        return self
