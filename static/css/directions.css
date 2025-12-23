@@ -839,3 +839,33 @@ body {
         padding: 15px 20px;
     }
 }
+
+.search-box {
+    position: relative;
+}
+
+
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 6px;
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 9999;
+    display: none;
+}
+
+.suggestion-item {
+    padding: 10px 14px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background: #FFD700;
+    color: #000;
+}

@@ -21,6 +21,7 @@ let currentMode = '';
 let currentRouteData = null;
 let userCurrentStation = null;
 let currentSearchType = 'path';
+let activeSelectionTarget = null;
 
 const clickableStations = Array.from(stations).filter(station => 
     station.getAttribute('data-station') !== 'intersection-1'
@@ -47,6 +48,10 @@ const trainLines = {
         'Katipunan', 'Santolan', 'Marikina-Pasig', 'Antipolo'
     ]
 };
+
+const allStationNames = Array.from(new Set(
+    Object.values(trainLines).flat()
+)).sort();
 
 // 3. UTILITY FUNCTIONS
 
@@ -75,6 +80,56 @@ function buildRouteString(stationList) {
         return 'No route available';
     }
     return stationList.map((station, i) => `${i + 1}. ${station}`).join('<br>');
+}
+
+let suggestionsBox = null;
+
+function createSuggestionsBox() {
+    if (suggestionsBox) return;
+
+
+    suggestionsBox = document.createElement('div');
+    suggestionsBox.className = 'search-suggestions';
+
+
+    const searchBox = document.querySelector('.search-box');
+    searchBox.appendChild(suggestionsBox);
+}
+
+function showSuggestions(matches) {
+    createSuggestionsBox();
+    suggestionsBox.innerHTML = '';
+
+
+    if (matches.length === 0) {
+        suggestionsBox.style.display = 'none';
+        return;
+    }
+
+
+    matches.forEach(station => {
+        const item = document.createElement('div');
+        item.className = 'suggestion-item';
+        item.textContent = station;
+
+
+        item.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            selectStation(station);
+        });
+
+
+        suggestionsBox.appendChild(item);
+    });
+
+
+    suggestionsBox.style.display = 'block';
+}
+
+function hideSuggestions() {
+    if (suggestionsBox) {
+        suggestionsBox.style.display = 'none';
+    }
 }
 
 // 4. API INTEGRATION & ROUTE DISPLAY
@@ -171,6 +226,7 @@ async function displayRoute() {
 
 function switchView(mode) {
     currentMode = mode;
+    activeSelectionTarget = mode;
     selectionModeText.textContent = mode === 'origin' ? 'Select Origin' : 'Select Destination';
     originalView.classList.add('hidden');
     newView.classList.add('active');
@@ -181,13 +237,18 @@ originInput.addEventListener('click', () => switchView('origin'));
 destinationInput.addEventListener('click', () => switchView('destination'));
 
 function selectStation(stationName) {
-    if (currentMode === 'origin') originInput.value = stationName;
-    else if (currentMode === 'destination') destinationInput.value = stationName;
-    
+    if (activeSelectionTarget === 'origin') {
+        originInput.value = stationName;
+    } else if (activeSelectionTarget === 'destination') {
+        destinationInput.value = stationName;
+    }
+
     originalView.classList.remove('hidden');
     newView.classList.remove('active');
     searchInput.value = '';
     currentMode = '';
+    activeSelectionTarget = null;
+    hideSuggestions();
     displayRoute();
 }
 
@@ -206,13 +267,21 @@ clickableStations.forEach(station => {
 
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase().trim();
+    if (searchTerm) {
+        const matches = allStationNames.filter(name =>
+            name.toLowerCase().includes(searchTerm)
+        );
+        showSuggestions(matches.slice(0, 6));
+    } else {
+        hideSuggestions();
+    }
+
     clickableStations.forEach(station => {
         const stationName = station.getAttribute('data-station').toLowerCase();
         if (!searchTerm || stationName.includes(searchTerm)) {
             station.style.opacity = '1';
             station.style.pointerEvents = 'auto';
-            if (searchTerm) station.style.transform = 'scale(1.2)';
-            else station.style.transform = 'scale(1)';
+            station.style.transform = searchTerm ? 'scale(1.2)' : 'scale(1)';
         } else {
             station.style.opacity = '0.2';
             station.style.pointerEvents = 'none';
@@ -225,20 +294,25 @@ searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         const searchTerm = searchInput.value.toLowerCase().trim();
         if (!searchTerm) return;
-        
-        let match = Array.from(clickableStations).find(s => 
-            s.getAttribute('data-station').toLowerCase() === searchTerm
+
+        const match = allStationNames.find(st =>
+            st.toLowerCase() === searchTerm ||
+            st.toLowerCase().includes(searchTerm)
         );
-        if (!match) {
-            match = Array.from(clickableStations).find(s => 
-                s.getAttribute('data-station').toLowerCase().includes(searchTerm)
-            );
+
+
+        if (match) {
+            selectStation(match);
+            hideSuggestions();
+        } else {
+            alert(`No station found matching "${searchTerm}"`);
         }
-        
-        if (match) selectStation(match.getAttribute('data-station'));
-        else alert(`No station found matching "${searchTerm}"`);
     }
 });
+
+searchInput.addEventListener('blur', hideSuggestions);
+refreshJourneyBtn.addEventListener('click', hideSuggestions);
+backButton.addEventListener('click', hideSuggestions);
 
 swapBtn.addEventListener('click', () => {
     const tempOrigin = originInput.value;
@@ -285,7 +359,6 @@ function showSelectedJourney() {
     if (!currentRouteData) return;
     document.getElementById('routeInfo').classList.remove('active');
     selectedJourneyView.classList.add('active');
-    
     document.getElementById('selectedLineName').textContent = currentRouteData.line;
     document.getElementById('selectedPrice').textContent = `P ${currentRouteData.cost}.00`;
     document.getElementById('selectedDuration').textContent = `${currentRouteData.time} mins`;
