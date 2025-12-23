@@ -366,7 +366,7 @@ body {
 }
 
 .journey-price {
-    color: #4169E1;
+    color: #8B0000;
     font-weight: 700;
     font-size: 1.3rem;
 }
@@ -451,12 +451,13 @@ body {
 
 .expandable-name {
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .expandable-price {
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    color: white;
 }
 
 .expandable-duration {
@@ -850,7 +851,7 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    background: #111;
+    background: #8B0000;
     border: 1px solid #333;
     border-radius: 6px;
     max-height: 240px;
@@ -866,6 +867,14 @@ body {
 }
 
 .suggestion-item:hover {
-    background: #FFD700;
-    color: #000;
+    background: white;
+    color: #8B0000;
+}
+
+#journeyPrice, #expandPrice, #selectedPrice, #selectedExpandPrice {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+    margin-left: 20px;
 }

@@ -75,11 +75,45 @@ function formatLineName(lines) {
     return lines.join(' + ');
 }
 
+function getStationLines(stationName) {
+    const lines = [];
+    for (const [line, lineStations] of Object.entries(trainLines)) {
+        if (lineStations.includes(stationName)) {
+            lines.push(line);
+        }
+    }
+    return lines;
+}
+
 function buildRouteString(stationList) {
     if (!stationList || stationList.length === 0) {
         return 'No route available';
     }
-    return stationList.map((station, i) => `${i + 1}. ${station}`).join('<br>');
+    
+    let routeSteps = [];
+    let stepNumber = 1;
+    
+    for (let i = 0; i < stationList.length; i++) {
+        const currentStation = stationList[i];
+        routeSteps.push(`${stepNumber}. ${currentStation}`);
+        stepNumber++;
+        
+        if (i < stationList.length - 1) {
+            const nextStation = stationList[i + 1];
+            const currentLines = getStationLines(currentStation);
+            const nextLines = getStationLines(nextStation);
+            
+            const sharedLines = currentLines.filter(line => nextLines.includes(line));
+            
+            if (sharedLines.length === 0 && currentLines.length > 0 && nextLines.length > 0) {
+                const fromLine = currentLines[0];
+                const toLine = nextLines[0];
+                routeSteps.push(`<span style="color: white; font-weight: bold;">   ↓ Transfer from ${fromLine} ${currentStation} to ${toLine} ${nextStation}</span>`);
+            }
+        }
+    }
+    
+    return routeSteps.join('<br>');
 }
 
 let suggestionsBox = null;
@@ -87,10 +121,8 @@ let suggestionsBox = null;
 function createSuggestionsBox() {
     if (suggestionsBox) return;
 
-
     suggestionsBox = document.createElement('div');
     suggestionsBox.className = 'search-suggestions';
-
 
     const searchBox = document.querySelector('.search-box');
     searchBox.appendChild(suggestionsBox);
@@ -100,28 +132,23 @@ function showSuggestions(matches) {
     createSuggestionsBox();
     suggestionsBox.innerHTML = '';
 
-
     if (matches.length === 0) {
         suggestionsBox.style.display = 'none';
         return;
     }
-
 
     matches.forEach(station => {
         const item = document.createElement('div');
         item.className = 'suggestion-item';
         item.textContent = station;
 
-
         item.addEventListener('mousedown', (e) => {
             e.preventDefault();
             selectStation(station);
         });
 
-
         suggestionsBox.appendChild(item);
     });
-
 
     suggestionsBox.style.display = 'block';
 }
@@ -180,6 +207,7 @@ async function displayRoute() {
         const stationList = path || [];
         const travelTime = apiResponse.time || 0;
         const ticketCost = apiResponse["single journey"] || 0;
+        const storedValueCost = apiResponse["stored value"] || 0;
 
         const lines = determineLines(stationList);
         const lineName = formatLineName(lines);
@@ -191,6 +219,7 @@ async function displayRoute() {
             stations: stationList,
             time: travelTime,
             cost: ticketCost,
+            storedValue: storedValueCost,
             line: lineName,
             route: routeString,
             getOn: getOnStation,
@@ -198,11 +227,10 @@ async function displayRoute() {
         };
 
         document.getElementById('lineName').textContent = currentRouteData.line;
-        document.getElementById('journeyPrice').textContent = `P ${currentRouteData.cost}.00`;
+        document.getElementById('journeyPrice').textContent = `Single: ₱${currentRouteData.cost}.00 | Stored: ₱${currentRouteData.storedValue}.00`;
         document.getElementById('journeyDuration').textContent = `${currentRouteData.time} mins`;
-
         document.getElementById('expandLineName').textContent = currentRouteData.line;
-        document.getElementById('expandPrice').textContent = `P ${currentRouteData.cost}.00`;
+        document.getElementById('expandPrice').textContent = `Single: ₱${currentRouteData.cost}.00 | Stored: ₱${currentRouteData.storedValue}.00`;
         document.getElementById('expandDuration').textContent = `${currentRouteData.time} mins`;
         document.getElementById('routeDetail').innerHTML = currentRouteData.route;
         document.getElementById('getOnDetail').textContent = currentRouteData.getOn;
@@ -306,7 +334,6 @@ searchInput.addEventListener('keypress', (e) => {
             st.toLowerCase().includes(searchTerm)
         );
 
-
         if (match) {
             selectStation(match);
             hideSuggestions();
@@ -366,10 +393,10 @@ function showSelectedJourney() {
     document.getElementById('routeInfo').classList.remove('active');
     selectedJourneyView.classList.add('active');
     document.getElementById('selectedLineName').textContent = currentRouteData.line;
-    document.getElementById('selectedPrice').textContent = `P ${currentRouteData.cost}.00`;
+    document.getElementById('selectedPrice').textContent = `Single: ₱${currentRouteData.cost}.00 | Stored: ₱${currentRouteData.storedValue}.00`;
     document.getElementById('selectedDuration').textContent = `${currentRouteData.time} mins`;
     document.getElementById('selectedExpandLineName').textContent = currentRouteData.line;
-    document.getElementById('selectedExpandPrice').textContent = `P ${currentRouteData.cost}.00`;
+    document.getElementById('selectedExpandPrice').textContent = `Single: ₱${currentRouteData.cost}.00 | Stored: ₱${currentRouteData.storedValue}.00`;
     document.getElementById('selectedExpandDuration').textContent = `${currentRouteData.time} mins`;
     document.getElementById('selectedRouteDetail').innerHTML = currentRouteData.route;
     document.getElementById('selectedGetOnDetail').textContent = currentRouteData.getOn;
