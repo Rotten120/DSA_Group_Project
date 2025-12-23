@@ -116,9 +116,15 @@ async function displayRoute() {
 
         console.log('API Response:', apiResponse);
 
-        const stationList = apiResponse.stations || [];
+        //combines the arr inside apiResponse.path into one
+        let path = [];
+        for (let train of apiResponse.path) {
+          path.push(...train.slice(1));
+        }
+
+        const stationList = path || [];
         const travelTime = apiResponse.time || 0;
-        const ticketCost = apiResponse.cost || 0;
+        const ticketCost = apiResponse["single journey"] || 0;
 
         const lines = determineLines(stationList);
         const lineName = formatLineName(lines);
