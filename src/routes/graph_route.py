@@ -11,27 +11,23 @@ def parse_bfs(path: list[str], tags: list[str]):
     parsed_path = []
     parsed_weight = TrainWeight()
     from_station = path[0]
-    temp_arr = [tags[0]]
- 
-    def update_weights(from_s, to_s, train = None):
-        nonlocal parsed_weight
-        nonlocal parsed_path
-        nonlocal temp_arr
-        
-        #main content of the function
-        parsed_weight += graph_out.get_weights(from_s, to_s)
-        parsed_path.append(temp_arr)
-        temp_arr = [train]
 
+    temp_arr = [tags[0]] 
     for p, t in zip(path, tags):
         if t != temp_arr[0]:
             #adds the weight when transferring trains
             parsed_weight += graph_out.get_weights(temp_arr[-1], p)
-
-            update_weights(from_station, temp_arr[-1], t)
+            #adds the weight from starting station to transferring station
+            parsed_weight += graph_out.get_weights(from_station, temp_arr[-1])
+            
+            parsed_path.append(temp_arr)
+            temp_arr = [t]
             from_station = p
+
         temp_arr.append(p)
-    update_weights(from_station, path[-1])
+
+    parsed_weight += graph_out.get_weights(from_station, path[-1])
+    parsed_path.append(temp_arr)
 
     parsed_dict = {
         "path": parsed_path,
