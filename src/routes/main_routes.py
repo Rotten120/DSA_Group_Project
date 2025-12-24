@@ -23,3 +23,11 @@ def binary_tree():
 @main_bp.route('/binary-search-tree')
 def binary_search_tree():
     return render_template('binary-search-tree.html')
+
+@main_bp.route("/train")
+def train():
+    return render_template("train.html")
+
+@main_bp.route("/directions/main-railway")
+def directions():
+    return render_template("components/directions/main-railway.html")

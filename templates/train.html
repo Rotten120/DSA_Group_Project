@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Train Guide</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/train.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+
+  <style> body {
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(to bottom, #1a0000 0%, #000000 100%);
+        color: white;
+        min-height: 100vh;
+    }
+  </style>
+
+</head>
+
+<body>
+  {% include 'components/sidebar.html' %}
+  {% include 'components/header.html' %}
+  {% include 'components/fonts.html' %}
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="content-box">
+        <div class="content-wrapper">
+          <div class="train-logo"></div>
+
+          <h1>Your Metro Manila<br>Train Guide.</h1>
+
+          <p class="subtitle">
+            Complete train directions, station info,
+            and line connections.
+          </p>
+
+          <div class="search-container">
+            <input
+              type="text"
+              lass="search-input"
+              placeholder="Starting station?"
+              readonly
+              onclick="window.location.href='directions/main-railway'"
+              class="search-input"
+            >
+            <button
+              class="search-button"
+              onclick="window.location.href='directions/main-railway'"
+            >
+              Go
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
