@@ -56,7 +56,7 @@ class TrainDB:
                 weight = TrainWeight(
                     stations["stored value"][from_station][m],
                     stations["single journey"][from_station][m],
-                    0
+                    stations["time"][from_station][m]
                 )
 
                 if not(from_station in self.__w_table):

@@ -4,27 +4,27 @@
     "station2": "Fernando Poe Jr.",
     "stored value": 0,
     "single journey": 0,
-    "time": 0
+    "time": 16
   },
   {
     "station1": "Taft Ave.",
     "station2": "EDSA",
     "stored value": 0,
     "single journey": 0,
-    "time": 0
+    "time": 7
   },
   {
     "station1": "Doroteo Jose",
     "station2": "Recto",
     "stored value": 0,
     "single journey": 0,
-    "time": 0
+    "time": 10
   },
   {
     "station1": "Araneta-Cubao",
     "station2": "Araneta Center-Cubao",
     "stored value": 0,
     "single journey": 0,
-    "time": 0
+    "time": 12
   }
 ]
