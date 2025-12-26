@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify
+from .base import *
 from src.logic.graph_bfs import Graph, Node, TrainWeight
 from src.database.train_db import TrainDB
 import json
@@ -51,21 +51,28 @@ def search_shortest_path_by_stations(start: str, end: str):
         )
 
         if not path or len(path) == 0:
-            return jsonify(message="Start or End stations does not exist"), 404
+            raise ServerError(
+                StatusCodes.NOT_FOUND,
+                "Start or End stations does not exist"
+            )
     
         if len(path) == 0:
-            return jsonify(message="No valid route found"), 404
-    
-        return jsonify(parse_bfs(path, tags)), 200
+            raise ServerError(
+                StatusCodes.NOT_FOUND,
+                "No valid route found"
+            )
+  
+        return jsonify(parse_bfs(path, tags)), StatusCodes.SUCCESS.code 
         
-    except Exception as e:
-        raise Exception(e)
-        return jsonify(message=f"Error processing route: {str(e)}"), 500
+    except Exception as err:
+        return ServerError.response(err)
     
 @graph_bp.route('/search/time/<string:start>/<string:end>')
 def search_shortest_path_by_time(start: str, end: str):
-    raise Exception("API still in development")
+    err = ServerError(description = "API still in development")
+    return ServerError.response(err)
 
 @graph_bp.route('/search/cost/<string:start>/<string:end>')
 def search_shortest_path_by_cost(start: str, end: str):
-    raise Exception("API still in development")
+    err = ServerError(description = "API still in development")
+    return ServerError.response(err)
