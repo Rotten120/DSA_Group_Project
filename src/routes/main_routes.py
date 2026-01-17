@@ -31,3 +31,7 @@ def train():
 @main_bp.route("/directions/main-railway")
 def directions():
     return render_template("components/directions/main-railway.html")
+
+@main_bp.route("/sorting-algorithm")
+def sorting_algorithm():
+    return render_template('sorting.html')
