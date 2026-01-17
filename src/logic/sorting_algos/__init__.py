@@ -12,5 +12,5 @@ algo_dict = {
     "selectionSort": selection_sort
 }
 
-def alg_exec(algo_name: str, arr: list, left: int, right: int):
+def get_alg_iterator(algo_name: str, arr: list, left: int, right: int):
     return algo_dict.get(algo_name, "bubbleSort")(arr, left, right)
