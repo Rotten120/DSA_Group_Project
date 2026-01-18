@@ -22,6 +22,7 @@ body {
   padding: 20px;
   min-width: 1024px;
   overflow-x: auto;
+  z-index: 1800;
 }
 
 /* MAIN SECTION */
@@ -214,7 +215,7 @@ body {
     color: white;
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 600;
     text-align: center;
     box-sizing: border-box;

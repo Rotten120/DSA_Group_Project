@@ -1,0 +1,38 @@
+{
+    "queue": {
+        "title": "Queue",
+        "route": "/queue/init",
+        "desc": "A linear data structure that follows First-In, First-Out (FIFO) order.",
+        "bg-img": "queue.jpeg"
+    },
+    "deque": {
+        "title": "DeQue",
+        "route": "/deque/init",
+        "desc": "A double-ended queue that allows insertion and deletion at both ends.",
+        "bg-img": "deque.jpeg"
+    },
+    "bitree": {
+        "title": "Binary Tree",
+        "route": "/bitree",
+        "desc": "A hierarchical data structure where each node has at most two children.",
+        "bg-img": "bitree.avif"
+    },
+    "bst": {
+        "title": "Binary Search Tree",
+        "route": "/bst",
+        "desc": "A binary tree where left nodes are smaller and right nodes are larger.",
+        "bg-img": "bst.webp"
+    },
+    "graph": {
+        "title": "Train Route",
+        "route": "/graph",
+        "desc": "A graph representation showing stations as nodes and routes as edges.",
+        "bg-img": "train_route.jpg"
+    },
+    "sorting": {
+        "title": "Sorting Algorithm",
+        "route": "/sorting",
+        "desc": "Algorithms used to arrange data in a specific order such as ascending or descending.",
+        "bg-img": "sorting.jpg"
+    }
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUEUE - Data Structure Visualizer</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/sorting.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/sidebar.css')}}">
+
+    {% include 'components/fonts.html' %}
+
+    <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
+</head>
+
+<body>
+  {% include 'components/sidebar.html' %}
+  {% include 'components/header.html' %}
+
+  <!-- OVERLAY -->
+  <div id="overlay" class="overlay"></div>
+
+    <div class="container">
+        <!-- SIDEBAR -->
+        <div class="left-sidebar">
+            <div class="edit-button">EDIT GRAPH</div>
+            
+            <!-- INITIAL -->
+            <div class="saved-graph-box">
+                <!-- NO SAVED GRAPH - Shows when no graphs exist -->
+                <div id="noSavedGraph">
+                    <div class="graph-icon">
+                        <div class="graph-icon-cell"></div>
+                        <div class="graph-icon-cell"></div>
+                        <div class="graph-icon-cell"></div>
+                        <div class="graph-icon-cell"></div>
+                    </div>
+                    <div class="saved-graph-text">NO SAVED GRAPH</div>
+                </div>
+
+                <!-- GRAPH LIST - Shows when graphs exist -->
+                <div id="graph-list-organizer" style="display:none;">
+                    <div class="graph-list-title">All Graphs</div>
+                </div>
+            </div>
+
+            <div class="create-button-container">
+                <div class="create-icon">
+                    <i class="fa-solid fa-chart-column"></i>
+                </div>
+                <div class="create-button">CREATE NEW GRAPH</div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- CONTROLS PANEL -->
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label class="control-label">SIZE</label>
+                    <div class="slider-container">
+                        <input type="range" class="slider" id="sizeSlider" min="5" max="30" value="30">
+                        <span class="slider-value" id="sizeValue">30</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">DELAY</label>
+                    <div class="slider-container">
+                        <input type="range" class="slider" id="delaySlider" min="10" max="500" value="100">
+                        <span class="slider-value" id="delayValue">100ms</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">ALGORITHM</label>
+                    <select class="algorithm-select" id="algorithmSelect">
+                        <option value="bubble">Bubble Sort</option>
+                        <option value="selection">Selection Sort</option>
+                        <option value="insertion">Insertion Sort</option>
+                        <option value="merge">Merge Sort</option>
+                        <option value="quick">Quick Sort</option>
+                    </select>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn" id="resetBtn">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                    <button class="action-btn" id="playBtn">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <button class="action-btn" id="clearBtn">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- VISUALIZATION BOX -->
+            <div class="red-box">
+                <div class="step-counter" id="stepCounter">Step: 0</div>
+                <div class="visualization-container" id="visualizationContainer">
+                    <!-- Bars will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CREATE GRAPH MODAL -->
+    <div id="createGraphModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Create New Graph</h3>
+            <input type="text" id="newGraphNameInput" placeholder="Enter graph name..." />
+            <div class="modal-buttons">
+                <button id="confirmCreateGraph" class="modal-btn confirm-btn">OK</button>
+                <button id="cancelCreateGraph" class="modal-btn cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="{{ url_for('static', filename='js/sorting.js') }}"></script>
+</body>
+</html>
