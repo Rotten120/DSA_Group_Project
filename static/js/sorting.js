@@ -306,12 +306,15 @@ class SortingVisualizer {
 
     async _partition(arr, low, high, delay, updateCallback) {
         const pivot = arr[high];
-        await updateCallback(high, null, 'pivot');
+        const pivotIndex = high;
+        await updateCallback(pivotIndex, null, 'pivot');
         let i = low - 1;
         
         for (let j = low; j < high; j++) {
             if (state.shouldStop) return i + 1;
             
+            // Keep pivot colored
+            await updateCallback(pivotIndex, null, 'pivot');
             await updateCallback(j, null, 'comparing');
             await this.sleep(state.delay);
             
@@ -321,78 +324,27 @@ class SortingVisualizer {
                 [arr[i], arr[j]] = [arr[j], arr[i]];
                 await updateCallback(null, null, 'render', arr);
                 await this.sleep(state.delay);
+                
+                // Restore colors after swap
                 await updateCallback(i, null, 'default');
             }
             await updateCallback(j, null, 'default');
+            // Restore pivot color after clearing other colors
+            await updateCallback(pivotIndex, null, 'pivot');
         }
         
-        await updateCallback(i + 1, null, 'swapping');
+        // Final swap - show both bars swapping
+        await updateCallback(i + 1, pivotIndex, 'swapping');
+        await this.sleep(state.delay);
+        
         [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
         await updateCallback(null, null, 'render', arr);
         await this.sleep(state.delay);
+        
+        // Mark the pivot's final position as sorted
         await updateCallback(i + 1, null, 'sorted');
         
         return i + 1;
-    }
-
-    async heapSort(array, delay, updateCallback) {
-        const arr = [...array];
-        const n = arr.length;
-        
-        for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
-            if (state.shouldStop) return arr;
-            await this._heapify(arr, n, i, delay, updateCallback);
-        }
-        
-        for (let i = n - 1; i > 0; i--) {
-            if (state.shouldStop) return arr;
-            
-            await updateCallback(0, i, 'swapping');
-            [arr[0], arr[i]] = [arr[i], arr[0]];
-            await updateCallback(null, null, 'render', arr);
-            await this.sleep(state.delay);
-            await updateCallback(i, null, 'sorted');
-            await updateCallback(0, null, 'default');
-            await this._heapify(arr, i, 0, delay, updateCallback);
-        }
-        await updateCallback(0, null, 'sorted');
-        return arr;
-    }
-
-    async _heapify(arr, n, i, delay, updateCallback) {
-        if (state.shouldStop) return;
-        
-        let largest = i;
-        const left = 2 * i + 1;
-        const right = 2 * i + 2;
-        
-        await updateCallback(i, null, 'comparing');
-        if (left < n) await updateCallback(left, null, 'comparing');
-        if (right < n) await updateCallback(right, null, 'comparing');
-        await this.sleep(state.delay);
-        
-        if (left < n && arr[left] > arr[largest]) {
-            largest = left;
-        }
-        
-        if (right < n && arr[right] > arr[largest]) {
-            largest = right;
-        }
-        
-        if (largest !== i) {
-            await updateCallback(i, largest, 'swapping');
-            [arr[i], arr[largest]] = [arr[largest], arr[i]];
-            await updateCallback(null, null, 'render', arr);
-            await this.sleep(state.delay);
-            await updateCallback(i, null, 'default');
-            if (left < n) await updateCallback(left, null, 'default');
-            if (right < n) await updateCallback(right, null, 'default');
-            await this._heapify(arr, n, largest, delay, updateCallback);
-        } else {
-            await updateCallback(i, null, 'default');
-            if (left < n) await updateCallback(left, null, 'default');
-            if (right < n) await updateCallback(right, null, 'default');
-        }
     }
 
     sleep(ms) {
@@ -406,6 +358,7 @@ class SortingVisualizer {
 
 let state = {
     array: [],
+    originalArray: [],
     arraySize: 30,
     delay: 100,
     isPlaying: false,
@@ -413,7 +366,8 @@ let state = {
     shouldStop: false,
     currentAlgorithm: 'bubble',
     savedGraphs: [],
-    currentGraphId: null
+    currentGraphId: null,
+    stepCount: 0
 };
 
 const visualizer = new SortingVisualizer();
@@ -428,6 +382,7 @@ const resetBtn = document.getElementById('resetBtn');
 const playBtn = document.getElementById('playBtn');
 const clearBtn = document.getElementById('clearBtn');
 const visualizationContainer = document.getElementById('visualizationContainer');
+const stepCounter = document.getElementById('stepCounter');
 
 // Sidebar elements
 const editButton = document.querySelector('.edit-button');
@@ -467,7 +422,7 @@ function setupEventListeners() {
         state.arraySize = parseInt(e.target.value);
         sizeValue.textContent = state.arraySize;
         if (!state.isPlaying) {
-            await generateArray();
+            await generateArray(); // This will generate new array and save as original
         }
     });
     
@@ -486,7 +441,13 @@ function setupEventListeners() {
     // Control buttons
     resetBtn.addEventListener('click', async () => {
         if (!state.isPlaying) {
-            await generateArray();
+            // Restore original array instead of generating new one
+            if (state.originalArray.length > 0) {
+                state.array = [...state.originalArray];
+                state.stepCount = 0;
+                updateStepCounter();
+                renderBars();
+            }
         }
     });
     
@@ -506,6 +467,8 @@ function setupEventListeners() {
     clearBtn.addEventListener('click', () => {
         if (!state.isPlaying) {
             state.array = [];
+            state.stepCount = 0;
+            updateStepCounter();
             renderBars();
         }
     });
@@ -533,8 +496,22 @@ async function generateArray() {
     const response = await SortingAPI.generateArray(state.arraySize);
     if (response.success) {
         state.array = response.data;
+        state.originalArray = [...response.data]; // Save original array
+        state.stepCount = 0;
+        updateStepCounter();
         renderBars();
     }
+}
+
+function updateStepCounter() {
+    if (stepCounter) {
+        stepCounter.textContent = `Step: ${state.stepCount}`;
+    }
+}
+
+function incrementStep() {
+    state.stepCount++;
+    updateStepCounter();
 }
 
 function renderBars() {
@@ -574,6 +551,8 @@ function renderBars() {
 async function startSorting() {
     state.isPlaying = true;
     state.shouldStop = false;
+    state.stepCount = 0;
+    updateStepCounter();
     playBtn.querySelector('i').className = 'fa-solid fa-pause';
     
     // Reset all bars
@@ -587,6 +566,11 @@ async function startSorting() {
         // Update callback for visualization
         const updateCallback = async (index1, index2, action, newArray) => {
             if (state.shouldStop) return;
+            
+            // Increment step for visual actions (not for render)
+            if (action !== 'render' && action !== 'default') {
+                incrementStep();
+            }
             
             if (action === 'render' && newArray) {
                 state.array = [...newArray];
@@ -616,9 +600,6 @@ async function startSorting() {
                 break;
             case 'quick':
                 result = await visualizer.quickSort(state.array, state.delay, updateCallback);
-                break;
-            case 'heap':
-                result = await visualizer.heapSort(state.array, state.delay, updateCallback);
                 break;
         }
         
@@ -739,6 +720,7 @@ async function loadGraph(graphId) {
         const graph = response.data;
         state.currentGraphId = graphId;
         state.array = [...graph.array];
+        state.originalArray = [...graph.array]; // Save as original array
         state.arraySize = graph.size;
         state.currentAlgorithm = graph.algorithm;
         
