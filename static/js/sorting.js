@@ -1,7 +1,49 @@
-// BACKEND API - Backend Integration
 const API_BASE_URL = '';
 
 let savedGraphsStore = [];
+
+const algorithmInfo = {
+    bubble: {
+        name: 'Bubble Sort',
+        bestCase: 'O(n)',
+        averageCase: 'O(n²)',
+        worstCase: 'O(n²)',
+        spaceComplexity: 'O(1)',
+        description: 'Bubble sort repeatedly swaps adjacent elements if they are in the wrong order. Takes longer for larger arrays.'
+    },
+    selection: {
+        name: 'Selection Sort',
+        bestCase: 'O(n²)',
+        averageCase: 'O(n²)',
+        worstCase: 'O(n²)',
+        spaceComplexity: 'O(1)',
+        description: 'Selection sort finds the minimum element and places it at the beginning. Performs same number of comparisons regardless of input.'
+    },
+    insertion: {
+        name: 'Insertion Sort',
+        bestCase: 'O(n)',
+        averageCase: 'O(n²)',
+        worstCase: 'O(n²)',
+        spaceComplexity: 'O(1)',
+        description: 'Insertion sort builds the sorted array one item at a time. Efficient for small data sets and nearly sorted arrays.'
+    },
+    merge: {
+        name: 'Merge Sort',
+        bestCase: 'O(n log n)',
+        averageCase: 'O(n log n)',
+        worstCase: 'O(n log n)',
+        spaceComplexity: 'O(n)',
+        description: 'Merge sort divides the array into halves, sorts them, and merges them back. Consistent performance across all cases.'
+    },
+    quick: {
+        name: 'Quick Sort',
+        bestCase: 'O(n log n)',
+        averageCase: 'O(n log n)',
+        worstCase: 'O(n²)',
+        spaceComplexity: 'O(log n)',
+        description: 'Quick sort picks a pivot and partitions the array around it. Generally faster than other O(n log n) algorithms.'
+    }
+};
 
 const SortingAPI = {
     generateArray: async (size) => {
@@ -27,7 +69,6 @@ const SortingAPI = {
             };
             
             const algoName = algoMap[algorithm];
-            
             const endpoint = `/sort/${algoName}`;
             
             const response = await fetch(endpoint, {
@@ -125,14 +166,12 @@ const SortingAPI = {
     }
 };
 
-// BACKEND ANIMATION PLAYER
 class SortingVisualizer {
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     
     async playBackendAnimation(animationSteps, updateCallback) {
-        
         for (let step of animationSteps) {
             if (state.shouldStop) break;
             
@@ -176,7 +215,6 @@ class SortingVisualizer {
     }
 }
 
-// APPLICATION STATE & DOM MANAGEMENT
 let state = {
     array: [],
     originalArray: [],
@@ -193,7 +231,6 @@ let state = {
 
 const visualizer = new SortingVisualizer();
 
-// DOM Elements
 const sizeSlider = document.getElementById('sizeSlider');
 const sizeValue = document.getElementById('sizeValue');
 const delaySlider = document.getElementById('delaySlider');
@@ -205,7 +242,6 @@ const clearBtn = document.getElementById('clearBtn');
 const visualizationContainer = document.getElementById('visualizationContainer');
 const stepCounter = document.getElementById('stepCounter');
 
-// Sidebar elements
 const editButton = document.querySelector('.edit-button');
 const createButton = document.querySelector('.create-button');
 const createIcon = document.querySelector('.create-icon');
@@ -214,10 +250,10 @@ const confirmCreateGraph = document.getElementById('confirmCreateGraph');
 const cancelCreateGraph = document.getElementById('cancelCreateGraph');
 const newGraphNameInput = document.getElementById('newGraphNameInput');
 
-// INITIALIZATION
 document.addEventListener('DOMContentLoaded', async () => {
     await initializeApp();
     setupEventListeners();
+    updateAlgorithmInfo();
 });
 
 async function initializeApp() {
@@ -248,6 +284,7 @@ function setupEventListeners() {
     
     algorithmSelect.addEventListener('change', (e) => {
         state.currentAlgorithm = e.target.value;
+        updateAlgorithmInfo();
     });
     
     resetBtn.addEventListener('click', async () => {
@@ -294,7 +331,17 @@ function setupEventListeners() {
     });
 }
 
-// CORE FUNCTIONS
+function updateAlgorithmInfo() {
+    const info = algorithmInfo[state.currentAlgorithm];
+    
+    document.getElementById('algoName').textContent = info.name + ' Info';
+    document.getElementById('bestCase').textContent = info.bestCase;
+    document.getElementById('averageCase').textContent = info.averageCase;
+    document.getElementById('worstCase').textContent = info.worstCase;
+    document.getElementById('spaceComplexity').textContent = info.spaceComplexity;
+    document.getElementById('algoDescription').textContent = info.description;
+}
+
 async function generateArray() {
     const response = await SortingAPI.generateArray(state.arraySize);
     if (response.success) {
@@ -378,7 +425,7 @@ async function startSorting() {
             }
         };
         
-        const result = await visualizer.playBackendAnimation(response.data, updateCallback);
+        await visualizer.playBackendAnimation(response.data, updateCallback);
         
         if (!state.shouldStop) {
             for (let i = 0; i < state.array.length; i++) {
@@ -405,7 +452,6 @@ function updateBarState(index, state) {
     }
 }
 
-// GRAPH MANAGEMENT
 function toggleEditMode() {
     console.log('Edit mode toggled');
 }
@@ -497,6 +543,7 @@ async function loadGraph(graphId) {
         sizeValue.textContent = state.arraySize;
         algorithmSelect.value = state.currentAlgorithm;
         
+        updateAlgorithmInfo();
         renderBars();
         displayGraphList();
     } else {
