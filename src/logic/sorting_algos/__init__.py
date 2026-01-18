@@ -5,7 +5,7 @@ from .quick_sort import quick_sort
 from .selection_sort import selection_sort
 
 algo_dict = {
-    "bubbleSort": bubbleSort,
+    "bubbleSort": bubble_sort,
     "insertionSort": insertion_sort,
     "mergeSort": merge_sort,
     "quickSort": quick_sort,

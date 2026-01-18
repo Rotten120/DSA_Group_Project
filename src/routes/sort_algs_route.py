@@ -8,16 +8,18 @@ sort_bp = Blueprint('sorting', __name__)
 def sort_update():
     return render_template('sorting.html')
 
-@graph_bp.route('/sort/<string:algo>')
-def run_sorting_algorithm(arr: list = [], algo: str):
-    arr = request.args.get('arrToSort')
+@sort_bp.route('/sort/<string:algo>')
+def run_sorting_algorithm(algo: str, arr: list = []):
+    data = request.get_json()
+    arr = data.get("arrToSort", arr)
     sorting_iterator = get_alg_iterator(algo, arr, 0, len(arr) - 1)
     animation_out = []
 
     try:
         while True:
-            arr, red_bar1, red_bar2, blue_bar1, blue_bar2 = next(sorting_iterator)
-            animation_out.append((arr, red_bar1, red_bar2, blue_bar1, blue_bar2))
+            temp_arr, red_bar1, red_bar2, blue_bar1, blue_bar2 = next(sorting_iterator)
+            copy_arr = temp_arr.copy()
+            animation_out.append((copy_arr, red_bar1, red_bar2, blue_bar1, blue_bar2))
     except StopIteration:
         pass
 
