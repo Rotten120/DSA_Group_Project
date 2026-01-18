@@ -6,10 +6,12 @@ def merge_sort(arr, left, right):
         yield from merge(arr, left, mid, right)
 
 def merge(arr, left, mid, right):
-    L = arr[left:mid+1]
-    R = arr[mid+1:right+1]
+    L = arr[left:mid + 1]
+    R = arr[mid + 1:right + 1]
+
     i = 0
     j = 0
+
     k = left
 
     while i < len(L) and j < len(R):
@@ -24,11 +26,14 @@ def merge(arr, left, mid, right):
         k += 1
 
     while i < len(L):
+        yield arr, left+i, -1, left, right
         arr[k] = L[i]
         i += 1
         k += 1
 
     while j < len(R):
+        yield arr, -1, mid+j, left, right
         arr[k] = R[j]
         j += 1
         k += 1
+    yield arr, -1, -1, -1, -1

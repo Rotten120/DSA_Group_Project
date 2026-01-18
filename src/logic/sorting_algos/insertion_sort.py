@@ -8,3 +8,4 @@ def insertion_sort(arr, *args):
             arr[j+1] = arr[j]
             j -= 1
         arr[j+1] = key
+    yield arr, -1, -1, -1, -1
