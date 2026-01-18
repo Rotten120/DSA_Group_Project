@@ -1,76 +1,90 @@
-// ============================================
-// MOCK API - Replace with real backend later
-// ============================================
+// BACKEND API - Backend Integration
+const API_BASE_URL = '';
+
+let savedGraphsStore = [];
 
 const SortingAPI = {
-    // Generate random array
     generateArray: async (size) => {
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-        const array = [];
-        for (let i = 0; i < size; i++) {
-            array.push(Math.floor(Math.random() * 100) + 1);
-        }
-        return { success: true, data: array };
-    },
-
-    // Get sorting steps for visualization
-    getSortingSteps: async (array, algorithm) => {
-        // This would normally call backend
-        // For now, return the array to be sorted client-side
-        await new Promise(resolve => setTimeout(resolve, 50));
-        
-        return { 
-            success: true, 
-            data: { array: [...array], algorithm } 
-        };
-    },
-
-    // Save graph to storage
-    saveGraph: async (graphData) => {
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
         try {
-            const saved = localStorage.getItem('sortingGraphs');
-            const graphs = saved ? JSON.parse(saved) : [];
+            const array = [];
+            for (let i = 0; i < size; i++) {
+                array.push(Math.floor(Math.random() * 100) + 1);
+            }
+            return { success: true, data: array };
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    },
+
+    getSortingSteps: async (array, algorithm) => {
+        try {
+            const algoMap = {
+                'bubble': 'bubbleSort',
+                'selection': 'selectionSort',
+                'insertion': 'insertionSort',
+                'merge': 'mergeSort',
+                'quick': 'quickSort'
+            };
             
+            const algoName = algoMap[algorithm];
+            
+            const endpoint = `/sort/${algoName}`;
+            
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    arrToSort: array
+                })
+            });
+            
+            if (!response.ok) {
+                let errorMessage = `HTTP error! status: ${response.status}`;
+                try {
+                    const errorData = await response.text();
+                    console.error('Backend error details:', errorData);
+                    errorMessage += `\n\nBackend says: ${errorData.substring(0, 200)}`;
+                } catch (e) {
+                }
+                throw new Error(errorMessage);
+            }
+            
+            const animationSteps = await response.json();
+            return { success: true, data: animationSteps };
+        } catch (error) {
+            console.error('Error fetching sorting steps:', error);
+            return { success: false, error: error.message };
+        }
+    },
+
+    saveGraph: async (graphData) => {
+        try {
             const newGraph = {
                 id: Date.now(),
                 ...graphData,
                 createdAt: new Date().toISOString()
             };
             
-            graphs.push(newGraph);
-            localStorage.setItem('sortingGraphs', JSON.stringify(graphs));
-            
+            savedGraphsStore.push(newGraph);
             return { success: true, data: newGraph };
         } catch (error) {
             return { success: false, error: error.message };
         }
     },
 
-    // Load all saved graphs
     loadGraphs: async () => {
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
         try {
-            const saved = localStorage.getItem('sortingGraphs');
-            const graphs = saved ? JSON.parse(saved) : [];
-            return { success: true, data: graphs };
+            return { success: true, data: savedGraphsStore };
         } catch (error) {
             return { success: false, error: error.message };
         }
     },
 
-    // Load specific graph by ID
     loadGraphById: async (id) => {
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
         try {
-            const saved = localStorage.getItem('sortingGraphs');
-            const graphs = saved ? JSON.parse(saved) : [];
-            const graph = graphs.find(g => g.id === id);
+            const graph = savedGraphsStore.find(g => g.id === id);
             
             if (graph) {
                 return { success: true, data: graph };
@@ -82,36 +96,26 @@ const SortingAPI = {
         }
     },
 
-    // Delete graph
     deleteGraph: async (id) => {
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
         try {
-            const saved = localStorage.getItem('sortingGraphs');
-            const graphs = saved ? JSON.parse(saved) : [];
-            const filtered = graphs.filter(g => g.id !== id);
-            
-            localStorage.setItem('sortingGraphs', JSON.stringify(filtered));
-            
+            savedGraphsStore = savedGraphsStore.filter(g => g.id !== id);
             return { success: true, data: { deleted: id } };
         } catch (error) {
             return { success: false, error: error.message };
         }
     },
 
-    // Update graph
     updateGraph: async (id, updates) => {
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
         try {
-            const saved = localStorage.getItem('sortingGraphs');
-            const graphs = saved ? JSON.parse(saved) : [];
-            const index = graphs.findIndex(g => g.id === id);
+            const index = savedGraphsStore.findIndex(g => g.id === id);
             
             if (index !== -1) {
-                graphs[index] = { ...graphs[index], ...updates, updatedAt: new Date().toISOString() };
-                localStorage.setItem('sortingGraphs', JSON.stringify(graphs));
-                return { success: true, data: graphs[index] };
+                savedGraphsStore[index] = { 
+                    ...savedGraphsStore[index], 
+                    ...updates, 
+                    updatedAt: new Date().toISOString() 
+                };
+                return { success: true, data: savedGraphsStore[index] };
             } else {
                 return { success: false, error: 'Graph not found' };
             }
@@ -121,241 +125,58 @@ const SortingAPI = {
     }
 };
 
-// ============================================
-// SORTING ALGORITHMS (Client-side visualization)
-// ============================================
-
+// BACKEND ANIMATION PLAYER
 class SortingVisualizer {
-    constructor() {
-        this.array = [];
-        this.steps = [];
-        this.currentStep = 0;
-    }
-
-    async bubbleSort(array, delay, updateCallback) {
-        const arr = [...array];
-        for (let i = 0; i < arr.length - 1; i++) {
-            for (let j = 0; j < arr.length - i - 1; j++) {
-                if (state.shouldStop) return arr;
-                
-                await updateCallback(j, j + 1, 'comparing');
-                await this.sleep(state.delay);
-                
-                if (arr[j] > arr[j + 1]) {
-                    await updateCallback(j, j + 1, 'swapping');
-                    [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-                    await updateCallback(null, null, 'render', arr);
-                    await this.sleep(state.delay);
-                }
-                
-                await updateCallback(j, j + 1, 'default');
-            }
-            await updateCallback(arr.length - i - 1, null, 'sorted');
-        }
-        await updateCallback(0, null, 'sorted');
-        return arr;
-    }
-
-    async selectionSort(array, delay, updateCallback) {
-        const arr = [...array];
-        for (let i = 0; i < arr.length - 1; i++) {
-            if (state.shouldStop) return arr;
-            
-            let minIdx = i;
-            await updateCallback(minIdx, null, 'selected');
-            
-            for (let j = i + 1; j < arr.length; j++) {
-                if (state.shouldStop) return arr;
-                
-                await updateCallback(j, null, 'comparing');
-                await this.sleep(state.delay);
-                
-                if (arr[j] < arr[minIdx]) {
-                    await updateCallback(minIdx, null, 'default');
-                    minIdx = j;
-                    await updateCallback(minIdx, null, 'selected');
-                } else {
-                    await updateCallback(j, null, 'default');
-                }
-            }
-            
-            if (minIdx !== i) {
-                await updateCallback(i, minIdx, 'swapping');
-                [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
-                await updateCallback(null, null, 'render', arr);
-                await this.sleep(state.delay);
-            }
-            
-            await updateCallback(i, null, 'sorted');
-        }
-        await updateCallback(arr.length - 1, null, 'sorted');
-        return arr;
-    }
-
-    async insertionSort(array, delay, updateCallback) {
-        const arr = [...array];
-        await updateCallback(0, null, 'sorted');
-        
-        for (let i = 1; i < arr.length; i++) {
-            if (state.shouldStop) return arr;
-            
-            let key = arr[i];
-            let j = i - 1;
-            
-            await updateCallback(i, null, 'selected');
-            await this.sleep(state.delay);
-            
-            while (j >= 0 && arr[j] > key) {
-                if (state.shouldStop) return arr;
-                
-                await updateCallback(j, null, 'comparing');
-                arr[j + 1] = arr[j];
-                await updateCallback(null, null, 'render', arr);
-                await this.sleep(state.delay);
-                await updateCallback(j, null, 'sorted');
-                j--;
-            }
-            
-            arr[j + 1] = key;
-            await updateCallback(null, null, 'render', arr);
-            await updateCallback(j + 1, null, 'sorted');
-            await this.sleep(state.delay);
-        }
-        return arr;
-    }
-
-    async mergeSort(array, delay, updateCallback) {
-        const arr = [...array];
-        await this._mergeSortHelper(arr, 0, arr.length - 1, delay, updateCallback);
-    }
-
-    async _mergeSortHelper(arr, left, right, delay, updateCallback) {
-        if (left < right) {
-            const mid = Math.floor((left + right) / 2);
-            await this._mergeSortHelper(arr, left, mid, delay, updateCallback);
-            await this._mergeSortHelper(arr, mid + 1, right, delay, updateCallback);
-            await this._merge(arr, left, mid, right, delay, updateCallback);
-        }
-    }
-
-    async _merge(arr, left, mid, right, delay, updateCallback) {
-        const leftArr = arr.slice(left, mid + 1);
-        const rightArr = arr.slice(mid + 1, right + 1);
-        
-        let i = 0, j = 0, k = left;
-        
-        while (i < leftArr.length && j < rightArr.length) {
-            if (state.shouldStop) return;
-            
-            await updateCallback(k, null, 'comparing');
-            
-            if (leftArr[i] <= rightArr[j]) {
-                arr[k] = leftArr[i];
-                i++;
-            } else {
-                arr[k] = rightArr[j];
-                j++;
-            }
-            
-            await updateCallback(null, null, 'render', arr);
-            await updateCallback(k, null, 'swapping');
-            await this.sleep(state.delay);
-            await updateCallback(k, null, 'default');
-            k++;
-        }
-        
-        while (i < leftArr.length) {
-            if (state.shouldStop) return;
-            
-            await updateCallback(k, null, 'comparing');
-            arr[k] = leftArr[i];
-            i++;
-            await updateCallback(null, null, 'render', arr);
-            await updateCallback(k, null, 'swapping');
-            await this.sleep(state.delay);
-            await updateCallback(k, null, 'default');
-            k++;
-        }
-        
-        while (j < rightArr.length) {
-            if (state.shouldStop) return;
-            
-            await updateCallback(k, null, 'comparing');
-            arr[k] = rightArr[j];
-            j++;
-            await updateCallback(null, null, 'render', arr);
-            await updateCallback(k, null, 'swapping');
-            await this.sleep(state.delay);
-            await updateCallback(k, null, 'default');
-            k++;
-        }
-    }
-
-    async quickSort(array, delay, updateCallback) {
-        const arr = [...array];
-        await this._quickSortHelper(arr, 0, arr.length - 1, delay, updateCallback);
-    }
-
-    async _quickSortHelper(arr, low, high, delay, updateCallback) {
-        if (low < high) {
-            const pi = await this._partition(arr, low, high, delay, updateCallback);
-            await this._quickSortHelper(arr, low, pi - 1, delay, updateCallback);
-            await this._quickSortHelper(arr, pi + 1, high, delay, updateCallback);
-        }
-    }
-
-    async _partition(arr, low, high, delay, updateCallback) {
-        const pivot = arr[high];
-        const pivotIndex = high;
-        await updateCallback(pivotIndex, null, 'pivot');
-        let i = low - 1;
-        
-        for (let j = low; j < high; j++) {
-            if (state.shouldStop) return i + 1;
-            
-            // Keep pivot colored
-            await updateCallback(pivotIndex, null, 'pivot');
-            await updateCallback(j, null, 'comparing');
-            await this.sleep(state.delay);
-            
-            if (arr[j] < pivot) {
-                i++;
-                await updateCallback(i, j, 'swapping');
-                [arr[i], arr[j]] = [arr[j], arr[i]];
-                await updateCallback(null, null, 'render', arr);
-                await this.sleep(state.delay);
-                
-                // Restore colors after swap
-                await updateCallback(i, null, 'default');
-            }
-            await updateCallback(j, null, 'default');
-            // Restore pivot color after clearing other colors
-            await updateCallback(pivotIndex, null, 'pivot');
-        }
-        
-        // Final swap - show both bars swapping
-        await updateCallback(i + 1, pivotIndex, 'swapping');
-        await this.sleep(state.delay);
-        
-        [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
-        await updateCallback(null, null, 'render', arr);
-        await this.sleep(state.delay);
-        
-        // Mark the pivot's final position as sorted
-        await updateCallback(i + 1, null, 'sorted');
-        
-        return i + 1;
-    }
-
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+    
+    async playBackendAnimation(animationSteps, updateCallback) {
+        
+        for (let step of animationSteps) {
+            if (state.shouldStop) break;
+            
+            const [arr, redBar1, redBar2, blueBar1, blueBar2] = step;
+            
+            state.array = [...arr];
+            await updateCallback(null, null, 'render', arr);
+            
+            if (redBar1 !== null && redBar1 !== -1) {
+                updateBarState(redBar1, 'comparing');
+            }
+            if (redBar2 !== null && redBar2 !== -1) {
+                updateBarState(redBar2, 'comparing');
+            }
+            
+            if (blueBar1 !== null && blueBar1 !== -1) {
+                updateBarState(blueBar1, 'swapping');
+            }
+            if (blueBar2 !== null && blueBar2 !== -1) {
+                updateBarState(blueBar2, 'swapping');
+            }
+            
+            incrementStep();
+            await this.sleep(state.delay);
+            
+            if (redBar1 !== null && redBar1 !== -1) {
+                updateBarState(redBar1, 'default');
+            }
+            if (redBar2 !== null && redBar2 !== -1) {
+                updateBarState(redBar2, 'default');
+            }
+            if (blueBar1 !== null && blueBar1 !== -1) {
+                updateBarState(blueBar1, 'default');
+            }
+            if (blueBar2 !== null && blueBar2 !== -1) {
+                updateBarState(blueBar2, 'default');
+            }
+        }
+        
+        return state.array;
+    }
 }
 
-// ============================================
 // APPLICATION STATE & DOM MANAGEMENT
-// ============================================
-
 let state = {
     array: [],
     originalArray: [],
@@ -393,17 +214,13 @@ const confirmCreateGraph = document.getElementById('confirmCreateGraph');
 const cancelCreateGraph = document.getElementById('cancelCreateGraph');
 const newGraphNameInput = document.getElementById('newGraphNameInput');
 
-// ============================================
 // INITIALIZATION
-// ============================================
-
 document.addEventListener('DOMContentLoaded', async () => {
     await initializeApp();
     setupEventListeners();
 });
 
 async function initializeApp() {
-    // Load saved graphs from API
     const response = await SortingAPI.loadGraphs();
     if (response.success) {
         state.savedGraphs = response.data;
@@ -412,36 +229,29 @@ async function initializeApp() {
         }
     }
     
-    // Generate initial array
     await generateArray();
 }
 
 function setupEventListeners() {
-    // Size slider
     sizeSlider.addEventListener('input', async (e) => {
         state.arraySize = parseInt(e.target.value);
         sizeValue.textContent = state.arraySize;
         if (!state.isPlaying) {
-            await generateArray(); // This will generate new array and save as original
+            await generateArray();
         }
     });
     
-    // Delay slider
     delaySlider.addEventListener('input', (e) => {
         state.delay = parseInt(e.target.value);
         delayValue.textContent = `${state.delay}ms`;
-        // Speed can now be adjusted during sorting
     });
     
-    // Algorithm selector
     algorithmSelect.addEventListener('change', (e) => {
         state.currentAlgorithm = e.target.value;
     });
     
-    // Control buttons
     resetBtn.addEventListener('click', async () => {
         if (!state.isPlaying) {
-            // Restore original array instead of generating new one
             if (state.originalArray.length > 0) {
                 state.array = [...state.originalArray];
                 state.stepCount = 0;
@@ -453,12 +263,10 @@ function setupEventListeners() {
     
     playBtn.addEventListener('click', async () => {
         if (state.isPlaying) {
-            // Stop/Pause the sorting
             state.shouldStop = true;
             state.isPlaying = false;
             playBtn.querySelector('i').className = 'fa-solid fa-play';
         } else {
-            // Start sorting
             state.shouldStop = false;
             await startSorting();
         }
@@ -473,14 +281,12 @@ function setupEventListeners() {
         }
     });
     
-    // Sidebar buttons
     editButton.addEventListener('click', toggleEditMode);
     createButton.addEventListener('click', showCreateModal);
     createIcon.addEventListener('click', showCreateModal);
     confirmCreateGraph.addEventListener('click', createNewGraph);
     cancelCreateGraph.addEventListener('click', hideCreateModal);
     
-    // Modal close on outside click
     createGraphModal.addEventListener('click', (e) => {
         if (e.target === createGraphModal) {
             hideCreateModal();
@@ -488,15 +294,12 @@ function setupEventListeners() {
     });
 }
 
-// ============================================
 // CORE FUNCTIONS
-// ============================================
-
 async function generateArray() {
     const response = await SortingAPI.generateArray(state.arraySize);
     if (response.success) {
         state.array = response.data;
-        state.originalArray = [...response.data]; // Save original array
+        state.originalArray = [...response.data];
         state.stepCount = 0;
         updateStepCounter();
         renderBars();
@@ -541,7 +344,7 @@ function renderBars() {
         indexLabel.className = 'bar-index';
         indexLabel.textContent = index;
         
-        bar.appendChild(valueLabel);  // Add value inside the bar
+        bar.appendChild(valueLabel);
         barWrapper.appendChild(bar);
         barWrapper.appendChild(indexLabel);
         visualizationContainer.appendChild(barWrapper);
@@ -555,22 +358,14 @@ async function startSorting() {
     updateStepCounter();
     playBtn.querySelector('i').className = 'fa-solid fa-pause';
     
-    // Reset all bars
     const bars = document.querySelectorAll('.bar');
     bars.forEach(bar => bar.className = 'bar');
     
-    // Get sorting data from API
     const response = await SortingAPI.getSortingSteps(state.array, state.currentAlgorithm);
     
     if (response.success) {
-        // Update callback for visualization
         const updateCallback = async (index1, index2, action, newArray) => {
             if (state.shouldStop) return;
-            
-            // Increment step for visual actions (not for render)
-            if (action !== 'render' && action !== 'default') {
-                incrementStep();
-            }
             
             if (action === 'render' && newArray) {
                 state.array = [...newArray];
@@ -583,39 +378,16 @@ async function startSorting() {
             }
         };
         
-        // Execute sorting algorithm
-        let result;
-        switch (state.currentAlgorithm) {
-            case 'bubble':
-                result = await visualizer.bubbleSort(state.array, state.delay, updateCallback);
-                break;
-            case 'selection':
-                result = await visualizer.selectionSort(state.array, state.delay, updateCallback);
-                break;
-            case 'insertion':
-                result = await visualizer.insertionSort(state.array, state.delay, updateCallback);
-                break;
-            case 'merge':
-                result = await visualizer.mergeSort(state.array, state.delay, updateCallback);
-                break;
-            case 'quick':
-                result = await visualizer.quickSort(state.array, state.delay, updateCallback);
-                break;
-        }
+        const result = await visualizer.playBackendAnimation(response.data, updateCallback);
         
-        // Update array if sorting completed
-        if (result && !state.shouldStop) {
-            state.array = result;
-            renderBars();
-        }
-        
-        // Final animation only if not stopped
         if (!state.shouldStop) {
             for (let i = 0; i < state.array.length; i++) {
                 updateBarState(i, 'sorted');
                 await new Promise(resolve => setTimeout(resolve, 10));
             }
         }
+    } else {
+        alert('Error connecting to backend: ' + response.error);
     }
     
     state.isPlaying = false;
@@ -633,10 +405,7 @@ function updateBarState(index, state) {
     }
 }
 
-// ============================================
 // GRAPH MANAGEMENT
-// ============================================
-
 function toggleEditMode() {
     console.log('Edit mode toggled');
 }
@@ -720,7 +489,7 @@ async function loadGraph(graphId) {
         const graph = response.data;
         state.currentGraphId = graphId;
         state.array = [...graph.array];
-        state.originalArray = [...graph.array]; // Save as original array
+        state.originalArray = [...graph.array];
         state.arraySize = graph.size;
         state.currentAlgorithm = graph.algorithm;
         
