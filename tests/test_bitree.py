@@ -1,4 +1,5 @@
 import unittest
+import time
 from src.logic.binary_tree import BinaryTree, Node
 
 class TestBinaryTree(unittest.TestCase):
@@ -10,6 +11,10 @@ class TestBinaryTree(unittest.TestCase):
         self.r = self.tree.insert_right(self.tree.root, 3)
         self.tree.insert_left(self.l, 4)
         self.tree.insert_right(self.l, 5)
+
+    def tearDown(self):
+        time.sleep(0.1)
+        print(f"[DONE] Test finished ({self._testMethodName})")
 
     def test_insert_left(self):
         self.assertEqual(self.tree.root.left.value, 2)

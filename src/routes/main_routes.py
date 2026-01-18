@@ -1,14 +1,10 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, send_from_directory
 
 main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def index():
     return render_template('index.html')
-
-@main_bp.route('/projects')
-def projects():
-    return render_template('project.html')
 
 @main_bp.route('/profiles_menu')
 def profiles_menu():
@@ -24,10 +20,19 @@ def binary_tree():
 def binary_search_tree():
     return render_template('binary-search-tree.html')
 
-@main_bp.route("/train")
+@main_bp.route("/graph")
 def train():
     return render_template("train.html")
 
 @main_bp.route("/directions/main-railway")
 def directions():
     return render_template("components/directions/main-railway.html")
+
+@main_bp.route("/sorting")
+def sorting_algorithm():
+    return render_template('sorting.html')
+
+# Temporary route for everything.
+@main_bp.route('/data/<path:filename>')
+def serve_data(filename):
+    return send_from_directory('data', filename)
