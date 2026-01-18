@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUEUE - Data Structure Visualizer</title>
+    <title>SORTING ALGORITHM - VISUALIZER</title>
     <link rel="stylesheet" href="{{url_for('static', filename='css/sorting.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/sidebar.css')}}">
 
@@ -16,17 +16,13 @@
   {% include 'components/sidebar.html' %}
   {% include 'components/header.html' %}
 
-  <!-- OVERLAY -->
   <div id="overlay" class="overlay"></div>
 
     <div class="container">
-        <!-- SIDEBAR -->
         <div class="left-sidebar">
             <div class="edit-button">EDIT GRAPH</div>
             
-            <!-- INITIAL -->
             <div class="saved-graph-box">
-                <!-- NO SAVED GRAPH - Shows when no graphs exist -->
                 <div id="noSavedGraph">
                     <div class="graph-icon">
                         <div class="graph-icon-cell"></div>
@@ -37,7 +33,6 @@
                     <div class="saved-graph-text">NO SAVED GRAPH</div>
                 </div>
 
-                <!-- GRAPH LIST - Shows when graphs exist -->
                 <div id="graph-list-organizer" style="display:none;">
                     <div class="graph-list-title">All Graphs</div>
                 </div>
@@ -51,9 +46,7 @@
             </div>
         </div>
 
-        <!-- MAIN CONTENT -->
         <div class="main-content">
-            <!-- CONTROLS PANEL -->
             <div class="controls-panel">
                 <div class="control-group">
                     <label class="control-label">SIZE</label>
@@ -95,17 +88,42 @@
                 </div>
             </div>
 
-            <!-- VISUALIZATION BOX -->
             <div class="red-box">
                 <div class="step-counter" id="stepCounter">Step: 0</div>
                 <div class="visualization-container" id="visualizationContainer">
-                    <!-- Bars will be generated here -->
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="info-header" id="algoName">Bubble Sort Info</div>
+                
+                <div class="info-section">
+                    <div class="info-row">
+                        <span class="info-label">Best Case</span>
+                        <span class="info-value" id="bestCase">O(n)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Average Case</span>
+                        <span class="info-value" id="averageCase">O(n²)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Worst Case</span>
+                        <span class="info-value" id="worstCase">O(n²)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Space Complexity</span>
+                        <span class="info-value" id="spaceComplexity">O(1)</span>
+                    </div>
+                </div>
+
+                <div class="info-header" style="margin-top: 30px;">Statistics</div>
+                <div class="info-description" id="algoDescription">
+                    Bubble sort repeatedly swaps adjacent elements if they are in the wrong order. Takes longer for larger arrays.
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- CREATE GRAPH MODAL -->
     <div id="createGraphModal" class="modal" style="display: none;">
         <div class="modal-content">
             <h3>Create New Graph</h3>
