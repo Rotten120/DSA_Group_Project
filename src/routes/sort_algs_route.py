@@ -8,7 +8,7 @@ sort_bp = Blueprint('sorting', __name__)
 def sort_update():
     return render_template('sorting.html')
 
-@sort_bp.route('/sort/<string:algo>')
+@sort_bp.route('/<string:algo>')
 def run_sorting_algorithm(algo: str, arr: list = []):
     data = request.get_json()
     arr = data.get("arrToSort", arr)
