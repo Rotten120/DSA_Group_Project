@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>CircuiTech</title>
+
+        <!--Tab Logo-->
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+        <!-- CSS Links -->
+        <link rel="stylesheet" href="{{url_for('static', filename='css/homepage-body-new.css')}}" />
+        <link rel="stylesheet" href="{{url_for('static', filename='css/homepage-media-response.css')}}" />
+
+        <!--Font Awesome-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+        {% include 'components/fonts.html' %}
+
+        <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
+
+    </head>
+
+    <body id="home">
+    {% include 'components/sidebar.html' %}
+    {% include 'components/header.html' %}
+
+    <!-- OVERLAY -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- View More Details Section -->
+    <div class="details-section">
+        <button class="view-details-btn">VIEW MORE DETAILS</button>
+    </div>
+
+    <!-- Watch Preview Section -->
+    <div class="preview-section">
+        <div class="play-button">
+            <i class="fas fa-play"></i>
+        </div>
+        <div class="preview-text">
+            <span>WATCH</span>
+            <span>THE</span>
+            <span>PREVIEW</span>
+        </div>
+    </div>
+
+    <!-- DSA Definition Search Button -->
+    <div class="dsa-definition-section">
+        <a href="#meaning-section" class="dsa-search-btn">
+            <i class="fas fa-search"></i>
+        </a>
+    </div>
+
+    <!-- DSA Applications Search Button -->
+    <div class="dsa-applications-section">
+        <a href="#applications-section" class="dsa-search-btn">
+            <i class="fas fa-search"></i>
+        </a>
+    </div>
+
+    <!-- DSA Importance Search Button -->
+    <div class="dsa-importance-section">
+        <a href="#importance-section" class="dsa-search-btn">
+            <i class="fas fa-search"></i>
+        </a>
+    </div>
+
+    <!-- Placeholder sections for smooth scroll -->
+    <section id="meaning-section" class="meaning-section">
+    </section>
+
+    <section id="applications-section" class="applications-section">
+    </section>
+
+    <section id="importance-section" class="importance-section">
+    </section>
+
+    </body>
+</html>
