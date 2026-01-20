@@ -19,6 +19,16 @@
 
         <script src="{{url_for('static', filename='js/side_bar.js')}}"></script>
 
+        <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+        </script>
+        <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "lpteQvYYZkkQbbfEi",
+            });
+        })();
+        </script>
     </head>
 
     <body id="home">
@@ -158,9 +168,9 @@
     <!-- Contact Form Section -->
     <div class="contact-form-section">
         <form class="contact-form">
-            <input type="text" class="form-input" placeholder="NAME" required>
-            <input type="email" class="form-input" placeholder="E-MAIL" required>
-            <textarea class="form-textarea" placeholder="MESSAGE" rows="6" required></textarea>
+            <input type="text" class="form-input" placeholder="NAME" id="name" required>
+            <input type="email" class="form-input" placeholder="E-MAIL" id="email" required>
+            <textarea class="form-textarea" placeholder="MESSAGE" id="message" rows="6" required></textarea>
             <button type="submit" class="send-message-btn">
                 <i class="fas fa-paper-plane"></i>
                 SEND MESSAGE
@@ -168,5 +178,6 @@
         </form>
     </div>
 
+    <script src="{{url_for('static', filename='js/send-email.js')}}"></script>
     </body>
 </html>
