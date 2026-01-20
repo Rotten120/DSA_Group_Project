@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", async ()=> {
     const leftBtn = document.querySelector(".scroll-left");
     const rightBtn = document.querySelector(".scroll-right");
     const overlay = document.getElementById('popup-overlay');
-    const closeBtn = document.getElementById('closePopup');
     const linkBoxes = document.querySelectorAll('.link-box a');
     const exitBtn = document.querySelector('.left-button .inner-btn');
     const continueBtn= document.querySelector('.right-button .inner-btn');
@@ -39,14 +38,7 @@ document.addEventListener("DOMContentLoaded", async ()=> {
                 { key: 'bitree', ...projectData.bitree },
                 { key: 'bst', ...projectData.bst },
                 { key: 'graph', ...projectData.graph},
-                { key: 'sorting', ...projectData.sorting },
-                { 
-                    key: 'placeholder6', 
-                    title: 'Coming Soon', 
-                    desc: 'This project is coming soon! Please wait for it!', 
-                    'bg-img': 'coming_soon.jpg',
-                    route: null 
-                }
+                { key: 'sorting', ...projectData.sorting }
             ];
             
             console.log('✓ Data array created:', dataStructuresArray);
@@ -108,7 +100,6 @@ document.addEventListener("DOMContentLoaded", async ()=> {
             currentIndex = linkTextToIndex[linkText] ?? 0;
             
             updatePopupContent(currentIndex);
-            updateButtonStates();
         });
     });
 
@@ -156,42 +147,19 @@ document.addEventListener("DOMContentLoaded", async ()=> {
         document.body.style.overflow = '';
     }
 
-    // Update popup content
+    // Update popup content - only load the image now
     function updatePopupContent(index) {
-        const popupTitle = document.querySelector('#text-content h2');
-        const popupText = document.querySelector('#text-content p');
         const popupImage = document.querySelector('.img-container img');
-        
-        const titles = [
-            '01   QUEUE',
-            '02   DEQUE',
-            '03   BINARY TREE',
-            '04   BINARY SEARCH TREE',
-            '05   TRAIN ROUTE',
-            '06   SORTING ALGORITHM'
-        ];
-
         const data = dataStructuresArray[index];
         
-        if (data) {
-            if (popupTitle) {
-                popupTitle.textContent = titles[index];
-            }
-            
-            if (popupText) {
-                popupText.textContent = data.desc || 'No description available';
-            }
-            
-            if (popupImage) {
-                const imgSrc = data['bg-img'].startsWith('http') 
-                    ? data['bg-img'] 
-                    : `/static/images/project_pics/${data['bg-img']}`;
-                popupImage.src = imgSrc;
-                popupImage.alt = data.title;
-            }
+        if (data && popupImage) {
+            const imgSrc = data['bg-img'].startsWith('http') 
+                ? data['bg-img'] 
+                : `/static/images/projects-img/${data['bg-img']}`;
+            popupImage.src = imgSrc;
+            popupImage.alt = data.title;
         } else {
-            if (popupTitle) popupTitle.textContent = 'Error Loading Data';
-            if (popupText) popupText.textContent = 'Could not load data structure information.';
+            console.error('Could not load image for index:', index);
         }
     }
 });

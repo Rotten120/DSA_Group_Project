@@ -9,7 +9,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
     display: none;
     justify-content: center;
     align-items: center;
@@ -31,102 +30,153 @@ body {
 }
 
 .popup-content {
-    background-color: #aa1313;
-    max-width: 800px;
-    min-width: 800px;
-    min-height: 600px;
-    max-height: 1200px;
+    background-color: transparent;
+    max-width: 900px;
+    max-height: 700px;
     border-radius: 20px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
 }
 
 .main-content {
-    display: flex;
-    gap: 20px;
-    padding: 0 20px;
-    margin-top: 30px;
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
-.left-content {
-    flex: 1;
-    max-width: 600px;
-    color: white;
-    margin-top: 40px;
-    margin-left: 12px;
-}
-
-.text-content {
-    display: flex;
-    flex-direction: column;
-    height: 380px;
-    overflow-y: auto;
-}
-
-h2 {
-    text-align: left;
-    font-size: 44px;
-    margin: 0;
-}
-
-p {
-    margin-top: 20px;
-    text-align: justify;
-    font-size: 18px;
-    line-height: 30px;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    padding-right: 8px;
-}
-
-.button-content {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    margin-top: 60px;
-}
-
-.left-button {
-    display: flex;
-}
-
-.right-button {
-    display: flex;
-}
-
-.inner-btn {
-    padding: 15px 0px;
-    width: 150px;
-    background-color: #600505;
-    border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.inner-btn:hover {
-    opacity: 0.7;
-}
-
-.inner-btn:active {
-    opacity: 0.4;
+.img-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
 .img-container {
     width: 100%;
     height: 100%;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .img-container img {
-    height: 500px;
-    width: 300px;
-    border-radius: 10px;
-    margin-top: 30px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
 
+.button-content {
+    position: absolute;
+    bottom: 55px;
+    left: 30.7%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 91px;
+    z-index: 10;
+}
+
+.left-button,
+.right-button {
+    display: flex;
+}
+
+.inner-btn {
+    padding: 12px 25px;
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.inner-btn:hover {
+    transform: translateY(-2px);
+}
+
+.inner-btn:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 1400px) {
+  .popup-overlay {
+    width: 90%;
+    height: 90%;
+    }
+}
+
+@media (max-width: 1200px) {
+  .popup-overlay {
+    width: 80%;
+    height: 80%;
+    }
+}
+
+@media (max-width: 1023px) {
+  .popup-overlay {
+    width: 80%;
+    height: 80%;
+    }
+
+    .button-content {
+    bottom: 34px;
+    left: 31%;
+    gap: 49px;
+    }
+
+    .inner-btn { 
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+  .popup-overlay {
+    width: 70%;
+    height: 70%;
+    }
+
+    .button-content {
+    bottom: 25px;
+    left: 31%;
+    gap: 20px;
+    }
+
+    .inner-btn { 
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 720px) {
+  .popup-overlay {
+    width: 70%;
+    height: 70%;
+    }
+
+    .button-content {
+    bottom: 18px;
+    left: 31%;
+    gap: 8px;
+    }
+
+    .inner-btn { 
+        font-size: 7px;
+    }
+}
+
+@media (max-width: 620px) {
+  .popup-overlay {
+    width: 60%;
+    height: 60%;
+    }
+
+    .button-content {
+    bottom: 11px;
+    left: 31%;
+    gap: 0;
+    }
+
+    .inner-btn { 
+        font-size: 5px;
+    }
+}
