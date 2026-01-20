@@ -30,41 +30,38 @@
 <section class="main-section">
     <div class="content-wrapper">
         <div class="profile-row-wrapper">
-            <h1 class="profile-title">PRO<br>&nbsp; FILES</h1>
 
-            <div class="first-row-cards">
-            <a class="card-item" href="{{url_for('profile.profile', profile_id=0)}}">
-              <img src="{{url_for('static', filename='images/card_pics/von.png')}}" alt="Profile 1" />
-            </a>
-            <a class="card-item" href="{{url_for('profile.profile', profile_id=1)}}">
-              <img src="{{url_for('static', filename='images/card_pics/trowa.png')}}" alt="Profile 2" />
-            </a>
-            <a class="card-item" href="{{url_for('profile.profile', profile_id=2)}}">
-              <img src="{{url_for('static', filename='images/card_pics/shane.png')}}" alt="Profile 3" />
-            </a>
-            <a class="card-item" href="{{url_for('profile.profile', profile_id=3)}}">
-              <img src="{{url_for('static', filename='images/card_pics/kurt.png')}}" alt="Profile 4" />
-            </a>
-            <a class="card-item" href="{{url_for('profile.profile', profile_id=4)}}">
-              <img src="{{url_for('static', filename='images/card_pics/carl.png')}}" alt="Profile 5" />
-            </a>
+            <div class="cards-container">
+                <a class="card-item card-1" href="{{url_for('profile.profile', profile_id=6)}}">
+                  <img src="{{url_for('static', filename='images/card_pics/laika-new.png')}}" alt="Profile 1" />
+                </a>
+                <a class="card-item card-2" href="{{url_for('profile.profile', profile_id=0)}}">
+                  <img src="{{url_for('static', filename='images/card_pics/von-new.png')}}" alt="Profile 2" />
+                </a>
+                <a class="card-item card-3" href="{{url_for('profile.profile', profile_id=5)}}">
+                  <img src="{{url_for('static', filename='images/card_pics/ycz-new.png')}}" alt="Profile 3" />
+                </a>
+                <a class="card-item card-4" href="{{url_for('profile.profile', profile_id=7)}}">
+                  <img src="{{url_for('static', filename='images/card_pics/chloe-new.png')}}" alt="Profile 4" />
+                </a>
+                <a class="card-item card-5" href="{{url_for('profile.profile', profile_id=4)}}">
+                  <img src="{{url_for('static', filename='images/card_pics/carl-new.png')}}" alt="Profile 5" />
+                </a>
+                <a class="card-item card-6" href="{{url_for('profile.profile', profile_id=8)}}">
+                  <img src="{{url_for('static', filename='images/card_pics/chris-new.png')}}" alt="Profile 6" />
+                </a>
+                <a class="card-item card-7" href="{{url_for('profile.profile', profile_id=3)}}">
+                  <img src="{{url_for('static', filename='images/card_pics/kurt-new.png')}}" alt="Profile 7" />
+                </a>
+                <a class="card-item card-8" href="{{url_for('profile.profile', profile_id=2)}}">
+                  <img src="{{url_for('static', filename='images/card_pics/shane-new.png')}}" alt="Profile 8" />
+                </a>
+                <a class="card-item card-9" href="{{url_for('profile.profile', profile_id=1)}}">
+                  <img src="{{url_for('static', filename='images/card_pics/trowa-new.png')}}" alt="Profile 9" />
+                </a>
+            </div>
         </div>
     </div>
-
-    <div class="card-row bottom">
-        <a class="card-item" href="{{url_for('profile.profile', profile_id=5)}}">
-        <img src="{{url_for('static', filename='images/card_pics/ycz.png')}}" alt="Profile 6" />
-        </a>
-        <a class="card-item" href="{{url_for('profile.profile', profile_id=6)}}">
-        <img src="{{url_for('static', filename='images/card_pics/laika.png')}}" alt="Profile 7" />
-        </a>
-        <a class="card-item" href="{{url_for('profile.profile', profile_id=7)}}">
-        <img src="{{url_for('static', filename='images/card_pics/chloe.png')}}" alt="Profile 8" />
-        </a>
-        <a class="card-item" href="{{url_for('profile.profile', profile_id=8)}}">
-        <img src="{{url_for('static', filename='images/card_pics/chris.png')}}" alt="Profile 9" />
-        </a>
-    </div>
-    </div>
+</section>
 </body>
 </html>
