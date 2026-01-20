@@ -10,7 +10,7 @@ html {
 
 body {
   font-family: "Montserrat", sans-serif;
-  background: url('../images/background/new-main.png') top center no-repeat;
+  background: url('../images/background/new--main.png') top center no-repeat;
   background-size: 100% auto;
   background-attachment: scroll;
   background-color: #000;
@@ -20,7 +20,7 @@ body {
   min-height: 100vh;
   position: relative;
   padding: 20px;
-  padding-bottom: calc(72.8vw * 4.5); 
+  padding-bottom: calc(73vw * 4.5); 
 }
 
 @media (max-width: 1023px) {
@@ -240,3 +240,184 @@ body {
   top: 55%;
 }
 
+.video-box-1,
+.video-box-2,
+.video-box-3,
+.video-box-4,
+.video-box-5,
+.video-box-6 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 3px solid #d4af37;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.video-box-1 .video-thumbnail,
+.video-box-2 .video-thumbnail,
+.video-box-3 .video-thumbnail,
+.video-box-4 .video-thumbnail,
+.video-box-5 .video-thumbnail,
+.video-box-6 .video-thumbnail {
+    width: 100%;
+    height: 100%;
+}
+
+.video-box-1 .video-thumbnail img,
+.video-box-2 .video-thumbnail img,
+.video-box-3 .video-thumbnail img,
+.video-box-4 .video-thumbnail img,
+.video-box-5 .video-thumbnail img,
+.video-box-6 .video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Position each video box - adjust these values as needed */
+.video-box-1 {
+    top: 68.5%;
+    left: 51%;
+}
+
+.video-box-2 {
+    top: 68.5%;
+    left: 76%;
+}
+
+.video-box-3 {
+    top: 76%;
+    left: 3%;
+}
+
+.video-box-4 {
+    top: 76%;
+    left: 26%;
+}
+
+.video-box-5 {
+    top: 76%;
+    left: 51%;
+}
+
+.video-box-6 {
+    top: 76%;
+    left: 76%;
+}
+
+/* Social Media Icons Section */
+.social-media-section {
+  position: absolute;
+  top: 95.3%;
+  left: 23%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: clamp(5px, 2vw, 5px);
+  z-index: 10;
+}
+
+.social-icon {
+  width: clamp(60px, 10vw, 65px);
+  height: clamp(50px, 10vw, 65px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f4e4c1;
+  font-size: clamp(40px, 4vw, 50px);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #fff5dc;
+  transform: translateY(-3px);
+  filter: drop-shadow(0 4px 8px rgba(244, 228, 193, 0.5));
+}
+
+.social-icon:active {
+  transform: translateY(-1px);
+}
+
+/* Contact Form Section */
+.contact-form-section {
+  position: absolute;
+  top: 87%;
+  right: 10.1%;
+  z-index: 10;
+  width: clamp(350px, 30vw, 450px);
+  padding: clamp(20px, 5vw, 20px);
+  background: transparent;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.5vw, 18px);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: clamp(10px, 1.2vw, 15px);
+  background: linear-gradient(135deg, #d4b896, #c9a875);
+  border: 2px solid #8b6f47;
+  border-radius: 8px;
+  font-family: "Cinzel", serif;
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  font-weight: 600;
+  color: #2c1810;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #2c1810;
+  opacity: 0.8;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  background: linear-gradient(135deg, #e4d4b6, #d4b896);
+  border-color: #d4af37;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 340px;
+}
+
+.send-message-btn {
+  background: linear-gradient(135deg, #f4e4c1, #d4b896);
+  color: #2c1810;
+  font-family: "Cinzel", serif;
+  font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: clamp(10px, 1.2vw, 14px) clamp(20px, 2.5vw, 30px);
+  border: 2px solid #8b6f47;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.send-message-btn i {
+  font-size: clamp(16px, 1.3vw, 20px);
+}
+
+.send-message-btn:hover {
+  background: linear-gradient(135deg, #fff5dc, #e4d4b6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(244, 228, 193, 0.5);
+}
+
+.send-message-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
