@@ -22,6 +22,25 @@
             position: relative;
         }
 
+        body {
+            font-family: "Montserrat", sans-serif;
+            background: linear-gradient(to bottom, #1a0000 0%, #000000 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+                margin-top: 0 !important;
+                margin-left: 0 !important;
+                top: -21px !important;
+                position: fixed !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                width: 100% !important;
+                padding: 10px 0 !important;
+                z-index: 1500 !important;
+            }
 
         /* Hero Content */
         .hero-content {
