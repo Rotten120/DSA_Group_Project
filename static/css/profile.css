@@ -229,8 +229,8 @@
   margin-bottom: 10px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 14px;
+  gap: 10px;
+  font-size: 12px;
   transition: 0.2s;
   text-transform: none;
   letter-spacing: normal;
