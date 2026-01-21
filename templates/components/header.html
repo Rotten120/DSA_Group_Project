@@ -3,7 +3,7 @@
 <header>
   <div class="header-left">
     <div id="menu-icon" class="menu-icon">&#9776;</div>
-    <div class="logo-icon">CircuiTech</div>
+    <div class="logo-icon"><img src="{{ url_for('static', filename='images/background/icon_newss.png') }}" alt="Types of Trees"></div>
   </div>
 
   <div class="header-right">
@@ -12,7 +12,7 @@
         <li><a href="/" class="active">Home</a></li>
         <li><a href="/projects">Projects</a></li>
         <li><a href="/profiles_menu">Profile</a></li>
-        <li><a href="#important-section">Contacts</a></li>
+        <li><a href="/#contactform-section">Contacts</a></li>
       </ul>
     </nav>
   
@@ -30,3 +30,5 @@
     </form>
   </div>
 </header>
+
+<script src="{{url_for('static', filename='js/search-bar.js')}}"></script>

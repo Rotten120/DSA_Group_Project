@@ -20,7 +20,7 @@
   box-sizing: border-box;
   transition: left 0.3s ease;
   overflow-y: auto;
-  z-index: 2000;
+  z-index: 2100;  /* Changed from 2000 to 2100 */
 }
 
 .sidebar.active {
@@ -60,7 +60,7 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-  z-index: 1700;
+  z-index: 2000;  /* Changed from 1700 to 2000, should be below sidebar */
 }
 
 .sidebar-overlay.active {

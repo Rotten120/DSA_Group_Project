@@ -1,0 +1,1033 @@
+/* Responsive Design */
+@media (max-width: 1400px) {
+  body {
+    padding-bottom: calc(65.9vw * 5);
+  }
+}
+
+@media (max-width: 1200px) {
+  body {
+    padding-bottom: calc(59.6vw * 5.5);
+  }
+}
+
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(50.35vw * 6.5);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(40.3vw * 8);
+  }
+}
+
+@media (max-width: 720px) {
+  body {
+    padding-bottom: calc(40.4vw * 8);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-bottom: calc(38vw * 10);
+  }
+}
+
+@media (max-width: 1400px) {
+  .details-section {
+    position: absolute;
+    top: 12%;
+    left: 25.5%;
+    z-index: 10;
+  }
+  
+  .preview-section {
+    top: 9%;
+    right: 23%;
+  }
+
+  .dsa-definition-section {
+    top: 28.5%;
+    left: 49%;
+  }
+  
+  .dsa-applications-section {
+    top: 28.5%;
+    left: 65.5%;
+  }
+  
+  .dsa-importance-section {
+    top: 28.5%;
+    left: 82%;
+  }
+
+  .meaning-section {
+  position: absolute;
+  top: 35%;
+  }
+
+  .applications-section {
+    position: absolute;
+    top: 48%;
+  }
+
+  .importance-section {
+    position: absolute;
+    top: 60%;
+  }
+
+  .video-box-1,
+  .video-box-2,
+  .video-box-3,
+  .video-box-4,
+  .video-box-5,
+  .video-box-6 {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+  }
+
+    .video-box-1 {
+      top: 68%;
+      left: 51%;
+  }
+
+  .video-box-2 {
+      top: 68%;
+      left: 76%;
+  }
+
+  .video-box-3 {
+      top: 75.5%;
+      left: 3%;
+  }
+
+  .video-box-4 {
+      top: 75.5%;
+      left: 26%;
+  }
+
+  .video-box-5 {
+      top: 75.5%;
+      left: 51%;
+  }
+
+  .video-box-6 {
+      top: 75.5%;
+      left: 76%;
+  }
+
+  /* Social Media Icons */
+  .social-media-section {
+    top: 94.1%;
+    left: 35.8%;
+    transform: translateX(-50%);
+    gap: 6px;
+  }
+  
+  .social-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 36px;
+  }
+
+  /* Contact Form */
+  .contact-form-section {
+    top: 86.8%;
+    left: 75%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 30%;
+    max-width: 400px;
+    padding: 10px;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 10px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .form-textarea {
+    min-height: 260px;
+  }
+
+  .send-message-btn {
+    font-size: 1rem;
+    padding: 13px 17px;
+  }
+
+  .send-message-btn i {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .details-section {
+    position: absolute;
+    top: 12%;
+    left: 25.5%;
+    z-index: 10;
+  }
+  
+  .preview-section {
+    top: 9%;
+    right: 23%;
+  }
+
+  .dsa-definition-section {
+    top: 28.5%;
+    left: 49%;
+  }
+  
+  .dsa-applications-section {
+    top: 28.5%;
+    left: 65.5%;
+  }
+  
+  .dsa-importance-section {
+    top: 28.5%;
+    left: 82%;
+  }
+
+  .meaning-section {
+  position: absolute;
+  top: 35%;
+  }
+
+  .applications-section {
+    position: absolute;
+    top: 48%;
+  }
+
+  .importance-section {
+    position: absolute;
+    top: 60%;
+  }
+
+  .video-box-1,
+  .video-box-2,
+  .video-box-3,
+  .video-box-4,
+  .video-box-5,
+  .video-box-6 {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+  }
+
+    .video-box-1 {
+      top: 68.2%;
+      left: 51%;
+  }
+
+  .video-box-2 {
+      top: 68.2%;
+      left: 76%;
+  }
+
+  .video-box-3 {
+      top: 75.7%;
+      left: 3%;
+  }
+
+  .video-box-4 {
+      top: 75.7%;
+      left: 26%;
+  }
+
+  .video-box-5 {
+      top: 75.7%;
+      left: 51%;
+  }
+
+  .video-box-6 {
+      top: 75.7%;
+      left: 76%;
+  }
+
+  /* Social Media Icons */
+  .social-media-section {
+    top: 94.5%;
+    left: 35.8%;
+    transform: translateX(-50%);
+    gap: 6px;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 31px;
+  }
+
+  /* Contact Form */
+  .contact-form-section {
+    top: 87%;
+    left: 75%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 30%;
+    max-width: 400px;
+    padding: 10px;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 10px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+  }
+
+  .form-textarea {
+    min-height: 220px;
+  }
+
+  .send-message-btn {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+
+  .send-message-btn i {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .details-section {
+    position: absolute;
+    top: 11.8%;
+    left: 23%;
+    z-index: 10;
+  }
+
+  .view-details-btn {
+    font-size: 0.60rem;
+  }
+  
+  .preview-section {
+    top: 9%;
+    right: 23%;
+  }
+  
+  .preview-text span {
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  }
+
+  .dsa-definition-section {
+    top: 28%;
+    left: 48.5%;
+  }
+  
+  .dsa-applications-section {
+    top: 28%;
+    left: 65%;
+  }
+  
+  .dsa-importance-section {
+    top: 28%;
+    left: 81.5%;
+  }
+  
+  .dsa-search-btn {
+    width: clamp(45px, 4vw, 55px);
+    height: clamp(45px, 4vw, 55px);
+  }
+  
+  .dsa-search-btn i {
+    font-size: clamp(16px, 1.5vw, 20px);
+  }
+
+  .meaning-section {
+  position: absolute;
+  top: 32%;
+}
+
+  .applications-section {
+    position: absolute;
+    top: 44%;
+  }
+
+  .importance-section {
+    position: absolute;
+    top: 44%;
+  }
+
+  .video-box-1,
+  .video-box-2,
+  .video-box-3,
+  .video-box-4,
+  .video-box-5,
+  .video-box-6 {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+  }
+
+    .video-box-1 {
+      top: 67.7%;
+      left: 51%;
+  }
+
+  .video-box-2 {
+      top: 67.7%;
+      left: 76%;
+  }
+
+  .video-box-3 {
+      top: 75.3%;
+      left: 2%;
+  }
+
+  .video-box-4 {
+      top: 75.3%;
+      left: 26%;
+  }
+
+  .video-box-5 {
+      top: 75.3%;
+      left: 51%;
+  }
+
+  .video-box-6 {
+      top: 75.3%;
+      left: 76%;
+  }
+
+  /* Social Media Icons */
+  .social-media-section {
+    top: 94.2%;
+    left: 35.8%;
+    transform: translateX(-50%);
+    gap: 6px;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+  }
+
+  /* Contact Form */
+  .contact-form-section {
+    top: 86.5%;
+    left: 75%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 30%;
+    max-width: 400px;
+    padding: 10px;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 10px;
+    font-size: 0.7rem;
+    border-radius: 6px;
+  }
+
+  .form-textarea {
+    min-height: 170px;
+  }
+
+  .send-message-btn {
+    font-size: 0.8rem;
+    padding: 10px 15px;
+  }
+
+  .send-message-btn i {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  .details-section {
+    position: absolute;
+    top: 11.9%;
+    left: 27.7%;
+    z-index: 10;
+  }
+  
+  .preview-section {
+    top: 9.2%;
+    left: 69%;
+    right: auto;
+  }
+  
+  .view-details-btn {
+    font-size: 0.50rem;
+    padding: 9px 4px;
+  }
+
+  .dsa-definition-section {
+    top: 28.5%;
+    left: 49%;
+  }
+  
+  .dsa-applications-section {
+    top: 28.5%;
+    left: 65.5%;
+  }
+  
+  .dsa-importance-section {
+    top: 28.5%;
+    left: 82%;
+  }
+  
+  .dsa-search-btn {
+    width: 33px;
+    height: 33px;
+  }
+  
+  .dsa-search-btn i {
+    font-size: 10px;
+  }
+
+  .meaning-section {
+    position: absolute;
+    top: 32%;
+  }
+
+  .applications-section {
+    position: absolute;
+    top: 44%;
+  }
+
+  .importance-section {
+    position: absolute;
+    top: 44%;
+  }
+
+  .video-box-1,
+  .video-box-2,
+  .video-box-3,
+  .video-box-4,
+  .video-box-5,
+  .video-box-6 {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+  }
+
+    .video-box-1 {
+      top: 68%;
+      left: 51%;
+  }
+
+  .video-box-2 {
+      top: 68%;
+      left: 76%;
+  }
+
+  .video-box-3 {
+      top: 75.3%;
+      left: 2%;
+  }
+
+  .video-box-4 {
+      top: 75.3%;
+      left: 26%;
+  }
+
+  .video-box-5 {
+      top: 75.3%;
+      left: 51%;
+  }
+
+  .video-box-6 {
+      top: 75.3%;
+      left: 76%;
+  }
+
+  /* Social Media Icons */
+  .social-media-section {
+    top: 93.9%;
+    left: 35.8%;
+    transform: translateX(-50%);
+    gap: 6px;
+  }
+  
+  .social-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 25px;
+  }
+
+  /* Contact Form */
+  .contact-form-section {
+    top: 86.5%;
+    left: 75%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 30%;
+    max-width: 400px;
+    padding: 10px;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 10px;
+    font-size: 0.6rem;
+    border-radius: 6px;
+  }
+
+  .form-textarea {
+    min-height: 140px;
+  }
+
+  .send-message-btn {
+    font-size: 0.6rem;
+    padding: 8px 13px;
+  }
+
+  .send-message-btn i {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .details-section {
+    position: absolute;
+    top: 12%;
+    left: 26.5%;
+    z-index: 10;
+  }
+  
+  .preview-section {
+    top: 9.2%;
+    left: 69%;
+    right: auto;
+  }
+  
+  .view-details-btn {
+    font-size: 0.50rem;
+    padding: 9px 4px;
+  }
+
+  .dsa-definition-section {
+    top: 28.5%;
+    left: 49%;
+  }
+  
+  .dsa-applications-section {
+    top: 28.5%;
+    left: 65.5%;
+  }
+  
+  .dsa-importance-section {
+    top: 28.5%;
+    left: 82%;
+  }
+  
+  .dsa-search-btn {
+    width: 33px;
+    height: 33px;
+  }
+  
+  .dsa-search-btn i {
+    font-size: 10px;
+  }
+
+  .meaning-section {
+    position: absolute;
+    top: 32%;
+  }
+
+  .applications-section {
+    position: absolute;
+    top: 44%;
+  }
+
+  .importance-section {
+    position: absolute;
+    top: 44%;
+  }
+
+  .video-box-1,
+  .video-box-2,
+  .video-box-3,
+  .video-box-4,
+  .video-box-5,
+  .video-box-6 {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+  }
+
+    .video-box-1 {
+      top: 68.3%;
+      left: 51%;
+  }
+
+  .video-box-2 {
+      top: 68.3%;
+      left: 76%;
+  }
+
+  .video-box-3 {
+      top: 75.6%;
+      left: 2%;
+  }
+
+  .video-box-4 {
+      top: 75.6%;
+      left: 76%;
+  }
+
+  .video-box-3 {
+      top: 75.6%;
+      left: 2%;
+  }
+
+  .video-box-4 {
+      top: 75.6%;
+      left: 26%;
+  }
+
+  .video-box-5 {
+      top: 75.6%;
+      left: 51%;
+  }
+
+  .video-box-6 {
+      top: 75.6%;
+      left: 76%;
+  }
+
+  /* Social Media Icons */
+  .social-media-section {
+    top: 94.8%;
+    left: 35.8%;
+    transform: translateX(-50%);
+    gap: 6px;
+  }
+  
+  .social-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 22px;
+  }
+
+  /* Contact Form */
+  .contact-form-section {
+    top: 87%;
+    left: 75%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 30%;
+    max-width: 400px;
+    padding: 10px;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 10px;
+    font-size: 0.5rem;
+    border-radius: 6px;
+  }
+
+  .form-textarea {
+    min-height: 140px;
+  }
+
+  .send-message-btn {
+    font-size: 0.5rem;
+    padding: 5px 10px;
+  }
+
+  .send-message-btn i {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 720px) {
+  .details-section {
+    position: absolute;
+    top: 11.9%;
+    left: 27.4%;
+    z-index: 10;
+  }
+  
+  .preview-section {
+    top: 9%;
+    left: 68.7%;
+    right: auto;
+  }
+  
+  .view-details-btn {
+    font-size: 0.35rem;
+    padding: 10px 5px;
+  }
+
+  .dsa-definition-section {
+    top: 28.4%;
+    left: 49%;
+  }
+  
+  .dsa-applications-section {
+    top: 28.4%;
+    left: 65.5%;
+  }
+  
+  .dsa-importance-section {
+    top: 28.4%;
+    left: 82%;
+  }
+  
+  .dsa-search-btn {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .dsa-search-btn i {
+    font-size: 10px;
+  }
+
+  .meaning-section {
+    position: absolute;
+    top: 32%;
+  }
+
+  .applications-section {
+    position: absolute;
+    top: 32%;
+  }
+
+  .importance-section {
+    position: absolute;
+    top: 32%;
+  }
+
+  .video-box-1,
+  .video-box-2,
+  .video-box-3,
+  .video-box-4,
+  .video-box-5,
+  .video-box-6 {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+  }
+
+    .video-box-1 {
+      top: 68%;
+      left: 51%;
+  }
+
+  .video-box-2 {
+      top: 68%;
+      left: 76%;
+  }
+
+  .video-box-3 {
+      top: 75.3%;
+      left: 2%;
+  }
+
+  .video-box-4 {
+      top: 75.3%;
+      left: 26%;
+  }
+
+  .video-box-5 {
+      top: 75.3%;
+      left: 51%;
+  }
+
+  .video-box-6 {
+      top: 75.3%;
+      left: 76%;
+  }
+
+  /* Social Media Icons */
+  .social-media-section {
+    top: 94.4%;
+    left: 35.8%;
+    transform: translateX(-50%);
+    gap: 6px;
+  }
+  
+  .social-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 19px;
+  }
+
+  /* Contact Form */
+  .contact-form-section {
+    top: 87%;
+    left: 75%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 30%;
+    max-width: 400px;
+    padding: 10px;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 10px;
+    font-size: 0.5rem;
+    border-radius: 6px;
+  }
+
+  .form-textarea {
+    min-height: 100px;
+  }
+
+  .send-message-btn {
+    font-size: 0.5rem;
+    padding: 5px 10px;
+  }
+
+  .send-message-btn i {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+   .details-section {
+    position: absolute;
+    top: 11.9%;
+    left: 25.6%;
+    z-index: 10;
+  }
+  
+  .preview-section {
+    top: 9%;
+    left: 68.7%;
+    right: auto;
+  }
+  
+  .view-details-btn {
+    font-size: 0.35rem;
+    padding: 10px 5px;
+  }
+
+  .dsa-definition-section {
+    top: 28%;
+    left: 49%;
+  }
+  
+  .dsa-applications-section {
+    top: 28%;
+    left: 65.5%;
+  }
+  
+  .dsa-importance-section {
+    top: 28%;
+    left: 82%;
+  }
+  
+  .dsa-search-btn {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .dsa-search-btn i {
+    font-size: 10px;
+  }
+
+  .meaning-section {
+    position: absolute;
+    top: 32%;
+  }
+
+  .applications-section {
+    position: absolute;
+    top: 32%;
+  }
+
+  .importance-section {
+    position: absolute;
+    top: 32%;
+  }
+
+  .video-box-1,
+  .video-box-2,
+  .video-box-3,
+  .video-box-4,
+  .video-box-5,
+  .video-box-6 {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+  }
+
+    .video-box-1 {
+      top: 67.3%;
+      left: 51%;
+  }
+
+  .video-box-2 {
+      top: 67.3%;
+      left: 76%;
+  }
+
+  .video-box-3 {
+      top: 75%;
+      left: 2%;
+  }
+
+  .video-box-4 {
+      top: 75%;
+      left: 26%;
+  }
+
+  .video-box-5 {
+      top: 75%;
+      left: 51%;
+  }
+
+  .video-box-6 {
+      top: 75%;
+      left: 76%;
+  }
+
+  /* Social Media Icons */
+  .social-media-section {
+    top: 94%;
+    left: 36%;
+    transform: translateX(-50%);
+    gap: 8px;
+  }
+  
+  .social-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+  }
+
+  /* Contact Form */
+  .contact-form-section {
+    top: 85%;
+    left: 75%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 30%;
+    max-width: 400px;
+    padding: 10px;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 10px;
+    font-size: 0.45rem;
+    border-radius: 6px;
+  }
+
+  .form-textarea {
+    min-height: 80px;
+  }
+
+  .send-message-btn {
+    font-size: 0.45rem;
+    padding: 5px 10px;
+  }
+
+  .send-message-btn i {
+    font-size: 8px;
+  }
+}
