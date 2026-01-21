@@ -21,22 +21,22 @@ body {
 
 .profile-row-wrapper {
     position: relative;
-    padding: 120px 80px 40px 80px;
+    padding: 120px 80px 80px 80px;
     max-width: 1800px;
     margin: 0;
     margin-left: -150px;
-    min-height: 800px;
+    min-height: 900px;
 }
 
 .cards-container {
     position: relative;
     width: 100%;
-    height: 700px;
+    height: 650px;
 }
 
 .card-item {
     position: absolute;
-    width: 180px;
+    width: 185px;
     aspect-ratio: 2 / 3;
     cursor: pointer;
     border-radius: 12px;
@@ -44,38 +44,36 @@ body {
     transition: transform 0.4s ease, filter 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Position each card individually - Top Row (6 cards) */
 .card-1 {
     left: -2%;
-    top: -30px;
+    top: -40px;
 }
 
 .card-2 {
     left: 16%;
-    top: -30px;
+    top: -40px;
 }
 
 .card-3 {
     left: 34%;
-    top: -30px;
+    top: -40px;
 }
 
 .card-4 {
     left: 52%;
-    top: -30px;
+    top: -40px;
 }
 
 .card-5 {
     left: 70%;
-    top: -30px;
+    top: -40px;
 }
 
 .card-6 {
     left: 88%;
-    top: -30px;
+    top: -40px;
 }
 
-/* Bottom Row (3 cards) - centered */
 .card-7 {
     left: -2%;
     top: 290px;
@@ -106,14 +104,20 @@ body {
 }
 
 /* Responsive Styles */
-@media (max-width: 1400px) {
+
+@media (max-width: 1200px) {
+    .main-section {
+        margin-left: 0;
+    }
+
     .profile-row-wrapper {
-        padding: 120px 70px 70px 70px;
-        min-height: 1500px;
+        padding: 80px 40px 40px 40px;
+        margin-left: 0;
+        min-height: 1000px;
     }
 
     .profile-title {
-        font-size: 5rem;
+        font-size: 3rem;
         margin-bottom: 40px;
         text-align: center;
     }
@@ -126,49 +130,190 @@ body {
         width: 150px;
     }
 
-    /* Responsive positioning - 3 columns */
     .card-1 {
-        left: 50px;
-        top: 100px;
+        left: 10%;
+        top: -40px;
     }
 
     .card-2 {
-        left: 220px;
-        top: 100px;
+        left: 42%;
+        top: -40px;
     }
 
     .card-3 {
-        left: 390px;
-        top: 100px;
+        left: 74%;
+        top: -40px;
     }
 
     .card-4 {
-        left: 50px;
-        top: 330px;
+        left: 10%;
+        top: 190px;
     }
 
     .card-5 {
-        left: 220px;
-        top: 330px;
+        left: 42%;
+        top: 190px;
     }
 
     .card-6 {
-        left: 390px;
-        top: 330px;
+        left: 74%;
+        top: 190px;
     }
 
     .card-7 {
-        left: 50px;
-        top: 560px;
+        left: 10%;
+        top: 420px;
     }
 
     .card-8 {
-        left: 220px;
-        top: 560px;
+        left: 42%;
+        top: 420px;
     }
 
     .card-9 {
-        left: 390px;
-        top: 560px;
+        left: 74%;
+        top: 420px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .main-section {
+        margin-left: 0;
+    }
+
+    .profile-row-wrapper {
+        padding: 80px 40px 40px 40px;
+        margin-left: 0;
+        min-height: 1000px;
+    }
+
+    .profile-title {
+        font-size: 3rem;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .cards-container {
+        height: 1500px;
+    }
+
+    .card-item {
+        width: 140px;
+    }
+
+    .card-1 {
+        left: 10%;
+        top: -40px;
+    }
+
+    .card-2 {
+        left: 42%;
+        top: -40px;
+    }
+
+    .card-3 {
+        left: 74%;
+        top: -40px;
+    }
+
+    .card-4 {
+        left: 10%;
+        top: 190px;
+    }
+
+    .card-5 {
+        left: 42%;
+        top: 190px;
+    }
+
+    .card-6 {
+        left: 74%;
+        top: 190px;
+    }
+
+    .card-7 {
+        left: 10%;
+        top: 420px;
+    }
+
+    .card-8 {
+        left: 42%;
+        top: 420px;
+    }
+
+    .card-9 {
+        left: 74%;
+        top: 420px;
+    }
+}
+
+@media (max-width: 720px) {
+    .main-section {
+        margin-left: 0;
+    }
+
+    .profile-row-wrapper {
+        padding: 80px 40px 40px 40px;
+        margin-left: 0;
+        min-height: 1000px;
+    }
+
+    .profile-title {
+        font-size: 3rem;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .cards-container {
+        height: 1500px;
+    }
+
+    .card-item {
+        width: 120px;
+    }
+
+    .card-1 {
+        left: -5%;
+        top: -40px;
+    }
+
+    .card-2 {
+        left: 35%;
+        top: -40px;
+    }
+
+    .card-3 {
+        left: 74%;
+        top: -40px;
+    }
+
+    .card-4 {
+        left: -5%;
+        top: 190px;
+    }
+
+    .card-5 {
+        left: 35%;
+        top: 190px;
+    }
+
+    .card-6 {
+        left: 74%;
+        top: 190px;
+    }
+
+    .card-7 {
+        left: -5%;
+        top: 420px;
+    }
+
+    .card-8 {
+        left: 35%;
+        top: 420px;
+    }
+
+    .card-9 {
+        left: 74%;
+        top: 420px;
     }
 }
